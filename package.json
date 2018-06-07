@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng build --base-href /yande --deploy-url /yande/ && node server/index.js",
+    "serve": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -21,6 +22,9 @@
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
     "core-js": "^2.5.4",
+    "express": "^4.16.3",
+    "http": "0.0.0",
+    "path": "^0.12.7",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
   },
