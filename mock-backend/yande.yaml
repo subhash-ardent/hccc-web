@@ -19,9 +19,9 @@ paths:
       summary: Retrieve courses from the catalogue
       operationId: getCourses
       parameters:
-        - $ref: #/parameters/Content-Type
-        - $ref: #/parameters/Accept
-        - $ref: #/parameters/Account-Id
+        - $ref: '#/parameters/Content-Type'
+        - $ref: '#/parameters/Accept'
+        - $ref: '#/parameters/Account-Id'
         - name: tags
           in: query
           required: false
@@ -31,36 +31,36 @@ paths:
         200:
           description: Success - List of items returned in the response payload
           schema:
-            $ref: #/definitions/RetrieveCoursesListResponse
+            $ref: '#/definitions/RetrieveCoursesListResponse'
         400:
-          $ref: #/responses/400ErrorResponse
+          $ref: '#/responses/400ErrorResponse'
         500:
-          $ref: #/responses/500ErrorResponse
+          $ref: '#/responses/500ErrorResponse'
     post:
       tags:
       - courses
       summary: Add a new course to the catalogue
       operationId: addCourse
       parameters:
-        - $ref: #/parameters/Content-Type
-        - $ref: #/parameters/Accept
-        - $ref: #/parameters/Account-Id
+        - $ref: '#/parameters/Content-Type'
+        - $ref: '#/parameters/Accept'
+        - $ref: '#/parameters/Account-Id'
         - in: body
           name: body
           required: true
           schema:
-            $ref: #/definitions/CreateCourseRequest
+            $ref: '#/definitions/CreateCourseRequest'
       responses:
         200:
           description: Success - Item returned in the response payload
           schema:
-            $ref: #/definitions/RetrieveCourseResponse
+            $ref: '#/definitions/RetrieveCourseResponse'
         400:
-          $ref: #/responses/400ErrorResponse
+          $ref: '#/responses/400ErrorResponse'
         403:
-          $ref: #/responses/403ErrorResponse
+          $ref: '#/responses/403ErrorResponse'
         500:
-          $ref: #/responses/500ErrorResponse
+          $ref: '#/responses/500ErrorResponse'
   /courses/{courseId}:
     get:
       tags:
@@ -68,9 +68,9 @@ paths:
       summary: Retrieve course by Course Id
       operationId: getCourseById
       parameters:
-        - $ref: #/parameters/Content-Type
-        - $ref: #/parameters/Accept
-        - $ref: #/parameters/Account-Id
+        - $ref: '#/parameters/Content-Type'
+        - $ref: '#/parameters/Accept'
+        - $ref: '#/parameters/Account-Id'
         - in: path
           name: courseId
           required: true
@@ -80,13 +80,13 @@ paths:
         200:
           description: Success - Item returned in the response payload
           schema:
-            $ref: #/definitions/RetrieveCourseResponse
+            $ref: '#/definitions/RetrieveCourseResponse'
         400:
-          $ref: #/responses/400ErrorResponse
+          $ref: '#/responses/400ErrorResponse'
         404:
-          $ref: #/responses/404ErrorResponse
+          $ref: '#/responses/404ErrorResponse'
         500:
-          $ref: #/responses/500ErrorResponse
+          $ref: '#/responses/500ErrorResponse'
   /teachers:
     get:
       tags:
@@ -94,45 +94,45 @@ paths:
       summary: Retrieve list of teachers
       operationId: getTeachers
       parameters:
-        - $ref: #/parameters/Content-Type
-        - $ref: #/parameters/Accept
-        - $ref: #/parameters/Account-Id
+        - $ref: '#/parameters/Content-Type'
+        - $ref: '#/parameters/Accept'
+        - $ref: '#/parameters/Account-Id'
       responses:
         200:
           description: Success - List of items returned in the response payload
           schema:
-            $ref: #/definitions/RetrieveTeachersListResponse
+            $ref: '#/definitions/RetrieveTeachersListResponse'
         400:
-          $ref: #/responses/400ErrorResponse
+          $ref: '#/responses/400ErrorResponse'
         403:
-          $ref: #/responses/403ErrorResponse
+          $ref: '#/responses/403ErrorResponse'
         500:
-          $ref: #/responses/500ErrorResponse
+          $ref: '#/responses/500ErrorResponse'
     post:
       tags:
       - teachers
       summary: Add a new teacher to the system
       operationId: registerTeacher
       parameters:
-        - $ref: #/parameters/Content-Type
-        - $ref: #/parameters/Accept
-        - $ref: #/parameters/Account-Id
+        - $ref: '#/parameters/Content-Type'
+        - $ref: '#/parameters/Accept'
+        - $ref: '#/parameters/Account-Id'
         - in: body
           name: body
           required: true
           schema:
-            $ref: #/definitions/RegisterTeacherRequest
+            $ref: '#/definitions/RegisterTeacherRequest'
       responses:
         200:
           description: Success - Item returned in the response payload
           schema:
-            $ref: #/definitions/RetrieveTeacherResponse
+            $ref: '#/definitions/RetrieveTeacherResponse'
         400:
-          $ref: #/responses/400ErrorResponse
+          $ref: '#/responses/400ErrorResponse'
         403:
-          $ref: #/responses/403ErrorResponse
+          $ref: '#/responses/403ErrorResponse'
         500:
-          $ref: #/responses/500ErrorResponse
+          $ref: '#/responses/500ErrorResponse'
   /teachers/{teacherId}:
     get:
       tags:
@@ -140,9 +140,9 @@ paths:
       summary: Retrieve teacher by teacher Id
       operationId: getTeacherById
       parameters:
-        - $ref: #/parameters/Content-Type
-        - $ref: #/parameters/Accept
-        - $ref: #/parameters/Account-Id
+        - $ref: '#/parameters/Content-Type'
+        - $ref: '#/parameters/Accept'
+        - $ref: '#/parameters/Account-Id'
         - in: path
           name: teacherId
           required: true
@@ -152,15 +152,15 @@ paths:
         200:
           description: Success - Item returned in the response payload
           schema:
-            $ref: #/definitions/RetrieveTeacherResponse
+            $ref: '#/definitions/RetrieveTeacherResponse'
         400:
-          $ref: #/responses/400ErrorResponse
+          $ref: '#/responses/400ErrorResponse'
         403:
-          $ref: #/responses/403ErrorResponse
+          $ref: '#/responses/403ErrorResponse'
         404:
-          $ref: #/responses/404ErrorResponse
+          $ref: '#/responses/404ErrorResponse'
         500:
-          $ref: #/responses/500ErrorResponse
+          $ref: '#/responses/500ErrorResponse'
   /indemnities:
     get:
       tags:
@@ -168,41 +168,41 @@ paths:
       summary: Retrieve indemnities from the system. Only indemnities belonging to the requesting user account will be returned. User Account information is available in the header.
       operationId: getIndemnities
       parameters:
-        - $ref: #/parameters/Content-Type
-        - $ref: #/parameters/Accept
-        - $ref: #/parameters/Account-Id
+        - $ref: '#/parameters/Content-Type'
+        - $ref: '#/parameters/Accept'
+        - $ref: '#/parameters/Account-Id'
       responses:
         200:
           description: Success - List of items returned in the response payload
           schema:
-            $ref: #/definitions/RetrieveIndemnitiesListResponse
+            $ref: '#/definitions/RetrieveIndemnitiesListResponse'
         400:
-          $ref: #/responses/400ErrorResponse
+          $ref: '#/responses/400ErrorResponse'
         500:
-          $ref: #/responses/500ErrorResponse
+          $ref: '#/responses/500ErrorResponse'
     post:
       tags:
       - indemnities
       summary: Add a new indemnity to the system
       operationId: addIndemnity
       parameters:
-        - $ref: #/parameters/Content-Type
-        - $ref: #/parameters/Accept
-        - $ref: #/parameters/Account-Id
+        - $ref: '#/parameters/Content-Type'
+        - $ref: '#/parameters/Accept'
+        - $ref: '#/parameters/Account-Id'
         - in: body
           name: body
           required: true
           schema:
-            $ref: #/definitions/CreateIndemnityRequest
+            $ref: '#/definitions/CreateIndemnityRequest'
       responses:
         200:
           description: Success - Item returned in the response payload
           schema:
-            $ref: #/definitions/RetrieveIndemnityResponse
+            $ref: '#/definitions/RetrieveIndemnityResponse'
         400:
-          $ref: #/responses/400ErrorResponse
+          $ref: '#/responses/400ErrorResponse'
         500:
-          $ref: #/responses/500ErrorResponse
+          $ref: '#/responses/500ErrorResponse'
   /account:
     get:
       tags:
@@ -210,9 +210,9 @@ paths:
       summary: Retrieve accounts from the system
       operationId: getAccounts
       parameters:
-        - $ref: #/parameters/Content-Type
-        - $ref: #/parameters/Accept
-        - $ref: #/parameters/Account-Id
+        - $ref: '#/parameters/Content-Type'
+        - $ref: '#/parameters/Accept'
+        - $ref: '#/parameters/Account-Id'
         - name: mobileNumber
           in: query
           required: false
@@ -222,15 +222,15 @@ paths:
         200:
           description: Success - List of items returned in the response payload
           schema:
-            $ref: #/definitions/RetrieveAccountsListResponse
+            $ref: '#/definitions/RetrieveAccountsListResponse'
         400:
-          $ref: #/responses/400ErrorResponse
+          $ref: '#/responses/400ErrorResponse'
         403:
-          $ref: #/responses/403ErrorResponse
+          $ref: '#/responses/403ErrorResponse'
         404:
-          $ref: #/responses/404ErrorResponse
+          $ref: '#/responses/404ErrorResponse'
         500:
-          $ref: #/responses/500ErrorResponse
+          $ref: '#/responses/500ErrorResponse'
   /account/{accountId}/enrollments:
     get:
       tags:
@@ -238,41 +238,51 @@ paths:
       summary: Retrieve enrollments from the system. Only enrollments belonging to the requesting user account will be returned. User Account information is available in the header.
       operationId: getEnrollments
       parameters:
-        - $ref: #/parameters/Content-Type
-        - $ref: #/parameters/Accept
-        - $ref: #/parameters/Account-Id
+        - $ref: '#/parameters/Content-Type'
+        - $ref: '#/parameters/Accept'
+        - $ref: '#/parameters/Account-Id'
+        - in: path
+          name: accountId
+          required: true
+          type: string
+          description: Id of the account to be retrieved
       responses:
         200:
           description: Success - List of items returned in the response payload
           schema:
-            $ref: #/definitions/RetrieveEnrollmentsListResponse
+            $ref: '#/definitions/RetrieveEnrollmentsListResponse'
         400:
-          $ref: #/responses/400ErrorResponse
+          $ref: '#/responses/400ErrorResponse'
         500:
-          $ref: #/responses/500ErrorResponse
+          $ref: '#/responses/500ErrorResponse'
     post:
       tags:
       - indemnities
       summary: Add a new enrollment to the system
       operationId: addEnrollment
       parameters:
-        - $ref: #/parameters/Content-Type
-        - $ref: #/parameters/Accept
-        - $ref: #/parameters/Account-Id
+        - $ref: '#/parameters/Content-Type'
+        - $ref: '#/parameters/Accept'
+        - $ref: '#/parameters/Account-Id'
+        - in: path
+          name: accountId
+          required: true
+          type: string
+          description: Id of the account to be retrieved
         - in: body
           name: body
           required: true
           schema:
-            $ref: #/definitions/CreateEnrollmentRequest
+            $ref: '#/definitions/CreateEnrollmentRequest'
       responses:
         200:
           description: Success - Item returned in the response payload
           schema:
-            $ref: #/definitions/RetrieveEnrollmentResponse
+            $ref: '#/definitions/RetrieveEnrollmentResponse'
         400:
-          $ref: #/responses/400ErrorResponse
+          $ref: '#/responses/400ErrorResponse'
         500:
-          $ref: #/responses/500ErrorResponse
+          $ref: '#/responses/500ErrorResponse'
 definitions:
   ErrorResponse:
     description: Error Object
@@ -287,7 +297,7 @@ definitions:
     description: This is the schema of request payload when a New Course is created in the system
     properties:
       course:
-        $ref: #definitions/CourseObject
+        $ref: '#/definitions/CourseObject'
   RetrieveCoursesListResponse:
     description: This is the schema of response payload when a list of course information is requested
     properties:
@@ -295,12 +305,12 @@ definitions:
         type: array
         description: List of Courses
         items:
-          $ref: #definitions/CourseObject
+          $ref: '#/definitions/CourseObject'
   RetrieveCourseResponse:
     description: This is the schema of response payload when a course information is requested
     properties:
       course:
-        $ref: #definitions/CourseObject
+        $ref: '#/definitions/CourseObject'
   CourseObject:
     description: Course Object
     properties:
@@ -346,7 +356,7 @@ definitions:
     description: This is the schema of request payload when a New Teacher is registered in the system
     properties:
       teacher:
-        $ref: #definitions/TeacherObject
+        $ref: '#/definitions/TeacherObject'
   RetrieveTeachersListResponse:
     description: This is the schema of response payload when a list of teacher information is requested
     properties:
@@ -354,12 +364,12 @@ definitions:
         type: array
         description: List of Teachers
         items:
-          $ref: #definitions/TeacherObject
+          $ref: '#/definitions/TeacherObject'
   RetrieveTeacherResponse:
     description: This is the schema of response payload when a teacher's information is requested
     properties:
       teacher:
-        $ref: #definitions/TeacherObject
+        $ref: '#/definitions/TeacherObject'
   TeacherObject:
     description: Teacher Object
     properties:
@@ -370,7 +380,7 @@ definitions:
         type: string
         description: Unique account id of the devotee
       teacherName:
-        $ref: #definitions/NameObject
+        $ref: '#/definitions/NameObject'
       teacherEmail:
         type: string
         description: Email of the teacher
@@ -381,7 +391,7 @@ definitions:
     description: This is the schema of request payload when a New Indemnity is submited to the system
     properties:
       indemnity:
-        $ref: #definitions/IndemnityObject
+        $ref: '#/definitions/IndemnityObject'
   RetrieveIndemnitiesListResponse:
     description: This is the schema of response payload when a list of indemnity information is requested
     properties:
@@ -389,12 +399,12 @@ definitions:
         type: array
         description: List of Indemnities
         items:
-          $ref: #definitions/IndemnityObject
+          $ref: '#/definitions/IndemnityObject'
   RetrieveIndemnityResponse:
     description: This is the schema of response payload when an indemnity form's information is requested
     properties:
       indemnity:
-        $ref: #definitions/IndemnityObject
+        $ref: '#/definitions/IndemnityObject'
   IndemnityObject:
     description: Indemnity Object
     properties:
@@ -402,12 +412,12 @@ definitions:
         type: string
         description: Unique devotee account id of the participant
       participantName:
-        $ref: #definitions/NameObject
+        $ref: '#/definitions/NameObject'
       participantDOB:
-        type:string
+        type: string
         description: Date of Birth of the participant
       guardianFirstName:
-        $ref: #definitions/NameObject
+        $ref: '#/definitions/NameObject'
       indemnityFormVersion:
         type: string
         description: String representing the name ot number of indemnity content version.
@@ -418,7 +428,7 @@ definitions:
         type: array
         description: List of Accounts
         items:
-          $ref: #definitions/AccountObject
+          $ref: '#/definitions/AccountObject'
   AccountObject:
     description: Devotee Account Object
     properties:
@@ -432,12 +442,12 @@ definitions:
         type: array
         description: List of family Members
         items:
-          $ref: #definitions/NameObjects
+          $ref: '#/definitions/NameObject'
   CreateEnrollmentRequest:
     description: This is the schema of request payload when a New Enrollment is created in the system
     properties:
       enrollment:
-        $ref: #definitions/EnrollmentObject
+        $ref: '#/definitions/EnrollmentObject'
   RetrieveEnrollmentsListResponse:
     description: This is the schema of response payload when a list of indemnity information is requested
     properties:
@@ -445,12 +455,12 @@ definitions:
         type: array
         description: List of Enrollments
         items:
-          $ref: #definitions/EnrollmentObject
+          $ref: '#/definitions/EnrollmentObject'
   RetrieveEnrollmentResponse:
     description: This is the schema of response payload when an enrollment's information is requested
     properties:
       enrollment:
-        $ref: #definitions/EnrollmentObject
+        $ref: '#/definitions/EnrollmentObject'
   EnrollmentObject:
     description: Enrollment Object
     properties:
@@ -461,9 +471,9 @@ definitions:
         type: string
         description: Unique account id of the participants devotee account
       participantName:
-        $ref: #definitions/NameObject
+        $ref: '#/definitions/NameObject'
       guardianName:
-        $ref: #definitions/NameObject
+        $ref: '#/definitions/NameObject'
       isParticipantUnder18:
         type: boolean
         description: true id participant age is under 18 else false
@@ -509,16 +519,16 @@ responses:
   400ErrorResponse:
     description: Bad request - some of the input parameters are incorrect or invalid
     schema:
-    $ref: #definitions/ErrorResponse
+      $ref: '#/definitions/ErrorResponse'
   403ErrorResponse:
     description: Forbidden - the devotee does not have permissions to call this endpoint
     schema:
-    $ref: #definitions/ErrorResponse
+      $ref: '#/definitions/ErrorResponse'
   404ErrorResponse:
     description: Resource Not Found
     schema:
-    $ref: #definitions/ErrorResponse
+      $ref: '#/definitions/ErrorResponse'
   500ErrorResponse:
     description: Internal Server Error
     schema:
-    $ref: #definitions/ErrorResponse
+      $ref: '#/definitions/ErrorResponse'
