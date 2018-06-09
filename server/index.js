@@ -5,15 +5,16 @@ const bodyParser = require('body-parser');
 const request = require('request');
 
 
-// const health = require(__dirname + '/server/routes/health');
-// const api = require(__dirname + '/server/routes/health');
+
+const health = require(__dirname + '/routes/health');
+const api = require(__dirname + '/routes/api');
 
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-// app.use('/yande/api', api);
-// app.use('/yande/health', health);
+app.use('/yande/api', api);
+app.use('/yande/health', health);
 app.get('/yande/home', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/youth-and-education/index.html'));
 });
