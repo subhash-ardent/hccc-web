@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng build --base-href /yande --deploy-url /yande/ && node server/index.js",
+    "start": "ng build --base-href /yande --deploy-url /yande/ && node server/index.js && node mock-backend/index.js",
     "serve": "ng serve",
     "build": "ng build",
     "test": "ng test",

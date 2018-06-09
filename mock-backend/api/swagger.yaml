@@ -1,0 +1,1090 @@
+---
+swagger: "2.0"
+info:
+  description: "This is the API Interface definition for HCCC'c Youth and Education\
+    \ Application"
+  version: "1.0.0"
+  title: "HCCC Youth and Education API"
+  contact:
+    email: "ec_it@livermoretemple.org"
+host: "livermoretemple.org"
+basePath: "/yande/api"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /courses:
+    get:
+      tags:
+      - "courses"
+      summary: "Retrieve courses from the catalogue"
+      operationId: "getCourses"
+      parameters:
+      - name: "Content-Type"
+        in: "header"
+        description: "The MediaType of the request content"
+        required: true
+        type: "string"
+        default: "application/json"
+      - name: "Accept"
+        in: "header"
+        description: "The MediaType of the response content"
+        required: true
+        type: "string"
+        default: "application/json"
+      - name: "Account-Id"
+        in: "header"
+        description: "Unique identifier of the devotee's (user's) account"
+        required: true
+        type: "string"
+      - name: "tags"
+        in: "query"
+        description: "Tags to be used as filter - comma seperated list of tags"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Success - List of items returned in the response payload"
+          schema:
+            $ref: "#/definitions/RetrieveCoursesListResponse"
+        400:
+          description: "Bad request - some of the input parameters are incorrect or\
+            \ invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      x-swagger-router-controller: "Courses"
+    post:
+      tags:
+      - "courses"
+      summary: "Add a new course to the catalogue"
+      operationId: "addCourse"
+      parameters:
+      - name: "Content-Type"
+        in: "header"
+        description: "The MediaType of the request content"
+        required: true
+        type: "string"
+        default: "application/json"
+      - name: "Accept"
+        in: "header"
+        description: "The MediaType of the response content"
+        required: true
+        type: "string"
+        default: "application/json"
+      - name: "Account-Id"
+        in: "header"
+        description: "Unique identifier of the devotee's (user's) account"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/CreateCourseRequest"
+      responses:
+        200:
+          description: "Success - Item returned in the response payload"
+          schema:
+            $ref: "#/definitions/RetrieveCourseResponse"
+        400:
+          description: "Bad request - some of the input parameters are incorrect or\
+            \ invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        403:
+          description: "Forbidden - the devotee does not have permissions to call\
+            \ this endpoint"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      x-swagger-router-controller: "Courses"
+  /courses/{courseId}:
+    get:
+      tags:
+      - "courses"
+      summary: "Retrieve course by Course Id"
+      operationId: "getCourseById"
+      parameters:
+      - name: "Content-Type"
+        in: "header"
+        description: "The MediaType of the request content"
+        required: true
+        type: "string"
+        default: "application/json"
+      - name: "Accept"
+        in: "header"
+        description: "The MediaType of the response content"
+        required: true
+        type: "string"
+        default: "application/json"
+      - name: "Account-Id"
+        in: "header"
+        description: "Unique identifier of the devotee's (user's) account"
+        required: true
+        type: "string"
+      - name: "courseId"
+        in: "path"
+        description: "Id of the course to be retrieved"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Success - Item returned in the response payload"
+          schema:
+            $ref: "#/definitions/RetrieveCourseResponse"
+        400:
+          description: "Bad request - some of the input parameters are incorrect or\
+            \ invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: "Resource Not Found"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      x-swagger-router-controller: "Courses"
+  /teachers:
+    get:
+      tags:
+      - "teachers"
+      summary: "Retrieve list of teachers"
+      operationId: "getTeachers"
+      parameters:
+      - name: "Content-Type"
+        in: "header"
+        description: "The MediaType of the request content"
+        required: true
+        type: "string"
+        default: "application/json"
+      - name: "Accept"
+        in: "header"
+        description: "The MediaType of the response content"
+        required: true
+        type: "string"
+        default: "application/json"
+      - name: "Account-Id"
+        in: "header"
+        description: "Unique identifier of the devotee's (user's) account"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Success - List of items returned in the response payload"
+          schema:
+            $ref: "#/definitions/RetrieveTeachersListResponse"
+        400:
+          description: "Bad request - some of the input parameters are incorrect or\
+            \ invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        403:
+          description: "Forbidden - the devotee does not have permissions to call\
+            \ this endpoint"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      x-swagger-router-controller: "Teachers"
+    post:
+      tags:
+      - "teachers"
+      summary: "Add a new teacher to the system"
+      operationId: "registerTeacher"
+      parameters:
+      - name: "Content-Type"
+        in: "header"
+        description: "The MediaType of the request content"
+        required: true
+        type: "string"
+        default: "application/json"
+      - name: "Accept"
+        in: "header"
+        description: "The MediaType of the response content"
+        required: true
+        type: "string"
+        default: "application/json"
+      - name: "Account-Id"
+        in: "header"
+        description: "Unique identifier of the devotee's (user's) account"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/RegisterTeacherRequest"
+      responses:
+        200:
+          description: "Success - Item returned in the response payload"
+          schema:
+            $ref: "#/definitions/RetrieveTeacherResponse"
+        400:
+          description: "Bad request - some of the input parameters are incorrect or\
+            \ invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        403:
+          description: "Forbidden - the devotee does not have permissions to call\
+            \ this endpoint"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      x-swagger-router-controller: "Teachers"
+  /teachers/{teacherId}:
+    get:
+      tags:
+      - "teachers"
+      summary: "Retrieve teacher by teacher Id"
+      operationId: "getTeacherById"
+      parameters:
+      - name: "Content-Type"
+        in: "header"
+        description: "The MediaType of the request content"
+        required: true
+        type: "string"
+        default: "application/json"
+      - name: "Accept"
+        in: "header"
+        description: "The MediaType of the response content"
+        required: true
+        type: "string"
+        default: "application/json"
+      - name: "Account-Id"
+        in: "header"
+        description: "Unique identifier of the devotee's (user's) account"
+        required: true
+        type: "string"
+      - name: "teacherId"
+        in: "path"
+        description: "Id of the teacher to be retrieved"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Success - Item returned in the response payload"
+          schema:
+            $ref: "#/definitions/RetrieveTeacherResponse"
+        400:
+          description: "Bad request - some of the input parameters are incorrect or\
+            \ invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        403:
+          description: "Forbidden - the devotee does not have permissions to call\
+            \ this endpoint"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: "Resource Not Found"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      x-swagger-router-controller: "Teachers"
+  /indemnities:
+    get:
+      tags:
+      - "indemnities"
+      summary: "Retrieve indemnities from the system. Only indemnities belonging to\
+        \ the requesting user account will be returned. User Account information is\
+        \ available in the header."
+      operationId: "getIndemnities"
+      parameters:
+      - name: "Content-Type"
+        in: "header"
+        description: "The MediaType of the request content"
+        required: true
+        type: "string"
+        default: "application/json"
+      - name: "Accept"
+        in: "header"
+        description: "The MediaType of the response content"
+        required: true
+        type: "string"
+        default: "application/json"
+      - name: "Account-Id"
+        in: "header"
+        description: "Unique identifier of the devotee's (user's) account"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Success - List of items returned in the response payload"
+          schema:
+            $ref: "#/definitions/RetrieveIndemnitiesListResponse"
+        400:
+          description: "Bad request - some of the input parameters are incorrect or\
+            \ invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      x-swagger-router-controller: "Indemnities"
+    post:
+      tags:
+      - "indemnities"
+      summary: "Add a new indemnity to the system"
+      operationId: "addIndemnity"
+      parameters:
+      - name: "Content-Type"
+        in: "header"
+        description: "The MediaType of the request content"
+        required: true
+        type: "string"
+        default: "application/json"
+      - name: "Accept"
+        in: "header"
+        description: "The MediaType of the response content"
+        required: true
+        type: "string"
+        default: "application/json"
+      - name: "Account-Id"
+        in: "header"
+        description: "Unique identifier of the devotee's (user's) account"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/CreateIndemnityRequest"
+      responses:
+        200:
+          description: "Success - Item returned in the response payload"
+          schema:
+            $ref: "#/definitions/RetrieveIndemnityResponse"
+        400:
+          description: "Bad request - some of the input parameters are incorrect or\
+            \ invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      x-swagger-router-controller: "Indemnities"
+  /account:
+    get:
+      tags:
+      - "accounts"
+      summary: "Retrieve accounts from the system"
+      operationId: "getAccounts"
+      parameters:
+      - name: "Content-Type"
+        in: "header"
+        description: "The MediaType of the request content"
+        required: true
+        type: "string"
+        default: "application/json"
+      - name: "Accept"
+        in: "header"
+        description: "The MediaType of the response content"
+        required: true
+        type: "string"
+        default: "application/json"
+      - name: "Account-Id"
+        in: "header"
+        description: "Unique identifier of the devotee's (user's) account"
+        required: true
+        type: "string"
+      - name: "mobileNumber"
+        in: "query"
+        description: "If a user name is passed in query string, the results will be\
+          \ filtered by accounts user name"
+        required: false
+        type: "string"
+      - name: "userName"
+        in: "query"
+        description: "If a mobile number is passed in query string, the results will\
+          \ be filtered by accounts mobile number"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Success - List of items returned in the response payload"
+          schema:
+            $ref: "#/definitions/RetrieveAccountsListResponse"
+        400:
+          description: "Bad request - some of the input parameters are incorrect or\
+            \ invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        403:
+          description: "Forbidden - the devotee does not have permissions to call\
+            \ this endpoint"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
+          description: "Resource Not Found"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      x-swagger-router-controller: "Accounts"
+  /account/{accountId}/enrollments:
+    get:
+      tags:
+      - "enrollments"
+      summary: "Retrieve enrollments from the system. Only enrollments belonging to\
+        \ the requesting user account will be returned. User Account information is\
+        \ available in the header."
+      operationId: "getEnrollments"
+      parameters:
+      - name: "Content-Type"
+        in: "header"
+        description: "The MediaType of the request content"
+        required: true
+        type: "string"
+        default: "application/json"
+      - name: "Accept"
+        in: "header"
+        description: "The MediaType of the response content"
+        required: true
+        type: "string"
+        default: "application/json"
+      - name: "Account-Id"
+        in: "header"
+        description: "Unique identifier of the devotee's (user's) account"
+        required: true
+        type: "string"
+      - name: "accountId"
+        in: "path"
+        description: "Id of the account to be retrieved"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Success - List of items returned in the response payload"
+          schema:
+            $ref: "#/definitions/RetrieveEnrollmentsListResponse"
+        400:
+          description: "Bad request - some of the input parameters are incorrect or\
+            \ invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      x-swagger-router-controller: "Enrollments"
+    post:
+      tags:
+      - "enrollments"
+      summary: "Add a new enrollment to the system"
+      operationId: "addEnrollment"
+      parameters:
+      - name: "Content-Type"
+        in: "header"
+        description: "The MediaType of the request content"
+        required: true
+        type: "string"
+        default: "application/json"
+      - name: "Accept"
+        in: "header"
+        description: "The MediaType of the response content"
+        required: true
+        type: "string"
+        default: "application/json"
+      - name: "Account-Id"
+        in: "header"
+        description: "Unique identifier of the devotee's (user's) account"
+        required: true
+        type: "string"
+      - name: "accountId"
+        in: "path"
+        description: "Id of the account to be retrieved"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/CreateEnrollmentRequest"
+      responses:
+        200:
+          description: "Success - Item returned in the response payload"
+          schema:
+            $ref: "#/definitions/RetrieveEnrollmentResponse"
+        400:
+          description: "Bad request - some of the input parameters are incorrect or\
+            \ invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        500:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      x-swagger-router-controller: "Indemnities"
+definitions:
+  ErrorResponse:
+    properties:
+      errorCode:
+        type: "integer"
+        description: "Unique Error Code that identifies the error"
+      errorMessage:
+        type: "string"
+        description: "Error Messages that describes the error"
+    description: "Error Object"
+  CreateCourseRequest:
+    properties:
+      course:
+        $ref: "#/definitions/CourseObject"
+    description: "This is the schema of request payload when a New Course is created\
+      \ in the system"
+    example:
+      course:
+        courseEndTime: "courseEndTime"
+        slots: 0
+        courseVenue: "courseVenue"
+        teachers:
+        - "teachers"
+        - "teachers"
+        imageURL: "imageURL"
+        flyerURL: "flyerURL"
+        courseStartTime: "courseStartTime"
+        ageRestrictions: "ageRestrictions"
+        courseId: "courseId"
+        courseDays: "courseDays"
+        courseRemarks: "courseRemarks"
+        tags: "tags"
+  RetrieveCoursesListResponse:
+    properties:
+      courses:
+        type: "array"
+        description: "List of Courses"
+        items:
+          $ref: "#/definitions/CourseObject"
+    description: "This is the schema of response payload when a list of course information\
+      \ is requested"
+    example:
+      courses:
+      - courseEndTime: "courseEndTime"
+        slots: 0
+        courseVenue: "courseVenue"
+        teachers:
+        - "teachers"
+        - "teachers"
+        imageURL: "imageURL"
+        flyerURL: "flyerURL"
+        courseStartTime: "courseStartTime"
+        ageRestrictions: "ageRestrictions"
+        courseId: "courseId"
+        courseDays: "courseDays"
+        courseRemarks: "courseRemarks"
+        tags: "tags"
+      - courseEndTime: "courseEndTime"
+        slots: 0
+        courseVenue: "courseVenue"
+        teachers:
+        - "teachers"
+        - "teachers"
+        imageURL: "imageURL"
+        flyerURL: "flyerURL"
+        courseStartTime: "courseStartTime"
+        ageRestrictions: "ageRestrictions"
+        courseId: "courseId"
+        courseDays: "courseDays"
+        courseRemarks: "courseRemarks"
+        tags: "tags"
+  RetrieveCourseResponse:
+    properties:
+      course:
+        $ref: "#/definitions/CourseObject"
+    description: "This is the schema of response payload when a course information\
+      \ is requested"
+    example:
+      course:
+        courseEndTime: "courseEndTime"
+        slots: 0
+        courseVenue: "courseVenue"
+        teachers:
+        - "teachers"
+        - "teachers"
+        imageURL: "imageURL"
+        flyerURL: "flyerURL"
+        courseStartTime: "courseStartTime"
+        ageRestrictions: "ageRestrictions"
+        courseId: "courseId"
+        courseDays: "courseDays"
+        courseRemarks: "courseRemarks"
+        tags: "tags"
+  CourseObject:
+    properties:
+      courseId:
+        type: "string"
+        description: "Unique course id"
+      ageRestrictions:
+        type: "string"
+        description: "A String describing any age restrictions"
+      courseStartTime:
+        type: "string"
+        description: "Course start time represented as a string in pacific time in\
+          \ the format hh:mm"
+      courseEndTime:
+        type: "string"
+        description: "Course end time represented as a string in pacific time in the\
+          \ format hh:mm"
+      courseDays:
+        type: "string"
+        description: "Course days or String describing the frequency/recurrence of\
+          \ the course"
+      courseVenue:
+        type: "string"
+        description: "Facility where the course will be taught"
+      flyerURL:
+        type: "string"
+        description: "URL of the course's flyer"
+      imageURL:
+        type: "string"
+        description: "URL of the course's image"
+      slots:
+        type: "integer"
+        description: "Class size or total number of slots in the course"
+      courseRemarks:
+        type: "string"
+        description: "Any additional notes or remarks about the course"
+      teachers:
+        type: "array"
+        description: "List of teacher (or coordinator) ids of the course"
+        items:
+          type: "string"
+      tags:
+        type: "string"
+        description: "List of tags associated with the course"
+    description: "Course Object"
+    example:
+      courseEndTime: "courseEndTime"
+      slots: 0
+      courseVenue: "courseVenue"
+      teachers:
+      - "teachers"
+      - "teachers"
+      imageURL: "imageURL"
+      flyerURL: "flyerURL"
+      courseStartTime: "courseStartTime"
+      ageRestrictions: "ageRestrictions"
+      courseId: "courseId"
+      courseDays: "courseDays"
+      courseRemarks: "courseRemarks"
+      tags: "tags"
+  RegisterTeacherRequest:
+    properties:
+      teacher:
+        $ref: "#/definitions/TeacherObject"
+    description: "This is the schema of request payload when a New Teacher is registered\
+      \ in the system"
+    example:
+      teacher:
+        accountId: "accountId"
+        teacherEmail: "teacherEmail"
+        teacherId: "teacherId"
+        teacherName:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        teacherPhoneNumber: "teacherPhoneNumber"
+  RetrieveTeachersListResponse:
+    properties:
+      teachers:
+        type: "array"
+        description: "List of Teachers"
+        items:
+          $ref: "#/definitions/TeacherObject"
+    description: "This is the schema of response payload when a list of teacher information\
+      \ is requested"
+    example:
+      teachers:
+      - accountId: "accountId"
+        teacherEmail: "teacherEmail"
+        teacherId: "teacherId"
+        teacherName:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        teacherPhoneNumber: "teacherPhoneNumber"
+      - accountId: "accountId"
+        teacherEmail: "teacherEmail"
+        teacherId: "teacherId"
+        teacherName:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        teacherPhoneNumber: "teacherPhoneNumber"
+  RetrieveTeacherResponse:
+    properties:
+      teacher:
+        $ref: "#/definitions/TeacherObject"
+    description: "This is the schema of response payload when a teacher's information\
+      \ is requested"
+    example:
+      teacher:
+        accountId: "accountId"
+        teacherEmail: "teacherEmail"
+        teacherId: "teacherId"
+        teacherName:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        teacherPhoneNumber: "teacherPhoneNumber"
+  TeacherObject:
+    properties:
+      teacherId:
+        type: "string"
+        description: "Unique teacher id"
+      accountId:
+        type: "string"
+        description: "Unique account id of the devotee"
+      teacherName:
+        $ref: "#/definitions/NameObject"
+      teacherEmail:
+        type: "string"
+        description: "Email of the teacher"
+      teacherPhoneNumber:
+        type: "string"
+        description: "Phone number of teacher"
+    description: "Teacher Object"
+    example:
+      accountId: "accountId"
+      teacherEmail: "teacherEmail"
+      teacherId: "teacherId"
+      teacherName:
+        firstName: "firstName"
+        lastName: "lastName"
+        middleName: "middleName"
+      teacherPhoneNumber: "teacherPhoneNumber"
+  CreateIndemnityRequest:
+    properties:
+      indemnity:
+        $ref: "#/definitions/IndemnityObject"
+    description: "This is the schema of request payload when a New Indemnity is submited\
+      \ to the system"
+    example:
+      indemnity:
+        guardianFirstName:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        AccountId: "AccountId"
+        participantDOB: "participantDOB"
+        participantName:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        indemnityFormVersion: "indemnityFormVersion"
+  RetrieveIndemnitiesListResponse:
+    properties:
+      indemnities:
+        type: "array"
+        description: "List of Indemnities"
+        items:
+          $ref: "#/definitions/IndemnityObject"
+    description: "This is the schema of response payload when a list of indemnity\
+      \ information is requested"
+    example:
+      indemnities:
+      - guardianFirstName:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        AccountId: "AccountId"
+        participantDOB: "participantDOB"
+        participantName:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        indemnityFormVersion: "indemnityFormVersion"
+      - guardianFirstName:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        AccountId: "AccountId"
+        participantDOB: "participantDOB"
+        participantName:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        indemnityFormVersion: "indemnityFormVersion"
+  RetrieveIndemnityResponse:
+    properties:
+      indemnity:
+        $ref: "#/definitions/IndemnityObject"
+    description: "This is the schema of response payload when an indemnity form's\
+      \ information is requested"
+    example:
+      indemnity:
+        guardianFirstName:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        AccountId: "AccountId"
+        participantDOB: "participantDOB"
+        participantName:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        indemnityFormVersion: "indemnityFormVersion"
+  IndemnityObject:
+    properties:
+      AccountId:
+        type: "string"
+        description: "Unique devotee account id of the participant"
+      participantName:
+        $ref: "#/definitions/NameObject"
+      participantDOB:
+        type: "string"
+        description: "Date of Birth of the participant"
+      guardianFirstName:
+        $ref: "#/definitions/NameObject"
+      indemnityFormVersion:
+        type: "string"
+        description: "String representing the name ot number of indemnity content\
+          \ version."
+    description: "Indemnity Object"
+    example:
+      guardianFirstName:
+        firstName: "firstName"
+        lastName: "lastName"
+        middleName: "middleName"
+      AccountId: "AccountId"
+      participantDOB: "participantDOB"
+      participantName:
+        firstName: "firstName"
+        lastName: "lastName"
+        middleName: "middleName"
+      indemnityFormVersion: "indemnityFormVersion"
+  RetrieveAccountsListResponse:
+    properties:
+      accounts:
+        type: "array"
+        description: "List of Accounts"
+        items:
+          $ref: "#/definitions/AccountObject"
+    description: "This is the schema of response payload when an account's information\
+      \ is requested"
+    example:
+      accounts:
+      - accountId: "accountId"
+        mobileNumber: "mobileNumber"
+        familyMembers:
+        - firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        - firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+      - accountId: "accountId"
+        mobileNumber: "mobileNumber"
+        familyMembers:
+        - firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        - firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+  AccountObject:
+    properties:
+      accountId:
+        type: "string"
+        description: "Unique account id of the devotee"
+      mobileNumber:
+        type: "string"
+        description: "Mobile number associated with the devotee's account"
+      familyMembers:
+        type: "array"
+        description: "List of family Members"
+        items:
+          $ref: "#/definitions/NameObject"
+    description: "Devotee Account Object"
+    example:
+      accountId: "accountId"
+      mobileNumber: "mobileNumber"
+      familyMembers:
+      - firstName: "firstName"
+        lastName: "lastName"
+        middleName: "middleName"
+      - firstName: "firstName"
+        lastName: "lastName"
+        middleName: "middleName"
+  CreateEnrollmentRequest:
+    properties:
+      enrollment:
+        $ref: "#/definitions/EnrollmentObject"
+    description: "This is the schema of request payload when a New Enrollment is created\
+      \ in the system"
+    example:
+      enrollment:
+        enrollmentId: "enrollmentId"
+        accountId: "accountId"
+        guardianName:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        indemnityId: "indemnityId"
+        participantName:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        isParticipantUnder18: true
+  RetrieveEnrollmentsListResponse:
+    properties:
+      enrollment:
+        type: "array"
+        description: "List of Enrollments"
+        items:
+          $ref: "#/definitions/EnrollmentObject"
+    description: "This is the schema of response payload when a list of indemnity\
+      \ information is requested"
+    example:
+      enrollment:
+      - enrollmentId: "enrollmentId"
+        accountId: "accountId"
+        guardianName:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        indemnityId: "indemnityId"
+        participantName:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        isParticipantUnder18: true
+      - enrollmentId: "enrollmentId"
+        accountId: "accountId"
+        guardianName:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        indemnityId: "indemnityId"
+        participantName:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        isParticipantUnder18: true
+  RetrieveEnrollmentResponse:
+    properties:
+      enrollment:
+        $ref: "#/definitions/EnrollmentObject"
+    description: "This is the schema of response payload when an enrollment's information\
+      \ is requested"
+    example:
+      enrollment:
+        enrollmentId: "enrollmentId"
+        accountId: "accountId"
+        guardianName:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        indemnityId: "indemnityId"
+        participantName:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        isParticipantUnder18: true
+  EnrollmentObject:
+    properties:
+      enrollmentId:
+        type: "string"
+        description: "Unique enrollment id"
+      accountId:
+        type: "string"
+        description: "Unique account id of the participants devotee account"
+      participantName:
+        $ref: "#/definitions/NameObject"
+      guardianName:
+        $ref: "#/definitions/NameObject"
+      isParticipantUnder18:
+        type: "boolean"
+        description: "true id participant age is under 18 else false"
+      indemnityId:
+        type: "string"
+        description: "indemnity form id associated with the enrollment"
+    description: "Enrollment Object"
+    example:
+      enrollmentId: "enrollmentId"
+      accountId: "accountId"
+      guardianName:
+        firstName: "firstName"
+        lastName: "lastName"
+        middleName: "middleName"
+      indemnityId: "indemnityId"
+      participantName:
+        firstName: "firstName"
+        lastName: "lastName"
+        middleName: "middleName"
+      isParticipantUnder18: true
+  NameObject:
+    properties:
+      firstName:
+        type: "string"
+        description: "First name of teacher"
+      middleName:
+        type: "string"
+        description: "Middle name of teacher"
+      lastName:
+        type: "string"
+        description: "Last name of teacher"
+    description: "Name Object"
+    example:
+      firstName: "firstName"
+      lastName: "lastName"
+      middleName: "middleName"
+parameters:
+  Content-Type:
+    name: "Content-Type"
+    in: "header"
+    description: "The MediaType of the request content"
+    required: true
+    type: "string"
+    default: "application/json"
+  Accept:
+    name: "Accept"
+    in: "header"
+    description: "The MediaType of the response content"
+    required: true
+    type: "string"
+    default: "application/json"
+  Account-Id:
+    name: "Account-Id"
+    in: "header"
+    description: "Unique identifier of the devotee's (user's) account"
+    required: true
+    type: "string"
+responses:
+  400ErrorResponse:
+    description: "Bad request - some of the input parameters are incorrect or invalid"
+    schema:
+      $ref: "#/definitions/ErrorResponse"
+  403ErrorResponse:
+    description: "Forbidden - the devotee does not have permissions to call this endpoint"
+    schema:
+      $ref: "#/definitions/ErrorResponse"
+  404ErrorResponse:
+    description: "Resource Not Found"
+    schema:
+      $ref: "#/definitions/ErrorResponse"
+  500ErrorResponse:
+    description: "Internal Server Error"
+    schema:
+      $ref: "#/definitions/ErrorResponse"
