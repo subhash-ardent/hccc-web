@@ -407,15 +407,15 @@ paths:
         description: "Unique identifier of the devotee's (user's) account"
         required: true
         type: "string"
-      - name: "mobileNumber"
+      - name: "accountId"
         in: "query"
-        description: "If a user name is passed in query string, the results will be\
+        description: "If a accountId is passed in query string, the results will be\
           \ filtered by accounts user name"
         required: false
         type: "string"
-      - name: "userName"
+      - name: "phoneNumber"
         in: "query"
-        description: "If a mobile number is passed in query string, the results will\
+        description: "If a phone number is passed in query string, the results will\
           \ be filtered by accounts mobile number"
         required: false
         type: "string"
@@ -491,7 +491,7 @@ paths:
       x-swagger-router-controller: "Enrollments"
     post:
       tags:
-      - "enrollments"
+      - "indemnities"
       summary: "Add a new enrollment to the system"
       operationId: "addEnrollment"
       parameters:
@@ -886,47 +886,91 @@ definitions:
     example:
       accounts:
       - accountId: "accountId"
-        mobileNumber: "mobileNumber"
+        phoneNumber: "phoneNumber"
+        roles:
+        - "roles"
+        - "roles"
         familyMembers:
-        - firstName: "firstName"
-          lastName: "lastName"
-          middleName: "middleName"
-        - firstName: "firstName"
-          lastName: "lastName"
-          middleName: "middleName"
+        - phoneNumber: "phoneNumber"
+          name:
+            firstName: "firstName"
+            lastName: "lastName"
+            middleName: "middleName"
+          dateOfBirth: "dateOfBirth"
+          email: "email"
+        - phoneNumber: "phoneNumber"
+          name:
+            firstName: "firstName"
+            lastName: "lastName"
+            middleName: "middleName"
+          dateOfBirth: "dateOfBirth"
+          email: "email"
+        email: "email"
       - accountId: "accountId"
-        mobileNumber: "mobileNumber"
+        phoneNumber: "phoneNumber"
+        roles:
+        - "roles"
+        - "roles"
         familyMembers:
-        - firstName: "firstName"
-          lastName: "lastName"
-          middleName: "middleName"
-        - firstName: "firstName"
-          lastName: "lastName"
-          middleName: "middleName"
+        - phoneNumber: "phoneNumber"
+          name:
+            firstName: "firstName"
+            lastName: "lastName"
+            middleName: "middleName"
+          dateOfBirth: "dateOfBirth"
+          email: "email"
+        - phoneNumber: "phoneNumber"
+          name:
+            firstName: "firstName"
+            lastName: "lastName"
+            middleName: "middleName"
+          dateOfBirth: "dateOfBirth"
+          email: "email"
+        email: "email"
   AccountObject:
     properties:
       accountId:
         type: "string"
         description: "Unique account id of the devotee"
-      mobileNumber:
+      phoneNumber:
         type: "string"
-        description: "Mobile number associated with the devotee's account"
+        description: "Phone number associated with the devotee's account"
+      email:
+        type: "string"
+        description: "Email Id associated with the devotee's account"
       familyMembers:
         type: "array"
         description: "List of family Members"
         items:
-          $ref: "#/definitions/NameObject"
+          $ref: "#/definitions/Devotee"
+      roles:
+        type: "array"
+        description: "List of roles"
+        items:
+          type: "string"
     description: "Devotee Account Object"
     example:
       accountId: "accountId"
-      mobileNumber: "mobileNumber"
+      phoneNumber: "phoneNumber"
+      roles:
+      - "roles"
+      - "roles"
       familyMembers:
-      - firstName: "firstName"
-        lastName: "lastName"
-        middleName: "middleName"
-      - firstName: "firstName"
-        lastName: "lastName"
-        middleName: "middleName"
+      - phoneNumber: "phoneNumber"
+        name:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        dateOfBirth: "dateOfBirth"
+        email: "email"
+      - phoneNumber: "phoneNumber"
+        name:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        dateOfBirth: "dateOfBirth"
+        email: "email"
+      email: "email"
   CreateEnrollmentRequest:
     properties:
       enrollment:
@@ -1050,6 +1094,28 @@ definitions:
       firstName: "firstName"
       lastName: "lastName"
       middleName: "middleName"
+  Devotee:
+    properties:
+      name:
+        $ref: "#/definitions/NameObject"
+      phoneNumber:
+        type: "string"
+        description: "Phone Number of the Devotee"
+      email:
+        type: "string"
+        description: "Email address of the Devotee"
+      dateOfBirth:
+        type: "string"
+        description: "Date of birth of the Devotee in the format YYYY-MM-DD"
+    description: "Devotee Object"
+    example:
+      phoneNumber: "phoneNumber"
+      name:
+        firstName: "firstName"
+        lastName: "lastName"
+        middleName: "middleName"
+      dateOfBirth: "dateOfBirth"
+      email: "email"
 parameters:
   Content-Type:
     name: "Content-Type"
