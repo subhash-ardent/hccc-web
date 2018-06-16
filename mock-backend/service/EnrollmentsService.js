@@ -6,23 +6,23 @@
  *
  * contentType String The MediaType of the request content
  * accept String The MediaType of the response content
- * accountId String Unique identifier of the devotee's (user's) account
- * accountId2 String Id of the account to be retrieved
+ * userId String Unique identifier of the user initiating the call
+ * userName String Id of the account to be retrieved
  * returns RetrieveEnrollmentsListResponse
  **/
-exports.getEnrollments = function(contentType,accept,accountId,accountId2) {
+exports.getEnrollments = function(contentType,accept,userId,userName) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
   "enrollment" : [ {
     "enrollmentId" : "enrollmentId",
-    "accountId" : "accountId",
     "guardianName" : {
       "firstName" : "firstName",
       "lastName" : "lastName",
       "middleName" : "middleName"
     },
     "indemnityId" : "indemnityId",
+    "userName" : "userName",
     "participantName" : {
       "firstName" : "firstName",
       "lastName" : "lastName",
@@ -31,13 +31,13 @@ exports.getEnrollments = function(contentType,accept,accountId,accountId2) {
     "isParticipantUnder18" : true
   }, {
     "enrollmentId" : "enrollmentId",
-    "accountId" : "accountId",
     "guardianName" : {
       "firstName" : "firstName",
       "lastName" : "lastName",
       "middleName" : "middleName"
     },
     "indemnityId" : "indemnityId",
+    "userName" : "userName",
     "participantName" : {
       "firstName" : "firstName",
       "lastName" : "lastName",

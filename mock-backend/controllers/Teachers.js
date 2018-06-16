@@ -6,9 +6,9 @@ var Teachers = require('../service/TeachersService');
 module.exports.getTeacherById = function getTeacherById (req, res, next) {
   var contentType = req.swagger.params['Content-Type'].value;
   var accept = req.swagger.params['Accept'].value;
-  var accountId = req.swagger.params['Account-Id'].value;
+  var userId = req.swagger.params['User-Id'].value;
   var teacherId = req.swagger.params['teacherId'].value;
-  Teachers.getTeacherById(contentType,accept,accountId,teacherId)
+  Teachers.getTeacherById(contentType,accept,userId,teacherId)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -20,8 +20,8 @@ module.exports.getTeacherById = function getTeacherById (req, res, next) {
 module.exports.getTeachers = function getTeachers (req, res, next) {
   var contentType = req.swagger.params['Content-Type'].value;
   var accept = req.swagger.params['Accept'].value;
-  var accountId = req.swagger.params['Account-Id'].value;
-  Teachers.getTeachers(contentType,accept,accountId)
+  var userId = req.swagger.params['User-Id'].value;
+  Teachers.getTeachers(contentType,accept,userId)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -33,9 +33,9 @@ module.exports.getTeachers = function getTeachers (req, res, next) {
 module.exports.registerTeacher = function registerTeacher (req, res, next) {
   var contentType = req.swagger.params['Content-Type'].value;
   var accept = req.swagger.params['Accept'].value;
-  var accountId = req.swagger.params['Account-Id'].value;
+  var userId = req.swagger.params['User-Id'].value;
   var body = req.swagger.params['body'].value;
-  Teachers.registerTeacher(contentType,accept,accountId,body)
+  Teachers.registerTeacher(contentType,accept,userId,body)
     .then(function (response) {
       utils.writeJson(res, response);
     })

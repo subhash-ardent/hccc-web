@@ -6,61 +6,66 @@
  *
  * contentType String The MediaType of the request content
  * accept String The MediaType of the response content
- * accountId String Unique identifier of the devotee's (user's) account
- * accountId2 String If a accountId is passed in query string, the results will be filtered by accounts user name (optional)
+ * userId String Unique identifier of the user initiating the call
+ * userName String If a userName is passed in query string, the results will be filtered by accounts user name (optional)
  * phoneNumber String If a phone number is passed in query string, the results will be filtered by accounts mobile number (optional)
+ * role String If a role is passed in query string, the results will be filtered by roles (optional)
  * returns RetrieveAccountsListResponse
  **/
-exports.getAccounts = function(contentType,accept,accountId,accountId2,phoneNumber) {
+exports.getAccounts = function(contentType,accept,userId,userName,phoneNumber,role) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
   "accounts" : [ {
-    "accountId" : "accountId",
     "phoneNumber" : "phoneNumber",
     "roles" : [ "roles", "roles" ],
+    "name" : {
+      "firstName" : "firstName",
+      "lastName" : "lastName",
+      "middleName" : "middleName"
+    },
+    "dateOfBirth" : "dateOfBirth",
+    "userName" : "userName",
     "familyMembers" : [ {
-      "phoneNumber" : "phoneNumber",
       "name" : {
         "firstName" : "firstName",
         "lastName" : "lastName",
         "middleName" : "middleName"
       },
-      "dateOfBirth" : "dateOfBirth",
-      "email" : "email"
+      "dateOfBirth" : "dateOfBirth"
     }, {
-      "phoneNumber" : "phoneNumber",
       "name" : {
         "firstName" : "firstName",
         "lastName" : "lastName",
         "middleName" : "middleName"
       },
-      "dateOfBirth" : "dateOfBirth",
-      "email" : "email"
+      "dateOfBirth" : "dateOfBirth"
     } ],
     "email" : "email"
   }, {
-    "accountId" : "accountId",
     "phoneNumber" : "phoneNumber",
     "roles" : [ "roles", "roles" ],
+    "name" : {
+      "firstName" : "firstName",
+      "lastName" : "lastName",
+      "middleName" : "middleName"
+    },
+    "dateOfBirth" : "dateOfBirth",
+    "userName" : "userName",
     "familyMembers" : [ {
-      "phoneNumber" : "phoneNumber",
       "name" : {
         "firstName" : "firstName",
         "lastName" : "lastName",
         "middleName" : "middleName"
       },
-      "dateOfBirth" : "dateOfBirth",
-      "email" : "email"
+      "dateOfBirth" : "dateOfBirth"
     }, {
-      "phoneNumber" : "phoneNumber",
       "name" : {
         "firstName" : "firstName",
         "lastName" : "lastName",
         "middleName" : "middleName"
       },
-      "dateOfBirth" : "dateOfBirth",
-      "email" : "email"
+      "dateOfBirth" : "dateOfBirth"
     } ],
     "email" : "email"
   } ]

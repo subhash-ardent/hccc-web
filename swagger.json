@@ -32,7 +32,7 @@
             "$ref": "#/parameters/Accept"
           },
           {
-            "$ref": "#/parameters/Account-Id"
+            "$ref": "#/parameters/User-Id"
           },
           {
             "name": "tags",
@@ -71,7 +71,7 @@
             "$ref": "#/parameters/Accept"
           },
           {
-            "$ref": "#/parameters/Account-Id"
+            "$ref": "#/parameters/User-Id"
           },
           {
             "in": "body",
@@ -116,7 +116,7 @@
             "$ref": "#/parameters/Accept"
           },
           {
-            "$ref": "#/parameters/Account-Id"
+            "$ref": "#/parameters/User-Id"
           },
           {
             "in": "path",
@@ -160,7 +160,7 @@
             "$ref": "#/parameters/Accept"
           },
           {
-            "$ref": "#/parameters/Account-Id"
+            "$ref": "#/parameters/User-Id"
           }
         ],
         "responses": {
@@ -195,7 +195,7 @@
             "$ref": "#/parameters/Accept"
           },
           {
-            "$ref": "#/parameters/Account-Id"
+            "$ref": "#/parameters/User-Id"
           },
           {
             "in": "body",
@@ -240,7 +240,7 @@
             "$ref": "#/parameters/Accept"
           },
           {
-            "$ref": "#/parameters/Account-Id"
+            "$ref": "#/parameters/User-Id"
           },
           {
             "in": "path",
@@ -287,7 +287,7 @@
             "$ref": "#/parameters/Accept"
           },
           {
-            "$ref": "#/parameters/Account-Id"
+            "$ref": "#/parameters/User-Id"
           }
         ],
         "responses": {
@@ -319,7 +319,7 @@
             "$ref": "#/parameters/Accept"
           },
           {
-            "$ref": "#/parameters/Account-Id"
+            "$ref": "#/parameters/User-Id"
           },
           {
             "in": "body",
@@ -346,7 +346,7 @@
         }
       }
     },
-    "/account": {
+    "/accounts": {
       "get": {
         "tags": [
           "accounts"
@@ -361,14 +361,14 @@
             "$ref": "#/parameters/Accept"
           },
           {
-            "$ref": "#/parameters/Account-Id"
+            "$ref": "#/parameters/User-Id"
           },
           {
-            "name": "accountId",
+            "name": "userName",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "If a accountId is passed in query string, the results will be filtered by accounts user name"
+            "description": "If a userName is passed in query string, the results will be filtered by accounts user name"
           },
           {
             "name": "phoneNumber",
@@ -376,6 +376,13 @@
             "required": false,
             "type": "string",
             "description": "If a phone number is passed in query string, the results will be filtered by accounts mobile number"
+          },
+          {
+            "name": "role",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "If a role is passed in query string, the results will be filtered by roles"
           }
         ],
         "responses": {
@@ -400,7 +407,7 @@
         }
       }
     },
-    "/account/{accountId}/enrollments": {
+    "/account/{userName}/enrollments": {
       "get": {
         "tags": [
           "enrollments"
@@ -415,11 +422,11 @@
             "$ref": "#/parameters/Accept"
           },
           {
-            "$ref": "#/parameters/Account-Id"
+            "$ref": "#/parameters/User-Id"
           },
           {
             "in": "path",
-            "name": "accountId",
+            "name": "userName",
             "required": true,
             "type": "string",
             "description": "Id of the account to be retrieved"
@@ -454,11 +461,11 @@
             "$ref": "#/parameters/Accept"
           },
           {
-            "$ref": "#/parameters/Account-Id"
+            "$ref": "#/parameters/User-Id"
           },
           {
             "in": "path",
-            "name": "accountId",
+            "name": "userName",
             "required": true,
             "type": "string",
             "description": "Id of the account to be retrieved"
@@ -550,6 +557,14 @@
           "type": "string",
           "description": "Course end time represented as a string in pacific time in the format hh:mm"
         },
+        "courseStartDate": {
+          "type": "string",
+          "description": "Course start date represented as a string in pacific time in the format yyyy-mm-dd"
+        },
+        "courseEndDate": {
+          "type": "string",
+          "description": "Course end date represented as a string in pacific time in the format yyyy-mm-dd"
+        },
         "courseDays": {
           "type": "string",
           "description": "Course days or String describing the frequency/recurrence of the course"
@@ -583,7 +598,10 @@
         },
         "tags": {
           "description": "List of tags associated with the course",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -618,24 +636,28 @@
     "TeacherObject": {
       "description": "Teacher Object",
       "properties": {
-        "teacherId": {
+        "userName": {
           "type": "string",
-          "description": "Unique teacher id"
+          "description": "Unique userName of the devotee"
         },
-        "accountId": {
-          "type": "string",
-          "description": "Unique account id of the devotee"
+        "skillSet": {
+          "description": "Teacher's skill set",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
-        "teacherName": {
-          "$ref": "#/definitions/NameObject"
+        "indemnitySigned": {
+          "type": "boolean",
+          "description": "Boolean indicating if the teacher has signed an indemnity"
         },
-        "teacherEmail": {
-          "type": "string",
-          "description": "Email of the teacher"
+        "backgroundVerified": {
+          "type": "boolean",
+          "description": "Boolean indicating if the teacher's background check has been complete"
         },
-        "teacherPhoneNumber": {
-          "type": "string",
-          "description": "Phone number of teacher"
+        "identityVerified": {
+          "type": "boolean",
+          "description": "Boolean indicating if the teacher's identity verified"
         }
       }
     },
@@ -670,18 +692,14 @@
     "IndemnityObject": {
       "description": "Indemnity Object",
       "properties": {
-        "AccountId": {
+        "userName": {
           "type": "string",
-          "description": "Unique devotee account id of the participant"
+          "description": "Unique devotee userName of the participant"
         },
         "participantName": {
           "$ref": "#/definitions/NameObject"
         },
-        "participantDOB": {
-          "type": "string",
-          "description": "Date of Birth of the participant"
-        },
-        "guardianFirstName": {
+        "guardianName": {
           "$ref": "#/definitions/NameObject"
         },
         "indemnityFormVersion": {
@@ -705,9 +723,12 @@
     "AccountObject": {
       "description": "Devotee Account Object",
       "properties": {
-        "accountId": {
+        "userName": {
           "type": "string",
-          "description": "Unique account id of the devotee"
+          "description": "Unique userName of the devotee"
+        },
+        "name": {
+          "$ref": "#/definitions/NameObject"
         },
         "phoneNumber": {
           "type": "string",
@@ -717,11 +738,15 @@
           "type": "string",
           "description": "Email Id associated with the devotee's account"
         },
+        "dateOfBirth": {
+          "type": "string",
+          "description": "Date of birth of the Devotee in the format YYYY-MM-DD"
+        },
         "familyMembers": {
           "type": "array",
           "description": "List of family Members",
           "items": {
-            "$ref": "#/definitions/Devotee"
+            "$ref": "#/definitions/FamilyMember"
           }
         },
         "roles": {
@@ -768,9 +793,9 @@
           "type": "string",
           "description": "Unique enrollment id"
         },
-        "accountId": {
+        "userName": {
           "type": "string",
-          "description": "Unique account id of the participants devotee account"
+          "description": "Unique userName of the participants devotee account"
         },
         "participantName": {
           "$ref": "#/definitions/NameObject"
@@ -805,19 +830,11 @@
         }
       }
     },
-    "Devotee": {
+    "FamilyMember": {
       "description": "Devotee Object",
       "properties": {
         "name": {
           "$ref": "#/definitions/NameObject"
-        },
-        "phoneNumber": {
-          "type": "string",
-          "description": "Phone Number of the Devotee"
-        },
-        "email": {
-          "type": "string",
-          "description": "Email address of the Devotee"
         },
         "dateOfBirth": {
           "type": "string",
@@ -843,10 +860,10 @@
       "type": "string",
       "default": "application/json"
     },
-    "Account-Id": {
-      "name": "Account-Id",
+    "User-Id": {
+      "name": "User-Id",
       "in": "header",
-      "description": "Unique identifier of the devotee's (user's) account",
+      "description": "Unique identifier of the user initiating the call",
       "required": true,
       "type": "string"
     }

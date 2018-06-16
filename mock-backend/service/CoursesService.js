@@ -6,27 +6,29 @@
  *
  * contentType String The MediaType of the request content
  * accept String The MediaType of the response content
- * accountId String Unique identifier of the devotee's (user's) account
+ * userId String Unique identifier of the user initiating the call
  * body CreateCourseRequest 
  * returns RetrieveCourseResponse
  **/
-exports.addCourse = function(contentType,accept,accountId,body) {
+exports.addCourse = function(contentType,accept,userId,body) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
   "course" : {
     "courseEndTime" : "courseEndTime",
+    "courseStartTime" : "courseStartTime",
+    "courseEndDate" : "courseEndDate",
+    "ageRestrictions" : "ageRestrictions",
+    "courseStartDate" : "courseStartDate",
+    "tags" : [ "tags", "tags" ],
     "slots" : 0,
     "courseVenue" : "courseVenue",
     "teachers" : [ "teachers", "teachers" ],
     "imageURL" : "imageURL",
     "flyerURL" : "flyerURL",
-    "courseStartTime" : "courseStartTime",
-    "ageRestrictions" : "ageRestrictions",
     "courseId" : "courseId",
     "courseDays" : "courseDays",
-    "courseRemarks" : "courseRemarks",
-    "tags" : "tags"
+    "courseRemarks" : "courseRemarks"
   }
 };
     if (Object.keys(examples).length > 0) {
@@ -43,27 +45,29 @@ exports.addCourse = function(contentType,accept,accountId,body) {
  *
  * contentType String The MediaType of the request content
  * accept String The MediaType of the response content
- * accountId String Unique identifier of the devotee's (user's) account
+ * userId String Unique identifier of the user initiating the call
  * courseId String Id of the course to be retrieved
  * returns RetrieveCourseResponse
  **/
-exports.getCourseById = function(contentType,accept,accountId,courseId) {
+exports.getCourseById = function(contentType,accept,userId,courseId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
   "course" : {
     "courseEndTime" : "courseEndTime",
+    "courseStartTime" : "courseStartTime",
+    "courseEndDate" : "courseEndDate",
+    "ageRestrictions" : "ageRestrictions",
+    "courseStartDate" : "courseStartDate",
+    "tags" : [ "tags", "tags" ],
     "slots" : 0,
     "courseVenue" : "courseVenue",
     "teachers" : [ "teachers", "teachers" ],
     "imageURL" : "imageURL",
     "flyerURL" : "flyerURL",
-    "courseStartTime" : "courseStartTime",
-    "ageRestrictions" : "ageRestrictions",
     "courseId" : "courseId",
     "courseDays" : "courseDays",
-    "courseRemarks" : "courseRemarks",
-    "tags" : "tags"
+    "courseRemarks" : "courseRemarks"
   }
 };
     if (Object.keys(examples).length > 0) {
@@ -80,40 +84,44 @@ exports.getCourseById = function(contentType,accept,accountId,courseId) {
  *
  * contentType String The MediaType of the request content
  * accept String The MediaType of the response content
- * accountId String Unique identifier of the devotee's (user's) account
+ * userId String Unique identifier of the user initiating the call
  * tags String Tags to be used as filter - comma seperated list of tags (optional)
  * returns RetrieveCoursesListResponse
  **/
-exports.getCourses = function(contentType,accept,accountId,tags) {
+exports.getCourses = function(contentType,accept,userId,tags) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
   "courses" : [ {
     "courseEndTime" : "courseEndTime",
+    "courseStartTime" : "courseStartTime",
+    "courseEndDate" : "courseEndDate",
+    "ageRestrictions" : "ageRestrictions",
+    "courseStartDate" : "courseStartDate",
+    "tags" : [ "tags", "tags" ],
     "slots" : 0,
     "courseVenue" : "courseVenue",
     "teachers" : [ "teachers", "teachers" ],
     "imageURL" : "imageURL",
     "flyerURL" : "flyerURL",
-    "courseStartTime" : "courseStartTime",
-    "ageRestrictions" : "ageRestrictions",
     "courseId" : "courseId",
     "courseDays" : "courseDays",
-    "courseRemarks" : "courseRemarks",
-    "tags" : "tags"
+    "courseRemarks" : "courseRemarks"
   }, {
     "courseEndTime" : "courseEndTime",
+    "courseStartTime" : "courseStartTime",
+    "courseEndDate" : "courseEndDate",
+    "ageRestrictions" : "ageRestrictions",
+    "courseStartDate" : "courseStartDate",
+    "tags" : [ "tags", "tags" ],
     "slots" : 0,
     "courseVenue" : "courseVenue",
     "teachers" : [ "teachers", "teachers" ],
     "imageURL" : "imageURL",
     "flyerURL" : "flyerURL",
-    "courseStartTime" : "courseStartTime",
-    "ageRestrictions" : "ageRestrictions",
     "courseId" : "courseId",
     "courseDays" : "courseDays",
-    "courseRemarks" : "courseRemarks",
-    "tags" : "tags"
+    "courseRemarks" : "courseRemarks"
   } ]
 };
     if (Object.keys(examples).length > 0) {

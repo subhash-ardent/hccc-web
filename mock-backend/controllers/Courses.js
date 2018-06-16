@@ -6,9 +6,9 @@ var Courses = require('../service/CoursesService');
 module.exports.addCourse = function addCourse (req, res, next) {
   var contentType = req.swagger.params['Content-Type'].value;
   var accept = req.swagger.params['Accept'].value;
-  var accountId = req.swagger.params['Account-Id'].value;
+  var userId = req.swagger.params['User-Id'].value;
   var body = req.swagger.params['body'].value;
-  Courses.addCourse(contentType,accept,accountId,body)
+  Courses.addCourse(contentType,accept,userId,body)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -20,9 +20,9 @@ module.exports.addCourse = function addCourse (req, res, next) {
 module.exports.getCourseById = function getCourseById (req, res, next) {
   var contentType = req.swagger.params['Content-Type'].value;
   var accept = req.swagger.params['Accept'].value;
-  var accountId = req.swagger.params['Account-Id'].value;
+  var userId = req.swagger.params['User-Id'].value;
   var courseId = req.swagger.params['courseId'].value;
-  Courses.getCourseById(contentType,accept,accountId,courseId)
+  Courses.getCourseById(contentType,accept,userId,courseId)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -34,9 +34,9 @@ module.exports.getCourseById = function getCourseById (req, res, next) {
 module.exports.getCourses = function getCourses (req, res, next) {
   var contentType = req.swagger.params['Content-Type'].value;
   var accept = req.swagger.params['Accept'].value;
-  var accountId = req.swagger.params['Account-Id'].value;
+  var userId = req.swagger.params['User-Id'].value;
   var tags = req.swagger.params['tags'].value;
-  Courses.getCourses(contentType,accept,accountId,tags)
+  Courses.getCourses(contentType,accept,userId,tags)
     .then(function (response) {
       utils.writeJson(res, response);
     })

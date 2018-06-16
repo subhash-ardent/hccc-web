@@ -6,24 +6,24 @@
  *
  * contentType String The MediaType of the request content
  * accept String The MediaType of the response content
- * accountId String Unique identifier of the devotee's (user's) account
- * accountId2 String Id of the account to be retrieved
+ * userId String Unique identifier of the user initiating the call
+ * userName String Id of the account to be retrieved
  * body CreateEnrollmentRequest 
  * returns RetrieveEnrollmentResponse
  **/
-exports.addEnrollment = function(contentType,accept,accountId,accountId2,body) {
+exports.addEnrollment = function(contentType,accept,userId,userName,body) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
   "enrollment" : {
     "enrollmentId" : "enrollmentId",
-    "accountId" : "accountId",
     "guardianName" : {
       "firstName" : "firstName",
       "lastName" : "lastName",
       "middleName" : "middleName"
     },
     "indemnityId" : "indemnityId",
+    "userName" : "userName",
     "participantName" : {
       "firstName" : "firstName",
       "lastName" : "lastName",
@@ -46,22 +46,21 @@ exports.addEnrollment = function(contentType,accept,accountId,accountId2,body) {
  *
  * contentType String The MediaType of the request content
  * accept String The MediaType of the response content
- * accountId String Unique identifier of the devotee's (user's) account
+ * userId String Unique identifier of the user initiating the call
  * body CreateIndemnityRequest 
  * returns RetrieveIndemnityResponse
  **/
-exports.addIndemnity = function(contentType,accept,accountId,body) {
+exports.addIndemnity = function(contentType,accept,userId,body) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
   "indemnity" : {
-    "guardianFirstName" : {
+    "guardianName" : {
       "firstName" : "firstName",
       "lastName" : "lastName",
       "middleName" : "middleName"
     },
-    "AccountId" : "AccountId",
-    "participantDOB" : "participantDOB",
+    "userName" : "userName",
     "participantName" : {
       "firstName" : "firstName",
       "lastName" : "lastName",
@@ -84,21 +83,20 @@ exports.addIndemnity = function(contentType,accept,accountId,body) {
  *
  * contentType String The MediaType of the request content
  * accept String The MediaType of the response content
- * accountId String Unique identifier of the devotee's (user's) account
+ * userId String Unique identifier of the user initiating the call
  * returns RetrieveIndemnitiesListResponse
  **/
-exports.getIndemnities = function(contentType,accept,accountId) {
+exports.getIndemnities = function(contentType,accept,userId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
   "indemnities" : [ {
-    "guardianFirstName" : {
+    "guardianName" : {
       "firstName" : "firstName",
       "lastName" : "lastName",
       "middleName" : "middleName"
     },
-    "AccountId" : "AccountId",
-    "participantDOB" : "participantDOB",
+    "userName" : "userName",
     "participantName" : {
       "firstName" : "firstName",
       "lastName" : "lastName",
@@ -106,13 +104,12 @@ exports.getIndemnities = function(contentType,accept,accountId) {
     },
     "indemnityFormVersion" : "indemnityFormVersion"
   }, {
-    "guardianFirstName" : {
+    "guardianName" : {
       "firstName" : "firstName",
       "lastName" : "lastName",
       "middleName" : "middleName"
     },
-    "AccountId" : "AccountId",
-    "participantDOB" : "participantDOB",
+    "userName" : "userName",
     "participantName" : {
       "firstName" : "firstName",
       "lastName" : "lastName",

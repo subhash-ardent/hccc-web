@@ -17,7 +17,6 @@ router.get('/*', (req, res) => {
       "Account-Id": "abcd" // TODO: update user id from session
     }
   };
-  console.log(options);
   request(options, function(err, response, body) {
     if(err) {
       console.log(`Api call for ${req.url} failed with an error`, err);

@@ -6,10 +6,10 @@ var Indemnities = require('../service/IndemnitiesService');
 module.exports.addEnrollment = function addEnrollment (req, res, next) {
   var contentType = req.swagger.params['Content-Type'].value;
   var accept = req.swagger.params['Accept'].value;
-  var accountId = req.swagger.params['Account-Id'].value;
-  var accountId2 = req.swagger.params['accountId'].value;
+  var userId = req.swagger.params['User-Id'].value;
+  var userName = req.swagger.params['userName'].value;
   var body = req.swagger.params['body'].value;
-  Indemnities.addEnrollment(contentType,accept,accountId,accountId2,body)
+  Indemnities.addEnrollment(contentType,accept,userId,userName,body)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -21,9 +21,9 @@ module.exports.addEnrollment = function addEnrollment (req, res, next) {
 module.exports.addIndemnity = function addIndemnity (req, res, next) {
   var contentType = req.swagger.params['Content-Type'].value;
   var accept = req.swagger.params['Accept'].value;
-  var accountId = req.swagger.params['Account-Id'].value;
+  var userId = req.swagger.params['User-Id'].value;
   var body = req.swagger.params['body'].value;
-  Indemnities.addIndemnity(contentType,accept,accountId,body)
+  Indemnities.addIndemnity(contentType,accept,userId,body)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -35,8 +35,8 @@ module.exports.addIndemnity = function addIndemnity (req, res, next) {
 module.exports.getIndemnities = function getIndemnities (req, res, next) {
   var contentType = req.swagger.params['Content-Type'].value;
   var accept = req.swagger.params['Accept'].value;
-  var accountId = req.swagger.params['Account-Id'].value;
-  Indemnities.getIndemnities(contentType,accept,accountId)
+  var userId = req.swagger.params['User-Id'].value;
+  Indemnities.getIndemnities(contentType,accept,userId)
     .then(function (response) {
       utils.writeJson(res, response);
     })

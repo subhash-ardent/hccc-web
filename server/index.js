@@ -3,15 +3,46 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 const request = require('request');
-
-
+const session = require ('express-session');
+const passport = require('passport');
+// const Strategy = require('passport-local').Strategy;
+const Strategy = require('passport-custom').Strategy;
 
 const health = require(__dirname + '/routes/health');
 const api = require(__dirname + '/routes/api');
+const currentUser = require(__dirname + '/routes/currentUser');
+const user = require(__dirname + '/routes/user');
+const passportConfig = require(__dirname + '/routes/passport-config');
+
+const env = process.env.ENVIRONMENT ? process.env.ENVIRONMENT : 'dev';
+const config = require(`${__dirname}/config/${env}.json`);
 
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
+
+// Enabling user session
+app.use(session(config.sessionOptions));
+
+// Verify session
+// app.use((req,res,next) => {
+//   if(!req.session) {
+//     return next(new Error('Session Unavailable'));
+//   } else {
+//     console.log("Session Verified");
+//     next();
+//   }
+// });
+
+// Configure passport
+passport.use('custom', new Strategy(passportConfig.customStrategyVerify));
+passport.serializeUser(passportConfig.serializeUser);
+passport.deserializeUser(passportConfig.deserializeUser);
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Configure API and Webapp routes
+app.use('/yande/user/current', passport.authenticate('custom', { failureRedirect: '/yande/health' }), currentUser);
 
 app.use('/yande/api', api);
 app.use('/yande/health', health);

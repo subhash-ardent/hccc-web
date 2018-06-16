@@ -6,24 +6,20 @@
  *
  * contentType String The MediaType of the request content
  * accept String The MediaType of the response content
- * accountId String Unique identifier of the devotee's (user's) account
+ * userId String Unique identifier of the user initiating the call
  * teacherId String Id of the teacher to be retrieved
  * returns RetrieveTeacherResponse
  **/
-exports.getTeacherById = function(contentType,accept,accountId,teacherId) {
+exports.getTeacherById = function(contentType,accept,userId,teacherId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
   "teacher" : {
-    "accountId" : "accountId",
-    "teacherEmail" : "teacherEmail",
-    "teacherId" : "teacherId",
-    "teacherName" : {
-      "firstName" : "firstName",
-      "lastName" : "lastName",
-      "middleName" : "middleName"
-    },
-    "teacherPhoneNumber" : "teacherPhoneNumber"
+    "skillSet" : [ "skillSet", "skillSet" ],
+    "indemnitySigned" : true,
+    "identityVerified" : true,
+    "userName" : "userName",
+    "backgroundVerified" : true
   }
 };
     if (Object.keys(examples).length > 0) {
@@ -40,33 +36,25 @@ exports.getTeacherById = function(contentType,accept,accountId,teacherId) {
  *
  * contentType String The MediaType of the request content
  * accept String The MediaType of the response content
- * accountId String Unique identifier of the devotee's (user's) account
+ * userId String Unique identifier of the user initiating the call
  * returns RetrieveTeachersListResponse
  **/
-exports.getTeachers = function(contentType,accept,accountId) {
+exports.getTeachers = function(contentType,accept,userId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
   "teachers" : [ {
-    "accountId" : "accountId",
-    "teacherEmail" : "teacherEmail",
-    "teacherId" : "teacherId",
-    "teacherName" : {
-      "firstName" : "firstName",
-      "lastName" : "lastName",
-      "middleName" : "middleName"
-    },
-    "teacherPhoneNumber" : "teacherPhoneNumber"
+    "skillSet" : [ "skillSet", "skillSet" ],
+    "indemnitySigned" : true,
+    "identityVerified" : true,
+    "userName" : "userName",
+    "backgroundVerified" : true
   }, {
-    "accountId" : "accountId",
-    "teacherEmail" : "teacherEmail",
-    "teacherId" : "teacherId",
-    "teacherName" : {
-      "firstName" : "firstName",
-      "lastName" : "lastName",
-      "middleName" : "middleName"
-    },
-    "teacherPhoneNumber" : "teacherPhoneNumber"
+    "skillSet" : [ "skillSet", "skillSet" ],
+    "indemnitySigned" : true,
+    "identityVerified" : true,
+    "userName" : "userName",
+    "backgroundVerified" : true
   } ]
 };
     if (Object.keys(examples).length > 0) {
@@ -83,24 +71,20 @@ exports.getTeachers = function(contentType,accept,accountId) {
  *
  * contentType String The MediaType of the request content
  * accept String The MediaType of the response content
- * accountId String Unique identifier of the devotee's (user's) account
+ * userId String Unique identifier of the user initiating the call
  * body RegisterTeacherRequest 
  * returns RetrieveTeacherResponse
  **/
-exports.registerTeacher = function(contentType,accept,accountId,body) {
+exports.registerTeacher = function(contentType,accept,userId,body) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
   "teacher" : {
-    "accountId" : "accountId",
-    "teacherEmail" : "teacherEmail",
-    "teacherId" : "teacherId",
-    "teacherName" : {
-      "firstName" : "firstName",
-      "lastName" : "lastName",
-      "middleName" : "middleName"
-    },
-    "teacherPhoneNumber" : "teacherPhoneNumber"
+    "skillSet" : [ "skillSet", "skillSet" ],
+    "indemnitySigned" : true,
+    "identityVerified" : true,
+    "userName" : "userName",
+    "backgroundVerified" : true
   }
 };
     if (Object.keys(examples).length > 0) {

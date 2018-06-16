@@ -33,9 +33,9 @@ paths:
         required: true
         type: "string"
         default: "application/json"
-      - name: "Account-Id"
+      - name: "User-Id"
         in: "header"
-        description: "Unique identifier of the devotee's (user's) account"
+        description: "Unique identifier of the user initiating the call"
         required: true
         type: "string"
       - name: "tags"
@@ -76,9 +76,9 @@ paths:
         required: true
         type: "string"
         default: "application/json"
-      - name: "Account-Id"
+      - name: "User-Id"
         in: "header"
-        description: "Unique identifier of the devotee's (user's) account"
+        description: "Unique identifier of the user initiating the call"
         required: true
         type: "string"
       - in: "body"
@@ -125,9 +125,9 @@ paths:
         required: true
         type: "string"
         default: "application/json"
-      - name: "Account-Id"
+      - name: "User-Id"
         in: "header"
-        description: "Unique identifier of the devotee's (user's) account"
+        description: "Unique identifier of the user initiating the call"
         required: true
         type: "string"
       - name: "courseId"
@@ -173,9 +173,9 @@ paths:
         required: true
         type: "string"
         default: "application/json"
-      - name: "Account-Id"
+      - name: "User-Id"
         in: "header"
-        description: "Unique identifier of the devotee's (user's) account"
+        description: "Unique identifier of the user initiating the call"
         required: true
         type: "string"
       responses:
@@ -216,9 +216,9 @@ paths:
         required: true
         type: "string"
         default: "application/json"
-      - name: "Account-Id"
+      - name: "User-Id"
         in: "header"
-        description: "Unique identifier of the devotee's (user's) account"
+        description: "Unique identifier of the user initiating the call"
         required: true
         type: "string"
       - in: "body"
@@ -265,9 +265,9 @@ paths:
         required: true
         type: "string"
         default: "application/json"
-      - name: "Account-Id"
+      - name: "User-Id"
         in: "header"
-        description: "Unique identifier of the devotee's (user's) account"
+        description: "Unique identifier of the user initiating the call"
         required: true
         type: "string"
       - name: "teacherId"
@@ -320,9 +320,9 @@ paths:
         required: true
         type: "string"
         default: "application/json"
-      - name: "Account-Id"
+      - name: "User-Id"
         in: "header"
-        description: "Unique identifier of the devotee's (user's) account"
+        description: "Unique identifier of the user initiating the call"
         required: true
         type: "string"
       responses:
@@ -358,9 +358,9 @@ paths:
         required: true
         type: "string"
         default: "application/json"
-      - name: "Account-Id"
+      - name: "User-Id"
         in: "header"
-        description: "Unique identifier of the devotee's (user's) account"
+        description: "Unique identifier of the user initiating the call"
         required: true
         type: "string"
       - in: "body"
@@ -383,7 +383,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
       x-swagger-router-controller: "Indemnities"
-  /account:
+  /accounts:
     get:
       tags:
       - "accounts"
@@ -402,14 +402,14 @@ paths:
         required: true
         type: "string"
         default: "application/json"
-      - name: "Account-Id"
+      - name: "User-Id"
         in: "header"
-        description: "Unique identifier of the devotee's (user's) account"
+        description: "Unique identifier of the user initiating the call"
         required: true
         type: "string"
-      - name: "accountId"
+      - name: "userName"
         in: "query"
-        description: "If a accountId is passed in query string, the results will be\
+        description: "If a userName is passed in query string, the results will be\
           \ filtered by accounts user name"
         required: false
         type: "string"
@@ -417,6 +417,12 @@ paths:
         in: "query"
         description: "If a phone number is passed in query string, the results will\
           \ be filtered by accounts mobile number"
+        required: false
+        type: "string"
+      - name: "role"
+        in: "query"
+        description: "If a role is passed in query string, the results will be filtered\
+          \ by roles"
         required: false
         type: "string"
       responses:
@@ -443,7 +449,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
       x-swagger-router-controller: "Accounts"
-  /account/{accountId}/enrollments:
+  /account/{userName}/enrollments:
     get:
       tags:
       - "enrollments"
@@ -464,12 +470,12 @@ paths:
         required: true
         type: "string"
         default: "application/json"
-      - name: "Account-Id"
+      - name: "User-Id"
         in: "header"
-        description: "Unique identifier of the devotee's (user's) account"
+        description: "Unique identifier of the user initiating the call"
         required: true
         type: "string"
-      - name: "accountId"
+      - name: "userName"
         in: "path"
         description: "Id of the account to be retrieved"
         required: true
@@ -507,12 +513,12 @@ paths:
         required: true
         type: "string"
         default: "application/json"
-      - name: "Account-Id"
+      - name: "User-Id"
         in: "header"
-        description: "Unique identifier of the devotee's (user's) account"
+        description: "Unique identifier of the user initiating the call"
         required: true
         type: "string"
-      - name: "accountId"
+      - name: "userName"
         in: "path"
         description: "Id of the account to be retrieved"
         required: true
@@ -556,6 +562,13 @@ definitions:
     example:
       course:
         courseEndTime: "courseEndTime"
+        courseStartTime: "courseStartTime"
+        courseEndDate: "courseEndDate"
+        ageRestrictions: "ageRestrictions"
+        courseStartDate: "courseStartDate"
+        tags:
+        - "tags"
+        - "tags"
         slots: 0
         courseVenue: "courseVenue"
         teachers:
@@ -563,12 +576,9 @@ definitions:
         - "teachers"
         imageURL: "imageURL"
         flyerURL: "flyerURL"
-        courseStartTime: "courseStartTime"
-        ageRestrictions: "ageRestrictions"
         courseId: "courseId"
         courseDays: "courseDays"
         courseRemarks: "courseRemarks"
-        tags: "tags"
   RetrieveCoursesListResponse:
     properties:
       courses:
@@ -581,6 +591,13 @@ definitions:
     example:
       courses:
       - courseEndTime: "courseEndTime"
+        courseStartTime: "courseStartTime"
+        courseEndDate: "courseEndDate"
+        ageRestrictions: "ageRestrictions"
+        courseStartDate: "courseStartDate"
+        tags:
+        - "tags"
+        - "tags"
         slots: 0
         courseVenue: "courseVenue"
         teachers:
@@ -588,13 +605,17 @@ definitions:
         - "teachers"
         imageURL: "imageURL"
         flyerURL: "flyerURL"
-        courseStartTime: "courseStartTime"
-        ageRestrictions: "ageRestrictions"
         courseId: "courseId"
         courseDays: "courseDays"
         courseRemarks: "courseRemarks"
-        tags: "tags"
       - courseEndTime: "courseEndTime"
+        courseStartTime: "courseStartTime"
+        courseEndDate: "courseEndDate"
+        ageRestrictions: "ageRestrictions"
+        courseStartDate: "courseStartDate"
+        tags:
+        - "tags"
+        - "tags"
         slots: 0
         courseVenue: "courseVenue"
         teachers:
@@ -602,12 +623,9 @@ definitions:
         - "teachers"
         imageURL: "imageURL"
         flyerURL: "flyerURL"
-        courseStartTime: "courseStartTime"
-        ageRestrictions: "ageRestrictions"
         courseId: "courseId"
         courseDays: "courseDays"
         courseRemarks: "courseRemarks"
-        tags: "tags"
   RetrieveCourseResponse:
     properties:
       course:
@@ -617,6 +635,13 @@ definitions:
     example:
       course:
         courseEndTime: "courseEndTime"
+        courseStartTime: "courseStartTime"
+        courseEndDate: "courseEndDate"
+        ageRestrictions: "ageRestrictions"
+        courseStartDate: "courseStartDate"
+        tags:
+        - "tags"
+        - "tags"
         slots: 0
         courseVenue: "courseVenue"
         teachers:
@@ -624,12 +649,9 @@ definitions:
         - "teachers"
         imageURL: "imageURL"
         flyerURL: "flyerURL"
-        courseStartTime: "courseStartTime"
-        ageRestrictions: "ageRestrictions"
         courseId: "courseId"
         courseDays: "courseDays"
         courseRemarks: "courseRemarks"
-        tags: "tags"
   CourseObject:
     properties:
       courseId:
@@ -646,6 +668,14 @@ definitions:
         type: "string"
         description: "Course end time represented as a string in pacific time in the\
           \ format hh:mm"
+      courseStartDate:
+        type: "string"
+        description: "Course start date represented as a string in pacific time in\
+          \ the format yyyy-mm-dd"
+      courseEndDate:
+        type: "string"
+        description: "Course end date represented as a string in pacific time in the\
+          \ format yyyy-mm-dd"
       courseDays:
         type: "string"
         description: "Course days or String describing the frequency/recurrence of\
@@ -671,11 +701,20 @@ definitions:
         items:
           type: "string"
       tags:
-        type: "string"
+        type: "array"
         description: "List of tags associated with the course"
+        items:
+          type: "string"
     description: "Course Object"
     example:
       courseEndTime: "courseEndTime"
+      courseStartTime: "courseStartTime"
+      courseEndDate: "courseEndDate"
+      ageRestrictions: "ageRestrictions"
+      courseStartDate: "courseStartDate"
+      tags:
+      - "tags"
+      - "tags"
       slots: 0
       courseVenue: "courseVenue"
       teachers:
@@ -683,12 +722,9 @@ definitions:
       - "teachers"
       imageURL: "imageURL"
       flyerURL: "flyerURL"
-      courseStartTime: "courseStartTime"
-      ageRestrictions: "ageRestrictions"
       courseId: "courseId"
       courseDays: "courseDays"
       courseRemarks: "courseRemarks"
-      tags: "tags"
   RegisterTeacherRequest:
     properties:
       teacher:
@@ -697,14 +733,13 @@ definitions:
       \ in the system"
     example:
       teacher:
-        accountId: "accountId"
-        teacherEmail: "teacherEmail"
-        teacherId: "teacherId"
-        teacherName:
-          firstName: "firstName"
-          lastName: "lastName"
-          middleName: "middleName"
-        teacherPhoneNumber: "teacherPhoneNumber"
+        skillSet:
+        - "skillSet"
+        - "skillSet"
+        indemnitySigned: true
+        identityVerified: true
+        userName: "userName"
+        backgroundVerified: true
   RetrieveTeachersListResponse:
     properties:
       teachers:
@@ -716,22 +751,20 @@ definitions:
       \ is requested"
     example:
       teachers:
-      - accountId: "accountId"
-        teacherEmail: "teacherEmail"
-        teacherId: "teacherId"
-        teacherName:
-          firstName: "firstName"
-          lastName: "lastName"
-          middleName: "middleName"
-        teacherPhoneNumber: "teacherPhoneNumber"
-      - accountId: "accountId"
-        teacherEmail: "teacherEmail"
-        teacherId: "teacherId"
-        teacherName:
-          firstName: "firstName"
-          lastName: "lastName"
-          middleName: "middleName"
-        teacherPhoneNumber: "teacherPhoneNumber"
+      - skillSet:
+        - "skillSet"
+        - "skillSet"
+        indemnitySigned: true
+        identityVerified: true
+        userName: "userName"
+        backgroundVerified: true
+      - skillSet:
+        - "skillSet"
+        - "skillSet"
+        indemnitySigned: true
+        identityVerified: true
+        userName: "userName"
+        backgroundVerified: true
   RetrieveTeacherResponse:
     properties:
       teacher:
@@ -740,40 +773,42 @@ definitions:
       \ is requested"
     example:
       teacher:
-        accountId: "accountId"
-        teacherEmail: "teacherEmail"
-        teacherId: "teacherId"
-        teacherName:
-          firstName: "firstName"
-          lastName: "lastName"
-          middleName: "middleName"
-        teacherPhoneNumber: "teacherPhoneNumber"
+        skillSet:
+        - "skillSet"
+        - "skillSet"
+        indemnitySigned: true
+        identityVerified: true
+        userName: "userName"
+        backgroundVerified: true
   TeacherObject:
     properties:
-      teacherId:
+      userName:
         type: "string"
-        description: "Unique teacher id"
-      accountId:
-        type: "string"
-        description: "Unique account id of the devotee"
-      teacherName:
-        $ref: "#/definitions/NameObject"
-      teacherEmail:
-        type: "string"
-        description: "Email of the teacher"
-      teacherPhoneNumber:
-        type: "string"
-        description: "Phone number of teacher"
+        description: "Unique userName of the devotee"
+      skillSet:
+        type: "array"
+        description: "Teacher's skill set"
+        items:
+          type: "string"
+      indemnitySigned:
+        type: "boolean"
+        description: "Boolean indicating if the teacher has signed an indemnity"
+      backgroundVerified:
+        type: "boolean"
+        description: "Boolean indicating if the teacher's background check has been\
+          \ complete"
+      identityVerified:
+        type: "boolean"
+        description: "Boolean indicating if the teacher's identity verified"
     description: "Teacher Object"
     example:
-      accountId: "accountId"
-      teacherEmail: "teacherEmail"
-      teacherId: "teacherId"
-      teacherName:
-        firstName: "firstName"
-        lastName: "lastName"
-        middleName: "middleName"
-      teacherPhoneNumber: "teacherPhoneNumber"
+      skillSet:
+      - "skillSet"
+      - "skillSet"
+      indemnitySigned: true
+      identityVerified: true
+      userName: "userName"
+      backgroundVerified: true
   CreateIndemnityRequest:
     properties:
       indemnity:
@@ -782,12 +817,11 @@ definitions:
       \ to the system"
     example:
       indemnity:
-        guardianFirstName:
+        guardianName:
           firstName: "firstName"
           lastName: "lastName"
           middleName: "middleName"
-        AccountId: "AccountId"
-        participantDOB: "participantDOB"
+        userName: "userName"
         participantName:
           firstName: "firstName"
           lastName: "lastName"
@@ -804,23 +838,21 @@ definitions:
       \ information is requested"
     example:
       indemnities:
-      - guardianFirstName:
+      - guardianName:
           firstName: "firstName"
           lastName: "lastName"
           middleName: "middleName"
-        AccountId: "AccountId"
-        participantDOB: "participantDOB"
+        userName: "userName"
         participantName:
           firstName: "firstName"
           lastName: "lastName"
           middleName: "middleName"
         indemnityFormVersion: "indemnityFormVersion"
-      - guardianFirstName:
+      - guardianName:
           firstName: "firstName"
           lastName: "lastName"
           middleName: "middleName"
-        AccountId: "AccountId"
-        participantDOB: "participantDOB"
+        userName: "userName"
         participantName:
           firstName: "firstName"
           lastName: "lastName"
@@ -834,12 +866,11 @@ definitions:
       \ information is requested"
     example:
       indemnity:
-        guardianFirstName:
+        guardianName:
           firstName: "firstName"
           lastName: "lastName"
           middleName: "middleName"
-        AccountId: "AccountId"
-        participantDOB: "participantDOB"
+        userName: "userName"
         participantName:
           firstName: "firstName"
           lastName: "lastName"
@@ -847,15 +878,12 @@ definitions:
         indemnityFormVersion: "indemnityFormVersion"
   IndemnityObject:
     properties:
-      AccountId:
+      userName:
         type: "string"
-        description: "Unique devotee account id of the participant"
+        description: "Unique devotee userName of the participant"
       participantName:
         $ref: "#/definitions/NameObject"
-      participantDOB:
-        type: "string"
-        description: "Date of Birth of the participant"
-      guardianFirstName:
+      guardianName:
         $ref: "#/definitions/NameObject"
       indemnityFormVersion:
         type: "string"
@@ -863,12 +891,11 @@ definitions:
           \ version."
     description: "Indemnity Object"
     example:
-      guardianFirstName:
+      guardianName:
         firstName: "firstName"
         lastName: "lastName"
         middleName: "middleName"
-      AccountId: "AccountId"
-      participantDOB: "participantDOB"
+      userName: "userName"
       participantName:
         firstName: "firstName"
         lastName: "lastName"
@@ -885,64 +912,71 @@ definitions:
       \ is requested"
     example:
       accounts:
-      - accountId: "accountId"
-        phoneNumber: "phoneNumber"
+      - phoneNumber: "phoneNumber"
         roles:
         - "roles"
         - "roles"
+        name:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        dateOfBirth: "dateOfBirth"
+        userName: "userName"
         familyMembers:
-        - phoneNumber: "phoneNumber"
-          name:
+        - name:
             firstName: "firstName"
             lastName: "lastName"
             middleName: "middleName"
           dateOfBirth: "dateOfBirth"
-          email: "email"
-        - phoneNumber: "phoneNumber"
-          name:
+        - name:
             firstName: "firstName"
             lastName: "lastName"
             middleName: "middleName"
           dateOfBirth: "dateOfBirth"
-          email: "email"
         email: "email"
-      - accountId: "accountId"
-        phoneNumber: "phoneNumber"
+      - phoneNumber: "phoneNumber"
         roles:
         - "roles"
         - "roles"
+        name:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        dateOfBirth: "dateOfBirth"
+        userName: "userName"
         familyMembers:
-        - phoneNumber: "phoneNumber"
-          name:
+        - name:
             firstName: "firstName"
             lastName: "lastName"
             middleName: "middleName"
           dateOfBirth: "dateOfBirth"
-          email: "email"
-        - phoneNumber: "phoneNumber"
-          name:
+        - name:
             firstName: "firstName"
             lastName: "lastName"
             middleName: "middleName"
           dateOfBirth: "dateOfBirth"
-          email: "email"
         email: "email"
   AccountObject:
     properties:
-      accountId:
+      userName:
         type: "string"
-        description: "Unique account id of the devotee"
+        description: "Unique userName of the devotee"
+      name:
+        $ref: "#/definitions/NameObject"
       phoneNumber:
         type: "string"
         description: "Phone number associated with the devotee's account"
       email:
         type: "string"
         description: "Email Id associated with the devotee's account"
+      dateOfBirth:
+        type: "string"
+        description: "Date of birth of the Devotee in the format YYYY-MM-DD"
       familyMembers:
         type: "array"
         description: "List of family Members"
         items:
-          $ref: "#/definitions/Devotee"
+          $ref: "#/definitions/FamilyMember"
       roles:
         type: "array"
         description: "List of roles"
@@ -950,26 +984,27 @@ definitions:
           type: "string"
     description: "Devotee Account Object"
     example:
-      accountId: "accountId"
       phoneNumber: "phoneNumber"
       roles:
       - "roles"
       - "roles"
+      name:
+        firstName: "firstName"
+        lastName: "lastName"
+        middleName: "middleName"
+      dateOfBirth: "dateOfBirth"
+      userName: "userName"
       familyMembers:
-      - phoneNumber: "phoneNumber"
-        name:
+      - name:
           firstName: "firstName"
           lastName: "lastName"
           middleName: "middleName"
         dateOfBirth: "dateOfBirth"
-        email: "email"
-      - phoneNumber: "phoneNumber"
-        name:
+      - name:
           firstName: "firstName"
           lastName: "lastName"
           middleName: "middleName"
         dateOfBirth: "dateOfBirth"
-        email: "email"
       email: "email"
   CreateEnrollmentRequest:
     properties:
@@ -980,12 +1015,12 @@ definitions:
     example:
       enrollment:
         enrollmentId: "enrollmentId"
-        accountId: "accountId"
         guardianName:
           firstName: "firstName"
           lastName: "lastName"
           middleName: "middleName"
         indemnityId: "indemnityId"
+        userName: "userName"
         participantName:
           firstName: "firstName"
           lastName: "lastName"
@@ -1003,24 +1038,24 @@ definitions:
     example:
       enrollment:
       - enrollmentId: "enrollmentId"
-        accountId: "accountId"
         guardianName:
           firstName: "firstName"
           lastName: "lastName"
           middleName: "middleName"
         indemnityId: "indemnityId"
+        userName: "userName"
         participantName:
           firstName: "firstName"
           lastName: "lastName"
           middleName: "middleName"
         isParticipantUnder18: true
       - enrollmentId: "enrollmentId"
-        accountId: "accountId"
         guardianName:
           firstName: "firstName"
           lastName: "lastName"
           middleName: "middleName"
         indemnityId: "indemnityId"
+        userName: "userName"
         participantName:
           firstName: "firstName"
           lastName: "lastName"
@@ -1035,12 +1070,12 @@ definitions:
     example:
       enrollment:
         enrollmentId: "enrollmentId"
-        accountId: "accountId"
         guardianName:
           firstName: "firstName"
           lastName: "lastName"
           middleName: "middleName"
         indemnityId: "indemnityId"
+        userName: "userName"
         participantName:
           firstName: "firstName"
           lastName: "lastName"
@@ -1051,9 +1086,9 @@ definitions:
       enrollmentId:
         type: "string"
         description: "Unique enrollment id"
-      accountId:
+      userName:
         type: "string"
-        description: "Unique account id of the participants devotee account"
+        description: "Unique userName of the participants devotee account"
       participantName:
         $ref: "#/definitions/NameObject"
       guardianName:
@@ -1067,12 +1102,12 @@ definitions:
     description: "Enrollment Object"
     example:
       enrollmentId: "enrollmentId"
-      accountId: "accountId"
       guardianName:
         firstName: "firstName"
         lastName: "lastName"
         middleName: "middleName"
       indemnityId: "indemnityId"
+      userName: "userName"
       participantName:
         firstName: "firstName"
         lastName: "lastName"
@@ -1094,28 +1129,20 @@ definitions:
       firstName: "firstName"
       lastName: "lastName"
       middleName: "middleName"
-  Devotee:
+  FamilyMember:
     properties:
       name:
         $ref: "#/definitions/NameObject"
-      phoneNumber:
-        type: "string"
-        description: "Phone Number of the Devotee"
-      email:
-        type: "string"
-        description: "Email address of the Devotee"
       dateOfBirth:
         type: "string"
         description: "Date of birth of the Devotee in the format YYYY-MM-DD"
     description: "Devotee Object"
     example:
-      phoneNumber: "phoneNumber"
       name:
         firstName: "firstName"
         lastName: "lastName"
         middleName: "middleName"
       dateOfBirth: "dateOfBirth"
-      email: "email"
 parameters:
   Content-Type:
     name: "Content-Type"
@@ -1131,10 +1158,10 @@ parameters:
     required: true
     type: "string"
     default: "application/json"
-  Account-Id:
-    name: "Account-Id"
+  User-Id:
+    name: "User-Id"
     in: "header"
-    description: "Unique identifier of the devotee's (user's) account"
+    description: "Unique identifier of the user initiating the call"
     required: true
     type: "string"
 responses:
