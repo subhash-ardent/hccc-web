@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const request = require('request');
 const session = require ('express-session');
 const passport = require('passport');
@@ -11,7 +12,6 @@ const Strategy = require('passport-custom').Strategy;
 const health = require(__dirname + '/routes/health');
 const api = require(__dirname + '/routes/api');
 const currentUser = require(__dirname + '/routes/currentUser');
-const user = require(__dirname + '/routes/user');
 const passportConfig = require(__dirname + '/routes/passport-config');
 
 const env = process.env.ENVIRONMENT ? process.env.ENVIRONMENT : 'dev';
@@ -20,6 +20,7 @@ const config = require(`${__dirname}/config/${env}.json`);
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(cookieParser());
 
 // Enabling user session
 app.use(session(config.sessionOptions));
@@ -41,15 +42,19 @@ passport.deserializeUser(passportConfig.deserializeUser);
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Configure API and Webapp routes
-app.use('/yande/user/current', passport.authenticate('custom', { failureRedirect: '/yande/health' }), currentUser);
+let failureRedirect = {
+  failureRedirect: 'https://livermoretemple.org'
+};
 
-app.use('/yande/api', api);
+// Configure API and Webapp routes
+app.use('/yande/user/current', passport.authenticate('custom', failureRedirect), currentUser);
+
+app.use('/yande/api', passport.authenticate('custom', failureRedirect), api);
 app.use('/yande/health', health);
-app.get('/yande/home', (req, res) => {
+app.get('/yande/home', passport.authenticate('custom', failureRedirect), (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/youth-and-education/index.html'));
 });
-app.use('/yande/', express.static(path.join(__dirname, '../dist/youth-and-education')));
+app.use('/yande/', passport.authenticate('custom', failureRedirect), express.static(path.join(__dirname, '../dist/youth-and-education')));
 
 const port = process.env.PORT || '3000';
 app.set('port', port);
