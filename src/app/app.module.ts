@@ -10,7 +10,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCheckboxModule, MatIconModule, MatMenuModule,
         MatToolbarModule, MatSidenavModule, MatListModule} from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
-import { CourseCatelogueComponent } from './course-catelogue/course-catelogue.component';
+import { CourseCatalogueComponent } from './course-catalogue/course-catalogue.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { CourseCatelogueComponent } from './course-catelogue/course-catelogue.co
     AppHeaderComponent,
     AppBannerComponent,
     TeacherListComponent,
-    CourseCatelogueComponent
+    CourseCatalogueComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +31,6 @@ import { CourseCatelogueComponent } from './course-catelogue/course-catelogue.co
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    AppRoutingModule,
     AppRoutingModule
   ],
   exports: [
