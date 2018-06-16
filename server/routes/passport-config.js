@@ -27,7 +27,7 @@ let getUserByUserName = function(usrNm) {
         console.log(`Api call for ${options.url} failed with status code - ${response.statusCode}`);
         reject(new Error('User Details api call - Response Code' + response.statusCode));
       } else {
-        console.log(`Received response for ${options.url}`);
+        //console.log(`Received response for ${options.url}`);
         let users = JSON.parse(body);
         if(users && users.length > 0)
           resolve(JSON.parse(body)[0]);

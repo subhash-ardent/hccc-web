@@ -51,10 +51,12 @@ app.use('/yande/user/current', passport.authenticate('custom', failureRedirect),
 
 app.use('/yande/api', passport.authenticate('custom', failureRedirect), api);
 app.use('/yande/health', health);
-app.get('/yande/home', passport.authenticate('custom', failureRedirect), (req, res) => {
-  res.sendFile(path.join(__dirname, '../dist/youth-and-education/index.html'));
-});
+// app.get('/yande/home', passport.authenticate('custom', failureRedirect), (req, res) => {
+//   res.sendFile(path.join(__dirname, '../dist/youth-and-education/index.html'));
+// });
+app.use('/yande', passport.authenticate('custom', failureRedirect), express.static(path.join(__dirname, '../dist/youth-and-education')));
 app.use('/yande/', passport.authenticate('custom', failureRedirect), express.static(path.join(__dirname, '../dist/youth-and-education')));
+app.use('/yande/*', passport.authenticate('custom', failureRedirect), express.static(path.join(__dirname, '../dist/youth-and-education')));
 
 const port = process.env.PORT || '3000';
 app.set('port', port);

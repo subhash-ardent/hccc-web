@@ -128,35 +128,28 @@ const data = {
       "middleName" : ""
     },
   } ],
-  kesavam: [ {
-    "userName" : "kesavam",
+  yande: [ {
+    "userName" : "yande",
     "phoneNumber" : "9876543210",
     "roles" : [ "Chairman - Youth and Cultural", "Devotee" ],
     "email" : "email",
     "dateOfBirth" : "1990-07-12",
     "name" : {
-      "firstName" : "Kesavam",
-      "lastName" : "Krishna",
+      "firstName" : "Vandhana",
+      "lastName" : "Bhanoori",
       "middleName" : ""
     },
     "familyMembers" : [ {
       "name" : {
-        "firstName" : "Sita",
-        "lastName" : "Raman",
+        "firstName" : "Prabhakar",
+        "lastName" : "Bhanoori",
         "middleName" : ""
       },
       "dateOfBirth" : "1990-12-12"
-    }, {
-      "name" : {
-        "firstName" : "Radha",
-        "lastName" : "Krishna",
-        "middleName" : ""
-      },
-      "dateOfBirth" : "1990-06-12"
     } ]
   } ],
-  achutham: [ {
-    "userName" : "achutham",
+  devotee: [ {
+    "userName" : "devotee",
     "phoneNumber" : "1234567890",
     "roles" : [ "Devotee"],
     "email" : "email",
@@ -213,10 +206,10 @@ const data = {
 
 exports.getAccounts = function(contentType,accept,accountId,userName,phoneNumber,role) {
   return new Promise(function(resolve, reject) {
-    if (userName === 'achutham') {
-      resolve(data['achutham']);
-    } else if (userName === 'kesavam') {
-      resolve(data['kesavam']);
+    if (userName === 'devotee') {
+      resolve(data['devotee']);
+    } else if (userName === 'yande') {
+      resolve(data['yande']);
     } else if (phoneNumber === '5678901234') {
       resolve(data['5678901234']);
     } else if (role === 'teacher') {
