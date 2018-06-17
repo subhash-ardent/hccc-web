@@ -2,7 +2,7 @@ const env = process.env.ENVIRONMENT ? process.env.ENVIRONMENT : 'dev';
 const config = require(`${__dirname}/../config/${env}.json`);
 const request = require('request');
 
-
+const guestUser = {userName:"hccc-guest-user"};
 
 let getUserByUserName = function(usrNm) {
   // fetching current users info from backend
@@ -40,7 +40,7 @@ let getUserByUserName = function(usrNm) {
 
 let getUserFromCookie = function(req) {
   let currUserName;
-  console.log(req.cookies.sessionInfo);
+  console.log("cookie: ", req.cookies.sessionInfo);
   if (req.cookies && req.cookies.sessionInfo) {
     let sessionInfo = req.cookies.sessionInfo;
     if(sessionInfo.startsWith("username=")) {
@@ -51,12 +51,12 @@ let getUserFromCookie = function(req) {
 };
 
 let customStrategyVerify = function(req, cb) {
-  if(req.user) {
+  if(req && req.user && req.user.userName && req.user.userName !== guestUser.userName) {
     cb(null, req.user);
   } else {
     let currUserName = getUserFromCookie(req);
     if(!currUserName) {
-      cb(null, false);
+      cb(null, guestUser);
     } else {
       getUserByUserName(currUserName)
         .then(function(userDetails){
@@ -73,13 +73,17 @@ let serializeUser = function(user, cb) {
   cb(null, user.userName);
 };
 let deserializeUser = function(userName, cb) {
-  getUserByUserName(userName)
-    .then(function(userDetails){
-      cb(null, userDetails);
-    })
-    .catch(function() {
-      cb(null, false);
-    });
+    if(userName === guestUser.userName) {
+      cb(null, guestUser);
+    } else {
+      getUserByUserName(userName)
+        .then(function (userDetails) {
+          cb(null, userDetails);
+        })
+        .catch(function () {
+          cb(null, false);
+        });
+    }
 };
 
 module.exports = {
