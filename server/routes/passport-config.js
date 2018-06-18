@@ -40,7 +40,7 @@ let getUserByUserName = function(usrNm) {
 
 let getUserFromCookie = function(req) {
   let currUserName;
-  console.log("cookie: ", req.cookies.sessionInfo);
+  // console.log("cookie: ", req.cookies.sessionInfo);
   if (req.cookies && req.cookies.sessionInfo) {
     let sessionInfo = req.cookies.sessionInfo;
     if(sessionInfo.startsWith("username=")) {

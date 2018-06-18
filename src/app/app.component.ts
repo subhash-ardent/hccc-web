@@ -12,7 +12,7 @@ import {MatIconRegistry} from '@angular/material';
 export class AppComponent implements OnDestroy {
   title = 'app';
   mobileQuery: MediaQueryList;
-  fillerNav = Array(50).fill(0).map((_, i) => `Nav Item ${i + 1}`);
+  fillerNav = ["Home", "Course Catalogue", "Teacher Onboarding"];
   private _mobileQueryListener: () => void;
   public appService;
 

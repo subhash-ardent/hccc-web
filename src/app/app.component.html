@@ -11,7 +11,8 @@
 
     <span class="hccc-toolbar-links">Donate</span>
     <span class="hccc-toolbar-links">Contact Us</span>
-    <div  class="hccc-toolbar-links container" *ngIf="appService.currentUser">
+    <span class="hccc-toolbar-links" *ngIf="appService.currentUser && appService.currentUser.userName && appService.currentUser.userName === 'hccc-guest-user'">Login</span>
+    <div  class="hccc-toolbar-links container" *ngIf="appService.currentUser && appService.currentUser.userName && appService.currentUser.userName !== 'hccc-guest-user'">
       <div flex><mat-icon svgIcon="avatar-placeholder"></mat-icon></div>
       <div flex>{{appService.currentUser.name.firstName}}</div>
       <div flex>{{appService.currentUser.name.lastName}}</div>

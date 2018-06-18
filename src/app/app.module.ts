@@ -8,7 +8,7 @@ import { AppBannerComponent } from './app-banner/app-banner.component';
 import { TeacherListComponent } from './teacher-list/teacher-list.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCheckboxModule, MatIconModule, MatMenuModule,
-        MatToolbarModule, MatSidenavModule, MatListModule} from '@angular/material';
+        MatToolbarModule, MatSidenavModule, MatListModule, MatCardModule} from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { CourseCatalogueComponent } from './course-catalogue/course-catalogue.component';
 
@@ -31,7 +31,8 @@ import { CourseCatalogueComponent } from './course-catalogue/course-catalogue.co
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatCardModule
   ],
   exports: [
     MatButtonModule,
@@ -40,7 +41,8 @@ import { CourseCatalogueComponent } from './course-catalogue/course-catalogue.co
     MatIconModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
