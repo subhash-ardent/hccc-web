@@ -8,9 +8,11 @@ import { AppBannerComponent } from './app-banner/app-banner.component';
 import { TeacherListComponent } from './teacher-list/teacher-list.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCheckboxModule, MatIconModule, MatMenuModule,
-        MatToolbarModule, MatSidenavModule, MatListModule, MatCardModule} from '@angular/material';
+        MatToolbarModule, MatSidenavModule, MatListModule, MatCardModule,
+        MatGridListModule} from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { CourseCatalogueComponent } from './course-catalogue/course-catalogue.component';
+import {FlexLayoutModule} from '@angular/flex-layout'
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { CourseCatalogueComponent } from './course-catalogue/course-catalogue.co
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    FlexLayoutModule,
     MatButtonModule,
     MatCheckboxModule,
     MatMenuModule,
@@ -32,7 +35,8 @@ import { CourseCatalogueComponent } from './course-catalogue/course-catalogue.co
     MatSidenavModule,
     MatListModule,
     AppRoutingModule,
-    MatCardModule
+    MatCardModule,
+    MatGridListModule
   ],
   exports: [
     MatButtonModule,
@@ -42,7 +46,8 @@ import { CourseCatalogueComponent } from './course-catalogue/course-catalogue.co
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    MatCardModule
+    MatCardModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -52,6 +57,7 @@ export class AppModule { }
 
 
 // To toggle between y&e chair and regular devotee set below cookies on the browser
+// https://kudithipudi.org/2016/02/03/how-to-add-cookies-in-chrome-without-a-pluginextension/
 
 //devotee
 //javascript:document.cookie="sessionInfo=username=devotee"

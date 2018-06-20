@@ -1,7 +1,7 @@
 'use strict';
 
 var utils = require('../utils/writer.js');
-var Courses = require('../service/CoursesService');
+var Courses = require('../../mock-data/CoursesService');
 
 module.exports.addCourse = function addCourse (req, res, next) {
   var contentType = req.swagger.params['Content-Type'].value;

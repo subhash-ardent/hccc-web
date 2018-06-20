@@ -1,18 +1,32 @@
-<mat-card class="hccc-course-card">
-  <mat-card-header>
-    <mat-card-title>Course Name</mat-card-title>
-    <mat-card-subtitle>Description</mat-card-subtitle>
+<div fxLayout="row wrap" fxLayoutGap="20px">
+<mat-card class="hccc-course-card" fxLayout="row wrap" *ngFor="let i of [1,2,3,4,5]">
+  <mat-card-header fxFlex.gt-xs="1 1 50" fxFlex.lt-sm="1 1 100" fxLayout="column">
+
+    <mat-card-content fxLayout="column" fxLayoutAlign.lt-sm="center center">
+      Course Name
+    </mat-card-content>
+
+    <mat-card-content fxLayout="column" fxLayoutAlign.lt-sm="center center">
+      <div>Teachers</div>
+      <div>Venue</div>
+      <div>Timings</div>
+      <div>Tags</div>
+      <div>Space Availability</div>
+    </mat-card-content>
+
   </mat-card-header>
-  <img mat-card-image >
-  <mat-card-content>
-    <p>
-      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-      bred for hunting.
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
+
+
+  <div fxFlex.gt-xs="1 1 50" fxFlex.lt-sm="1 1 100" >
+    <img src="http://www.livermoretemple.org/hints/images/2011/saraswathi1.gif"
+         alt="Photo of a Lordess Saraswati"
+          style="width:100%;height:100%;" >
+  </div>
+
+
+  <mat-card-actions fxFlex="100">
     <button mat-button>LIKE</button>
     <button mat-button>SHARE</button>
   </mat-card-actions>
 </mat-card>
+</div>

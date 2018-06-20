@@ -29,3 +29,16 @@
 7. Run mock-server: `npm start`
 8. Navigate to `localhost:8080/docs` on a browser to view the APIs on Swagger UI 
 9. Change back to root directory: `cd ..`
+
+
+### To toggle between user roles in dev environment
+
+Refer [here](http://nategood.com/quickly-add-and-edit-cookies-in-chrome) to add new cookies on chrome.
+
+```angularjs
+//devotee
+javascript:document.cookie="sessionInfo=username=devotee"
+
+//y&e chair
+javascript:document.cookie="sessionInfo=username=yande"
+```
