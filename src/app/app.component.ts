@@ -12,7 +12,6 @@ import {MatIconRegistry} from '@angular/material';
 export class AppComponent implements OnDestroy {
   title = 'app';
   mobileQuery: MediaQueryList;
-  fillerNav = ["Home", "Course Catalogue", "Teacher Onboarding"];
   private _mobileQueryListener: () => void;
   public appService;
 
@@ -27,7 +26,7 @@ export class AppComponent implements OnDestroy {
     this.appService = appService;
     iconRegistry.addSvgIcon(
       'avatar-placeholder',
-      sanitizer.bypassSecurityTrustResourceUrl('yande/assets/img/baseline-account_box-24px.svg'));
+      sanitizer.bypassSecurityTrustResourceUrl('assets/img/baseline-account_box-24px.svg'));
 
   }
 

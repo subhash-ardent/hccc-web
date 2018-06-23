@@ -14,6 +14,8 @@ import { CoreModule }     from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
 
+import { AuthGuardService }                from './services/auth-guard.service';
+import {AppService} from './services/app.service';
 
 
 
@@ -25,6 +27,10 @@ import { MaterialModule } from './material.module';
     YandeModule,
     CoreModule,
     AppRoutingModule,
+  ],
+  providers: [
+    AuthGuardService,
+    AppService
   ],
   declarations: [
     AppComponent

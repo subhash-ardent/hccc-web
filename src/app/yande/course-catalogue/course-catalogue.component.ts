@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AppService} from '../../services/app.service';
+import {ActivatedRoute, Router }                 from '@angular/router';
 
 @Component({
   selector: 'app-course-catalogue',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./course-catalogue.component.css']
 })
 export class CourseCatalogueComponent implements OnInit {
-
-  constructor() { }
+  public appService;
+  constructor(appService: AppService,
+              private router: Router,
+              private route: ActivatedRoute,) {
+    this.appService = appService;
+  }
 
   ngOnInit() {
+  }
+
+  onClickAddNew() {
+    this.router.navigate(["../create"], { relativeTo: this.route });
   }
 
 }

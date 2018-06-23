@@ -17,6 +17,8 @@ import { CourseDetailsComponent } from './course-details/course-details.componen
 import { CourseDetailsUpdateComponent } from './course-details-update/course-details-update.component';
 import { TeacherDetailsComponent } from './teacher-details/teacher-details.component';
 import { TeacherDetailsUpdateComponent } from './teacher-details-update/teacher-details-update.component';
+import { CourseBaseComponent } from './course-base/course-base.component';
+import { TeacherBaseComponent } from './teacher-base/teacher-base.component';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { TeacherDetailsUpdateComponent } from './teacher-details-update/teacher-
     CourseDetailsComponent,
     CourseDetailsUpdateComponent,
     TeacherDetailsComponent,
-    TeacherDetailsUpdateComponent
+    TeacherDetailsUpdateComponent,
+    CourseBaseComponent,
+    TeacherBaseComponent
   ]
 })
 export class YandeModule { }

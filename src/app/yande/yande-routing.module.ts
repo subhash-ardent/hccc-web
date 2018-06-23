@@ -11,20 +11,46 @@ import { CourseDetailsComponent } from './course-details/course-details.componen
 import { CourseDetailsUpdateComponent } from './course-details-update/course-details-update.component';
 import { TeacherDetailsComponent } from './teacher-details/teacher-details.component';
 import { TeacherDetailsUpdateComponent } from './teacher-details-update/teacher-details-update.component';
+import { CourseBaseComponent } from './course-base/course-base.component';
+import { TeacherBaseComponent } from './teacher-base/teacher-base.component';
+
+import { AuthGuardService } from '../services/auth-guard.service';
+import { YandeChairGuardService } from '../services/yande-chair-guard.service';
 
 
 const yandeRoutes: Routes = [
   { path: '',   redirectTo: '/course/catalogue', pathMatch: 'full' },
-  { path: 'course/catalogue',  component: CourseCatalogueComponent },
-  { path: 'course/create',  component: CourseCreateComponent },
-  { path: 'course/details/:id', component: CourseDetailsComponent },
-  { path: 'course/update/:id', component: CourseDetailsUpdateComponent },
-  { path: 'course/enroll/:id', component: CourseEnrollComponent },
-  { path: 'course/indemnity/:id', component: CourseIndemnityComponent },
-  { path: 'teacher/list', component: TeacherListComponent },
-  { path: 'teacher/onboard', component: TeacherOnboardComponent },
-  { path: 'teacher/details/:id', component: TeacherDetailsComponent },
-  { path: 'teacher/update/:id', component: TeacherDetailsUpdateComponent }
+  {
+    path: 'course', component: CourseBaseComponent,
+    children: [
+      { path: 'catalogue', component: CourseCatalogueComponent },
+      { path: 'details/:id', component: CourseDetailsComponent },
+      { path: 'enroll/:id', component: CourseEnrollComponent, canActivate: [AuthGuardService]  },
+      { path: 'indemnity/:id', component: CourseIndemnityComponent, canActivate: [AuthGuardService]  },
+      { path: 'update/:id', component: CourseDetailsUpdateComponent, canActivate: [YandeChairGuardService] },
+      { path: 'create', component: CourseCreateComponent, canActivate: [YandeChairGuardService] },
+      { path: '',   redirectTo: '/catalogue', pathMatch: 'full' },
+    ]
+  },
+  {
+    path: 'teacher',
+    component: TeacherBaseComponent,
+    canActivate: [YandeChairGuardService],
+    children: [
+      {
+        path: '',
+        canActivateChild: [YandeChairGuardService],
+        children: [
+          { path: 'list', component: TeacherListComponent },
+          { path: 'onboard', component: TeacherOnboardComponent },
+          { path: 'details/:id', component: TeacherDetailsComponent },
+          { path: 'update/:id', component: TeacherDetailsUpdateComponent }
+        ],
+      }
+    ]
+  }
+
+
 ];
 
 

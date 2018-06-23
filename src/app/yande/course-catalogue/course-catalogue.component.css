@@ -1,8 +1,14 @@
 .hccc-course-card {
-  max-width: 400px;
+  max-width: 500px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-.hccc-course-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
+.hccc-course-card img {
+  max-width: 200px;
 }
+
+.hccc-add-new-fab {
+  margin-top: -30px;
+}
+

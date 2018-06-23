@@ -93,38 +93,26 @@ exports.getCourses = function(contentType,accept,userId,tags) {
     var examples = {};
     examples['application/json'] = {
   "courses" : [ {
-    "courseEndTime" : "courseEndTime",
-    "courseStartTime" : "courseStartTime",
-    "courseEndDate" : "courseEndDate",
-    "ageRestrictions" : "ageRestrictions",
-    "courseStartDate" : "courseStartDate",
-    "tags" : [ "tags", "tags" ],
-    "slots" : 0,
-    "courseVenue" : "courseVenue",
-    "teachers" : [ "teachers", "teachers" ],
-    "imageURL" : "imageURL",
-    "flyerURL" : "flyerURL",
-    "courseId" : "courseId",
-    "courseName" : "Bakthi Jothi",
-    "courseDays" : "courseDays",
-    "courseRemarks" : "courseRemarks"
-  }, {
-    "courseEndTime" : "courseEndTime",
-    "courseStartTime" : "courseStartTime",
-    "courseEndDate" : "courseEndDate",
-    "ageRestrictions" : "ageRestrictions",
-    "courseStartDate" : "courseStartDate",
-    "tags" : [ "tags", "tags" ],
-    "slots" : 0,
-    "courseVenue" : "courseVenue",
-    "teachers" : [ "teachers", "teachers" ],
-    "imageURL" : "imageURL",
-    "flyerURL" : "flyerURL",
-    "courseName" : "Bala Jothi",
-    "courseId" : "courseId",
-    "courseDays" : "courseDays",
-    "courseRemarks" : "courseRemarks"
-  } ]
+    "courseName" : "NARAYANEEYAM CLASSES",
+    "imageURL" : "http://www.livermoretemple.org/hints/images/2012/Jyeshtabhishekam.gif",
+
+  },
+    {
+      "courseName" : "STEM SUMMER WORKSHOP",
+      "imageURL" : "http://www.livermoretemple.org/hints/images/2018/summer-workshops.gif",
+
+    },
+    {
+      "courseName" : "VISHNUSAHASRANAMAM CLASS",
+      "imageURL" : "http://www.livermoretemple.org/hints/images/2010/vishnuclasses.jpg",
+
+    },
+    // {
+    //   "courseName" : "SANSKRIT CLASSES",
+    //   "imageURL" : "http://www.livermoretemple.org/hints/images/2015/om.gif",
+    //
+    // }
+    ]
 };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);

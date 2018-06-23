@@ -10,20 +10,33 @@ import { MessageService } from './message.service';
 })
 export class AppService {
 
+  private yandeChairRoleLabel = "Chairman - Youth and Cultural";
+  private hcccGuestUserName = "hccc-guest-user";
   private currentUserUrl = 'yande/user/current';  // URL to web api
+
   public currentUser: Account;
   isLoggedIn = false;
+  isYandeChair = false;
   authRedirectUrl:string;
   constructor(
     private http: HttpClient,
     private messageService: MessageService) {
 
     this.getCurrentUser()
-      .subscribe(user => this.currentUser = user);
+      .subscribe(user => {
+        this.currentUser = user;
+        this.log(this.currentUser.userName);
+        if(this.currentUser && this.currentUser.userName && this.currentUser.userName !== this.hcccGuestUserName) {
+          this.isLoggedIn = true;
+          this.log(this.currentUser.userName);
+        }
+        if(this.currentUser && this.currentUser.roles && this.currentUser.roles.length > 0) {
+          if(this.currentUser.roles.includes(this.yandeChairRoleLabel))
+            this.isYandeChair = true;
+        }
+      });
 
-    if(this.currentUser && this.currentUser.userName && this.currentUser.userName !== 'hccc-guest-user') {
-      this.isLoggedIn = true;
-    }
+
 
   }
   /** GET current user by id. Will 404 if id not found */
