@@ -11,6 +11,7 @@
 7. Start Application: `npm start`
 8. Navigate to `localhost:4200/yande/home` on a browser to view the webapp
 
+Always run `npm install` after pulling latest code from GitHub.
 
 ### To generate mock backend after making changes to the API Specification
 

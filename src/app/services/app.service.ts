@@ -12,12 +12,18 @@ export class AppService {
 
   private currentUserUrl = 'yande/user/current';  // URL to web api
   public currentUser: Account;
+  isLoggedIn = false;
+  authRedirectUrl:string;
   constructor(
     private http: HttpClient,
     private messageService: MessageService) {
 
     this.getCurrentUser()
       .subscribe(user => this.currentUser = user);
+
+    if(this.currentUser && this.currentUser.userName && this.currentUser.userName !== 'hccc-guest-user') {
+      this.isLoggedIn = true;
+    }
 
   }
   /** GET current user by id. Will 404 if id not found */

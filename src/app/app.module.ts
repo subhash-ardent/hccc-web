@@ -1,55 +1,34 @@
+//Angular library imports
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule }    from '@angular/common/http';
 
+
+// Components
 import { AppComponent } from './app.component';
-import { AppHeaderComponent } from './app-header/app-header.component';
-import { AppBannerComponent } from './app-banner/app-banner.component';
-import { TeacherListComponent } from './teacher-list/teacher-list.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule, MatIconModule, MatMenuModule,
-        MatToolbarModule, MatSidenavModule, MatListModule, MatCardModule,
-        MatGridListModule} from '@angular/material';
+
+// Modules
+import { YandeModule }     from './yande/yande.module';
+import { CoreModule }     from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
-import { CourseCatalogueComponent } from './course-catalogue/course-catalogue.component';
-import {FlexLayoutModule} from '@angular/flex-layout'
+import { MaterialModule } from './material.module';
+
+
+
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AppHeaderComponent,
-    AppBannerComponent,
-    TeacherListComponent,
-    CourseCatalogueComponent
-  ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     HttpClientModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatMenuModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatListModule,
+    MaterialModule,
+    YandeModule,
+    CoreModule,
     AppRoutingModule,
-    MatCardModule,
-    MatGridListModule
   ],
-  exports: [
-    MatButtonModule,
-    MatCheckboxModule,
-    MatMenuModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatListModule,
-    MatCardModule,
-    MatGridListModule
+  declarations: [
+    AppComponent
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
