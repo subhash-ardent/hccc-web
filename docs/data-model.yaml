@@ -1,0 +1,214 @@
+"EnrollmentObject": {
+  "description": "Enrollment Object",
+  "properties": {
+    "enrollmentId": {
+      "type": "string",
+      "description": "Unique enrollment id"
+    },
+    "userName": {
+      "type": "string",
+      "description": "Unique userName of the participants devotee account"
+    },
+    "participantName": {
+      "$ref": "#/definitions/NameObject"
+    },
+    "guardianName": {
+      "$ref": "#/definitions/NameObject"
+    },
+    "isParticipantUnder18": {
+      "type": "boolean",
+      "description": "true id participant age is under 18 else false"
+    },
+    "indemnityId": {
+      "type": "string",
+      "description": "indemnity form id associated with the enrollment"
+    }
+  }
+},
+"NameObject": {
+  "description": "Name Object",
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "description": "First name of teacher"
+    },
+    "middleName": {
+      "type": "string",
+      "description": "Middle name of teacher"
+    },
+    "lastName": {
+      "type": "string",
+      "description": "Last name of teacher"
+    }
+  }
+},
+"FamilyMember": {
+  "description": "Devotee Object",
+  "properties": {
+    "name": {
+      "$ref": "#/definitions/NameObject"
+    },
+    "dateOfBirth": {
+      "type": "string",
+      "description": "Date of birth of the Devotee in the format MM-DD"
+    }
+  }
+},
+"AccountObject": {
+  "description": "Devotee Account Object",
+  "properties": {
+    "userName": {
+      "type": "string",
+      "description": "Unique userName of the devotee"
+    },
+    "name": {
+      "$ref": "#/definitions/NameObject"
+    },
+    "phoneNumber": {
+      "type": "string",
+      "description": "Phone number associated with the devotee's account"
+    },
+    "email": {
+      "type": "string",
+      "description": "Email Id associated with the devotee's account"
+    },
+    "dateOfBirth": {
+      "type": "string",
+      "description": "Date of birth of the Devotee in the format MM-DD"
+    },
+    "familyMembers": {
+      "type": "array",
+      "description": "List of family Members",
+      "items": {
+        "$ref": "#/definitions/FamilyMember"
+      }
+    },
+    "roles": {
+      "type": "array",
+      "description": "List of roles",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+},
+"IndemnityObject": {
+  "description": "Indemnity Object",
+  "properties": {
+    "userName": {
+      "type": "string",
+      "description": "Unique devotee userName of the participant"
+    },
+    "participantName": {
+      "$ref": "#/definitions/NameObject"
+    },
+    "guardianName": {
+      "$ref": "#/definitions/NameObject"
+    },
+    "indemnityFormVersion": {
+      "type": "string",
+      "description": "String representing the name ot number of indemnity content version."
+    }
+  }
+},
+
+"TeacherObject": {
+  "description": "Teacher Object",
+  "properties": {
+    "userName": {
+      "type": "string",
+      "description": "Unique userName of the devotee"
+    },
+    "skillSet": {
+      "description": "Teacher's skill set",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "indemnitySigned": {
+      "type": "boolean",
+      "description": "Boolean indicating if the teacher has signed an indemnity"
+    },
+    "backgroundVerified": {
+      "type": "boolean",
+      "description": "Boolean indicating if the teacher's background check has been complete"
+    },
+    "identityVerified": {
+      "type": "boolean",
+      "description": "Boolean indicating if the teacher's identity verified"
+    }
+  }
+},
+
+"CourseObject": {
+  "description": "Course Object",
+  "properties": {
+    "courseId": {
+      "type": "string",
+      "description": "Unique course id"
+    },
+    "courseName": {
+      "type": "string",
+      "description": "Unique course id"
+    },
+    "ageRestrictions": {
+      "type": "string",
+      "description": "A String describing any age restrictions"
+    },
+    "courseStartTime": {
+      "type": "string",
+      "description": "Course start time represented as a string in pacific time in the format hh:mm"
+    },
+    "courseEndTime": {
+      "type": "string",
+      "description": "Course end time represented as a string in pacific time in the format hh:mm"
+    },
+    "courseStartDate": {
+      "type": "string",
+      "description": "Course start date represented as a string in pacific time in the format yyyy-mm-dd"
+    },
+    "courseEndDate": {
+      "type": "string",
+      "description": "Course end date represented as a string in pacific time in the format yyyy-mm-dd"
+    },
+    "courseDays": {
+      "type": "string",
+      "description": "Course days or String describing the frequency/recurrence of the course"
+    },
+    "courseVenue": {
+      "type": "string",
+      "description": "Facility where the course will be taught"
+    },
+    "flyerURL": {
+      "type": "string",
+      "description": "URL of the course's flyer"
+    },
+    "imageURL": {
+      "type": "string",
+      "description": "URL of the course's image"
+    },
+    "slots": {
+      "type": "integer",
+      "description": "Class size or total number of slots in the course"
+    },
+    "courseRemarks": {
+      "type": "string",
+      "description": "Any additional notes or remarks about the course"
+    },
+    "teachers": {
+      "description": "List of teacher (or coordinator) ids of the course",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tags": {
+      "description": "List of tags associated with the course",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+},

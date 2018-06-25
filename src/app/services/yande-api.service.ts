@@ -15,12 +15,9 @@ export class YandeApiService {
   constructor(private http: HttpClient,
               private messageService: MessageService) { }
 
-  getCourses(): Observable<Course> {
+  getCourses(): Observable<Course[]> {
     const url = `${this.coursesEndpointUrl}`;
-    return this.http.get<Course>(url).pipe(
-      tap(_ => this.log(`fetched courses`)),
-      catchError(this.handleError<Course>(`getCourses`))
-    );
+    return this.http.get<Course[]>(url)
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

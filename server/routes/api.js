@@ -7,6 +7,7 @@ const env = process.env.ENVIRONMENT ? process.env.ENVIRONMENT : 'dev';
 const config = require(`${__dirname}/../config/${env}.json`);
 
 router.get('/*', (req, res) => {
+  console.log(req.url);
   let options = {
     baseUrl: config.baseUrl,
     url: "/yande/api" + req.url,
@@ -16,6 +17,7 @@ router.get('/*', (req, res) => {
       "Content-Type": "application/json",
       "User-Id": "abcd" // TODO: update user id from session
     }
+
   };
   request(options, function(err, response, body) {
     if(err) {

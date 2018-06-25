@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AppService} from '../../services/app.service';
 import {ActivatedRoute, Router }                 from '@angular/router';
+import { Course } from "../../models/course";
 
 @Component({
   selector: 'app-course-catalogue',
@@ -9,6 +10,7 @@ import {ActivatedRoute, Router }                 from '@angular/router';
 })
 export class CourseCatalogueComponent implements OnInit {
   public appService;
+  public courses;
   constructor(appService: AppService,
               private router: Router,
               private route: ActivatedRoute,) {
@@ -16,6 +18,11 @@ export class CourseCatalogueComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.route.data
+      .subscribe((data: { courses: Course[] }) => {
+        this.courses = data.courses;
+        console.log(data.courses);
+      });
   }
 
   onClickAddNew() {

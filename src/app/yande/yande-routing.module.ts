@@ -16,6 +16,7 @@ import { TeacherBaseComponent } from './teacher-base/teacher-base.component';
 
 import { AuthGuardService } from '../services/auth-guard.service';
 import { YandeChairGuardService } from '../services/yande-chair-guard.service';
+import { CourseListResolveService }   from './services/course-list-resolve.service';
 
 
 const yandeRoutes: Routes = [
@@ -23,7 +24,9 @@ const yandeRoutes: Routes = [
   {
     path: 'course', component: CourseBaseComponent,
     children: [
-      { path: 'catalogue', component: CourseCatalogueComponent },
+      { path: 'catalogue', component: CourseCatalogueComponent, resolve: {
+          courses: CourseListResolveService
+        } },
       { path: 'details/:id', component: CourseDetailsComponent },
       { path: 'enroll/:id', component: CourseEnrollComponent, canActivate: [AuthGuardService]  },
       { path: 'indemnity/:id', component: CourseIndemnityComponent, canActivate: [AuthGuardService]  },
@@ -60,6 +63,9 @@ const yandeRoutes: Routes = [
   ],
   exports: [
     RouterModule
+  ],
+  providers: [
+    CourseListResolveService
   ]
 })
 export class YandeRoutingModule { }

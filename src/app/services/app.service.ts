@@ -18,6 +18,8 @@ export class AppService {
   isLoggedIn = false;
   isYandeChair = false;
   authRedirectUrl:string;
+  loading:boolean = false;
+
   constructor(
     private http: HttpClient,
     private messageService: MessageService) {

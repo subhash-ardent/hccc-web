@@ -10,11 +10,11 @@ import { YandeApiService }  from '../../services/yande-api.service';
 @Injectable({
   providedIn: 'root'
 })
-export class CourseListResolveService implements Resolve<Course>  {
+export class CourseListResolveService implements Resolve<Course[]>  {
 
   constructor(private apiService: YandeApiService, private router: Router) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Course> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Course[]> {
 
     return this.apiService.getCourses().pipe(
       take(1),
