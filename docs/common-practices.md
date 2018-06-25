@@ -10,10 +10,10 @@ Below are a list of common practices and conventions followed in this project
 * Currently all model classes are created under `src/app/models`. Later these models will be moved under specific modules
 
 ### Services
-* Most services are created under `arc/app/services`. Module specific services are created user `<module-dir>/services`
+* Most services are created under `arc/app/services`. Module specific services are created under `<module-dir>/services`
 
 ### Angular Material and Flexbox
-1. Use Route Material Design and Flexbox User Interface. 
+1. Use Material Design and angular flex-layout for User Interface. 
 2. Material components are imported/exported in `src/app/material.modules.ts` and this module can be imported into other modules that has use Material Components
 
 ### Route Guards
