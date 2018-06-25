@@ -1,4 +1,4 @@
-Below are a list of common practices and conventions followed in this project
+List of common practices and conventions followed in this project
 
 
 ### The application currently has 3 modules
