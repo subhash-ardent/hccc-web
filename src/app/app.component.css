@@ -37,3 +37,13 @@ h1.hccc-app-name {
   margin-left: 8px;
 }
 
+.dark-overlay{
+  background-color: rgba(0,0,0,0.5);
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  min-height:805px;
+  z-index: 5;
+}
+

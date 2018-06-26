@@ -44,16 +44,16 @@ export class AppComponent implements OnDestroy {
 
   private navigationInterceptor(event: Event): void {
     if (event instanceof NavigationStart) {
-      this.logger.add("NavigationStart")
+        this.appService.loading = true;
     }
     if (event instanceof NavigationEnd) {
-      this.logger.add("NavigationEnd")
+        this.appService.loading = false;
     }
     if (event instanceof NavigationCancel) {
-      this.logger.add("NavigationCancel")
+        this.appService.loading = false;
     }
     if (event instanceof NavigationError) {
-      this.logger.add("NavigationError")
+        this.appService.loading = false;
     }
   }
 

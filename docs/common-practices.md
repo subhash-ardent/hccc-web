@@ -20,7 +20,7 @@ List of common practices and conventions followed in this project
 * Use Route Guards (e.g. `src/app/services/auth-guard.service` and `src/app/services/yande-chair-guard.service`) to protect routes from unauthorised and unauthenticated access
 
 ### Resolver to pre-fetch data
-* Use Resolvers (e.g. `src/app/yande/services/course-list-resolve.service.ts) to prefetch component data from backend
+* Use Resolvers (e.g. `src/app/yande/services/course-list-resolve.service.ts`) to prefetch component data from backend
 
 ### Spinners for perceived performance
 * Use spinners (`<mat-progress-spinner>`) for perceived performance during API calls

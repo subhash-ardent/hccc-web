@@ -1,3 +1,75 @@
+"CourseObject": {
+  "description": "Course Object",
+  "properties": {
+    "courseId": {
+      "type": "string",
+      "description": "Unique course id"
+    },
+    "courseName": {
+      "type": "string",
+      "description": "Unique course id"
+    },
+    "ageRestrictions": {
+      "type": "string",
+      "description": "A String describing any age restrictions"
+    },
+    "courseStartTime": {
+      "type": "string",
+      "description": "Course start time represented as a string in pacific time in the format hh:mm"
+    },
+    "courseEndTime": {
+      "type": "string",
+      "description": "Course end time represented as a string in pacific time in the format hh:mm"
+    },
+    "courseStartDate": {
+      "type": "string",
+      "description": "Course start date represented as a string in pacific time in the format yyyy-mm-dd"
+    },
+    "courseEndDate": {
+      "type": "string",
+      "description": "Course end date represented as a string in pacific time in the format yyyy-mm-dd"
+    },
+    "courseDays": {
+      "type": "string",
+      "description": "Course days or String describing the frequency/recurrence of the course"
+    },
+    "courseVenue": {
+      "type": "string",
+      "description": "Facility where the course will be taught"
+    },
+    "flyerURL": {
+      "type": "string",
+      "description": "URL of the course's flyer"
+    },
+    "imageURL": {
+      "type": "string",
+      "description": "URL of the course's image"
+    },
+    "slots": {
+      "type": "integer",
+      "description": "Class size or total number of slots in the course"
+    },
+    "courseRemarks": {
+      "type": "string",
+      "description": "Any additional notes or remarks about the course"
+    },
+    "teachers": {
+      "description": "List of teacher (or coordinator) ids of the course",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tags": {
+      "description": "List of tags associated with the course",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+},
+
 "EnrollmentObject": {
   "description": "Enrollment Object",
   "properties": {
@@ -141,74 +213,4 @@
   }
 },
 
-"CourseObject": {
-  "description": "Course Object",
-  "properties": {
-    "courseId": {
-      "type": "string",
-      "description": "Unique course id"
-    },
-    "courseName": {
-      "type": "string",
-      "description": "Unique course id"
-    },
-    "ageRestrictions": {
-      "type": "string",
-      "description": "A String describing any age restrictions"
-    },
-    "courseStartTime": {
-      "type": "string",
-      "description": "Course start time represented as a string in pacific time in the format hh:mm"
-    },
-    "courseEndTime": {
-      "type": "string",
-      "description": "Course end time represented as a string in pacific time in the format hh:mm"
-    },
-    "courseStartDate": {
-      "type": "string",
-      "description": "Course start date represented as a string in pacific time in the format yyyy-mm-dd"
-    },
-    "courseEndDate": {
-      "type": "string",
-      "description": "Course end date represented as a string in pacific time in the format yyyy-mm-dd"
-    },
-    "courseDays": {
-      "type": "string",
-      "description": "Course days or String describing the frequency/recurrence of the course"
-    },
-    "courseVenue": {
-      "type": "string",
-      "description": "Facility where the course will be taught"
-    },
-    "flyerURL": {
-      "type": "string",
-      "description": "URL of the course's flyer"
-    },
-    "imageURL": {
-      "type": "string",
-      "description": "URL of the course's image"
-    },
-    "slots": {
-      "type": "integer",
-      "description": "Class size or total number of slots in the course"
-    },
-    "courseRemarks": {
-      "type": "string",
-      "description": "Any additional notes or remarks about the course"
-    },
-    "teachers": {
-      "description": "List of teacher (or coordinator) ids of the course",
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "tags": {
-      "description": "List of tags associated with the course",
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    }
-  }
-},
+
