@@ -188,7 +188,7 @@ exports.getCourses = function(contentType,accept,userId,tags) {
         "courseEndDate" : "2018-08-15",
         "ageRestrictions" : "7 years and above",
         "courseStartDate" : "2018-06-15",
-        "tags" : [ "BHAKTIJOTHI", "Kids","Rituals""Slokas", "Slokas", "Bhajans" ],
+        "tags" : [ "BHAKTIJOTHI", "Kids","Rituals","Slokas", "Slokas", "Bhajans" ],
         "slots" : 20,
         "courseVenue" : "varies by course level",
         "teachers" : [ "Chitra Padmanabhan"],
