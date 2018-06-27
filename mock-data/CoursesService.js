@@ -145,11 +145,60 @@ exports.getCourses = function(contentType,accept,userId,tags) {
       "imageURL" : "http://www.livermoretemple.org/hints/images/2010/vishnuclasses.jpg",
 
     },
-    // {
-    //   "courseName" : "SANSKRIT CLASSES",
-    //   "imageURL" : "http://www.livermoretemple.org/hints/images/2015/om.gif",
-    //
-    // }
+{
+       "courseName" : "SANSKRIT CLASSES",
+       "courseEndTime" : "varies by course level",
+        "courseStartTime" : "varies by course level",
+        "courseEndDate" : "2018-08-15",
+        "ageRestrictions" : "Age above 6 and Adults",
+        "courseStartDate" : "2018-06-15",
+        "tags" : [ "SANSKRIT", "Kids", "Adults","sanskrit","language"],
+        "slots" : 20,
+        "courseVenue" : "varies by course level",
+        "teachers" : [ "-"],
+        "flyerURL" : "flyerURL",
+        "courseId" : "4",
+        "courseDays" : "Saturdays",
+        "courseRemarks" : "Children 6 to 10 years must be accompanied by a parent.No prior knowledge of Sanskrit is required.",
+       "imageURL" : "http://www.livermoretemple.org/hints/images/2015/om.gif",
+    
+     },
+     {
+       "courseName" : "BALAJYOTHI CLASS - I",
+       "courseEndTime" : "1.45 PM",
+        "courseStartTime" : "1.15 PM",
+        "courseEndDate" : "2018-08-15",
+        "ageRestrictions" : "4-7 years",
+        "courseStartDate" : "2018-06-15",
+        "tags" : [ "BALAJYOTHI", "Kids","Stories", "Slokas", "Bhajans", "Art","Craft"],
+        "slots" : 20,
+        "courseVenue" : "varies by course level",
+        "teachers" : [ "Chitra Padmanabhan"],
+        "flyerURL" : "flyerURL",
+        "courseId" : "5",
+        "courseDays" : "2nd and 4th Saturdays of the month",
+        "courseRemarks" : "During the classes, we encourage children to maintain discipline and urge parents to cooperate",
+       "imageURL" : "http://www.livermoretemple.org/hints/images/2015/om.gif",
+    
+     },
+     {
+       "courseName" : "BHAKTIJOTHI CLASS - II",
+       "courseEndTime" : "1.45 PM",
+        "courseStartTime" : "1.15 PM",
+        "courseEndDate" : "2018-08-15",
+        "ageRestrictions" : "7 years and above",
+        "courseStartDate" : "2018-06-15",
+        "tags" : [ "BHAKTIJOTHI", "Kids","Rituals""Slokas", "Slokas", "Bhajans" ],
+        "slots" : 20,
+        "courseVenue" : "varies by course level",
+        "teachers" : [ "Chitra Padmanabhan"],
+        "flyerURL" : "flyerURL",
+        "courseId" : "6",
+        "courseDays" : "2nd and 4th Saturdays of the month",
+        "courseRemarks" : "During the classes, we encourage children to maintain discipline and urge parents to cooperate",
+       "imageURL" : "http://www.livermoretemple.org/hints/images/2015/om.gif",
+    
+     },
     ]
 };
     if (Object.keys(examples).length > 0) {
