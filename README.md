@@ -2,14 +2,14 @@
 
 ### To Setup
 
-1. Clone the repository: `git clone https://github.com/hcccecit/youth-and-education-web.git`
-2. Change into the directory: `cd youth-and-education-web`
+1. Clone the repository: `git clone https://github.com/hcccecit/hccc-web.git`
+2. Change into the directory: `cd hccc-web`
 3. Install dependencies: `npm install`
 4. Change to mock-backend directory: `cd mock-backend`
 5. Install dependencies for mock-backend: `npm install`
 6. Change back to root directory: `cd ..`
 7. Start Application: `npm start`
-8. Navigate to `localhost:4200/yande/home` on a browser to view the webapp
+8. Navigate to `localhost:4200` on a browser to view the webapp
 
 Always run `npm install` after pulling latest code from GitHub.
 
