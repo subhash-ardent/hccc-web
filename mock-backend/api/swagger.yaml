@@ -569,6 +569,7 @@ definitions:
         tags:
         - "tags"
         - "tags"
+        courseName: "courseName"
         slots: 0
         courseVenue: "courseVenue"
         teachers:
@@ -598,6 +599,7 @@ definitions:
         tags:
         - "tags"
         - "tags"
+        courseName: "courseName"
         slots: 0
         courseVenue: "courseVenue"
         teachers:
@@ -616,6 +618,7 @@ definitions:
         tags:
         - "tags"
         - "tags"
+        courseName: "courseName"
         slots: 0
         courseVenue: "courseVenue"
         teachers:
@@ -642,6 +645,7 @@ definitions:
         tags:
         - "tags"
         - "tags"
+        courseName: "courseName"
         slots: 0
         courseVenue: "courseVenue"
         teachers:
@@ -655,6 +659,9 @@ definitions:
   CourseObject:
     properties:
       courseId:
+        type: "string"
+        description: "Unique course id"
+      courseName:
         type: "string"
         description: "Unique course id"
       ageRestrictions:
@@ -715,6 +722,7 @@ definitions:
       tags:
       - "tags"
       - "tags"
+      courseName: "courseName"
       slots: 0
       courseVenue: "courseVenue"
       teachers:
@@ -971,7 +979,7 @@ definitions:
         description: "Email Id associated with the devotee's account"
       dateOfBirth:
         type: "string"
-        description: "Date of birth of the Devotee in the format YYYY-MM-DD"
+        description: "Date of birth of the Devotee in the format MM-DD"
       familyMembers:
         type: "array"
         description: "List of family Members"
@@ -1135,7 +1143,7 @@ definitions:
         $ref: "#/definitions/NameObject"
       dateOfBirth:
         type: "string"
-        description: "Date of birth of the Devotee in the format YYYY-MM-DD"
+        description: "Date of birth of the Devotee in the format MM-DD"
     description: "Devotee Object"
     example:
       name:

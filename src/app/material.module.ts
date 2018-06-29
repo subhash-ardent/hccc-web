@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
-
 import {
+
   MatButtonModule,
   MatCheckboxModule,
   MatIconModule,
@@ -26,10 +26,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
   imports: [
     BrowserAnimationsModule,
     FlexLayoutModule,
+
     MatButtonModule,
     MatCheckboxModule,
-    MatMenuModule,
     MatIconModule,
+
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
@@ -46,8 +47,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     FlexLayoutModule,
     MatButtonModule,
     MatCheckboxModule,
+
     MatMenuModule,
-    MatIconModule,
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
@@ -60,4 +61,5 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatNativeDateModule
   ]
 })
-export class MaterialModule { }
+export class MaterialModule {
+}
