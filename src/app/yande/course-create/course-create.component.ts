@@ -10,6 +10,10 @@ export class CourseCreateComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  	 this.breakpoint = (window.innerWidth <= 768) ? 1 : 2;
+  }
+  onResize(event) {
+  	this.breakpoint = (event.target.innerWidth <= 768) ? 1 : 2;
   }
 
 }
