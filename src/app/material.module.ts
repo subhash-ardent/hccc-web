@@ -13,8 +13,14 @@ import {
   MatSidenavModule,
   MatListModule,
   MatCardModule,
-  MatGridListModule
+  MatGridListModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSelectModule,
+  MatNativeDateModule
 } from '@angular/material';
+
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   imports: [
@@ -28,7 +34,12 @@ import {
     MatSidenavModule,
     MatListModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [
     BrowserAnimationsModule,
@@ -41,7 +52,12 @@ import {
     MatSidenavModule,
     MatListModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ]
 })
 export class MaterialModule { }

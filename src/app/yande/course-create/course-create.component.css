@@ -1,3 +1,51 @@
-div.wrapper {
-  height: 200px;
+.course-creation-form {
+	margin: 20px 0;
 }
+.course-creation-container {
+  max-width: 380px;
+  width: 100%;
+  padding: 0 15px;
+}
+.course-right-col {
+	margin-top: -50px;
+}
+.course-input-field{
+  width: 100%;
+}
+.course-input-field-50{
+	width: 50%;
+}
+.course-select-field {
+	width: 80%;
+}
+.button-container {
+	margin: 0 18px;
+}
+
+.mat-flat-button {
+	color: white;
+	background-color: #93ad47;
+	font-size: 12px;
+	margin: 10px;
+}
+mat-icon {
+	float: right;
+    position: absolute;
+    left: 100px;
+    top: 4px;
+}
+mat-datepicker-toggle {
+	font-size: 40px;
+	color: black;
+	margin-top: 5px;
+}
+
+@media screen and (min-width: 480px) {
+  .button-container {
+	margin-left: 30%;
+  }
+  mat-icon {
+	left: 150px;
+  }
+}
+
