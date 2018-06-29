@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./course-create.component.css']
 })
 export class CourseCreateComponent implements OnInit {
-
+    public breakpoint;
   constructor() { }
 
   ngOnInit() {

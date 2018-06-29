@@ -8,6 +8,7 @@ import {
   MatButtonModule,
   MatCheckboxModule,
   MatIconModule,
+    MatProgressSpinnerModule,
   MatMenuModule,
   MatToolbarModule,
   MatSidenavModule,
@@ -30,7 +31,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatButtonModule,
     MatCheckboxModule,
     MatIconModule,
-
+      MatProgressSpinnerModule,
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
@@ -47,7 +48,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     FlexLayoutModule,
     MatButtonModule,
     MatCheckboxModule,
-
+      MatIconModule,
+      MatProgressSpinnerModule,
     MatMenuModule,
     MatToolbarModule,
     MatSidenavModule,
