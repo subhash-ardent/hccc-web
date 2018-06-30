@@ -42,3 +42,16 @@ fxFlex.md="10px;
 fxHide.lt-sm;
 xLayout.gt-md="row";
 ```
+
+### Observables naming convention
+* Name observables named with a trailing “$” sign. This can be useful when scanning through code and looking for observable values. Also, if you want a property to store the most recent value from an observable, it can be convenient to simply use the same name with or without the “$”.
+```angularjs
+  stopwatchValue: number;
+  stopwatchValue$: Observable<number>;
+ 
+  start() {
+    this.stopwatchValue$.subscribe(num =>
+      this.stopwatchValue = num
+    );
+  }
+```

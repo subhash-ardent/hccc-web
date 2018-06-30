@@ -1,76 +1,84 @@
-<div class="course-creation-form">
- <mat-grid-list [cols]="breakpoint" rowHeight="390px" (window:resize)="onResize($event)">
-   <mat-grid-tile>
-      <div class="course-creation-container">
-         <mat-form-field class="course-input-field">
-            <input matInput placeholder="Enter Course Name" value=""><br />
-         </mat-form-field>
-         <mat-form-field class="course-input-field">
-            <input matInput placeholder="Enter any Age Restrictions Info" value="">
-         </mat-form-field>
+<div class="hccc-course-creation-form container" fxLayout="column" fxLayoutGap="5%" fxLayoutAlign.lt-md="center center" >
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="5%">
 
-         <mat-form-field class="course-input-field-50">
-            <input matInput [matDatepicker]="startDatePicker" placeholder="Select Start Date" value="">
-            <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
-            <mat-datepicker #startDatePicker="matDatepicker"></mat-datepicker>
-         </mat-form-field>
+        <div fxLayout="column" fxFlex="30" fxFlex.md="40" fxLayoutAlign="center">
+            <mat-form-field>
+                <input matInput placeholder="Enter Course Name" value=""><br/>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Enter any Age Restrictions Info" value="">
+            </mat-form-field>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="startDatePicker" placeholder="Select Start Date" value="">
+                        <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #startDatePicker="matDatepicker"></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="endDatePicker" placeholder="Select End Date" value="">
+                        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #endDatePicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
 
-         <mat-form-field class="course-input-field-50">
-            <input matInput [matDatepicker]="endDatePicker" placeholder="Select End Date" value="">
-            <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
-            <mat-datepicker #endDatePicker></mat-datepicker>
-         </mat-form-field>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
+                    <mat-form-field>
+                        <input matInput placeholder="Select Start Time"/>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
+                    <mat-form-field>
+                        <input matInput placeholder="Select End Time"/>
+                    </mat-form-field>
+                </div>
+            </div>
 
-         <mat-form-field class="course-input-field-50">
-           <input matInput type="time" atp-time-picker value="20:55" placeholder="Select Start Time"/>
-           <mat-icon aria-label="clock">add</mat-icon>
-         </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Enter Days" value="">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Enter Venue" value="">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Enter Flyer URL" value="">
+            </mat-form-field>
+        </div>
 
-         <mat-form-field class="course-input-field-50">
-            <input matInput type="time" atp-time-picker value="20:55" placeholder="Select End Time"/>
-            <mat-icon aria-label="clock">add</mat-icon>
-         </mat-form-field>
+        <div fxLayout="column" fxFlex="30" fxFlex.md="40" >
 
-         <mat-form-field class="course-input-field">
-            <input matInput placeholder="Enter Days" value="">
-         </mat-form-field>
-         <mat-form-field class="course-input-field">
-            <input matInput placeholder="Enter Venue" value="">
-         </mat-form-field>
-         <mat-form-field class="course-input-field">
-            <input matInput placeholder="Enter Flyer URL" value="">
-         </mat-form-field>
-      </div>
-   </mat-grid-tile>
-   <mat-grid-tile class="course-right-col">
-      <div class="course-creation-container">
-      	<!-- TODO: get teacher list from api -->
-         <mat-form-field class="course-select-field" >
-            <mat-select placeholder="Select Teachers and Coordinates" [(ngModel)]="selectedValue" name="food">
-            <mat-option *ngFor="let food of foods" [value]="food.value">
-            {{food.viewValue}}
-            </mat-option>
-         	</mat-select>
-         </mat-form-field>
-         <mat-form-field class="course-input-field">
-            <input matInput placeholder="Add Tags">
-         </mat-form-field>
-         <mat-form-field class="course-input-field">
-            <input matInput placeholder="Enter Image URL">
-         </mat-form-field>
-         <mat-form-field class="course-input-field">
-            <textarea matInput placeholder="Add any Remarks/Notes"></textarea>
-         </mat-form-field>
-         <mat-form-field class="course-input-field">
-            <input matInput placeholder="Enter Number of Slots">
-         </mat-form-field>
-      </div>
-   </mat-grid-tile>
-</mat-grid-list>
+            <!-- TODO: get teacher list from api -->
+            <mat-form-field>
+                <mat-select placeholder="Select Teachers and Coordinates" [(ngModel)]="selectedValue" name="food">
+                    <mat-option *ngFor="let food of foods" [value]="food.value">
+                        {{food.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Add Tags">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Enter Image URL">
+            </mat-form-field>
+            <mat-form-field>
+                <textarea matInput placeholder="Add any Remarks/Notes"></textarea>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Enter Number of Slots">
+            </mat-form-field>
+        </div>
 
-<div class="button-container">
-	<button mat-flat-button>CANCEL</button>
-	<button mat-flat-button>RESET</button>
-	<button mat-flat-button>SUBMIT</button>
-</div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="50px">
+        <button mat-flat-button color="accent">CANCEL</button>
+        <button mat-flat-button color="accent">RESET</button>
+        <button mat-flat-button color="accent">SUBMIT</button>
+    </div>
+
 </div>
