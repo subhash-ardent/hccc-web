@@ -29,5 +29,6 @@ export class YandeChairGuardService implements CanActivate, CanActivateChild {
     // Navigate to page not found
     this.router.navigate(['/page-not-found']);
     return false;
+      // return true;
   }
 }
