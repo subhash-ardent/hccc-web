@@ -16,13 +16,14 @@
       </mat-card-content>
 
       <mat-card-content fxLayout="column" fxLayoutAlign.lt-sm="center center">
-        <div>Teachers</div>
+        <div *ngFor="let teacher of teachers">{{teacher.teachers}}</div>
         <div>{{course.courseVenue}}</div>
-        <div>Days</div>
-        <div>Start & End Times</div>
-        <div>Start & End Dates</div>
-        <div>Tags</div>
-        <div>Space Availability</div>
+        <div>{{course.courseDays}}</div>
+        <div>{{course.courseStartTime}} - {{course.courseEndTime}}</div>
+        <div>{{course.courseStartDate}} - {{course.courseEndDate}}</div>
+        <div>{{course.ageRestrictions}}</div>
+        <div *ngFor="let tag of tags">{{course.tag}}</div>
+        <div>{{course.slots}}</div>
       </mat-card-content>
 
     </mat-card-header>
