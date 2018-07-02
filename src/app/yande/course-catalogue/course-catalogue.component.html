@@ -8,22 +8,23 @@
   </div>
   <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
     {{appService.courses}}
-  <mat-card class="hccc-course-card" fxLayout="row wrap" *ngFor="let course of courses.courses" >
+  <mat-card class="hccc-course-card" fxLayout="row wrap" *ngFor="let course of courses" >
     <mat-card-header fxFlex.gt-xs="1 1 50" fxFlex.lt-sm="1 1 100" fxLayout="column">
 
       <mat-card-content fxLayout="column" fxLayoutAlign.lt-sm="center center">
-        {{course.courseName}}
+          <a mat-button color="accent" routerLink="../details/{{course.courseId}}">{{course.courseName}}</a>
+
       </mat-card-content>
 
       <mat-card-content fxLayout="column" fxLayoutAlign.lt-sm="center center">
-        <div *ngFor="let teacher of teachers">{{teacher.teachers}}</div>
-        <div>{{course.courseVenue}}</div>
-        <div>{{course.courseDays}}</div>
-        <div>{{course.courseStartTime}} - {{course.courseEndTime}}</div>
-        <div>{{course.courseStartDate}} - {{course.courseEndDate}}</div>
-        <div>{{course.ageRestrictions}}</div>
-        <div *ngFor="let tag of tags">{{course.tag}}</div>
-        <div>{{course.slots}}</div>
+        <div><b>Teacher(s): </b> <span *ngFor="let teacher of course.teachers">{{teacher}}</span></div>
+        <div><b>Venue: </b> {{course.courseVenue}}</div>
+        <div><b>Days: </b> {{course.courseDays}}</div>
+        <div><b>Time: </b> {{course.courseStartTime}} - {{course.courseEndTime}}</div>
+        <div><b>Dates: </b> {{course.courseStartDate}} - {{course.courseEndDate}}</div>
+        <div><b>Age Restrictions: </b> {{course.ageRestrictions}}</div>
+        <div><b>Tags: </b> <span *ngFor="let tag of course.tags">{{tag}}</span></div>
+        <div><b>Slots Available: </b> {{course.slots}}</div>
       </mat-card-content>
 
     </mat-card-header>
@@ -37,8 +38,8 @@
 
 
     <mat-card-actions fxFlex="100" fxLayoutAlign.lt-sm="center center">
-      <a mat-button routerLink="../details/{{course.courseId}}">DETAILS</a>
-      <a mat-button routerLink="../enroll/{{course.courseId}}">ENROLL</a>
+      <a mat-button color="accent" routerLink="../details/{{course.courseId}}">DETAILS</a>
+      <a mat-button color="accent" routerLink="../enroll/{{course.courseId}}">ENROLL</a>
     </mat-card-actions>
   </mat-card>
   </div>

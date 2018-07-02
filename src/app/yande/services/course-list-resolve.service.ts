@@ -18,16 +18,15 @@ export class CourseListResolveService implements Resolve<Course[]> {
     }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Course[]> {
-        // TODO: The below delay is intentionally introduced to demonstrated spinners for perceived performance. Remove later.
+        // TODO: The below delay is intentionally introduced to demonstrate spinners for perceived performance. Remove later.
         const intentionalDelay = () => timer(1000);
-        return this.apiService.getCourses().pipe(
+        return this.apiService.getCoursesAsObservable().pipe(
             delayWhen(intentionalDelay),
-            take(1),
+            take(this.apiService.isCoursesLoaded ? 1 : 2),
             map(courses => {
                 if (courses) {
                     return courses;
                 } else {
-                    this.router.navigate(['/page-not-found']);
                     return null;
                 }
             })

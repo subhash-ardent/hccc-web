@@ -44,7 +44,7 @@ xLayout.gt-md="row";
 ```
 
 ### Observables naming convention
-* Name observables named with a trailing “$” sign. This can be useful when scanning through code and looking for observable values. Also, if you want a property to store the most recent value from an observable, it can be convenient to simply use the same name with or without the “$”.
+* Name observables with a trailing “$” sign. This can be useful when scanning through code and looking for observable values. Also, if you want a property to store the most recent value from an observable, it can be convenient to simply use the same name with or without the “$”.
 ```angularjs
   stopwatchValue: number;
   stopwatchValue$: Observable<number>;
@@ -55,3 +55,8 @@ xLayout.gt-md="row";
     );
   }
 ```
+
+### Observable Data Services
+This angular application is built around the concept of observable data services. For more details refer this [Angular University blog post](https://blog.angular-university.io/how-to-build-angular2-apps-using-rxjs-observable-data-services-pitfalls-to-avoid/).
+ 
+

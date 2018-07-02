@@ -10,7 +10,7 @@ import { NavigationCancel,
   NavigationStart,
   Router } from '@angular/router';
 
-import { MessageService } from './services/message.service';
+import { LoggerService } from './services/logger.service';
 
 @Component({
   selector: 'app-root',
@@ -21,14 +21,14 @@ export class AppComponent implements OnDestroy {
   title = 'app';
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
+  private logger = new LoggerService(this.constructor.name);
 
   constructor(changeDetectorRef: ChangeDetectorRef,
               media: MediaMatcher,
               public appService: AppService,
               iconRegistry: MatIconRegistry,
               sanitizer: DomSanitizer,
-              private router: Router,
-              private logger: MessageService) {
+              private router: Router) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
