@@ -7,6 +7,7 @@ import { AppHeaderComponent} from "./app-header/app-header.component";
 import { PageNotFoundComponent} from "./page-not-found/page-not-found.component";
 import { LoginRedirectComponent} from "./login-redirect/login-redirect.component";
 import { CoreRoutingModule } from './core-routing.module';
+import { GenericErrorComponent } from './generic-error/generic-error.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { CoreRoutingModule } from './core-routing.module';
     AppBannerComponent,
     AppHeaderComponent,
     PageNotFoundComponent,
-    LoginRedirectComponent
+    LoginRedirectComponent,
+    GenericErrorComponent
   ],
   exports: [
     AppBannerComponent,

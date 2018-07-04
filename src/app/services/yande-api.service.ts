@@ -17,7 +17,7 @@ export class YandeApiService {
   private logger = new LoggerService(this.constructor.name);
   public isCoursesLoaded = false;
   public courses$: BehaviorSubject<Course[]> = new BehaviorSubject(null);
-  public teachers$: BehaviorSubject<Teacher[]> = new BehaviorSubject([]);
+  public teachers$: BehaviorSubject<Teacher[]> = new BehaviorSubject(null);
 
   constructor(
     private http: HttpClient) {

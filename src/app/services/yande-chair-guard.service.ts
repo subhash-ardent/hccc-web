@@ -1,34 +1,48 @@
-import { Injectable }       from '@angular/core';
+import {Injectable} from '@angular/core';
 import {
   CanActivate, Router,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   CanActivateChild
-}                           from '@angular/router';
-import { AppService }      from './app.service';
+} from '@angular/router';
+import {AppService} from './app.service';
+import {catchError, delayWhen, map, take} from 'rxjs/operators';
+import {Observable, of, timer} from 'rxjs';
+import {LoggerService} from './logger.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class YandeChairGuardService implements CanActivate, CanActivateChild {
+  private logger = new LoggerService(this.constructor.name);
 
-  constructor(private appService: AppService, private router: Router) { }
-
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    let url: string = state.url;
-    return this.checkYandeChairRole(url);
+  constructor(private appService: AppService, private router: Router) {
   }
 
-  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+    console.log('returns ');
+    return this.checkYandeChairRole();
+  }
+
+  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+    console.log('returns ');
     return this.canActivate(route, state);
   }
 
-  checkYandeChairRole(url: string): boolean {
-    if (this.appService.isYandeChair) { return true; }
-
-    // Navigate to page not found
-    this.router.navigate(['/page-not-found']);
-    return false;
-      // return true;
+  async checkYandeChairRole(): Promise<boolean> {
+    if (!this.appService.isinitialDataLoaded) {
+      await this.appService.loadInitialData();
+    }
+    return this.appService.isYandeChair$.pipe(
+      take(1),
+      map(isYandeChair => {
+        if (!isYandeChair) {
+          this.router.navigate(['/login-redirect']);
+        }
+        return isYandeChair;
+      }),
+      catchError(this.appService.handleFatalError<boolean>(`checkLogin`))
+    ).toPromise();
   }
+
 }
