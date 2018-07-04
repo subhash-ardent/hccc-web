@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Course} from '../models/course';
 import {Teacher} from '../models/teacher';
-import {BehaviorSubject, Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable, of, timer} from 'rxjs';
 import {LoggerService} from './logger.service';
-import {catchError, tap} from 'rxjs/operators';
+import {catchError, tap, take, delayWhen} from 'rxjs/operators';
 
 
 @Injectable({
@@ -31,8 +31,11 @@ export class YandeApiService {
   }
 
   loadCourses() {
-    this.http.get<{courses: Course[]}>(this.coursesEndpointUrl)
-      .subscribe(
+    const intentionalDelay = () => timer(1000);
+    this.http.get<{courses: Course[]}>(this.coursesEndpointUrl).pipe(
+      take(1),
+      delayWhen(intentionalDelay),
+    ).subscribe(
         res => {
           this.logger.info('Fetched courses successfully');
           const courses = res.courses ? res.courses : [];

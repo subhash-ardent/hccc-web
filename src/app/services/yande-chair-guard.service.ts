@@ -20,12 +20,10 @@ export class YandeChairGuardService implements CanActivate, CanActivateChild {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-    console.log('returns ');
     return this.checkYandeChairRole();
   }
 
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-    console.log('returns ');
     return this.canActivate(route, state);
   }
 

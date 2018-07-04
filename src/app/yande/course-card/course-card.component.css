@@ -1,0 +1,9 @@
+.hccc-course-card {
+    max-width: 600px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.hccc-course-card img {
+    max-width: 200px;
+}

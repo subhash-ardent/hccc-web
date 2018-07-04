@@ -22,7 +22,6 @@ export class CourseCatalogueComponent implements OnInit {
         this.route.data
             .subscribe((data: { courses: Course[] }) => {
                 this.courses = data.courses;
-                console.log(data.courses);
             });
     }
 

@@ -16,4 +16,5 @@ export class Course {
   courseId: string;
   courseDays: string;
   courseRemarks: string;
+  ageRestrictions: string;
 }
