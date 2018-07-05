@@ -4,28 +4,27 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Course} from '../../models/course';
 
 @Component({
-    selector: 'app-course-catalogue',
-    templateUrl: './course-catalogue.component.html',
-    styleUrls: ['./course-catalogue.component.css']
+  selector: 'app-course-catalogue',
+  templateUrl: './course-catalogue.component.html',
+  styleUrls: ['./course-catalogue.component.css']
 })
 export class CourseCatalogueComponent implements OnInit {
-    public appService;
-    public courses;
+  public courses;
 
-    constructor(appService: AppService,
-                private router: Router,
-                private route: ActivatedRoute) {
-        this.appService = appService;
-    }
+  constructor(public appService: AppService,
+              private router: Router,
+              private route: ActivatedRoute) {
+    this.appService = appService;
+  }
 
-    ngOnInit() {
-        this.route.data
-            .subscribe((data: { courses: Course[] }) => {
-                this.courses = data.courses;
-            });
-    }
+  ngOnInit() {
+    this.route.data
+      .subscribe((data: { courses: Course[] }) => {
+        this.courses = data.courses;
+      });
+  }
 
-    // onClickAddNew() {
-    //     this.router.navigate(['../create'], {relativeTo: this.route});
-    // }
+  // onClickAddNew() {
+  //     this.router.navigate(['../create'], {relativeTo: this.route});
+  // }
 }

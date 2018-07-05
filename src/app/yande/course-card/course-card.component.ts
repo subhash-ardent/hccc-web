@@ -8,6 +8,7 @@ import {Course} from '../../models/course';
 })
 export class CourseCardComponent implements OnInit {
   @Input() course: Course;
+  @Input() isEnrollDisabled: boolean;
   constructor() { }
 
   ngOnInit() {

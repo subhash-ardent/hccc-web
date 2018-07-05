@@ -22,13 +22,13 @@
 
     <div fxFlex.gt-xs="1 1 50" fxFlex.lt-sm="1 1 100" fxLayoutAlign="center center">
         <img src="{{course.imageURL}}"
-             alt="Photo of a Lordess Saraswati"
+             alt="Course Card Image"
              style="width:100%;height:100%;" >
     </div>
 
 
     <mat-card-actions fxFlex="100" fxLayoutAlign.lt-sm="center center">
-        <a mat-button color="accent" routerLink="../details/{{course.courseId}}">DETAILS</a>
-        <a mat-button color="accent" routerLink="../enroll/{{course.courseId}}">ENROLL</a>
+        <a mat-button color="accent" routerLink="/course/details/{{course.courseId}}">DETAILS</a>
+        <a mat-button color="accent" routerLink="/course/enroll/{{course.courseId}}" [disabled]="isEnrollDisabled">ENROLL</a>
     </mat-card-actions>
 </mat-card>

@@ -1,5 +1,6 @@
-<div class="wrapper" fxLayoutAlign="center center" fxFlex="100" fxLayout="column">
-  <div class="mat-title">Course Enrollment Page </div>
-  <div class="mat-title">Under Construction</div>
-  <a mat-button routerLink="../../catalogue"> BACK TO CATALOGUE</a>
-</div>
+<mat-toolbar class="toolbar">
+    <mat-toolbar-row>
+        <button mat-stroked-button color="accent" routerLink="../../catalogue">BACK TO CATALOGUE</button>
+    </mat-toolbar-row>
+</mat-toolbar>
+<course-card [course]="course" [isEnrollDisabled]="true"></course-card>

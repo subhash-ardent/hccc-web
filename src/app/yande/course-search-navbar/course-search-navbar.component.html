@@ -1,14 +1,14 @@
 <mat-toolbar class="hccc-search-toolbar">
-  <mat-toolbar-row>
-    <div class="hccc-course-tags" fxFlex="300px" fxLayoutAlign="space-between center">
-      <span>Slokas</span>
-      <span>STEM</span>
-      <span>Languages</span>
-      <span>All</span>
-    </div>
-    <!-- This fills the remaining space of the current row -->
-    <span fxFlex="1 1 auto"></span>
-
-    <input title="search courses" type="text" size="30" placeholder="Search Courses"/>
-  </mat-toolbar-row>
+    <mat-toolbar-row>
+        <div class="hccc-course-tags" fxFlex="300px" fxLayoutAlign="space-between center" fxLayoutGap=".5em">
+            <mat-chip-list>
+                <mat-chip>Slokas</mat-chip>
+                <mat-chip>STEM</mat-chip>
+                <mat-chip>Languages</mat-chip>
+                <mat-chip>All</mat-chip>
+            </mat-chip-list>
+        </div>
+        <span fxFlex="1 1 auto"></span>
+        <input title="search courses" type="text" size="30" placeholder="Search Courses"/>
+    </mat-toolbar-row>
 </mat-toolbar>
