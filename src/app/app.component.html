@@ -1,20 +1,11 @@
-<!--App component works-->
-
-
 <div>
     <hccc-header></hccc-header>
-
-<mat-drawer-container autosize>
-
-    <mat-drawer #snav [mode]="mobileQuery.matches ? 'over' : 'side'">
-        <hccc-side-navbar></hccc-side-navbar>
-    </mat-drawer>
-
-
-    <hccc-banner></hccc-banner>
-    <router-outlet></router-outlet>
-
-</mat-drawer-container>
+    <mat-drawer-container autosize>
+        <mat-drawer #snav [mode]="mobileQuery.matches ? 'over' : 'side'">
+            <hccc-side-navbar></hccc-side-navbar>
+        </mat-drawer>
+        <hccc-banner></hccc-banner>
+        <router-outlet></router-outlet>
+    </mat-drawer-container>
 </div>
-
 <hccc-spinner></hccc-spinner>

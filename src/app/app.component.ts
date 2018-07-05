@@ -1,13 +1,13 @@
 import {ChangeDetectorRef, Component, AfterViewInit, ViewChild, OnDestroy} from '@angular/core';
 import {AppService} from './services/app.service';
-import { NavigationCancel,
+import {
+  NavigationCancel,
   Event,
   NavigationEnd,
   NavigationError,
   NavigationStart,
-  Router } from '@angular/router';
-
-import { LoggerService } from './services/logger.service';
+  Router
+} from '@angular/router';
 import {catchError} from 'rxjs/operators';
 import {MatSidenav} from '@angular/material/sidenav';
 import {MediaMatcher} from '@angular/cdk/layout';
@@ -20,10 +20,9 @@ import {MediaMatcher} from '@angular/cdk/layout';
 export class AppComponent implements AfterViewInit, OnDestroy {
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
-  private logger = new LoggerService(this.constructor.name);
 
   @ViewChild('snav') snav: MatSidenav;
-  showFiller = false;
+
   constructor(changeDetectorRef: ChangeDetectorRef,
               public appService: AppService,
               private router: Router,
@@ -54,7 +53,6 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.appService.sideNavMenuClick$.pipe(
-      // tap(res => {console.log(res); }),
       catchError(this.appService.showErrorOnSnackbar<boolean>(`Side navbar operation`))
     ).subscribe(
       res => {
