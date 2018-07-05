@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-banner',
+  selector: 'hccc-banner',
   templateUrl: './app-banner.component.html',
-  styleUrls: ['./app-banner.component.css']
+  styleUrls: ['./app-banner.component.scss']
 })
 export class AppBannerComponent implements OnInit {
 

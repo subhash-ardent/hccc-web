@@ -1,3 +1,5 @@
+@import '../../../../src/hccc-theme.scss';
+
 .hccc-course-card {
     max-width: 600px;
     margin-top: 20px;
@@ -6,4 +8,8 @@
 
 .hccc-course-card img {
     max-width: 200px;
+}
+
+mat-card-content a {
+    background-color: mat-color($hccc-theme-accent, 50);
 }

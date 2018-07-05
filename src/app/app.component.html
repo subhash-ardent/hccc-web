@@ -1,45 +1,20 @@
-
 <!--App component works-->
 
-<div class="hccc-container" [class.hccc-is-mobile]="mobileQuery.matches">
-  <mat-toolbar color="accent" class="hccc-toolbar">
-    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-    <span>Shiva - Vishnu Temple, Livermore</span>
 
-    <!-- This fills the remaining space of the current row -->
-    <span class="fill-remaining-space" fxFlex="1 1 auto"></span>
+<div>
+    <hccc-header></hccc-header>
 
-    <span class="hccc-toolbar-links">Donate</span>
-    <span class="hccc-toolbar-links">Contact Us</span>
-    <span class="hccc-toolbar-links" *ngIf="!appService.isLoggedIn">Login</span>
-    <div  class="hccc-toolbar-links container" *ngIf="appService.isLoggedIn">
-      <div flex><mat-icon svgIcon="avatar-placeholder"></mat-icon></div>
-      <div flex>{{appService.currentUser.name.firstName}}</div>
-      <div flex>{{appService.currentUser.name.lastName}}</div>
-    </div>
-  </mat-toolbar>
+<mat-drawer-container autosize>
 
-  <mat-sidenav-container class="hccc-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
-                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
-      <mat-nav-list>
-        <a mat-list-item routerLink="/home" >Home</a>
-        <a mat-list-item routerLink="/course/catalogue" >Course Catalogue</a>
-        <a mat-list-item routerLink="/teacher/list" *ngIf="appService.isYandeChair">Teachers List</a>
-      </mat-nav-list>
-    </mat-sidenav>
+    <mat-drawer #snav [mode]="mobileQuery.matches ? 'over' : 'side'">
+        <hccc-side-navbar></hccc-side-navbar>
+    </mat-drawer>
 
-    <mat-sidenav-content>
-      <app-banner></app-banner>
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+
+    <hccc-banner></hccc-banner>
+    <router-outlet></router-outlet>
+
+</mat-drawer-container>
 </div>
 
-<div class="dark-overlay" *ngIf="appService.loading" fxLayoutAlign="center center">
-      <mat-progress-spinner
-              class="example-margin"
-              color="accent"
-              mode="indeterminate">
-      </mat-progress-spinner>
-</div>
+<hccc-spinner></hccc-spinner>

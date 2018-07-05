@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {BehaviorSubject, Observable, of, interval} from 'rxjs';
-import {catchError, map, tap, take} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
+import {BehaviorSubject, Observable, of} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 import {Account} from '../models/account';
 import {LoggerService} from './logger.service';
-import {Course} from '../models/course';
 import {Router} from '@angular/router';
 
 @Injectable({
@@ -23,6 +22,7 @@ export class AppService {
   public isYandeChair$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public isYandeChair = false;
   public isinitialDataLoaded = false;
+  public sideNavMenuClick$: Observable<Event>;
 
   authRedirectUrl: string;
   loading = false;
@@ -55,7 +55,7 @@ export class AppService {
         catchError(this.handleFatalError<Account>('loadInitialData'))
       )
       .toPromise();
-    this.logger.info('fetched current user');
+    this.logger.info('Fetched current user');
     this.currentUser = user;
 
     if (this.currentUser && this.currentUser.userName && this.currentUser.userName !== this.hcccGuestUserName) {
@@ -71,6 +71,20 @@ export class AppService {
     return (error: any): Observable<T> => {
       this.logger.error(`${operation} failed: ${error.message}`);
       this.router.navigate(['/error-page']);
+      return of(result as T);
+    };
+  }
+
+  public handleNonFatalError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      this.logger.error(`${operation} failed: ${error.message}`);
+      return of(result as T);
+    };
+  }
+
+  public showErrorOnSnackbar<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      this.logger.error(`${operation} failed: ${error.message}`);
       return of(result as T);
     };
   }

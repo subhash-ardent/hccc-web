@@ -37,7 +37,7 @@ export class YandeApiService {
       delayWhen(intentionalDelay),
     ).subscribe(
         res => {
-          this.logger.info('Fetched courses successfully');
+          this.logger.info('Fetched courses');
           const courses = res.courses ? res.courses : [];
           this.courses$.next(courses);
           this.isCoursesLoaded = true;

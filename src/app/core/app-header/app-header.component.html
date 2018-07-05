@@ -1,1 +1,22 @@
+<mat-toolbar color="accent" fxLayout="row">
+    <div fxLayout="row" fxLayoutGap="2em">
+        <button mat-icon-button #menuButton>
+            <mat-icon>menu</mat-icon>
+        </button>
 
+        <span>Shiva - Vishnu Temple, Livermore</span>
+    </div>
+    <!-- This fills the remaining space of the current row -->
+    <span fxFlex="1 1 auto"></span>
+
+    <div fxLayout="row" fxLayoutGap="2em">
+        <!--<span>Donate</span>-->
+        <!--<span>Contact Us</span>-->
+        <span *ngIf="!appService.isLoggedIn">Login</span>
+        <span *ngIf="appService.isLoggedIn" fxLayoutGap=".5em">
+            <mat-icon>person</mat-icon>
+            <span>{{appService.currentUser.name.firstName}}</span>
+            <span>{{appService.currentUser.name.lastName}}</span>
+        </span>
+    </div>
+</mat-toolbar>

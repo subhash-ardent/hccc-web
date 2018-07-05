@@ -7,7 +7,7 @@
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
-      "prefix": "yande",
+      "prefix": "hccc",
       "schematics": {},
       "architect": {
         "build": {
@@ -123,6 +123,11 @@
           }
         }
       }
+    }
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
     }
   },
   "defaultProject": "youth-and-education"

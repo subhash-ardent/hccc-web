@@ -1,8 +1,5 @@
-import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
-import {MediaMatcher} from "@angular/cdk/layout";
+import {ChangeDetectorRef, Component, AfterViewInit, ViewChild, OnDestroy} from '@angular/core';
 import {AppService} from './services/app.service';
-import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
 import { NavigationCancel,
   Event,
   NavigationEnd,
@@ -11,53 +8,63 @@ import { NavigationCancel,
   Router } from '@angular/router';
 
 import { LoggerService } from './services/logger.service';
+import {catchError} from 'rxjs/operators';
+import {MatSidenav} from '@angular/material/sidenav';
+import {MediaMatcher} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnDestroy {
-  title = 'app';
+export class AppComponent implements AfterViewInit, OnDestroy {
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
   private logger = new LoggerService(this.constructor.name);
 
+  @ViewChild('snav') snav: MatSidenav;
+  showFiller = false;
   constructor(changeDetectorRef: ChangeDetectorRef,
-              media: MediaMatcher,
               public appService: AppService,
-              iconRegistry: MatIconRegistry,
-              sanitizer: DomSanitizer,
-              private router: Router) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this._mobileQueryListener);
-    this.appService = appService;
-    iconRegistry.addSvgIcon(
-      'avatar-placeholder',
-      sanitizer.bypassSecurityTrustResourceUrl('assets/img/baseline-account_box-24px.svg'));
-
+              private router: Router,
+              media: MediaMatcher) {
     this.router.events.subscribe((event: Event) => {
       this.navigationInterceptor(event);
     });
+    this.mobileQuery = media.matchMedia('(max-width: 800px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+
   }
 
   private navigationInterceptor(event: Event): void {
     if (event instanceof NavigationStart) {
-        this.appService.loading = true;
+      this.appService.loading = true;
     }
     if (event instanceof NavigationEnd) {
-        this.appService.loading = false;
+      this.appService.loading = false;
     }
     if (event instanceof NavigationCancel) {
-        this.appService.loading = false;
+      this.appService.loading = false;
     }
     if (event instanceof NavigationError) {
-        this.appService.loading = false;
+      this.appService.loading = false;
     }
+  }
+
+  ngAfterViewInit() {
+    this.appService.sideNavMenuClick$.pipe(
+      // tap(res => {console.log(res); }),
+      catchError(this.appService.showErrorOnSnackbar<boolean>(`Side navbar operation`))
+    ).subscribe(
+      res => {
+        this.snav.toggle();
+      }
+    );
   }
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 }
+
