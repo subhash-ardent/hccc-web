@@ -1,4 +1,9 @@
 mat-toolbar {
     height: 60px;
+    position:fixed;
+    z-index: 2;
+}
+.header-space {
+    height: 60px;
 }
 
