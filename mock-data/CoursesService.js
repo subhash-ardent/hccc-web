@@ -120,26 +120,16 @@ const courses = [ {
  * returns RetrieveCourseResponse
  **/
 exports.addCourse = function(contentType,accept,userId,body) {
+  const getMaxId = (accumulator, currentValue) => parseInt(currentValue.courseId) > accumulator ? parseInt(currentValue.courseId) : accumulator;
   return new Promise(function(resolve, reject) {
+    if(!body.course) {
+      reject();
+    }
+    let maxId = courses.reduce(getMaxId, 0);
+    body.course.courseId = maxId + 1;
+    courses.push(body.course);
     var examples = {};
-    examples['application/json'] = {
-  "course" : {
-    "courseEndTime" : "courseEndTime",
-    "courseStartTime" : "courseStartTime",
-    "courseEndDate" : "courseEndDate",
-    "ageRestrictions" : "ageRestrictions",
-    "courseStartDate" : "courseStartDate",
-    "tags" : [ "tags", "tags" ],
-    "slots" : 0,
-    "courseVenue" : "courseVenue",
-    "teachers" : [ "teachers", "teachers" ],
-    "imageURL" : "imageURL",
-    "flyerURL" : "flyerURL",
-    "courseId" : "courseId",
-    "courseDays" : "courseDays",
-    "courseRemarks" : "courseRemarks"
-  }
-};
+    examples['application/json'] = body;
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
