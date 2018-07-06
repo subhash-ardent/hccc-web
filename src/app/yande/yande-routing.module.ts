@@ -60,13 +60,12 @@ const yandeRoutes: Routes = [
           {path: 'list', component: TeacherListComponent},
           {path: 'onboard', component: TeacherOnboardComponent},
           {path: 'details/:id', component: TeacherDetailsComponent},
-          {path: 'update/:id', component: TeacherDetailsUpdateComponent}
+          {path: 'update/:id', component: TeacherDetailsUpdateComponent},
+          {path: '', redirectTo: 'list', pathMatch: 'full'},
         ],
       }
     ]
   }
-
-
 ];
 
 
@@ -85,43 +84,3 @@ export class YandeRoutingModule {
 }
 
 
-/*
-import { NgModule }             from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { TeacherListComponent }      from './yande/teacher-list/teacher-list.component';
-import { CourseCatalogueComponent } from "./yande/course-catalogue/course-catalogue.component";
-import { CourseComponent } from './course/course.component';
-import { CreateCourseComponent } from './create-course/create-course.component';
-import { EnrollCourseComponent } from './enroll-course/enroll-course.component';
-import { LoginRedirectComponent } from './core/login-redirect/login-redirect.component';
-import {AuthGuard} from './services/auth-guard.service';
-
-const routes: Routes = [
-  { path: 'login', component: LoginRedirectComponent },
-  { path: 'teachers', component: TeacherListComponent },
-  {
-    path: 'courses',
-    component: CourseComponent,
-    canActivate: [AuthGuard],
-    children: [
-      {
-        path: '',
-        children: [
-          { path: 'new', component: CreateCourseComponent },
-          { path: 'enroll', component: EnrollCourseComponent },
-          { path: '', component: CourseCatalogueComponent }
-        ]
-      }
-    ]
-  },
-  { path: 'home', component: CourseCatalogueComponent }
-];
-
-@NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
-})
-
-export class AppRoutingModule {}
-
- */
