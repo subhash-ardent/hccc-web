@@ -10,6 +10,7 @@ import { CoreRoutingModule } from './core-routing.module';
 import { GenericErrorComponent } from './generic-error/generic-error.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { SideNavbarComponent } from './side-navbar/side-navbar.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -25,13 +26,15 @@ import { SideNavbarComponent } from './side-navbar/side-navbar.component';
     LoginRedirectComponent,
     GenericErrorComponent,
     SpinnerComponent,
-    SideNavbarComponent
+    SideNavbarComponent,
+    FooterComponent
   ],
   exports: [
     AppBannerComponent,
     AppHeaderComponent,
     SpinnerComponent,
-    SideNavbarComponent
+    SideNavbarComponent,
+    FooterComponent
   ]
 })
 export class CoreModule { }
