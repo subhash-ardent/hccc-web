@@ -16,7 +16,9 @@ import {AppService} from '../../services/app.service';
 })
 export class CourseDetailsResolveService {
 
-  constructor(private appService: AppService, private apiService: YandeApiService, private router: Router) { }
+  constructor(private appService: AppService,
+              private apiService: YandeApiService,
+              private router: Router) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Course> {
 
@@ -31,7 +33,7 @@ export class CourseDetailsResolveService {
             throw new RangeError(`Course with id, ${parseInt(route.params['id']) - 1} cannot be found`);
           }
         } else {
-          throw new Error();
+          return null;
         }
       }),
       catchError(this.appService.handleFatalError<Course>(`get course`))

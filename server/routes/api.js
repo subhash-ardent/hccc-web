@@ -22,6 +22,7 @@ router.all('/*', (req, res) => {
 
     if (req.method === 'POST' && req.body) {
       options.body = JSON.stringify(req.body);
+      console.log(options, req.body);
     }
     // console.log(options);
     request(options, function(err, response, body) {
@@ -32,8 +33,8 @@ router.all('/*', (req, res) => {
         console.log(`Api call for ${req.url} failed with status code - ${response.statusCode}`);
         res.status(response.statusCode).end();
       } else {
-        console.log(`Received response for $req.url`);
-        res.status(200).send(body);
+        console.log(`Received response for $req.url`, response.statusCode);
+        res.status(response.statusCode).send(body);
       }
     })
   } catch (e) {
