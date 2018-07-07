@@ -6,7 +6,7 @@ import {Course} from '../../models/course';
 @Component({
   selector: 'app-course-catalogue',
   templateUrl: './course-catalogue.component.html',
-  styleUrls: ['./course-catalogue.component.css']
+  styleUrls: ['./course-catalogue.component.scss']
 })
 export class CourseCatalogueComponent implements OnInit {
   public courses;

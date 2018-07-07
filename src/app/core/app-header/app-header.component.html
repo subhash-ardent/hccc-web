@@ -1,25 +1,23 @@
-<mat-toolbar color="accent" fxLayout="row">
+<mat-toolbar class="hccc-toolbar" fxLayout="row">
     <div fxLayout="row" fxLayoutGap="2em">
         <button mat-icon-button #menuButton>
             <mat-icon>menu</mat-icon>
         </button>
 
-        <span>Shiva - Vishnu Temple, Livermore</span>
+        <span class="text">Shiva - Vishnu Temple, Livermore</span>
     </div>
     <!-- This fills the remaining space of the current row -->
     <span fxFlex="1 1 auto"></span>
 
-    <div fxLayout="row" fxLayoutGap="2em">
-        <!--<span>Donate</span>-->
-        <!--<span>Contact Us</span>-->
-        <span *ngIf="!appService.isLoggedIn">Login</span>
-        <span *ngIf="appService.isLoggedIn" fxLayoutGap=".5em">
-            <mat-icon>person</mat-icon>
-            <span>{{appService.currentUser.name.firstName}}</span>
-            <span>{{appService.currentUser.name.lastName}}</span>
-        </span>
-    </div>
-</mat-toolbar>
-<div class="header-space">
 
-</div>
+    <span *ngIf="!appService.isLoggedIn">Login</span>
+    <div fxLayout="row"  *ngIf="appService.isLoggedIn" fxLayoutGap=".5em">
+        <button mat-icon-button>
+            <mat-icon>person</mat-icon>
+        </button>
+        <span class="username mat-subheading-1">{{appService.currentUser.name.firstName}}</span>
+        <span class="username mat-subheading-1">{{appService.currentUser.name.lastName}}</span>
+    </div>
+
+</mat-toolbar>
+

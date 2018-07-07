@@ -7,8 +7,8 @@
 // define 3 theme color
 // mat-palette accepts $palette-name, main, lighter and darker variants
 $hccc-theme-primary: mat-palette($mat-grey);
-$hccc-theme-accent: mat-palette($mat-green);
-$hccc-theme-warn: mat-palette($mat-deep-orange, A200);
+$hccc-theme-accent: mat-palette($mat-orange);
+$hccc-theme-warn: mat-palette($mat-red, A200);
 
 // create theme (use mat-dark-theme for themes with dark backgrounds)
 $hccc-theme: mat-light-theme(

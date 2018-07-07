@@ -5,7 +5,7 @@ import {fromEvent} from 'rxjs';
 @Component({
   selector: 'hccc-header',
   templateUrl: './app-header.component.html',
-  styleUrls: ['./app-header.component.css']
+  styleUrls: ['./app-header.component.scss']
 })
 export class AppHeaderComponent implements AfterViewInit {
   @ViewChild('menuButton') menuButton: any;
