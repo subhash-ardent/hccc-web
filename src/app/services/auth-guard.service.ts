@@ -6,8 +6,7 @@ import {
     CanActivateChild
 } from '@angular/router';
 import {AppService} from './app.service';
-import {BehaviorSubject, Observable, of} from 'rxjs';
-import {delayWhen, map, take, catchError} from 'rxjs/operators';
+import {map, take, catchError} from 'rxjs/operators';
 import {LoggerService} from './logger.service';
 
 @Injectable()

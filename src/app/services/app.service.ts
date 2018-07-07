@@ -5,6 +5,7 @@ import {catchError} from 'rxjs/operators';
 import {Account} from '../models/account';
 import {LoggerService} from './logger.service';
 import {Router} from '@angular/router';
+import {NotFoundError} from '../models/NotFoundError';
 
 @Injectable({
   providedIn: 'root'
@@ -70,7 +71,11 @@ export class AppService {
   public handleFatalError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       this.logger.error(`${operation} failed: ${error.message}`);
-      this.router.navigate(['/error-page']);
+      if (error instanceof NotFoundError) {
+        this.router.navigate(['/page-not-found']);
+      } else {
+        this.router.navigate(['/error-page']);
+      }
       return of(result as T);
     };
   }

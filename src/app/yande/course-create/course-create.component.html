@@ -3,12 +3,12 @@
         <button mat-stroked-button color="accent" routerLink="../catalogue">BACK TO CATALOGUE</button>
     </mat-toolbar-row>
 </mat-toolbar>
-<div class="hccc-course-creation-form container" fxLayout="column" fxLayoutGap="5%" fxLayoutAlign.lt-md="center center" >
+<form #courseForm="ngForm" (ngSubmit)="onSubmit()" class="hccc-course-creation-form" fxLayout="column" fxLayoutGap="5%" fxLayoutAlign.lt-md="center center" >
     <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="5%">
 
         <div fxLayout="column" fxFlex="30" fxFlex.md="40" fxLayoutAlign="center">
             <mat-form-field>
-                <input matInput placeholder="Enter Course Name" value=""><br/>
+                <input matInput placeholder="Enter Course Name" value=""  id="courseName" required [(ngModel)]="model.courseName" name="courseName"> <br/>
             </mat-form-field>
             <mat-form-field>
                 <input matInput placeholder="Enter any Age Restrictions Info" value="">
@@ -58,9 +58,9 @@
 
             <!-- TODO: get teacher list from api -->
             <mat-form-field>
-                <mat-select placeholder="Select Teachers and Coordinates" [(ngModel)]="selectedValue" name="food">
-                    <mat-option *ngFor="let food of foods" [value]="food.value">
-                        {{food.viewValue}}
+                <mat-select placeholder="Select Teachers and Coordinates" [(ngModel)]="model.teachers" name="teacher">
+                    <mat-option *ngFor="let teacher of teachers" [value]="teacher">
+                        {{teacher[0]}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
@@ -83,7 +83,7 @@
     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="50px">
         <button mat-flat-button color="accent" routerLink="../../course/catalogue">CANCEL</button>
         <button mat-flat-button color="accent">RESET</button>
-        <button mat-flat-button color="accent">SUBMIT</button>
+        <button mat-flat-button color="accent" type="submit" [disabled]="!courseForm.form.valid">SUBMIT</button>
     </div>
 
-</div>
+</form>

@@ -5,6 +5,7 @@ import {Teacher} from '../models/teacher';
 import {BehaviorSubject, Observable, of, timer} from 'rxjs';
 import {LoggerService} from './logger.service';
 import {catchError, tap, take, delayWhen} from 'rxjs/operators';
+import {AppService} from './app.service';
 
 
 @Injectable({
@@ -20,6 +21,7 @@ export class YandeApiService {
   public teachers$: BehaviorSubject<Teacher[]> = new BehaviorSubject(null);
 
   constructor(
+    private appService: AppService,
     private http: HttpClient) {
     this.loadCourses();
   }
@@ -47,13 +49,16 @@ export class YandeApiService {
   }
 
   addCourse(newCourse: Course) {
-    return this.http.post<Course>('/courses', JSON.stringify(newCourse)).pipe(
+    console.log('prinitng newCourse', JSON.stringify({course: newCourse}));
+    return this.http.post<{course: Course}>(this.coursesEndpointUrl, {course: newCourse}).pipe(
       tap(
         res => {
-          this.courses$.value.push(res);
+          if (!res.course) { throw new Error('Invalid Response');}
+          this.courses$.value.push(res.course);
           this.courses$.next(this.courses$.value);
           this.logger.info(`${newCourse.courseName} added successfully`);
-        })
+        }),
+      catchError(this.appService.handleFatalError<Course[]>(`add course`))
     );
   }
 

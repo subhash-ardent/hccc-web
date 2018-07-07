@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Course} from '../../models/course';
+import {YandeApiService} from '../../services/yande-api.service';
+import {catchError} from 'rxjs/operators';
+import {AppService} from '../../services/app.service';
 
 @Component({
   selector: 'app-course-create',
@@ -6,14 +10,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./course-create.component.css']
 })
 export class CourseCreateComponent implements OnInit {
-    public breakpoint;
-  constructor() { }
+  model = new Course();
+  teachers = [['Madhu Ramesh'], ['Dr Kamala Shankar']];
+  submitted = false;
+
+  constructor(private appService: AppService,
+              private apiService: YandeApiService) {
+
+  }
 
   ngOnInit() {
-  	 this.breakpoint = (window.innerWidth <= 768) ? 1 : 2;
   }
-  onResize(event) {
-  	this.breakpoint = (event.target.innerWidth <= 768) ? 1 : 2;
+
+
+  onSubmit() {
+    this.submitted = true;
+    console.log('printing model', this.model);
+    this.apiService.addCourse(this.model).pipe(
+      catchError(this.appService.handleFatalError<Course[]>(`submit to add course`))
+    ).subscribe();
   }
 
 }
