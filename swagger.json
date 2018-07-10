@@ -22,7 +22,7 @@
         "tags": [
           "courses"
         ],
-        "summary": "Retrieve courses from the catalogue",
+        "summary": "Retrieves courses from the catalogue",
         "operationId": "getCourses",
         "parameters": [
           {
@@ -32,7 +32,7 @@
             "$ref": "#/parameters/Accept"
           },
           {
-            "$ref": "#/parameters/User-Id"
+            "$ref": "#/parameters/User-Name"
           },
           {
             "name": "tags",
@@ -61,7 +61,7 @@
         "tags": [
           "courses"
         ],
-        "summary": "Add a new course to the catalogue",
+        "summary": "Adds a new course to the catalogue",
         "operationId": "addCourse",
         "parameters": [
           {
@@ -71,14 +71,14 @@
             "$ref": "#/parameters/Accept"
           },
           {
-            "$ref": "#/parameters/User-Id"
+            "$ref": "#/parameters/User-Name"
           },
           {
             "in": "body",
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateCourseRequest"
+              "$ref": "#/definitions/CourseObject"
             }
           }
         ],
@@ -86,7 +86,7 @@
           "200": {
             "description": "Success - Item returned in the response payload",
             "schema": {
-              "$ref": "#/definitions/RetrieveCourseResponse"
+              "$ref": "#/definitions/CourseObject"
             }
           },
           "400": {
@@ -106,7 +106,7 @@
         "tags": [
           "courses"
         ],
-        "summary": "Retrieve course by Course Id",
+        "summary": "Retrieves course by Course Id",
         "operationId": "getCourseById",
         "parameters": [
           {
@@ -116,7 +116,7 @@
             "$ref": "#/parameters/Accept"
           },
           {
-            "$ref": "#/parameters/User-Id"
+            "$ref": "#/parameters/User-Name"
           },
           {
             "in": "path",
@@ -130,7 +130,7 @@
           "200": {
             "description": "Success - Item returned in the response payload",
             "schema": {
-              "$ref": "#/definitions/RetrieveCourseResponse"
+              "$ref": "#/definitions/CourseObject"
             }
           },
           "400": {
@@ -150,7 +150,7 @@
         "tags": [
           "teachers"
         ],
-        "summary": "Retrieve list of teachers",
+        "summary": "Retrieves list of teachers",
         "operationId": "getTeachers",
         "parameters": [
           {
@@ -160,7 +160,7 @@
             "$ref": "#/parameters/Accept"
           },
           {
-            "$ref": "#/parameters/User-Id"
+            "$ref": "#/parameters/User-Name"
           }
         ],
         "responses": {
@@ -185,7 +185,7 @@
         "tags": [
           "teachers"
         ],
-        "summary": "Add a new teacher to the system",
+        "summary": "Adds a new teacher to the system",
         "operationId": "registerTeacher",
         "parameters": [
           {
@@ -195,14 +195,14 @@
             "$ref": "#/parameters/Accept"
           },
           {
-            "$ref": "#/parameters/User-Id"
+            "$ref": "#/parameters/User-Name"
           },
           {
             "in": "body",
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RegisterTeacherRequest"
+              "$ref": "#/definitions/TeacherObject"
             }
           }
         ],
@@ -210,7 +210,7 @@
           "200": {
             "description": "Success - Item returned in the response payload",
             "schema": {
-              "$ref": "#/definitions/RetrieveTeacherResponse"
+              "$ref": "#/definitions/TeacherObject"
             }
           },
           "400": {
@@ -230,7 +230,7 @@
         "tags": [
           "teachers"
         ],
-        "summary": "Retrieve teacher by teacher Id",
+        "summary": "Retrieves teacher by teacher Id",
         "operationId": "getTeacherById",
         "parameters": [
           {
@@ -240,7 +240,7 @@
             "$ref": "#/parameters/Accept"
           },
           {
-            "$ref": "#/parameters/User-Id"
+            "$ref": "#/parameters/User-Name"
           },
           {
             "in": "path",
@@ -254,7 +254,7 @@
           "200": {
             "description": "Success - Item returned in the response payload",
             "schema": {
-              "$ref": "#/definitions/RetrieveTeacherResponse"
+              "$ref": "#/definitions/TeacherObject"
             }
           },
           "400": {
@@ -277,7 +277,8 @@
         "tags": [
           "indemnities"
         ],
-        "summary": "Retrieve indemnities from the system. Only indemnities belonging to the requesting user account will be returned. User Account information is available in the header.",
+        "summary": "Retrieves indemnities from the system. ",
+        "description": "Only indemnities belonging to the requesting user account will be returned. User Account information is available in the header.",
         "operationId": "getIndemnities",
         "parameters": [
           {
@@ -287,7 +288,21 @@
             "$ref": "#/parameters/Accept"
           },
           {
-            "$ref": "#/parameters/User-Id"
+            "$ref": "#/parameters/User-Name"
+          },
+          {
+            "name": "familyMemberId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Identifier of the family member"
+          },
+          {
+            "name": "indemnityFormId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Identifier of the Indemnity Form"
           }
         ],
         "responses": {
@@ -300,6 +315,10 @@
           "400": {
             "$ref": "#/responses/400ErrorResponse"
           },
+          "404": {
+            "description": "If no indemnity is signed for the given indemnityFormId and familyMemberId combination then return 404 - Not Found",
+            "$ref": "#/responses/400ErrorResponse"
+          },
           "500": {
             "$ref": "#/responses/500ErrorResponse"
           }
@@ -309,7 +328,7 @@
         "tags": [
           "indemnities"
         ],
-        "summary": "Add a new indemnity to the system",
+        "summary": "Adds a new indemnity for a student in the system",
         "operationId": "addIndemnity",
         "parameters": [
           {
@@ -319,14 +338,14 @@
             "$ref": "#/parameters/Accept"
           },
           {
-            "$ref": "#/parameters/User-Id"
+            "$ref": "#/parameters/User-Name"
           },
           {
             "in": "body",
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateIndemnityRequest"
+              "$ref": "#/definitions/IndemnityObject"
             }
           }
         ],
@@ -334,7 +353,7 @@
           "200": {
             "description": "Success - Item returned in the response payload",
             "schema": {
-              "$ref": "#/definitions/RetrieveIndemnityResponse"
+              "$ref": "#/definitions/IndemnityObject"
             }
           },
           "400": {
@@ -351,7 +370,7 @@
         "tags": [
           "accounts"
         ],
-        "summary": "Retrieve accounts from the system",
+        "summary": "Retrieves accounts from the system",
         "operationId": "getAccounts",
         "parameters": [
           {
@@ -361,7 +380,7 @@
             "$ref": "#/parameters/Accept"
           },
           {
-            "$ref": "#/parameters/User-Id"
+            "$ref": "#/parameters/User-Name"
           },
           {
             "name": "userName",
@@ -412,7 +431,8 @@
         "tags": [
           "enrollments"
         ],
-        "summary": "Retrieve enrollments from the system. Only enrollments belonging to the requesting user account will be returned. User Account information is available in the header.",
+        "summary": "Retrieves enrollments from the system.",
+        "description": " Only enrollments belonging to the requesting user account will be returned. User Account information is available in the header.",
         "operationId": "getEnrollments",
         "parameters": [
           {
@@ -422,7 +442,7 @@
             "$ref": "#/parameters/Accept"
           },
           {
-            "$ref": "#/parameters/User-Id"
+            "$ref": "#/parameters/User-Name"
           },
           {
             "in": "path",
@@ -449,9 +469,9 @@
       },
       "post": {
         "tags": [
-          "indemnities"
+          "enrollments"
         ],
-        "summary": "Add a new enrollment to the system",
+        "summary": "Adds a new enrollment to the system",
         "operationId": "addEnrollment",
         "parameters": [
           {
@@ -461,7 +481,7 @@
             "$ref": "#/parameters/Accept"
           },
           {
-            "$ref": "#/parameters/User-Id"
+            "$ref": "#/parameters/User-Name"
           },
           {
             "in": "path",
@@ -475,7 +495,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateEnrollmentRequest"
+              "$ref": "#/definitions/EnrollmentObject"
             }
           }
         ],
@@ -483,7 +503,7 @@
           "200": {
             "description": "Success - Item returned in the response payload",
             "schema": {
-              "$ref": "#/definitions/RetrieveEnrollmentResponse"
+              "$ref": "#/definitions/EnrollmentObject"
             }
           },
           "400": {
@@ -510,14 +530,7 @@
         }
       }
     },
-    "CreateCourseRequest": {
-      "description": "This is the schema of request payload when a New Course is created in the system",
-      "properties": {
-        "course": {
-          "$ref": "#/definitions/CourseObject"
-        }
-      }
-    },
+
     "RetrieveCoursesListResponse": {
       "description": "This is the schema of response payload when a list of course information is requested",
       "properties": {
@@ -527,14 +540,6 @@
           "items": {
             "$ref": "#/definitions/CourseObject"
           }
-        }
-      }
-    },
-    "RetrieveCourseResponse": {
-      "description": "This is the schema of response payload when a course information is requested",
-      "properties": {
-        "course": {
-          "$ref": "#/definitions/CourseObject"
         }
       }
     },
@@ -609,14 +614,7 @@
         }
       }
     },
-    "RegisterTeacherRequest": {
-      "description": "This is the schema of request payload when a New Teacher is registered in the system",
-      "properties": {
-        "teacher": {
-          "$ref": "#/definitions/TeacherObject"
-        }
-      }
-    },
+
     "RetrieveTeachersListResponse": {
       "description": "This is the schema of response payload when a list of teacher information is requested",
       "properties": {
@@ -629,20 +627,19 @@
         }
       }
     },
-    "RetrieveTeacherResponse": {
-      "description": "This is the schema of response payload when a teacher's information is requested",
-      "properties": {
-        "teacher": {
-          "$ref": "#/definitions/TeacherObject"
-        }
-      }
-    },
     "TeacherObject": {
       "description": "Teacher Object",
       "properties": {
-        "userName": {
+        "account": {
+          "$ref": "#/definitions/AccountObject"
+        },
+        "salutation": {
           "type": "string",
-          "description": "Unique userName of the devotee"
+          "description": "Salutation or title. For e.g. Mrs, Dr, Shri, Pandit, etc."
+        },
+        "profilePictureURL": {
+          "type": "string",
+          "description": "URL of the teachers profile picture"
         },
         "skillSet": {
           "description": "Teacher's skill set",
@@ -665,14 +662,7 @@
         }
       }
     },
-    "CreateIndemnityRequest": {
-      "description": "This is the schema of request payload when a New Indemnity is submited to the system",
-      "properties": {
-        "indemnity": {
-          "$ref": "#/definitions/IndemnityObject"
-        }
-      }
-    },
+
     "RetrieveIndemnitiesListResponse": {
       "description": "This is the schema of response payload when a list of indemnity information is requested",
       "properties": {
@@ -685,33 +675,28 @@
         }
       }
     },
-    "RetrieveIndemnityResponse": {
-      "description": "This is the schema of response payload when an indemnity form's information is requested",
-      "properties": {
-        "indemnity": {
-          "$ref": "#/definitions/IndemnityObject"
-        }
-      }
-    },
     "IndemnityObject": {
       "description": "Indemnity Object",
       "properties": {
-        "userName": {
-          "type": "string",
-          "description": "Unique devotee userName of the participant"
+        "account": {
+          "$ref": "#/definitions/AccountObject"
         },
-        "participantName": {
+        "signedFor": {
           "$ref": "#/definitions/NameObject"
         },
-        "guardianName": {
+        "signedBy": {
           "$ref": "#/definitions/NameObject"
         },
-        "indemnityFormVersion": {
+        "signedOn": {
           "type": "string",
-          "description": "String representing the name ot number of indemnity content version."
+          "description": "Datetime when the indemnity was signed in ISO 8612 format. For e.g. 2018-07-10T07:51:25+00:00"
+        },
+        "indemnityForm": {
+          "$ref": "#/definitions/IndemnityFormObject"
         }
       }
     },
+
     "RetrieveAccountsListResponse": {
       "description": "This is the schema of response payload when an account's information is requested",
       "properties": {
@@ -762,14 +747,7 @@
         }
       }
     },
-    "CreateEnrollmentRequest": {
-      "description": "This is the schema of request payload when a New Enrollment is created in the system",
-      "properties": {
-        "enrollment": {
-          "$ref": "#/definitions/EnrollmentObject"
-        }
-      }
-    },
+
     "RetrieveEnrollmentsListResponse": {
       "description": "This is the schema of response payload when a list of indemnity information is requested",
       "properties": {
@@ -782,14 +760,6 @@
         }
       }
     },
-    "RetrieveEnrollmentResponse": {
-      "description": "This is the schema of response payload when an enrollment's information is requested",
-      "properties": {
-        "enrollment": {
-          "$ref": "#/definitions/EnrollmentObject"
-        }
-      }
-    },
     "EnrollmentObject": {
       "description": "Enrollment Object",
       "properties": {
@@ -797,26 +767,26 @@
           "type": "string",
           "description": "Unique enrollment id"
         },
-        "userName": {
-          "type": "string",
-          "description": "Unique userName of the participants devotee account"
+        "account": {
+          "$ref": "#/definitions/AccountObject"
         },
         "participantName": {
           "$ref": "#/definitions/NameObject"
         },
-        "guardianName": {
-          "$ref": "#/definitions/NameObject"
+        "familyMemberId": {
+          "type": "string",
+          "description": "Identifier of the Family Member"
         },
         "isParticipantUnder18": {
           "type": "boolean",
           "description": "true id participant age is under 18 else false"
         },
-        "indemnityId": {
-          "type": "string",
-          "description": "indemnity form id associated with the enrollment"
+        "indemnityForm": {
+          "$ref": "#/definitions/IndemnityObject"
         }
       }
     },
+
     "NameObject": {
       "description": "Name Object",
       "properties": {
@@ -831,6 +801,27 @@
         "lastName": {
           "type": "string",
           "description": "Last name of teacher"
+        }
+      }
+    },
+    "IndemnityFormObject": {
+      "description": "Indemnity Form Object",
+      "properties": {
+        "indemnityFormId": {
+          "type": "string",
+          "description": "URL of the indemnity template"
+        },
+        "templateURL": {
+          "type": "string",
+          "description": "URL of the indemnity template"
+        },
+        "indemnityFormTitle": {
+          "type": "string",
+          "description": "Title of the indemnity Form"
+        },
+        "indemnityFormVersion": {
+          "type": "string",
+          "description": "Version of the indemnity Form"
         }
       }
     },
@@ -864,10 +855,10 @@
       "type": "string",
       "default": "application/json"
     },
-    "User-Id": {
-      "name": "User-Id",
+    "User-Name": {
+      "name": "User-Name",
       "in": "header",
-      "description": "Unique identifier of the user initiating the call",
+      "description": "Unique identifier of the devotee's account",
       "required": true,
       "type": "string"
     }

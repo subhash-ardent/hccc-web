@@ -2,17 +2,17 @@
 
 
 /**
- * Retrieve accounts from the system
+ * Retrieves accounts from the system
  *
  * contentType String The MediaType of the request content
  * accept String The MediaType of the response content
- * userId String Unique identifier of the user initiating the call
- * userName String If a userName is passed in query string, the results will be filtered by accounts user name (optional)
+ * userName String Unique identifier of the devotee's account
+ * userName2 String If a userName is passed in query string, the results will be filtered by accounts user name (optional)
  * phoneNumber String If a phone number is passed in query string, the results will be filtered by accounts mobile number (optional)
  * role String If a role is passed in query string, the results will be filtered by roles (optional)
  * returns RetrieveAccountsListResponse
  **/
-exports.getAccounts = function(contentType,accept,userId,userName,phoneNumber,role) {
+exports.getAccounts = function(contentType,accept,userName,userName2,phoneNumber,role) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {

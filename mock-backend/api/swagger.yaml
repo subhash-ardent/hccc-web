@@ -18,7 +18,7 @@ paths:
     get:
       tags:
       - "courses"
-      summary: "Retrieve courses from the catalogue"
+      summary: "Retrieves courses from the catalogue"
       operationId: "getCourses"
       parameters:
       - name: "Content-Type"
@@ -33,9 +33,9 @@ paths:
         required: true
         type: "string"
         default: "application/json"
-      - name: "User-Id"
+      - name: "User-Name"
         in: "header"
-        description: "Unique identifier of the user initiating the call"
+        description: "Unique identifier of the devotee's account"
         required: true
         type: "string"
       - name: "tags"
@@ -61,7 +61,7 @@ paths:
     post:
       tags:
       - "courses"
-      summary: "Add a new course to the catalogue"
+      summary: "Adds a new course to the catalogue"
       operationId: "addCourse"
       parameters:
       - name: "Content-Type"
@@ -76,21 +76,21 @@ paths:
         required: true
         type: "string"
         default: "application/json"
-      - name: "User-Id"
+      - name: "User-Name"
         in: "header"
-        description: "Unique identifier of the user initiating the call"
+        description: "Unique identifier of the devotee's account"
         required: true
         type: "string"
       - in: "body"
         name: "body"
         required: true
         schema:
-          $ref: "#/definitions/CreateCourseRequest"
+          $ref: "#/definitions/CourseObject"
       responses:
         200:
           description: "Success - Item returned in the response payload"
           schema:
-            $ref: "#/definitions/RetrieveCourseResponse"
+            $ref: "#/definitions/CourseObject"
         400:
           description: "Bad request - some of the input parameters are incorrect or\
             \ invalid"
@@ -110,7 +110,7 @@ paths:
     get:
       tags:
       - "courses"
-      summary: "Retrieve course by Course Id"
+      summary: "Retrieves course by Course Id"
       operationId: "getCourseById"
       parameters:
       - name: "Content-Type"
@@ -125,9 +125,9 @@ paths:
         required: true
         type: "string"
         default: "application/json"
-      - name: "User-Id"
+      - name: "User-Name"
         in: "header"
-        description: "Unique identifier of the user initiating the call"
+        description: "Unique identifier of the devotee's account"
         required: true
         type: "string"
       - name: "courseId"
@@ -139,7 +139,7 @@ paths:
         200:
           description: "Success - Item returned in the response payload"
           schema:
-            $ref: "#/definitions/RetrieveCourseResponse"
+            $ref: "#/definitions/CourseObject"
         400:
           description: "Bad request - some of the input parameters are incorrect or\
             \ invalid"
@@ -158,7 +158,7 @@ paths:
     get:
       tags:
       - "teachers"
-      summary: "Retrieve list of teachers"
+      summary: "Retrieves list of teachers"
       operationId: "getTeachers"
       parameters:
       - name: "Content-Type"
@@ -173,9 +173,9 @@ paths:
         required: true
         type: "string"
         default: "application/json"
-      - name: "User-Id"
+      - name: "User-Name"
         in: "header"
-        description: "Unique identifier of the user initiating the call"
+        description: "Unique identifier of the devotee's account"
         required: true
         type: "string"
       responses:
@@ -201,7 +201,7 @@ paths:
     post:
       tags:
       - "teachers"
-      summary: "Add a new teacher to the system"
+      summary: "Adds a new teacher to the system"
       operationId: "registerTeacher"
       parameters:
       - name: "Content-Type"
@@ -216,21 +216,21 @@ paths:
         required: true
         type: "string"
         default: "application/json"
-      - name: "User-Id"
+      - name: "User-Name"
         in: "header"
-        description: "Unique identifier of the user initiating the call"
+        description: "Unique identifier of the devotee's account"
         required: true
         type: "string"
       - in: "body"
         name: "body"
         required: true
         schema:
-          $ref: "#/definitions/RegisterTeacherRequest"
+          $ref: "#/definitions/TeacherObject"
       responses:
         200:
           description: "Success - Item returned in the response payload"
           schema:
-            $ref: "#/definitions/RetrieveTeacherResponse"
+            $ref: "#/definitions/TeacherObject"
         400:
           description: "Bad request - some of the input parameters are incorrect or\
             \ invalid"
@@ -250,7 +250,7 @@ paths:
     get:
       tags:
       - "teachers"
-      summary: "Retrieve teacher by teacher Id"
+      summary: "Retrieves teacher by teacher Id"
       operationId: "getTeacherById"
       parameters:
       - name: "Content-Type"
@@ -265,9 +265,9 @@ paths:
         required: true
         type: "string"
         default: "application/json"
-      - name: "User-Id"
+      - name: "User-Name"
         in: "header"
-        description: "Unique identifier of the user initiating the call"
+        description: "Unique identifier of the devotee's account"
         required: true
         type: "string"
       - name: "teacherId"
@@ -279,7 +279,7 @@ paths:
         200:
           description: "Success - Item returned in the response payload"
           schema:
-            $ref: "#/definitions/RetrieveTeacherResponse"
+            $ref: "#/definitions/TeacherObject"
         400:
           description: "Bad request - some of the input parameters are incorrect or\
             \ invalid"
@@ -303,9 +303,9 @@ paths:
     get:
       tags:
       - "indemnities"
-      summary: "Retrieve indemnities from the system. Only indemnities belonging to\
-        \ the requesting user account will be returned. User Account information is\
-        \ available in the header."
+      summary: "Retrieves indemnities from the system. "
+      description: "Only indemnities belonging to the requesting user account will\
+        \ be returned. User Account information is available in the header."
       operationId: "getIndemnities"
       parameters:
       - name: "Content-Type"
@@ -320,10 +320,20 @@ paths:
         required: true
         type: "string"
         default: "application/json"
-      - name: "User-Id"
+      - name: "User-Name"
         in: "header"
-        description: "Unique identifier of the user initiating the call"
+        description: "Unique identifier of the devotee's account"
         required: true
+        type: "string"
+      - name: "familyMemberId"
+        in: "query"
+        description: "Identifier of the family member"
+        required: false
+        type: "string"
+      - name: "indemnityFormId"
+        in: "query"
+        description: "Identifier of the Indemnity Form"
+        required: false
         type: "string"
       responses:
         200:
@@ -331,6 +341,11 @@ paths:
           schema:
             $ref: "#/definitions/RetrieveIndemnitiesListResponse"
         400:
+          description: "Bad request - some of the input parameters are incorrect or\
+            \ invalid"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        404:
           description: "Bad request - some of the input parameters are incorrect or\
             \ invalid"
           schema:
@@ -343,7 +358,7 @@ paths:
     post:
       tags:
       - "indemnities"
-      summary: "Add a new indemnity to the system"
+      summary: "Adds a new indemnity for a student in the system"
       operationId: "addIndemnity"
       parameters:
       - name: "Content-Type"
@@ -358,21 +373,21 @@ paths:
         required: true
         type: "string"
         default: "application/json"
-      - name: "User-Id"
+      - name: "User-Name"
         in: "header"
-        description: "Unique identifier of the user initiating the call"
+        description: "Unique identifier of the devotee's account"
         required: true
         type: "string"
       - in: "body"
         name: "body"
         required: true
         schema:
-          $ref: "#/definitions/CreateIndemnityRequest"
+          $ref: "#/definitions/IndemnityObject"
       responses:
         200:
           description: "Success - Item returned in the response payload"
           schema:
-            $ref: "#/definitions/RetrieveIndemnityResponse"
+            $ref: "#/definitions/IndemnityObject"
         400:
           description: "Bad request - some of the input parameters are incorrect or\
             \ invalid"
@@ -387,7 +402,7 @@ paths:
     get:
       tags:
       - "accounts"
-      summary: "Retrieve accounts from the system"
+      summary: "Retrieves accounts from the system"
       operationId: "getAccounts"
       parameters:
       - name: "Content-Type"
@@ -402,9 +417,9 @@ paths:
         required: true
         type: "string"
         default: "application/json"
-      - name: "User-Id"
+      - name: "User-Name"
         in: "header"
-        description: "Unique identifier of the user initiating the call"
+        description: "Unique identifier of the devotee's account"
         required: true
         type: "string"
       - name: "userName"
@@ -453,9 +468,9 @@ paths:
     get:
       tags:
       - "enrollments"
-      summary: "Retrieve enrollments from the system. Only enrollments belonging to\
-        \ the requesting user account will be returned. User Account information is\
-        \ available in the header."
+      summary: "Retrieves enrollments from the system."
+      description: " Only enrollments belonging to the requesting user account will\
+        \ be returned. User Account information is available in the header."
       operationId: "getEnrollments"
       parameters:
       - name: "Content-Type"
@@ -470,9 +485,9 @@ paths:
         required: true
         type: "string"
         default: "application/json"
-      - name: "User-Id"
+      - name: "User-Name"
         in: "header"
-        description: "Unique identifier of the user initiating the call"
+        description: "Unique identifier of the devotee's account"
         required: true
         type: "string"
       - name: "userName"
@@ -498,7 +513,7 @@ paths:
     post:
       tags:
       - "indemnities"
-      summary: "Add a new enrollment to the system"
+      summary: "Adds a new enrollment to the system"
       operationId: "addEnrollment"
       parameters:
       - name: "Content-Type"
@@ -513,9 +528,9 @@ paths:
         required: true
         type: "string"
         default: "application/json"
-      - name: "User-Id"
+      - name: "User-Name"
         in: "header"
-        description: "Unique identifier of the user initiating the call"
+        description: "Unique identifier of the devotee's account"
         required: true
         type: "string"
       - name: "userName"
@@ -527,12 +542,12 @@ paths:
         name: "body"
         required: true
         schema:
-          $ref: "#/definitions/CreateEnrollmentRequest"
+          $ref: "#/definitions/EnrollmentObject"
       responses:
         200:
           description: "Success - Item returned in the response payload"
           schema:
-            $ref: "#/definitions/RetrieveEnrollmentResponse"
+            $ref: "#/definitions/EnrollmentObject"
         400:
           description: "Bad request - some of the input parameters are incorrect or\
             \ invalid"
@@ -553,33 +568,6 @@ definitions:
         type: "string"
         description: "Error Messages that describes the error"
     description: "Error Object"
-  CreateCourseRequest:
-    properties:
-      course:
-        $ref: "#/definitions/CourseObject"
-    description: "This is the schema of request payload when a New Course is created\
-      \ in the system"
-    example:
-      course:
-        courseEndTime: "courseEndTime"
-        courseStartTime: "courseStartTime"
-        courseEndDate: "courseEndDate"
-        ageRestrictions: "ageRestrictions"
-        courseStartDate: "courseStartDate"
-        tags:
-        - "tags"
-        - "tags"
-        courseName: "courseName"
-        slots: 0
-        courseVenue: "courseVenue"
-        teachers:
-        - "teachers"
-        - "teachers"
-        imageURL: "imageURL"
-        flyerURL: "flyerURL"
-        courseId: "courseId"
-        courseDays: "courseDays"
-        courseRemarks: "courseRemarks"
   RetrieveCoursesListResponse:
     properties:
       courses:
@@ -611,33 +599,6 @@ definitions:
         courseDays: "courseDays"
         courseRemarks: "courseRemarks"
       - courseEndTime: "courseEndTime"
-        courseStartTime: "courseStartTime"
-        courseEndDate: "courseEndDate"
-        ageRestrictions: "ageRestrictions"
-        courseStartDate: "courseStartDate"
-        tags:
-        - "tags"
-        - "tags"
-        courseName: "courseName"
-        slots: 0
-        courseVenue: "courseVenue"
-        teachers:
-        - "teachers"
-        - "teachers"
-        imageURL: "imageURL"
-        flyerURL: "flyerURL"
-        courseId: "courseId"
-        courseDays: "courseDays"
-        courseRemarks: "courseRemarks"
-  RetrieveCourseResponse:
-    properties:
-      course:
-        $ref: "#/definitions/CourseObject"
-    description: "This is the schema of response payload when a course information\
-      \ is requested"
-    example:
-      course:
-        courseEndTime: "courseEndTime"
         courseStartTime: "courseStartTime"
         courseEndDate: "courseEndDate"
         ageRestrictions: "ageRestrictions"
@@ -733,21 +694,6 @@ definitions:
       courseId: "courseId"
       courseDays: "courseDays"
       courseRemarks: "courseRemarks"
-  RegisterTeacherRequest:
-    properties:
-      teacher:
-        $ref: "#/definitions/TeacherObject"
-    description: "This is the schema of request payload when a New Teacher is registered\
-      \ in the system"
-    example:
-      teacher:
-        skillSet:
-        - "skillSet"
-        - "skillSet"
-        indemnitySigned: true
-        identityVerified: true
-        userName: "userName"
-        backgroundVerified: true
   RetrieveTeachersListResponse:
     properties:
       teachers:
@@ -759,40 +705,78 @@ definitions:
       \ is requested"
     example:
       teachers:
-      - skillSet:
-        - "skillSet"
-        - "skillSet"
-        indemnitySigned: true
-        identityVerified: true
-        userName: "userName"
-        backgroundVerified: true
-      - skillSet:
-        - "skillSet"
-        - "skillSet"
-        indemnitySigned: true
-        identityVerified: true
-        userName: "userName"
-        backgroundVerified: true
-  RetrieveTeacherResponse:
-    properties:
-      teacher:
-        $ref: "#/definitions/TeacherObject"
-    description: "This is the schema of response payload when a teacher's information\
-      \ is requested"
-    example:
-      teacher:
+      - profilePictureURL: "profilePictureURL"
         skillSet:
         - "skillSet"
         - "skillSet"
         indemnitySigned: true
+        salutation: "salutation"
         identityVerified: true
-        userName: "userName"
+        account:
+          phoneNumber: "phoneNumber"
+          roles:
+          - "roles"
+          - "roles"
+          name:
+            firstName: "firstName"
+            lastName: "lastName"
+            middleName: "middleName"
+          dateOfBirth: "dateOfBirth"
+          userName: "userName"
+          familyMembers:
+          - name:
+              firstName: "firstName"
+              lastName: "lastName"
+              middleName: "middleName"
+            dateOfBirth: "dateOfBirth"
+          - name:
+              firstName: "firstName"
+              lastName: "lastName"
+              middleName: "middleName"
+            dateOfBirth: "dateOfBirth"
+          email: "email"
+        backgroundVerified: true
+      - profilePictureURL: "profilePictureURL"
+        skillSet:
+        - "skillSet"
+        - "skillSet"
+        indemnitySigned: true
+        salutation: "salutation"
+        identityVerified: true
+        account:
+          phoneNumber: "phoneNumber"
+          roles:
+          - "roles"
+          - "roles"
+          name:
+            firstName: "firstName"
+            lastName: "lastName"
+            middleName: "middleName"
+          dateOfBirth: "dateOfBirth"
+          userName: "userName"
+          familyMembers:
+          - name:
+              firstName: "firstName"
+              lastName: "lastName"
+              middleName: "middleName"
+            dateOfBirth: "dateOfBirth"
+          - name:
+              firstName: "firstName"
+              lastName: "lastName"
+              middleName: "middleName"
+            dateOfBirth: "dateOfBirth"
+          email: "email"
         backgroundVerified: true
   TeacherObject:
     properties:
-      userName:
+      account:
+        $ref: "#/definitions/AccountObject"
+      salutation:
         type: "string"
-        description: "Unique userName of the devotee"
+        description: "Salutation or title. For e.g. Mrs, Dr, Shri, Pandit, etc."
+      profilePictureURL:
+        type: "string"
+        description: "URL of the teachers profile picture"
       skillSet:
         type: "array"
         description: "Teacher's skill set"
@@ -810,31 +794,37 @@ definitions:
         description: "Boolean indicating if the teacher's identity verified"
     description: "Teacher Object"
     example:
+      profilePictureURL: "profilePictureURL"
       skillSet:
       - "skillSet"
       - "skillSet"
       indemnitySigned: true
+      salutation: "salutation"
       identityVerified: true
-      userName: "userName"
-      backgroundVerified: true
-  CreateIndemnityRequest:
-    properties:
-      indemnity:
-        $ref: "#/definitions/IndemnityObject"
-    description: "This is the schema of request payload when a New Indemnity is submited\
-      \ to the system"
-    example:
-      indemnity:
-        guardianName:
+      account:
+        phoneNumber: "phoneNumber"
+        roles:
+        - "roles"
+        - "roles"
+        name:
           firstName: "firstName"
           lastName: "lastName"
           middleName: "middleName"
+        dateOfBirth: "dateOfBirth"
         userName: "userName"
-        participantName:
-          firstName: "firstName"
-          lastName: "lastName"
-          middleName: "middleName"
-        indemnityFormVersion: "indemnityFormVersion"
+        familyMembers:
+        - name:
+            firstName: "firstName"
+            lastName: "lastName"
+            middleName: "middleName"
+          dateOfBirth: "dateOfBirth"
+        - name:
+            firstName: "firstName"
+            lastName: "lastName"
+            middleName: "middleName"
+          dateOfBirth: "dateOfBirth"
+        email: "email"
+      backgroundVerified: true
   RetrieveIndemnitiesListResponse:
     properties:
       indemnities:
@@ -846,69 +836,133 @@ definitions:
       \ information is requested"
     example:
       indemnities:
-      - guardianName:
+      - signedFor:
           firstName: "firstName"
           lastName: "lastName"
           middleName: "middleName"
-        userName: "userName"
-        participantName:
+        signedBy:
           firstName: "firstName"
           lastName: "lastName"
           middleName: "middleName"
-        indemnityFormVersion: "indemnityFormVersion"
-      - guardianName:
+        indemnityForm:
+          indemnityFormTitle: "indemnityFormTitle"
+          indemnityFormId: "indemnityFormId"
+          indemnityFormVersion: "indemnityFormVersion"
+          templateURL: "templateURL"
+        signedOn: "signedOn"
+        account:
+          phoneNumber: "phoneNumber"
+          roles:
+          - "roles"
+          - "roles"
+          name:
+            firstName: "firstName"
+            lastName: "lastName"
+            middleName: "middleName"
+          dateOfBirth: "dateOfBirth"
+          userName: "userName"
+          familyMembers:
+          - name:
+              firstName: "firstName"
+              lastName: "lastName"
+              middleName: "middleName"
+            dateOfBirth: "dateOfBirth"
+          - name:
+              firstName: "firstName"
+              lastName: "lastName"
+              middleName: "middleName"
+            dateOfBirth: "dateOfBirth"
+          email: "email"
+      - signedFor:
           firstName: "firstName"
           lastName: "lastName"
           middleName: "middleName"
-        userName: "userName"
-        participantName:
+        signedBy:
           firstName: "firstName"
           lastName: "lastName"
           middleName: "middleName"
-        indemnityFormVersion: "indemnityFormVersion"
-  RetrieveIndemnityResponse:
-    properties:
-      indemnity:
-        $ref: "#/definitions/IndemnityObject"
-    description: "This is the schema of response payload when an indemnity form's\
-      \ information is requested"
-    example:
-      indemnity:
-        guardianName:
-          firstName: "firstName"
-          lastName: "lastName"
-          middleName: "middleName"
-        userName: "userName"
-        participantName:
-          firstName: "firstName"
-          lastName: "lastName"
-          middleName: "middleName"
-        indemnityFormVersion: "indemnityFormVersion"
+        indemnityForm:
+          indemnityFormTitle: "indemnityFormTitle"
+          indemnityFormId: "indemnityFormId"
+          indemnityFormVersion: "indemnityFormVersion"
+          templateURL: "templateURL"
+        signedOn: "signedOn"
+        account:
+          phoneNumber: "phoneNumber"
+          roles:
+          - "roles"
+          - "roles"
+          name:
+            firstName: "firstName"
+            lastName: "lastName"
+            middleName: "middleName"
+          dateOfBirth: "dateOfBirth"
+          userName: "userName"
+          familyMembers:
+          - name:
+              firstName: "firstName"
+              lastName: "lastName"
+              middleName: "middleName"
+            dateOfBirth: "dateOfBirth"
+          - name:
+              firstName: "firstName"
+              lastName: "lastName"
+              middleName: "middleName"
+            dateOfBirth: "dateOfBirth"
+          email: "email"
   IndemnityObject:
     properties:
-      userName:
-        type: "string"
-        description: "Unique devotee userName of the participant"
-      participantName:
+      account:
+        $ref: "#/definitions/AccountObject"
+      signedFor:
         $ref: "#/definitions/NameObject"
-      guardianName:
+      signedBy:
         $ref: "#/definitions/NameObject"
-      indemnityFormVersion:
+      signedOn:
         type: "string"
-        description: "String representing the name ot number of indemnity content\
-          \ version."
+        description: "Datetime when the indemnity was signed in ISO 8612 format. For\
+          \ e.g. 2018-07-10T07:51:25+00:00"
+      indemnityForm:
+        $ref: "#/definitions/IndemnityFormObject"
     description: "Indemnity Object"
     example:
-      guardianName:
+      signedFor:
         firstName: "firstName"
         lastName: "lastName"
         middleName: "middleName"
-      userName: "userName"
-      participantName:
+      signedBy:
         firstName: "firstName"
         lastName: "lastName"
         middleName: "middleName"
-      indemnityFormVersion: "indemnityFormVersion"
+      indemnityForm:
+        indemnityFormTitle: "indemnityFormTitle"
+        indemnityFormId: "indemnityFormId"
+        indemnityFormVersion: "indemnityFormVersion"
+        templateURL: "templateURL"
+      signedOn: "signedOn"
+      account:
+        phoneNumber: "phoneNumber"
+        roles:
+        - "roles"
+        - "roles"
+        name:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        dateOfBirth: "dateOfBirth"
+        userName: "userName"
+        familyMembers:
+        - name:
+            firstName: "firstName"
+            lastName: "lastName"
+            middleName: "middleName"
+          dateOfBirth: "dateOfBirth"
+        - name:
+            firstName: "firstName"
+            lastName: "lastName"
+            middleName: "middleName"
+          dateOfBirth: "dateOfBirth"
+        email: "email"
   RetrieveAccountsListResponse:
     properties:
       accounts:
@@ -1014,26 +1068,6 @@ definitions:
           middleName: "middleName"
         dateOfBirth: "dateOfBirth"
       email: "email"
-  CreateEnrollmentRequest:
-    properties:
-      enrollment:
-        $ref: "#/definitions/EnrollmentObject"
-    description: "This is the schema of request payload when a New Enrollment is created\
-      \ in the system"
-    example:
-      enrollment:
-        enrollmentId: "enrollmentId"
-        guardianName:
-          firstName: "firstName"
-          lastName: "lastName"
-          middleName: "middleName"
-        indemnityId: "indemnityId"
-        userName: "userName"
-        participantName:
-          firstName: "firstName"
-          lastName: "lastName"
-          middleName: "middleName"
-        isParticipantUnder18: true
   RetrieveEnrollmentsListResponse:
     properties:
       enrollment:
@@ -1046,80 +1080,227 @@ definitions:
     example:
       enrollment:
       - enrollmentId: "enrollmentId"
-        guardianName:
-          firstName: "firstName"
-          lastName: "lastName"
-          middleName: "middleName"
-        indemnityId: "indemnityId"
-        userName: "userName"
+        familyMemberId: "familyMemberId"
+        indemnityForm:
+          signedFor:
+            firstName: "firstName"
+            lastName: "lastName"
+            middleName: "middleName"
+          signedBy:
+            firstName: "firstName"
+            lastName: "lastName"
+            middleName: "middleName"
+          indemnityForm:
+            indemnityFormTitle: "indemnityFormTitle"
+            indemnityFormId: "indemnityFormId"
+            indemnityFormVersion: "indemnityFormVersion"
+            templateURL: "templateURL"
+          signedOn: "signedOn"
+          account:
+            phoneNumber: "phoneNumber"
+            roles:
+            - "roles"
+            - "roles"
+            name:
+              firstName: "firstName"
+              lastName: "lastName"
+              middleName: "middleName"
+            dateOfBirth: "dateOfBirth"
+            userName: "userName"
+            familyMembers:
+            - name:
+                firstName: "firstName"
+                lastName: "lastName"
+                middleName: "middleName"
+              dateOfBirth: "dateOfBirth"
+            - name:
+                firstName: "firstName"
+                lastName: "lastName"
+                middleName: "middleName"
+              dateOfBirth: "dateOfBirth"
+            email: "email"
         participantName:
           firstName: "firstName"
           lastName: "lastName"
           middleName: "middleName"
+        account:
+          phoneNumber: "phoneNumber"
+          roles:
+          - "roles"
+          - "roles"
+          name:
+            firstName: "firstName"
+            lastName: "lastName"
+            middleName: "middleName"
+          dateOfBirth: "dateOfBirth"
+          userName: "userName"
+          familyMembers:
+          - name:
+              firstName: "firstName"
+              lastName: "lastName"
+              middleName: "middleName"
+            dateOfBirth: "dateOfBirth"
+          - name:
+              firstName: "firstName"
+              lastName: "lastName"
+              middleName: "middleName"
+            dateOfBirth: "dateOfBirth"
+          email: "email"
         isParticipantUnder18: true
       - enrollmentId: "enrollmentId"
-        guardianName:
-          firstName: "firstName"
-          lastName: "lastName"
-          middleName: "middleName"
-        indemnityId: "indemnityId"
-        userName: "userName"
+        familyMemberId: "familyMemberId"
+        indemnityForm:
+          signedFor:
+            firstName: "firstName"
+            lastName: "lastName"
+            middleName: "middleName"
+          signedBy:
+            firstName: "firstName"
+            lastName: "lastName"
+            middleName: "middleName"
+          indemnityForm:
+            indemnityFormTitle: "indemnityFormTitle"
+            indemnityFormId: "indemnityFormId"
+            indemnityFormVersion: "indemnityFormVersion"
+            templateURL: "templateURL"
+          signedOn: "signedOn"
+          account:
+            phoneNumber: "phoneNumber"
+            roles:
+            - "roles"
+            - "roles"
+            name:
+              firstName: "firstName"
+              lastName: "lastName"
+              middleName: "middleName"
+            dateOfBirth: "dateOfBirth"
+            userName: "userName"
+            familyMembers:
+            - name:
+                firstName: "firstName"
+                lastName: "lastName"
+                middleName: "middleName"
+              dateOfBirth: "dateOfBirth"
+            - name:
+                firstName: "firstName"
+                lastName: "lastName"
+                middleName: "middleName"
+              dateOfBirth: "dateOfBirth"
+            email: "email"
         participantName:
           firstName: "firstName"
           lastName: "lastName"
           middleName: "middleName"
-        isParticipantUnder18: true
-  RetrieveEnrollmentResponse:
-    properties:
-      enrollment:
-        $ref: "#/definitions/EnrollmentObject"
-    description: "This is the schema of response payload when an enrollment's information\
-      \ is requested"
-    example:
-      enrollment:
-        enrollmentId: "enrollmentId"
-        guardianName:
-          firstName: "firstName"
-          lastName: "lastName"
-          middleName: "middleName"
-        indemnityId: "indemnityId"
-        userName: "userName"
-        participantName:
-          firstName: "firstName"
-          lastName: "lastName"
-          middleName: "middleName"
+        account:
+          phoneNumber: "phoneNumber"
+          roles:
+          - "roles"
+          - "roles"
+          name:
+            firstName: "firstName"
+            lastName: "lastName"
+            middleName: "middleName"
+          dateOfBirth: "dateOfBirth"
+          userName: "userName"
+          familyMembers:
+          - name:
+              firstName: "firstName"
+              lastName: "lastName"
+              middleName: "middleName"
+            dateOfBirth: "dateOfBirth"
+          - name:
+              firstName: "firstName"
+              lastName: "lastName"
+              middleName: "middleName"
+            dateOfBirth: "dateOfBirth"
+          email: "email"
         isParticipantUnder18: true
   EnrollmentObject:
     properties:
       enrollmentId:
         type: "string"
         description: "Unique enrollment id"
-      userName:
-        type: "string"
-        description: "Unique userName of the participants devotee account"
+      account:
+        $ref: "#/definitions/AccountObject"
       participantName:
         $ref: "#/definitions/NameObject"
-      guardianName:
-        $ref: "#/definitions/NameObject"
+      familyMemberId:
+        type: "string"
+        description: "Identifier of the Family Member"
       isParticipantUnder18:
         type: "boolean"
         description: "true id participant age is under 18 else false"
-      indemnityId:
-        type: "string"
-        description: "indemnity form id associated with the enrollment"
+      indemnityForm:
+        $ref: "#/definitions/IndemnityObject"
     description: "Enrollment Object"
     example:
       enrollmentId: "enrollmentId"
-      guardianName:
-        firstName: "firstName"
-        lastName: "lastName"
-        middleName: "middleName"
-      indemnityId: "indemnityId"
-      userName: "userName"
+      familyMemberId: "familyMemberId"
+      indemnityForm:
+        signedFor:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        signedBy:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        indemnityForm:
+          indemnityFormTitle: "indemnityFormTitle"
+          indemnityFormId: "indemnityFormId"
+          indemnityFormVersion: "indemnityFormVersion"
+          templateURL: "templateURL"
+        signedOn: "signedOn"
+        account:
+          phoneNumber: "phoneNumber"
+          roles:
+          - "roles"
+          - "roles"
+          name:
+            firstName: "firstName"
+            lastName: "lastName"
+            middleName: "middleName"
+          dateOfBirth: "dateOfBirth"
+          userName: "userName"
+          familyMembers:
+          - name:
+              firstName: "firstName"
+              lastName: "lastName"
+              middleName: "middleName"
+            dateOfBirth: "dateOfBirth"
+          - name:
+              firstName: "firstName"
+              lastName: "lastName"
+              middleName: "middleName"
+            dateOfBirth: "dateOfBirth"
+          email: "email"
       participantName:
         firstName: "firstName"
         lastName: "lastName"
         middleName: "middleName"
+      account:
+        phoneNumber: "phoneNumber"
+        roles:
+        - "roles"
+        - "roles"
+        name:
+          firstName: "firstName"
+          lastName: "lastName"
+          middleName: "middleName"
+        dateOfBirth: "dateOfBirth"
+        userName: "userName"
+        familyMembers:
+        - name:
+            firstName: "firstName"
+            lastName: "lastName"
+            middleName: "middleName"
+          dateOfBirth: "dateOfBirth"
+        - name:
+            firstName: "firstName"
+            lastName: "lastName"
+            middleName: "middleName"
+          dateOfBirth: "dateOfBirth"
+        email: "email"
       isParticipantUnder18: true
   NameObject:
     properties:
@@ -1137,6 +1318,26 @@ definitions:
       firstName: "firstName"
       lastName: "lastName"
       middleName: "middleName"
+  IndemnityFormObject:
+    properties:
+      indemnityFormId:
+        type: "string"
+        description: "URL of the indemnity template"
+      templateURL:
+        type: "string"
+        description: "URL of the indemnity template"
+      indemnityFormTitle:
+        type: "string"
+        description: "Title of the indemnity Form"
+      indemnityFormVersion:
+        type: "string"
+        description: "Version of the indemnity Form"
+    description: "Indemnity Form Object"
+    example:
+      indemnityFormTitle: "indemnityFormTitle"
+      indemnityFormId: "indemnityFormId"
+      indemnityFormVersion: "indemnityFormVersion"
+      templateURL: "templateURL"
   FamilyMember:
     properties:
       name:
@@ -1166,10 +1367,10 @@ parameters:
     required: true
     type: "string"
     default: "application/json"
-  User-Id:
-    name: "User-Id"
+  User-Name:
+    name: "User-Name"
     in: "header"
-    description: "Unique identifier of the user initiating the call"
+    description: "Unique identifier of the devotee's account"
     required: true
     type: "string"
 responses:

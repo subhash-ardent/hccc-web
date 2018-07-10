@@ -2,34 +2,166 @@
 
 
 /**
- * Add a new enrollment to the system
+ * Adds a new enrollment to the system
  *
  * contentType String The MediaType of the request content
  * accept String The MediaType of the response content
- * userId String Unique identifier of the user initiating the call
- * userName String Id of the account to be retrieved
- * body CreateEnrollmentRequest 
- * returns RetrieveEnrollmentResponse
+ * userName String Unique identifier of the devotee's account
+ * userName2 String Id of the account to be retrieved
+ * body EnrollmentObject 
+ * returns EnrollmentObject
  **/
-exports.addEnrollment = function(contentType,accept,userId,userName,body) {
+exports.addEnrollment = function(contentType,accept,userName,userName2,body) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "enrollment" : {
-    "enrollmentId" : "enrollmentId",
-    "guardianName" : {
+  "enrollmentId" : "enrollmentId",
+  "familyMemberId" : "familyMemberId",
+  "indemnityForm" : {
+    "signedFor" : {
       "firstName" : "firstName",
       "lastName" : "lastName",
       "middleName" : "middleName"
     },
-    "indemnityId" : "indemnityId",
+    "signedBy" : {
+      "firstName" : "firstName",
+      "lastName" : "lastName",
+      "middleName" : "middleName"
+    },
+    "indemnityForm" : {
+      "indemnityFormTitle" : "indemnityFormTitle",
+      "indemnityFormId" : "indemnityFormId",
+      "indemnityFormVersion" : "indemnityFormVersion",
+      "templateURL" : "templateURL"
+    },
+    "signedOn" : "signedOn",
+    "account" : {
+      "phoneNumber" : "phoneNumber",
+      "roles" : [ "roles", "roles" ],
+      "name" : {
+        "firstName" : "firstName",
+        "lastName" : "lastName",
+        "middleName" : "middleName"
+      },
+      "dateOfBirth" : "dateOfBirth",
+      "userName" : "userName",
+      "familyMembers" : [ {
+        "name" : {
+          "firstName" : "firstName",
+          "lastName" : "lastName",
+          "middleName" : "middleName"
+        },
+        "dateOfBirth" : "dateOfBirth"
+      }, {
+        "name" : {
+          "firstName" : "firstName",
+          "lastName" : "lastName",
+          "middleName" : "middleName"
+        },
+        "dateOfBirth" : "dateOfBirth"
+      } ],
+      "email" : "email"
+    }
+  },
+  "participantName" : {
+    "firstName" : "firstName",
+    "lastName" : "lastName",
+    "middleName" : "middleName"
+  },
+  "account" : {
+    "phoneNumber" : "phoneNumber",
+    "roles" : [ "roles", "roles" ],
+    "name" : {
+      "firstName" : "firstName",
+      "lastName" : "lastName",
+      "middleName" : "middleName"
+    },
+    "dateOfBirth" : "dateOfBirth",
     "userName" : "userName",
-    "participantName" : {
+    "familyMembers" : [ {
+      "name" : {
+        "firstName" : "firstName",
+        "lastName" : "lastName",
+        "middleName" : "middleName"
+      },
+      "dateOfBirth" : "dateOfBirth"
+    }, {
+      "name" : {
+        "firstName" : "firstName",
+        "lastName" : "lastName",
+        "middleName" : "middleName"
+      },
+      "dateOfBirth" : "dateOfBirth"
+    } ],
+    "email" : "email"
+  },
+  "isParticipantUnder18" : true
+};
+    if (Object.keys(examples).length > 0) {
+      resolve(examples[Object.keys(examples)[0]]);
+    } else {
+      resolve();
+    }
+  });
+}
+
+
+/**
+ * Adds a new indemnity for a student in the system
+ *
+ * contentType String The MediaType of the request content
+ * accept String The MediaType of the response content
+ * userName String Unique identifier of the devotee's account
+ * body IndemnityObject 
+ * returns IndemnityObject
+ **/
+exports.addIndemnity = function(contentType,accept,userName,body) {
+  return new Promise(function(resolve, reject) {
+    var examples = {};
+    examples['application/json'] = {
+  "signedFor" : {
+    "firstName" : "firstName",
+    "lastName" : "lastName",
+    "middleName" : "middleName"
+  },
+  "signedBy" : {
+    "firstName" : "firstName",
+    "lastName" : "lastName",
+    "middleName" : "middleName"
+  },
+  "indemnityForm" : {
+    "indemnityFormTitle" : "indemnityFormTitle",
+    "indemnityFormId" : "indemnityFormId",
+    "indemnityFormVersion" : "indemnityFormVersion",
+    "templateURL" : "templateURL"
+  },
+  "signedOn" : "signedOn",
+  "account" : {
+    "phoneNumber" : "phoneNumber",
+    "roles" : [ "roles", "roles" ],
+    "name" : {
       "firstName" : "firstName",
       "lastName" : "lastName",
       "middleName" : "middleName"
     },
-    "isParticipantUnder18" : true
+    "dateOfBirth" : "dateOfBirth",
+    "userName" : "userName",
+    "familyMembers" : [ {
+      "name" : {
+        "firstName" : "firstName",
+        "lastName" : "lastName",
+        "middleName" : "middleName"
+      },
+      "dateOfBirth" : "dateOfBirth"
+    }, {
+      "name" : {
+        "firstName" : "firstName",
+        "lastName" : "lastName",
+        "middleName" : "middleName"
+      },
+      "dateOfBirth" : "dateOfBirth"
+    } ],
+    "email" : "email"
   }
 };
     if (Object.keys(examples).length > 0) {
@@ -42,80 +174,110 @@ exports.addEnrollment = function(contentType,accept,userId,userName,body) {
 
 
 /**
- * Add a new indemnity to the system
+ * Retrieves indemnities from the system. 
+ * Only indemnities belonging to the requesting user account will be returned. User Account information is available in the header.
  *
  * contentType String The MediaType of the request content
  * accept String The MediaType of the response content
- * userId String Unique identifier of the user initiating the call
- * body CreateIndemnityRequest 
- * returns RetrieveIndemnityResponse
- **/
-exports.addIndemnity = function(contentType,accept,userId,body) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "indemnity" : {
-    "guardianName" : {
-      "firstName" : "firstName",
-      "lastName" : "lastName",
-      "middleName" : "middleName"
-    },
-    "userName" : "userName",
-    "participantName" : {
-      "firstName" : "firstName",
-      "lastName" : "lastName",
-      "middleName" : "middleName"
-    },
-    "indemnityFormVersion" : "indemnityFormVersion"
-  }
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
-}
-
-
-/**
- * Retrieve indemnities from the system. Only indemnities belonging to the requesting user account will be returned. User Account information is available in the header.
- *
- * contentType String The MediaType of the request content
- * accept String The MediaType of the response content
- * userId String Unique identifier of the user initiating the call
+ * userName String Unique identifier of the devotee's account
+ * familyMemberId String Identifier of the family member (optional)
+ * indemnityFormId String Identifier of the Indemnity Form (optional)
  * returns RetrieveIndemnitiesListResponse
  **/
-exports.getIndemnities = function(contentType,accept,userId) {
+exports.getIndemnities = function(contentType,accept,userName,familyMemberId,indemnityFormId) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
   "indemnities" : [ {
-    "guardianName" : {
+    "signedFor" : {
       "firstName" : "firstName",
       "lastName" : "lastName",
       "middleName" : "middleName"
     },
-    "userName" : "userName",
-    "participantName" : {
+    "signedBy" : {
       "firstName" : "firstName",
       "lastName" : "lastName",
       "middleName" : "middleName"
     },
-    "indemnityFormVersion" : "indemnityFormVersion"
+    "indemnityForm" : {
+      "indemnityFormTitle" : "indemnityFormTitle",
+      "indemnityFormId" : "indemnityFormId",
+      "indemnityFormVersion" : "indemnityFormVersion",
+      "templateURL" : "templateURL"
+    },
+    "signedOn" : "signedOn",
+    "account" : {
+      "phoneNumber" : "phoneNumber",
+      "roles" : [ "roles", "roles" ],
+      "name" : {
+        "firstName" : "firstName",
+        "lastName" : "lastName",
+        "middleName" : "middleName"
+      },
+      "dateOfBirth" : "dateOfBirth",
+      "userName" : "userName",
+      "familyMembers" : [ {
+        "name" : {
+          "firstName" : "firstName",
+          "lastName" : "lastName",
+          "middleName" : "middleName"
+        },
+        "dateOfBirth" : "dateOfBirth"
+      }, {
+        "name" : {
+          "firstName" : "firstName",
+          "lastName" : "lastName",
+          "middleName" : "middleName"
+        },
+        "dateOfBirth" : "dateOfBirth"
+      } ],
+      "email" : "email"
+    }
   }, {
-    "guardianName" : {
+    "signedFor" : {
       "firstName" : "firstName",
       "lastName" : "lastName",
       "middleName" : "middleName"
     },
-    "userName" : "userName",
-    "participantName" : {
+    "signedBy" : {
       "firstName" : "firstName",
       "lastName" : "lastName",
       "middleName" : "middleName"
     },
-    "indemnityFormVersion" : "indemnityFormVersion"
+    "indemnityForm" : {
+      "indemnityFormTitle" : "indemnityFormTitle",
+      "indemnityFormId" : "indemnityFormId",
+      "indemnityFormVersion" : "indemnityFormVersion",
+      "templateURL" : "templateURL"
+    },
+    "signedOn" : "signedOn",
+    "account" : {
+      "phoneNumber" : "phoneNumber",
+      "roles" : [ "roles", "roles" ],
+      "name" : {
+        "firstName" : "firstName",
+        "lastName" : "lastName",
+        "middleName" : "middleName"
+      },
+      "dateOfBirth" : "dateOfBirth",
+      "userName" : "userName",
+      "familyMembers" : [ {
+        "name" : {
+          "firstName" : "firstName",
+          "lastName" : "lastName",
+          "middleName" : "middleName"
+        },
+        "dateOfBirth" : "dateOfBirth"
+      }, {
+        "name" : {
+          "firstName" : "firstName",
+          "lastName" : "lastName",
+          "middleName" : "middleName"
+        },
+        "dateOfBirth" : "dateOfBirth"
+      } ],
+      "email" : "email"
+    }
   } ]
 };
     if (Object.keys(examples).length > 0) {
