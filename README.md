@@ -25,5 +25,16 @@ Always run `npm install` after pulling latest code from GitHub.
 8. Navigate to `localhost:8080/docs` on a browser to view the APIs on Swagger UI 
 9. Change back to root directory: `cd ..`
 
+### To get the latest code
+
+1. Fetch the latest from GitHub `git fetch --prune`
+2. Assuming you are on the `master` branch, rebase your master with origin/master `git rebase origin/master`
+3. Install dependencies: `npm install`
+4. Change to mock-backend directory: `cd mock-backend`
+5. Install dependencies for mock-backend: `npm install`
+6. Change back to root directory: `cd ..`
+7. Start Application: `npm start`
+8. Navigate to `localhost:4200` on a browser to view the latest app
+
 
 
