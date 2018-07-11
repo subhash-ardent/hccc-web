@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Course} from '../models/course';
 import {CourseCollection} from '../models/courseCollection';
+import {TeacherCollection} from '../models/teacherCollection';
 import {Teacher} from '../models/teacher';
 import {BehaviorSubject, Observable, of, timer} from 'rxjs';
 import {LoggerService} from './logger.service';
@@ -19,6 +20,7 @@ export class YandeApiService {
   private teachersEndpointUrl = 'yande/api/teachers';
   private logger = new LoggerService(this.constructor.name);
   public isCoursesLoaded = false;
+  public isTeachersLoaded = false;
   public courses$: BehaviorSubject<Course[]> = new BehaviorSubject(null);
   public teachers$: BehaviorSubject<Teacher[]> = new BehaviorSubject(null);
 
@@ -26,6 +28,7 @@ export class YandeApiService {
     private appService: AppService,
     private http: HttpClient) {
     this.loadCourses();
+    this.loadTeachers();
   }
 
   // Courses
@@ -82,14 +85,24 @@ export class YandeApiService {
 
   // Teachers
 
-  loadTeachers() {
-    this.http.get<Teacher[]>(this.teachersEndpointUrl)
-      .subscribe(
-        res => {
-          this.teachers$.next(res);
-        },
-        err => this.logger.error('Error retrieving Teachers')
-      );
+  async loadTeachers() {
+    try {
+      const intentionalDelay = () => timer(1000);
+      const res = await this.http.get<TeacherCollection>(this.teachersEndpointUrl).pipe(
+        take(1),
+        delayWhen(intentionalDelay),
+        catchError(this.appService.handleFatalError<TeacherCollection>('loadTeachers'))
+      ).toPromise();
+      this.logger.info('Fetched teachers');
+      if (res && res.teachers) {
+        this.teachers$.next(res.teachers);
+        this.isTeachersLoaded = true;
+      } else {
+        throw new Error('Invalid payload');
+      }
+    } catch (e) {
+      this.appService.handleFatalError<TeacherCollection>('loadTeachers')(e);
+    }
   }
 
   addTeacher(newTeacher: Teacher) {

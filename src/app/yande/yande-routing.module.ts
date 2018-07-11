@@ -18,6 +18,8 @@ import {AuthGuardService} from '../services/auth-guard.service';
 import {YandeChairGuardService} from '../services/yande-chair-guard.service';
 import {CourseListResolveService} from './services/course-list-resolve.service';
 import {CourseDetailsResolveService} from './services/course-details-resolve.service';
+import {TeacherListResolveService} from './services/teacher-list-resolve.service';
+import {TeacherDetailsResolveService} from './services/teacher-details-resolve.service';
 
 
 const yandeRoutes: Routes = [
@@ -44,7 +46,13 @@ const yandeRoutes: Routes = [
       },
       {path: 'indemnity/:id', component: CourseIndemnityComponent, canActivate: [AuthGuardService]},
       {path: 'update/:id', component: CourseDetailsUpdateComponent, canActivate: [YandeChairGuardService]},
-      {path: 'create', component: CourseCreateComponent, canActivate: [YandeChairGuardService]},
+      {
+        path: 'create', component: CourseCreateComponent,
+        canActivate: [YandeChairGuardService],
+        resolve: {
+          teachers: TeacherListResolveService
+        }
+      },
       {path: '', redirectTo: '/catalogue', pathMatch: 'full'},
     ]
   },

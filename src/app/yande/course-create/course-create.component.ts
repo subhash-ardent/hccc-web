@@ -3,6 +3,8 @@ import {Course} from '../../models/course';
 import {YandeApiService} from '../../services/yande-api.service';
 import {catchError} from 'rxjs/operators';
 import {AppService} from '../../services/app.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Teacher} from '../../models/teacher';
 
 @Component({
   selector: 'app-course-create',
@@ -11,15 +13,20 @@ import {AppService} from '../../services/app.service';
 })
 export class CourseCreateComponent implements OnInit {
   model = new Course();
-  teachers = [['Madhu Ramesh'], ['Dr Kamala Shankar']];
+  teachers: Teacher[];
   submitted = false;
 
   constructor(private appService: AppService,
+              private route: ActivatedRoute,
               private apiService: YandeApiService) {
 
   }
 
   ngOnInit() {
+    this.route.data
+      .subscribe((data: { teachers: Teacher[] }) => {
+        this.teachers = data.teachers;
+      });
   }
 
 

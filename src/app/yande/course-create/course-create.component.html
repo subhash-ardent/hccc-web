@@ -59,8 +59,8 @@
             <!-- TODO: get teacher list from api -->
             <mat-form-field>
                 <mat-select placeholder="Select Teachers and Coordinates" [(ngModel)]="model.teachers" name="teacher">
-                    <mat-option *ngFor="let teacher of teachers" [value]="teacher">
-                        {{teacher[0]}}
+                    <mat-option *ngFor="let teacher of teachers" [value]="teacher.userName">
+                        {{teacher.account.name.firstName}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
