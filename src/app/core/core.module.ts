@@ -11,6 +11,7 @@ import { GenericErrorComponent } from './components/generic-error/generic-error.
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SideNavbarComponent } from './components/side-navbar/side-navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { FullNamePipe } from './pipes/full-name.pipe';
 
 
 @NgModule({
@@ -27,14 +28,16 @@ import { FooterComponent } from './components/footer/footer.component';
     GenericErrorComponent,
     SpinnerComponent,
     SideNavbarComponent,
-    FooterComponent
+    FooterComponent,
+    FullNamePipe
   ],
   exports: [
     AppBannerComponent,
     AppHeaderComponent,
     SpinnerComponent,
     SideNavbarComponent,
-    FooterComponent
+    FooterComponent,
+    FullNamePipe
   ]
 })
 export class CoreModule { }

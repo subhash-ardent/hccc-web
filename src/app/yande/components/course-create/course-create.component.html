@@ -61,7 +61,7 @@
                 <mat-select placeholder="Select Teachers and Coordinates" [(ngModel)]="model.teachers" name="teacher">
                     <mat-option *ngFor="let teacher of teachers" [value]="[teacher]">
                     <!--<mat-option *ngFor="let teacher of teachers" [value]="[teacher.account.userName]"> Uncomment when integrating with Backend-->
-                        {{teacher.account.name.firstName}}
+                        {{teacher.account | fullName}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
