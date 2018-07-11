@@ -1,21 +1,21 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {CourseCatalogueComponent} from './course-catalogue/course-catalogue.component';
-import {CourseCreateComponent} from './course-create/course-create.component';
-import {CourseEnrollComponent} from './course-enroll/course-enroll.component';
-import {CourseIndemnityComponent} from './course-indemnity/course-indemnity.component';
-import {TeacherListComponent} from './teacher-list/teacher-list.component';
-import {TeacherOnboardComponent} from './teacher-onboard/teacher-onboard.component';
-import {CourseDetailsComponent} from './course-details/course-details.component';
-import {CourseDetailsUpdateComponent} from './course-details-update/course-details-update.component';
-import {TeacherDetailsComponent} from './teacher-details/teacher-details.component';
-import {TeacherDetailsUpdateComponent} from './teacher-details-update/teacher-details-update.component';
-import {CourseBaseComponent} from './course-base/course-base.component';
-import {TeacherBaseComponent} from './teacher-base/teacher-base.component';
+import {CourseCatalogueComponent} from './components/course-catalogue/course-catalogue.component';
+import {CourseCreateComponent} from './components/course-create/course-create.component';
+import {CourseEnrollComponent} from './components/course-enroll/course-enroll.component';
+import {CourseIndemnityComponent} from './components/course-indemnity/course-indemnity.component';
+import {TeacherListComponent} from './components/teacher-list/teacher-list.component';
+import {TeacherOnboardComponent} from './components/teacher-onboard/teacher-onboard.component';
+import {CourseDetailsComponent} from './components/course-details/course-details.component';
+import {CourseDetailsUpdateComponent} from './components/course-details-update/course-details-update.component';
+import {TeacherDetailsComponent} from './components/teacher-details/teacher-details.component';
+import {TeacherDetailsUpdateComponent} from './components/teacher-details-update/teacher-details-update.component';
+import {CourseBaseComponent} from './components/course-base/course-base.component';
+import {TeacherBaseComponent} from './components/teacher-base/teacher-base.component';
 
-import {AuthGuardService} from '../services/auth-guard.service';
-import {YandeChairGuardService} from '../services/yande-chair-guard.service';
+import {AuthGuardService} from '../core/services/auth-guard.service';
+import {YandeChairGuardService} from './services/yande-chair-guard.service';
 import {CourseListResolveService} from './services/course-list-resolve.service';
 import {CourseDetailsResolveService} from './services/course-details-resolve.service';
 import {TeacherListResolveService} from './services/teacher-list-resolve.service';

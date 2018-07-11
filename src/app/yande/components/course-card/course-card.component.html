@@ -1,0 +1,33 @@
+<mat-card class="hccc-course-card" fxLayout="row wrap" >
+    <mat-card-header fxFlex.gt-xs="1 1 50" fxFlex.lt-sm="1 1 100" fxLayout="column">
+
+        <mat-card-content fxLayout="column" fxLayoutAlign.lt-sm="center center">
+            <a mat-button color="accent" routerLink="/course/details/{{course.courseId}}">{{course.courseName}}</a>
+
+        </mat-card-content>
+
+        <mat-card-content fxLayout="column" fxLayoutAlign.lt-sm="center center">
+            <div><b>Teacher(s): </b> <span *ngFor="let teacher of course.teachers">{{teacher.account.name.firstName}}</span></div>
+            <div><b>Venue: </b> {{course.courseVenue}}</div>
+            <div><b>Days: </b> {{course.courseDays}}</div>
+            <div><b>Time: </b> {{course.courseStartTime}} - {{course.courseEndTime}}</div>
+            <div><b>Dates: </b> {{course.courseStartDate}} - {{course.courseEndDate}}</div>
+            <div><b>Age Restrictions: </b> {{course.ageRestrictions}}</div>
+            <div><b>Tags: </b> <span *ngFor="let tag of course.tags">{{tag}}</span></div>
+            <div><b>Slots Available: </b> {{course.slots}}</div>
+        </mat-card-content>
+
+    </mat-card-header>
+
+
+    <div fxFlex.gt-xs="1 1 50" fxFlex.lt-sm="1 1 100" fxLayoutAlign="center center">
+        <img src="{{course.imageURL}}"
+             style="width:100%;height:100%;background-color: lightgrey" >
+    </div>
+
+
+    <mat-card-actions fxFlex="100" fxLayoutAlign.lt-sm="center center">
+        <a mat-button color="accent" routerLink="/course/details/{{course.courseId}}">DETAILS</a>
+        <a mat-button color="accent" routerLink="/course/enroll/{{course.courseId}}" [disabled]="isEnrollDisabled">ENROLL</a>
+    </mat-card-actions>
+</mat-card>

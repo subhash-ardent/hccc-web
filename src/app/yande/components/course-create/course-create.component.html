@@ -1,0 +1,90 @@
+<mat-toolbar class="toolbar">
+    <mat-toolbar-row>
+        <button mat-stroked-button color="accent" routerLink="../catalogue">BACK TO CATALOGUE</button>
+    </mat-toolbar-row>
+</mat-toolbar>
+<form #courseForm="ngForm" (ngSubmit)="onSubmit()" class="hccc-course-creation-form" fxLayout="column" fxLayoutGap="5%" fxLayoutAlign.lt-md="center center" >
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="5%">
+
+        <div fxLayout="column" fxFlex="30" fxFlex.md="40" fxLayoutAlign="center">
+            <mat-form-field>
+                <input matInput placeholder="Enter Course Name" value=""  id="courseName" required [(ngModel)]="model.courseName" name="courseName"> <br/>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Enter any Age Restrictions Info" value="">
+            </mat-form-field>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="startDatePicker" placeholder="Select Start Date" value="">
+                        <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #startDatePicker="matDatepicker"></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="endDatePicker" placeholder="Select End Date" value="">
+                        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #endDatePicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
+                    <mat-form-field>
+                        <input matInput placeholder="Select Start Time"/>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
+                    <mat-form-field>
+                        <input matInput placeholder="Select End Time"/>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <mat-form-field>
+                <input matInput placeholder="Enter Days" value="">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Enter Venue" value="">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Enter Flyer URL" value="">
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="column" fxFlex="30" fxFlex.md="40" >
+
+            <!-- TODO: get teacher list from api -->
+            <mat-form-field>
+                <mat-select placeholder="Select Teachers and Coordinates" [(ngModel)]="model.teachers" name="teacher">
+                    <mat-option *ngFor="let teacher of teachers" [value]="[teacher]">
+                    <!--<mat-option *ngFor="let teacher of teachers" [value]="[teacher.account.userName]"> Uncomment when integrating with Backend-->
+                        {{teacher.account.name.firstName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Add Tags">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Enter Image URL">
+            </mat-form-field>
+            <mat-form-field>
+                <textarea matInput placeholder="Add any Remarks/Notes"></textarea>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Enter Number of Slots">
+            </mat-form-field>
+        </div>
+
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="50px">
+        <button mat-flat-button color="accent" routerLink="../../course/catalogue">CANCEL</button>
+        <button mat-flat-button color="accent">RESET</button>
+        <button mat-flat-button color="accent" type="submit" [disabled]="!courseForm.form.valid">SUBMIT</button>
+    </div>
+
+</form>

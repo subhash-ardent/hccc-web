@@ -1,0 +1,15 @@
+
+
+.hccc-search-toolbar input {
+  height:40px;
+  padding-left: 40px;
+  font-size: .85em;
+  background: url(../../../../assets/img/baseline-search-24px.svg) no-repeat scroll 7px 7px;
+}
+.hccc-course-tags {
+  font-size: .75em;
+}
+.hccc-search-toolbar {
+  background-color: white;
+}
+

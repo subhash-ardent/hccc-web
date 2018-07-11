@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
-import {LoginRedirectComponent} from './login-redirect/login-redirect.component';
-import {GenericErrorComponent} from './generic-error/generic-error.component';
+import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
+import {LoginRedirectComponent} from './components/login-redirect/login-redirect.component';
+import {GenericErrorComponent} from './components/generic-error/generic-error.component';
 
 const coreRoutes: Routes = [
   {path: 'login-redirect', component: LoginRedirectComponent},

@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, AfterViewInit, ViewChild, OnDestroy} from '@angular/core';
-import {AppService} from './services/app.service';
+import {AppService} from './app.service';
 import {
   NavigationCancel,
   Event,

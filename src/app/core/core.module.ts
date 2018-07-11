@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material.module';
 
-import { AppBannerComponent} from './app-banner/app-banner.component';
-import { AppHeaderComponent} from './app-header/app-header.component';
-import { PageNotFoundComponent} from './page-not-found/page-not-found.component';
-import { LoginRedirectComponent} from './login-redirect/login-redirect.component';
+import { AppBannerComponent} from './components/app-banner/app-banner.component';
+import { AppHeaderComponent} from './components/app-header/app-header.component';
+import { PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
+import { LoginRedirectComponent} from './components/login-redirect/login-redirect.component';
 import { CoreRoutingModule } from './core-routing.module';
-import { GenericErrorComponent } from './generic-error/generic-error.component';
-import { SpinnerComponent } from './spinner/spinner.component';
-import { SideNavbarComponent } from './side-navbar/side-navbar.component';
-import { FooterComponent } from './footer/footer.component';
+import { GenericErrorComponent } from './components/generic-error/generic-error.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { SideNavbarComponent } from './components/side-navbar/side-navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({

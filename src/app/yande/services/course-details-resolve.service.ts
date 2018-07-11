@@ -6,10 +6,10 @@ import {
 import {Observable, timer} from 'rxjs';
 import {map, take, delayWhen, catchError} from 'rxjs/operators';
 
-import {Course} from '../../models/course';
-import {NotFoundError} from '../../models/NotFoundError';
-import {YandeApiService} from '../../services/yande-api.service';
-import {AppService} from '../../services/app.service';
+import {Course} from '../models/course';
+import {NotFoundError} from '../../core/models/not-found-error';
+import {YandeApiService} from './yande-api.service';
+import {AppService} from '../../app.service';
 
 @Injectable({
   providedIn: 'root'

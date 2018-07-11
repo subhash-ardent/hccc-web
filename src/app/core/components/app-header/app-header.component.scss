@@ -1,0 +1,19 @@
+@import '../../../../hccc-theme';
+.hccc-toolbar {
+    height: 60px;
+    position:fixed;
+    z-index: 2;
+  background-color: mat-color($hccc-theme-primary, 900, 0.65);
+  color: mat-contrast($hccc-theme-primary, 900);
+}
+.header-space {
+    height: 60px;
+}
+
+.text{
+  padding-top: .25em;
+}
+
+.username{
+  padding-top: .8em;
+}
