@@ -16,7 +16,7 @@ router.all('/*', (req, res) => {
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json",
-        "User-Id": "abcd" // TODO: update user id from session
+        "User-Name": "abcd" // TODO: update user id from session
       }
     };
 

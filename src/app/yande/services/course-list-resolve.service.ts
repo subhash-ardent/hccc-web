@@ -20,17 +20,24 @@ export class CourseListResolveService implements Resolve<Course[]> {
               private router: Router) {
   }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Course[]> {
-    return this.apiService.getCoursesAsObservable().pipe(
-      take(this.apiService.isCoursesLoaded ? 1 : 2),
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<Course[]> {
+    return this.getCourses();
+  }
+
+  async getCourses(): Promise<Course[]> {
+    if (!this.apiService.isCoursesLoaded) {
+      await this.apiService.loadCourses();
+    }
+    return this.apiService.courses$.pipe(
+      take(1),
       map(courses => {
-        if (courses) {
-          return courses;
+        if (!courses || courses.length === 0) {
+          throw new Error('Course Catalogue is Empty');
         } else {
-          return null;
+          return courses;
         }
       }),
       catchError(this.appService.handleFatalError<Course[]>(`get courses`))
-    );
+    ).toPromise();
   }
 }

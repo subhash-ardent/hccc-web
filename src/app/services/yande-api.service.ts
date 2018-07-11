@@ -1,11 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Course} from '../models/course';
+import {CourseCollection} from '../models/courseCollection';
 import {Teacher} from '../models/teacher';
 import {BehaviorSubject, Observable, of, timer} from 'rxjs';
 import {LoggerService} from './logger.service';
 import {catchError, tap, take, delayWhen} from 'rxjs/operators';
 import {AppService} from './app.service';
+import {Account} from '../models/account';
 
 
 @Injectable({
@@ -28,24 +30,25 @@ export class YandeApiService {
 
   // Courses
 
-  getCoursesAsObservable(): BehaviorSubject<Course[]> {
-    return this.courses$;
-  }
+  async loadCourses() {
+    try {
+      const intentionalDelay = () => timer(1000);
+      const res = await this.http.get<CourseCollection>(this.coursesEndpointUrl).pipe(
+        take(1),
+        delayWhen(intentionalDelay),
+        catchError(this.appService.handleFatalError<CourseCollection>('loadCourses'))
+      ).toPromise();
+      this.logger.info('Fetched courses');
+      if (res && res.courses) {
+        this.courses$.next(res.courses);
+        this.isCoursesLoaded = true;
+      } else {
+        throw new Error('Invalid payload');
+      }
+    } catch (e) {
+      this.appService.handleFatalError<CourseCollection>('loadCourses')(e);
+    }
 
-  loadCourses() {
-    const intentionalDelay = () => timer(1000);
-    this.http.get<{courses: Course[]}>(this.coursesEndpointUrl).pipe(
-      take(1),
-      delayWhen(intentionalDelay),
-    ).subscribe(
-        res => {
-          this.logger.info('Fetched courses');
-          const courses = res.courses ? res.courses : [];
-          this.courses$.next(courses);
-          this.isCoursesLoaded = true;
-        },
-        err => this.logger.error('Error retrieving Courses')
-      );
   }
 
   addCourse(newCourse: Course) {
@@ -53,7 +56,7 @@ export class YandeApiService {
     return this.http.post<{course: Course}>(this.coursesEndpointUrl, {course: newCourse}).pipe(
       tap(
         res => {
-          if (!res.course) { throw new Error('Invalid Response');}
+          if (!res.course) { throw new Error('Invalid Response'); }
           this.courses$.value.push(res.course);
           this.courses$.next(this.courses$.value);
           this.logger.info(`${newCourse.courseName} added successfully`);
@@ -78,10 +81,6 @@ export class YandeApiService {
 
 
   // Teachers
-
-  getTeachersAsObservable(): BehaviorSubject<Teacher[]> {
-    return this.teachers$;
-  }
 
   loadTeachers() {
     this.http.get<Teacher[]>(this.teachersEndpointUrl)

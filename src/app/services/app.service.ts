@@ -70,10 +70,11 @@ export class AppService {
 
   public handleFatalError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      this.logger.error(`${operation} failed: ${error.message}`);
       if (error instanceof NotFoundError) {
+        this.logger.error(`${operation} failed: ${error.message}. Redirecting to page-not-found`);
         this.router.navigate(['/page-not-found']);
       } else {
+        this.logger.error(`${operation} failed: ${error.message}. Redirecting to error-page`);
         this.router.navigate(['/error-page']);
       }
       return of(result as T);

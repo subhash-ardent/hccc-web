@@ -16,7 +16,7 @@ let getUserByUserName = function(usrNm) {
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json",
-        "User-Id": usrNm
+        "User-Name": usrNm
       }
     };
     request(options, function(err, response, body) {

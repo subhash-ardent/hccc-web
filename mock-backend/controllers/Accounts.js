@@ -1,7 +1,7 @@
 'use strict';
 
 var utils = require('../utils/writer.js');
-var Accounts = require('../service/AccountsService');
+var Accounts = require('../../mock-data/AccountsService');
 
 module.exports.getAccounts = function getAccounts (req, res, next) {
   var contentType = req.swagger.params['Content-Type'].value;

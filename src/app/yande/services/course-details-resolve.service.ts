@@ -20,23 +20,25 @@ export class CourseDetailsResolveService {
               private apiService: YandeApiService,
               private router: Router) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Course> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<Course> {
+    return this.getCourses(route);
+  }
 
-    return this.apiService.getCoursesAsObservable().pipe(
-      take(this.apiService.isCoursesLoaded ? 1 : 2),
+  async getCourses(route: ActivatedRouteSnapshot): Promise<Course> {
+    if (!this.apiService.isCoursesLoaded) {
+      await this.apiService.loadCourses();
+    }
+    return this.apiService.courses$.pipe(
+      take(1),
       map(courses => {
-        if (courses) {
-          const course = courses[parseInt(route.params['id']) - 1];
-          if (course) {
-            return course;
-          } else {
-            throw new RangeError(`Course with id, ${parseInt(route.params['id']) - 1} cannot be found`);
-          }
+        if (!courses || courses.length === 0) {
+          throw new Error('Course Catalogue is Empty');
         } else {
-          return null;
+          const course = courses[parseInt(route.params['id']) - 1];
+          return course;
         }
       }),
-      catchError(this.appService.handleFatalError<Course>(`get course`))
-    );
+      catchError(this.appService.handleFatalError<Course>(`get courses`))
+    ).toPromise();
   }
 }
