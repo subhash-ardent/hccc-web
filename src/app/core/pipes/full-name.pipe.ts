@@ -6,16 +6,13 @@ import {Account} from '../models/account';
 })
 export class FullNamePipe implements PipeTransform {
 
-  transform(account: Account, args?: any): any {
+  transform(account: Account, salutation?: string): any {
     if (account && account.name) {
-      const f = account.name.firstName;
-      const m = account.name.middleName;
+      const s = salutation ? salutation + '. ' : ''
+      const f = account.name.firstName + ' ';
+      const m = account.name.middleName ? account.name.middleName + ' ' : '';
       const l = account.name.lastName;
-      if (m) {
-        return `${f} ${m} ${l}`;
-      } else {
-        return `${f} ${l}`;
-      }
+      return s + f + m + l;
     } else {
       return 'Devotee Name';
     }
