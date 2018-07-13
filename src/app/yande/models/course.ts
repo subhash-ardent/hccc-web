@@ -1,3 +1,5 @@
+import {Teacher} from './teacher';
+
 export class Course {
   courseName: string;
   imageURL?: string;
@@ -8,7 +10,7 @@ export class Course {
   tags?: string[];
   slots = 10;
   courseVenue = 'Shiva - Vishnu Temple, Livermore';
-  teachers: string[];
+  teachers: Teacher[];
   flyerURL?: string;
   courseId?: string;
   courseDays: string;

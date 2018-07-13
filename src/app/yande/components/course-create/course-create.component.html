@@ -3,7 +3,9 @@
         <button mat-stroked-button color="accent" routerLink="../catalogue">BACK TO CATALOGUE</button>
     </mat-toolbar-row>
 </mat-toolbar>
-<form #courseForm="ngForm" (ngSubmit)="onSubmit()" class="hccc-course-creation-form" fxLayout="column" fxLayoutGap="5%" fxLayoutAlign.lt-md="center center" >
+<form #courseForm="ngForm" (ngSubmit)="onSubmit()" class="hccc-course-creation-form"
+      fxLayout="column" fxLayoutGap="5%" fxLayoutAlign.lt-md="center center"
+      (keydown.enter)="$event.preventDefault()">
     <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="5%">
 
         <div fxLayout="column" fxFlex="30" fxFlex.md="40" fxLayoutAlign="center">
@@ -55,18 +57,27 @@
         </div>
 
         <div fxLayout="column" fxFlex="30" fxFlex.md="40" >
-
-            <!-- TODO: get teacher list from api -->
             <mat-form-field>
-                <mat-select placeholder="Select Teachers and Coordinates" [(ngModel)]="model.teachers" name="teacher">
-                    <mat-option *ngFor="let teacher of teachers" [value]="[teacher]">
+                <mat-select placeholder="Select Teachers and Coordinates" [(ngModel)]="model.teachers" name="teacher" multiple>
+                    <mat-option *ngFor="let teacher of teachers" [value]="teacher">
                     <!--<mat-option *ngFor="let teacher of teachers" [value]="[teacher.account.userName]"> Uncomment when integrating with Backend-->
                         {{teacher.account | fullName}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Add Tags">
+                <mat-chip-list #tagList>
+                    <mat-chip *ngFor="let tag of model.tags"
+                              removable (removed)="removeTag(tag)">
+                        {{tag}}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="Add Tags (comma seperated)"
+                           [matChipInputFor]="tagList"
+                           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                           matChipInputAddOnBlur="true"
+                           (matChipInputTokenEnd)="addTag($event)">
+                </mat-chip-list>
             </mat-form-field>
             <mat-form-field>
                 <input matInput placeholder="Enter Image URL">

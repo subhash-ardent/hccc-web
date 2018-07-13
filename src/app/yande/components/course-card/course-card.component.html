@@ -2,19 +2,23 @@
     <mat-card-header fxFlex.gt-xs="1 1 50" fxFlex.lt-sm="1 1 100" fxLayout="column">
 
         <mat-card-content fxLayout="column" fxLayoutAlign.lt-sm="center center">
-            <a mat-button color="accent" routerLink="/course/details/{{course.courseId}}">{{course.courseName}}</a>
+            <a mat-button color="accent" routerLink="/course/details/{{course.courseId}}"
+               [matBadge]="course.slots" matBadgePosition="before" matBadgeColor="warn">{{course.courseName}}</a>
 
         </mat-card-content>
 
         <mat-card-content fxLayout="column" fxLayoutAlign.lt-sm="center center">
-            <div><b>Teacher(s): </b> <span *ngFor="let teacher of course.teachers">{{teacher.account.name.firstName}}</span></div>
-            <div><b>Venue: </b> {{course.courseVenue}}</div>
-            <div><b>Days: </b> {{course.courseDays}}</div>
-            <div><b>Time: </b> {{course.courseStartTime}} - {{course.courseEndTime}}</div>
-            <div><b>Dates: </b> {{course.courseStartDate}} - {{course.courseEndDate}}</div>
-            <div><b>Age Restrictions: </b> {{course.ageRestrictions}}</div>
-            <div><b>Tags: </b> <span *ngFor="let tag of course.tags">{{tag}}</span></div>
-            <div><b>Slots Available: </b> {{course.slots}}</div>
+            <div><i>By</i></div>
+            <div *ngFor="let teacher of course.teachers">{{teacher.account | fullName:teacher.salutation}}</div>
+            <br>
+            <div><i>On </i> </div>
+            <div>{{course.courseDays}}</div>
+            <br>
+            <mat-chip-list #tagList>
+                <mat-chip *ngFor="let tag of course.tags">
+                    {{tag}}
+                </mat-chip>
+            </mat-chip-list>
         </mat-card-content>
 
     </mat-card-header>

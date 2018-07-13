@@ -72,6 +72,42 @@ const teachers = [ {
       "email" : "ssb@livermoretemple.org"
     },
     "backgroundVerified" : true
+  },
+  {
+    "profilePictureURL" : "http://livermoretemple.org/hints/atirudram/images/p3.png",
+    "skillSet" : [ "Bhagavath Gita", "Yoga" ],
+    "indemnitySigned" : true,
+    "salutation" : "Dr",
+    "identityVerified" : true,
+    "account" : {
+      "phoneNumber" : "1234567890",
+      "roles" : [ "teacher", "devotee" ],
+      "name" : {
+        "firstName" : "Kamala",
+        "lastName" : "Shankar"
+      },
+      "userName" : "kamala",
+      "email" : "kamala@livermoretemple.org"
+    },
+    "backgroundVerified" : true
+  },
+  {
+    "profilePictureURL" : "http://livermoretemple.org/hints/atirudram/images/p1.png",
+    "skillSet" : [ "Vishnu Sahasranaamam", "Narayaneeyam" ],
+    "indemnitySigned" : true,
+    "salutation" : "Smt",
+    "identityVerified" : true,
+    "account" : {
+      "phoneNumber" : "1234567890",
+      "roles" : [ "teacher", "devotee" ],
+      "name" : {
+        "firstName" : "Madhu",
+        "lastName" : "Ramesh"
+      },
+      "userName" : "madhu",
+      "email" : "madhu@livermoretemple.org"
+    },
+    "backgroundVerified" : true
   }];
 
 /**
