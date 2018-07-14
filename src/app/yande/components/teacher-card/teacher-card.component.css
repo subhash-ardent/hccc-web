@@ -1,15 +1,15 @@
+mat-icon {
+	font-size: 38px;
+}
 .teacher-icon {
 	float: left;
-	background-color: #cccccc;
-    width: 35px;
-    height: 35px;
-    border-radius: 17px;
-    margin-right: 10px;
+    background-color: #cccccc;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
 }
 .teacher-details {
 	display: inline-block;
-}
-
-mat-icon {
-	font-size: 33px;
+	margin-left: 20px;
+	line-height: 10px;
 }
