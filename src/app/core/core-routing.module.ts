@@ -6,9 +6,21 @@ import {LoginRedirectComponent} from './components/login-redirect/login-redirect
 import {GenericErrorComponent} from './components/generic-error/generic-error.component';
 
 const coreRoutes: Routes = [
-  {path: 'login-redirect', component: LoginRedirectComponent},
-  {path: 'error-page', component: GenericErrorComponent},
-  {path: '**', component: PageNotFoundComponent}
+  {
+    path: 'login-redirect',
+    component: LoginRedirectComponent,
+    data: {title: 'Login Redirect'}
+  },
+  {
+    path: 'error-page',
+    component: GenericErrorComponent,
+    data: {title: 'Error Page'}
+  },
+  {
+    path: '**',
+    component: PageNotFoundComponent,
+    data: {title: 'Page Not Found'}
+  }
 ];
 
 @NgModule({

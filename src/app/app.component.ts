@@ -6,7 +6,7 @@ import {
   NavigationEnd,
   NavigationError,
   NavigationStart,
-  Router
+  Router, ActivatedRoute
 } from '@angular/router';
 import {catchError} from 'rxjs/operators';
 import {MatSidenav} from '@angular/material/sidenav';
@@ -26,6 +26,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   constructor(changeDetectorRef: ChangeDetectorRef,
               public appService: AppService,
               private router: Router,
+              private activatedRoute: ActivatedRoute,
               media: MediaMatcher) {
     this.router.events.subscribe((event: Event) => {
       this.navigationInterceptor(event);
@@ -41,6 +42,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       this.appService.loading = true;
     }
     if (event instanceof NavigationEnd) {
+      this.appService.breadCrumbs = this.appService.buildBreadCrumb(this.activatedRoute.root);
       this.appService.loading = false;
     }
     if (event instanceof NavigationCancel) {

@@ -1,0 +1,6 @@
+<span *ngFor="let breadCrumb of appService.breadCrumbs">
+    <a [routerLink]="breadCrumb.url">
+        {{breadCrumb.label === 'Home' ? 'Home' : ' / ' + breadCrumb.label}}
+    </a>
+</span>
+

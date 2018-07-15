@@ -12,6 +12,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SideNavbarComponent } from './components/side-navbar/side-navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FullNamePipe } from './pipes/full-name.pipe';
+import { BreadCrumbComponent } from './components/bread-crumb/bread-crumb.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { FullNamePipe } from './pipes/full-name.pipe';
     SpinnerComponent,
     SideNavbarComponent,
     FooterComponent,
-    FullNamePipe
+    FullNamePipe,
+    BreadCrumbComponent
   ],
   exports: [
     AppBannerComponent,

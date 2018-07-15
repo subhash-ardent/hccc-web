@@ -23,37 +23,51 @@ import {TeacherDetailsResolveService} from './services/teacher-details-resolve.s
 
 
 const yandeRoutes: Routes = [
-  {path: '', redirectTo: '/course/catalogue', pathMatch: 'full'},
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
   {
     path: 'course', component: CourseBaseComponent,
+    data: {title: 'Courses'},
     children: [
       {
-        path: 'catalogue', component: CourseCatalogueComponent, resolve: {
+        path: 'catalogue',
+        component: CourseCatalogueComponent,
+        data: {title: 'Catalogue'},
+        resolve: {
           courses: CourseListResolveService
         }
       },
       {
-        path: 'details/:id', component: CourseDetailsComponent, resolve: {
+        path: 'details/:id', component: CourseDetailsComponent,
+        resolve: {
           course: CourseDetailsResolveService
-        }
+        },
+        data: {title: 'Details'}
       },
       {
         path: 'enroll/:id', component: CourseEnrollComponent,
         canActivate: [AuthGuardService],
         resolve: {
           course: CourseDetailsResolveService
-        }
+        },
+        data: {title: 'Enroll'}
       },
-      {path: 'indemnity/:id', component: CourseIndemnityComponent, canActivate: [AuthGuardService]},
-      {path: 'update/:id', component: CourseDetailsUpdateComponent, canActivate: [YandeChairGuardService]},
+      {path: 'indemnity/:id',
+        component: CourseIndemnityComponent,
+        canActivate: [AuthGuardService],
+        data: {title: 'Indemnity'}},
+      {path: 'update/:id',
+        component: CourseDetailsUpdateComponent,
+        canActivate: [YandeChairGuardService],
+        data: {title: 'Edit'}},
       {
         path: 'create', component: CourseCreateComponent,
         canActivate: [YandeChairGuardService],
         resolve: {
           teachers: TeacherListResolveService
-        }
+        },
+        data: {title: 'Create'}
       },
-      {path: '', redirectTo: '/catalogue', pathMatch: 'full'},
+      {path: '', redirectTo: '/course/catalogue', pathMatch: 'full'},
     ]
   },
   {

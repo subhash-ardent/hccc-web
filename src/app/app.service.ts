@@ -4,8 +4,9 @@ import {BehaviorSubject, Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Account} from './core/models/account';
 import {LoggerService} from './core/services/logger.service';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import {NotFoundError} from './core/models/not-found-error';
+import {BreadCrumb} from './core/models/bread-crumb';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,7 @@ export class AppService {
   public isYandeChair = false;
   public isinitialDataLoaded = false;
   public sideNavMenuClick$: Observable<Event>;
+  public breadCrumbs: BreadCrumb[];
 
   authRedirectUrl: string;
   loading = false;
@@ -66,6 +68,27 @@ export class AppService {
       }
     }
     this.isinitialDataLoaded = true;
+  }
+
+  buildBreadCrumb(route: ActivatedRoute, url: string = '',
+                  breadcrumbs: Array<BreadCrumb> = []): Array<BreadCrumb> {
+    // If no routeConfig is avalailable we are on the root path
+    const label = route.routeConfig ? route.routeConfig.data[ 'title' ] : 'Home';
+    const path = route.routeConfig ? route.routeConfig.path : '';
+    // In the routeConfig the complete path is not available,
+    // so we rebuild it each time
+    const nextUrl = `${url}${path}/`;
+    const breadcrumb = {
+      label: label,
+      url: nextUrl
+    };
+    const newBreadcrumbs = [ ...breadcrumbs, breadcrumb ];
+    if (route.firstChild) {
+      // If we are not on our current path yet,
+      // there will be more children to look after, to build our breadcumb
+      return this.buildBreadCrumb(route.firstChild, nextUrl, newBreadcrumbs);
+    }
+    return newBreadcrumbs;
   }
 
   public handleFatalError<T>(operation = 'operation', result?: T) {
