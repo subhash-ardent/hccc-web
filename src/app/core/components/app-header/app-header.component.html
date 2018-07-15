@@ -1,5 +1,5 @@
 <mat-toolbar class="hccc-toolbar" fxLayout="row">
-    <div fxLayout="row" fxLayoutGap="2em">
+    <div fxLayout="row" fxLayoutGap=".5em">
         <button mat-icon-button #menuButton>
             <mat-icon>menu</mat-icon>
         </button>
@@ -11,7 +11,7 @@
 
 
     <span *ngIf="!appService.isLoggedIn">Login</span>
-    <div fxLayout="row"  *ngIf="appService.isLoggedIn" fxLayoutGap=".5em">
+    <div fxLayout="row"  *ngIf="appService.isLoggedIn" fxLayoutGap=".5em" fxShow.lt-md="false">
         <button mat-icon-button>
             <mat-icon>person</mat-icon>
         </button>

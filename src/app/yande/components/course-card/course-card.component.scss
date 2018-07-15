@@ -1,15 +1,51 @@
 @import '../../../../../src/hccc-theme.scss';
 
+
+.course-card-lt-sm {
+  max-width: 300px;
+  min-width: 300px;
+}
+.course-card-gt-xs {
+  max-width: 600px;
+  min-width: 600px;
+}
+
 .hccc-course-card {
-    max-width: 600px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 0;
 
-.hccc-course-card img {
-    max-width: 200px;
-}
-
-mat-card-content a {
-    background-color: mat-color($hccc-theme-accent, 50, .8);
+  div {
+    mat-card-header {
+        background-color: mat-color($hccc-theme-accent, 50, .8);
+      padding: .5em 0 .5em 0;
+    }
+    mat-card-content {
+      padding: 1em 1em 1em 1em;
+      font-size: .9em;
+      div {
+        color: mat-contrast($hccc-theme-primary, 500);
+        padding: .5em 0 .5em 0;
+        .teacher-name {
+          background-color: mat-color($hccc-theme-primary, 100, .8);
+          padding: 0 .5em 0 .5em;
+        }
+      }
+      mat-chip-list {
+        padding: 1em 0 1em 0;
+        mat-chip {
+          background-color: mat-color($hccc-theme-primary, 200, .8);
+          padding: 2px 12px;
+        }
+      }
+    }
+    mat-card-actions {
+      margin: 0;
+      padding-left: .5em;
+    }
+  }
+  img {
+    max-width: 240px;
+    min-width: 240px;
+  }
 }

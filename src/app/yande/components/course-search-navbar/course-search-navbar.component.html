@@ -1,6 +1,6 @@
 <mat-toolbar class="hccc-search-toolbar">
-    <mat-toolbar-row>
-        <div class="hccc-course-tags" fxFlex="300px" fxLayoutAlign="space-between center" fxLayoutGap=".5em">
+    <mat-toolbar-row fxLayoutAlign="center center">
+        <div class="hccc-course-tags" fxFlex="300px" fxLayoutAlign="space-between center" fxLayoutGap=".5em" fxShow.lt-md="false">
             <mat-chip-list>
                 <mat-chip>Slokas</mat-chip>
                 <mat-chip>STEM</mat-chip>
@@ -8,7 +8,7 @@
                 <mat-chip>All</mat-chip>
             </mat-chip-list>
         </div>
-        <span fxFlex="1 1 auto"></span>
+        <span fxFlex="1 1 auto" fxShow.lt-md="false"></span>
         <input title="search courses" type="text" size="30" placeholder="Search Courses"/>
     </mat-toolbar-row>
 </mat-toolbar>

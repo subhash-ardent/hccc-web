@@ -65,7 +65,12 @@ const yandeRoutes: Routes = [
         path: '',
         canActivateChild: [YandeChairGuardService],
         children: [
-          {path: 'list', component: TeacherListComponent},
+          {
+            path: 'list', component: TeacherListComponent,
+            resolve: {
+              teachers: TeacherListResolveService
+            }
+          },
           {path: 'onboard', component: TeacherOnboardComponent},
           {path: 'details/:id', component: TeacherDetailsComponent},
           {path: 'update/:id', component: TeacherDetailsUpdateComponent},

@@ -18,3 +18,7 @@ $hccc-theme-warn
 );
 @include angular-material-theme($hccc-theme);
 
+.mat-badge-content {
+  padding: 7px !important;
+  color:black;
+}

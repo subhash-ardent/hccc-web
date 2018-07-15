@@ -4,27 +4,7 @@
       <mat-icon aria-label="add new icon">add</mat-icon>
     </a>
   </div>
-  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="5%">
-	<div fxLayout="column" fxFlex="30" fxFlex.md="40" fxLayoutAlign="center">
-		<ul>
-		  <li *ngFor="let number of [0,1,2,3,4]">
-		     <teacher-card></teacher-card>
-		  </li>
-		</ul> 
-	</div>
-	<div fxLayout="column" fxFlex="30" fxFlex.md="40" >
-		<ul>
-		  <li *ngFor="let number of [0,1,2,3,4]">
-		     <teacher-card></teacher-card>
-		  </li>
-		</ul>
-	</div>
-	<div fxLayout="column" fxFlex="30" fxFlex.md="40">
-		<ul>
-		  <li *ngFor="let number of [0,1,2,3,4]">
-		     <teacher-card></teacher-card>
-		  </li>
-		</ul>
-	</div>
+  <div class="list" fxLayout="row wrap" fxLayoutAlign="start stretch" fxLayoutGap="2%">
+          <teacher-card *ngFor="let teacher of teachers"></teacher-card>
   </div>
 </div>

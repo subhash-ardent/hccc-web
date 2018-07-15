@@ -2,14 +2,12 @@
 <div class="wrapper" fxLayout="column">
   <hccc-course-search-navbar></hccc-course-search-navbar>
   <div fxFlex="100" fxLayoutAlign="center center" *ngIf="appService.isYandeChair">
-    <a mat-fab class="hccc-add-new-fab" routerLink="../create">
+    <a mat-fab ngClass.gt-sm="hccc-add-new-fab" routerLink="../create">
       <mat-icon aria-label="add new icon">add</mat-icon>
     </a>
   </div>
   <div fxLayout="row wrap" fxLayoutAlign="space-evenly stretch" fxLayoutGap="1%">
-      <course-card *ngFor="let course of courses"
-                      [course]="course">
-      </course-card>
+      <course-card *ngFor="let course of courses" [course]="course"></course-card>
 
   </div>
 </div>

@@ -1,37 +1,44 @@
-<mat-card class="hccc-course-card" fxLayout="row wrap" >
-    <mat-card-header fxFlex.gt-xs="1 1 50" fxFlex.lt-sm="1 1 100" fxLayout="column">
+<mat-card class="hccc-course-card" ngClass.lt-sm="course-card-lt-sm" ngClass.gt-xs="course-card-gt-xs"
+          fxLayout="row" fxLayout.lt-sm="column"
+          [matBadge]="course.slots" matBadgePosition="after" matBadgeColor="warn" matBadgeSize="medium">
+    <div fxFlex.gt-xs="1 1 60" fxFlex.lt-sm="1 1 100" fxLayout="column">
 
-        <mat-card-content fxLayout="column" fxLayoutAlign.lt-sm="center center">
-            <a mat-button color="accent" routerLink="/course/details/{{course.courseId}}"
-               [matBadge]="course.slots" matBadgePosition="before" matBadgeColor="warn">{{course.courseName}}</a>
+        <mat-card-header fxLayout="column" fxLayoutAlign.lt-sm="center center">
+            <a mat-button color="accent" routerLink="/course/details/{{course.courseId}}">
+                <div>{{course.courseName}}</div>
+            </a>
+        </mat-card-header>
+
+        <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+            <div>On {{course.courseDays}}</div>
+            <div>By <span class="teacher-name"
+                    *ngFor="let teacher of course.teachers">{{teacher.account | fullName:teacher.salutation}}</span>
+            </div>
+
+                <mat-chip-list #tagList  selectable="false">
+                    <mat-chip *ngFor="let tag of course.tags" disableRipple="true" selectable="false">
+                        {{tag}}
+                    </mat-chip>
+                </mat-chip-list>
 
         </mat-card-content>
 
-        <mat-card-content fxLayout="column" fxLayoutAlign.lt-sm="center center">
-            <div><i>By</i></div>
-            <div *ngFor="let teacher of course.teachers">{{teacher.account | fullName:teacher.salutation}}</div>
-            <br>
-            <div><i>On </i> </div>
-            <div>{{course.courseDays}}</div>
-            <br>
-            <mat-chip-list #tagList>
-                <mat-chip *ngFor="let tag of course.tags">
-                    {{tag}}
-                </mat-chip>
-            </mat-chip-list>
-        </mat-card-content>
+        <span fxFlex="1 1 auto"></span>
 
-    </mat-card-header>
+        <div>
+            <mat-card-actions fxLayoutAlign.lt-sm="center center">
+                <a mat-button color="accent" routerLink="/course/details/{{course.courseId}}">DETAILS</a>
+                <a mat-button color="accent" routerLink="/course/enroll/{{course.courseId}}"
+                   [disabled]="isEnrollDisabled">ENROLL</a>
+            </mat-card-actions>
+        </div>
 
-
-    <div fxFlex.gt-xs="1 1 50" fxFlex.lt-sm="1 1 100" fxLayoutAlign="center center">
-        <img src="{{course.imageURL}}"
-             style="width:100%;height:100%;background-color: lightgrey" >
     </div>
 
 
-    <mat-card-actions fxFlex="100" fxLayoutAlign.lt-sm="center center">
-        <a mat-button color="accent" routerLink="/course/details/{{course.courseId}}">DETAILS</a>
-        <a mat-button color="accent" routerLink="/course/enroll/{{course.courseId}}" [disabled]="isEnrollDisabled">ENROLL</a>
-    </mat-card-actions>
+    <div fxFlex.gt-xs="1 1 40" fxFlex.lt-sm="1 1 100" fxLayoutAlign="center center">
+        <img src="{{course.imageURL}}"
+             style="width:100%;height:100%;background-color: lightgrey">
+    </div>
+
 </mat-card>
