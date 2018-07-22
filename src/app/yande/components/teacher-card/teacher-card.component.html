@@ -1,10 +1,10 @@
-<div>
+<div class="wrapper" >
     <div class="teacher-icon">
      	<mat-icon>home</mat-icon>
      </div>
 	 <div class="teacher-details">
-	     <p>Teacher Name</p>
-	     <p>teacher@livermore.org</p>
-	     <p>0987654321</p>
+	     <p>{{teacher.account | fullName}}</p>
+	     <p>{{teacher.account.email}}</p>
+	     <p>{{teacher.account.phoneNumber}}</p>
 	 </div>
 </div>

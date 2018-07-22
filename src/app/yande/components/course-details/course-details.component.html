@@ -1,12 +1,7 @@
 <div class="wrapper" fxLayout="column">
-    <mat-toolbar class="toolbar">
-        <mat-toolbar-row>
-            <button mat-stroked-button color="accent" routerLink="../../catalogue">BACK TO CATALOGUE</button>
-        </mat-toolbar-row>
-    </mat-toolbar>
 
     <div fxFlex="100" fxLayoutAlign="center center" *ngIf="appService.isYandeChair">
-        <a mat-fab class="fab" routerLink="../../create">
+        <a mat-fab class="fab" routerLink="../edit">
             <mat-icon aria-label="add new icon">edit</mat-icon>
         </a>
     </div>

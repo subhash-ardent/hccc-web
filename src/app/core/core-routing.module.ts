@@ -4,6 +4,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import {LoginRedirectComponent} from './components/login-redirect/login-redirect.component';
 import {GenericErrorComponent} from './components/generic-error/generic-error.component';
+import {HomeComponent} from './components/home/home.component';
 
 const coreRoutes: Routes = [
   {
@@ -15,6 +16,10 @@ const coreRoutes: Routes = [
     path: 'error-page',
     component: GenericErrorComponent,
     data: {title: 'Error Page'}
+  },
+  {
+    path: '',
+    component: HomeComponent,
   },
   {
     path: '**',

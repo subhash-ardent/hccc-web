@@ -20,45 +20,21 @@ import {CourseListResolveService} from './services/course-list-resolve.service';
 import {CourseDetailsResolveService} from './services/course-details-resolve.service';
 import {TeacherListResolveService} from './services/teacher-list-resolve.service';
 import {TeacherDetailsResolveService} from './services/teacher-details-resolve.service';
+import {CourseNameResolveService} from './services/course-name-resolve.service';
 
 
 const yandeRoutes: Routes = [
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
   {
-    path: 'course', component: CourseBaseComponent,
+    path: 'courses',
     data: {title: 'Courses'},
     children: [
       {
-        path: 'catalogue',
+        path: '',
         component: CourseCatalogueComponent,
-        data: {title: 'Catalogue'},
         resolve: {
           courses: CourseListResolveService
         }
       },
-      {
-        path: 'details/:id', component: CourseDetailsComponent,
-        resolve: {
-          course: CourseDetailsResolveService
-        },
-        data: {title: 'Details'}
-      },
-      {
-        path: 'enroll/:id', component: CourseEnrollComponent,
-        canActivate: [AuthGuardService],
-        resolve: {
-          course: CourseDetailsResolveService
-        },
-        data: {title: 'Enroll'}
-      },
-      {path: 'indemnity/:id',
-        component: CourseIndemnityComponent,
-        canActivate: [AuthGuardService],
-        data: {title: 'Indemnity'}},
-      {path: 'update/:id',
-        component: CourseDetailsUpdateComponent,
-        canActivate: [YandeChairGuardService],
-        data: {title: 'Edit'}},
       {
         path: 'create', component: CourseCreateComponent,
         canActivate: [YandeChairGuardService],
@@ -67,28 +43,73 @@ const yandeRoutes: Routes = [
         },
         data: {title: 'Create'}
       },
-      {path: '', redirectTo: '/course/catalogue', pathMatch: 'full'},
+      {
+        path: ':id',
+        resolve: {
+          course: CourseDetailsResolveService,
+          id: CourseNameResolveService
+        },
+        data: {title: ':id'},
+        children: [
+          {
+            path: '', component: CourseDetailsComponent
+          },
+          {
+            path: 'enroll', component: CourseEnrollComponent,
+            canActivate: [AuthGuardService],
+            data: {title: 'Enroll'}
+          },
+          {
+            path: 'indemnity',
+            component: CourseIndemnityComponent,
+            canActivate: [AuthGuardService],
+            data: {title: 'Indemnity'}
+          },
+          {
+            path: 'edit',
+            component: CourseDetailsUpdateComponent,
+            canActivate: [YandeChairGuardService],
+            data: {title: 'Edit'}
+          },
+        ]
+      }
     ]
   },
   {
-    path: 'teacher',
-    component: TeacherBaseComponent,
+    path: 'teachers',
     canActivate: [YandeChairGuardService],
+    canActivateChild: [YandeChairGuardService],
+    data: {title: 'Teachers'},
     children: [
       {
         path: '',
+        component: TeacherListComponent,
+        resolve: {
+          teachers: TeacherListResolveService
+        },
+      },
+      {
+        path: 'onboard',
+        component: TeacherOnboardComponent,
+        data: {title: 'Onboard'}
+      },
+      {
+        path: ':id',
         canActivateChild: [YandeChairGuardService],
+        resolve: {
+          teacher: TeacherDetailsResolveService
+        },
+        data: {title: ':id'},
         children: [
           {
-            path: 'list', component: TeacherListComponent,
-            resolve: {
-              teachers: TeacherListResolveService
-            }
+            path: '',
+            component: TeacherDetailsComponent
           },
-          {path: 'onboard', component: TeacherOnboardComponent},
-          {path: 'details/:id', component: TeacherDetailsComponent},
-          {path: 'update/:id', component: TeacherDetailsUpdateComponent},
-          {path: '', redirectTo: 'list', pathMatch: 'full'},
+          {
+            path: 'edit',
+            component: TeacherDetailsUpdateComponent,
+            data: {title: 'Edit'}
+          }
         ],
       }
     ]

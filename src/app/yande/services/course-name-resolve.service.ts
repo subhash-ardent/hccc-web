@@ -1,30 +1,24 @@
-import {Injectable} from '@angular/core';
-import {
-  Router, Resolve, RouterStateSnapshot,
-  ActivatedRouteSnapshot
-} from '@angular/router';
-import {Observable, timer} from 'rxjs';
-import {map, take, delayWhen, catchError} from 'rxjs/operators';
-
-import {Course} from '../models/course';
-import {NotFoundError} from '../../core/models/not-found-error';
+import { Injectable } from '@angular/core';
+import {catchError, map, take} from 'rxjs/operators';
 import {YandeApiService} from './yande-api.service';
+import {ActivatedRouteSnapshot, Router, RouterStateSnapshot} from '@angular/router';
+import {Course} from '../models/course';
 import {AppService} from '../../app.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CourseDetailsResolveService {
+export class CourseNameResolveService {
 
   constructor(private appService: AppService,
               private apiService: YandeApiService,
               private router: Router) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<Course> {
-    return this.getCourse(route);
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<string> {
+    return this.getCourseName(route);
   }
 
-  async getCourse(route: ActivatedRouteSnapshot): Promise<Course> {
+  async getCourseName(route: ActivatedRouteSnapshot): Promise<string> {
     if (!this.apiService.isCoursesLoaded) {
       await this.apiService.loadCourses();
     }
@@ -35,10 +29,11 @@ export class CourseDetailsResolveService {
           throw new Error('Course Catalogue is Empty');
         } else {
           const course = courses[parseInt(route.params['id']) - 1];
-          return course;
+          console.log(course.courseName);
+          return course.courseName;
         }
       }),
-      catchError(this.appService.handleFatalError<Course>(`get courses`))
+      catchError(this.appService.handleFatalError<string>(`get course name`))
     ).toPromise();
   }
 }

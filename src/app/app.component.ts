@@ -42,7 +42,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       this.appService.loading = true;
     }
     if (event instanceof NavigationEnd) {
-      this.appService.breadCrumbs = this.appService.buildBreadCrumb(this.activatedRoute.root);
+      this.appService.breadCrumbs = [];
+      this.appService.buildBreadCrumb(this.activatedRoute.root);
       this.appService.loading = false;
     }
     if (event instanceof NavigationCancel) {

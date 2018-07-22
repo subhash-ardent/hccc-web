@@ -13,6 +13,7 @@ import { SideNavbarComponent } from './components/side-navbar/side-navbar.compon
 import { FooterComponent } from './components/footer/footer.component';
 import { FullNamePipe } from './pipes/full-name.pipe';
 import { BreadCrumbComponent } from './components/bread-crumb/bread-crumb.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { BreadCrumbComponent } from './components/bread-crumb/bread-crumb.compon
     SideNavbarComponent,
     FooterComponent,
     FullNamePipe,
-    BreadCrumbComponent
+    BreadCrumbComponent,
+    HomeComponent
   ],
   exports: [
     AppBannerComponent,

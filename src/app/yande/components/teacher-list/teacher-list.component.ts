@@ -7,7 +7,7 @@ import {ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'teacher-list',
   templateUrl: './teacher-list.component.html',
-  styleUrls: ['./teacher-list.component.css']
+  styleUrls: ['./teacher-list.component.scss']
 })
 export class TeacherListComponent implements OnInit {
   public teachers: Teacher[];

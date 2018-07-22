@@ -1,0 +1,13 @@
+@import '../../../../hccc-theme';
+
+.wrapper {
+  .hccc-add-new-fab {
+      margin-top: -30px;
+  }
+  .list {
+    padding: 2em 12% 2em 12%;
+  }
+  mat-icon {
+      color: mat-contrast($hccc-theme-primary, 900);
+  }
+}
