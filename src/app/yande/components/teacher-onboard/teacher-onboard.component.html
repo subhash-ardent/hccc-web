@@ -1,5 +1,5 @@
-<div class="hccc-teacher-onboard-form container" fxLayout="column" fxLayoutGap="5%" fxLayoutAlign.lt-md="center center" >
-  <div class="mat-title" fxLayoutAlign.gt-md="center center">Teacher Onboard Page </div>
+<div class="hccc-teacher-onboard-form container" fxLayout="column" fxLayoutGap="10%" fxLayoutAlign.lt-md="center center" >
+
   <!--<div fxFlex="100" fxLayoutAlign="center center" *ngIf="appService.isYandeChair">
     <a mat-fab class="hccc-add-new-fab" routerLink="../create">
       <mat-icon aria-label="add new icon">add</mat-icon>
@@ -8,12 +8,15 @@
 
 
 
-  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="5%">
+  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="10%">
 
       <div fxLayout="column" fxFlex="30" fxFlex.md="40" fxLayoutAlign="center">
-        <mat-form-field>
-          <input matInput type="number" placeholder="Enter Devotee Mobile Number"> <mat-icon matSuffix>search</mat-icon>
+        <mat-form-field >
+          <input fxFlex="60" matInput type="text" placeholder="Enter Devotee Mobile Number">
+          <button fxFlex="10" fxFlex="1 1 auto" mat-icon-button ><mat-icon >search</mat-icon></button>
+
         </mat-form-field>
+
           <mat-list role="list">
             <mat-list-item role="listitem"><h3 matSubheader>First Name:</h3>Madhu Ramesh</mat-list-item>
             <mat-list-item role="listitem"><h3 matSubheader>Email:</h3>abc@example.com</mat-list-item>
@@ -22,10 +25,16 @@
       </div>
 
       <div fxLayout="column" fxFlex="30" fxFlex.md="40" fxLayoutAlign="center">
+
+        <mat-form-field>
+          <input matInput placeholder="Title/Salutaion"><br/>
+        </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Profile Picture URL"><br/>
+          </mat-form-field>
           <mat-form-field>
             <input matInput placeholder="Skill sets"><br/>
           </mat-form-field>
-          
           <mat-checkbox> Indemnity Signed </mat-checkbox><br/>
           <mat-checkbox> Identification Verified </mat-checkbox><br/>
           <mat-checkbox> Background check complete </mat-checkbox>
