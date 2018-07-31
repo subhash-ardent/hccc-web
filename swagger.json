@@ -19,23 +19,14 @@
   "paths": {
     "/courses": {
       "get": {
-        "tags": [
-          "courses"
-        ],
-        "summary": "Retrieves courses from the catalogue",
+        "summary": "Retrieves courses",
         "operationId": "getCourses",
         "parameters": [
-          {
-            "$ref": "#/parameters/Content-Type"
-          },
-          {
-            "$ref": "#/parameters/Accept"
-          },
           {
             "$ref": "#/parameters/User-Name"
           },
           {
-            "name": "tags",
+            "name": "courseTags",
             "in": "query",
             "required": false,
             "type": "string",
@@ -44,9 +35,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Success - List of items returned in the response payload",
+            "description": "Success",
             "schema": {
-              "$ref": "#/definitions/RetrieveCoursesListResponse"
+              "$ref": "#/definitions/CoursesList"
             }
           },
           "400": {
@@ -58,18 +49,9 @@
         }
       },
       "post": {
-        "tags": [
-          "courses"
-        ],
-        "summary": "Adds a new course to the catalogue",
+        "summary": "Adds a new course",
         "operationId": "addCourse",
         "parameters": [
-          {
-            "$ref": "#/parameters/Content-Type"
-          },
-          {
-            "$ref": "#/parameters/Accept"
-          },
           {
             "$ref": "#/parameters/User-Name"
           },
@@ -78,15 +60,15 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CourseObject"
+              "$ref": "#/definitions/Course"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Success - Item returned in the response payload",
+            "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CourseObject"
+              "$ref": "#/definitions/Course"
             }
           },
           "400": {
@@ -103,18 +85,9 @@
     },
     "/courses/{courseId}": {
       "get": {
-        "tags": [
-          "courses"
-        ],
-        "summary": "Retrieves course by Course Id",
+        "summary": "Retrieves course by Id",
         "operationId": "getCourseById",
         "parameters": [
-          {
-            "$ref": "#/parameters/Content-Type"
-          },
-          {
-            "$ref": "#/parameters/Accept"
-          },
           {
             "$ref": "#/parameters/User-Name"
           },
@@ -128,10 +101,249 @@
         ],
         "responses": {
           "200": {
-            "description": "Success - Item returned in the response payload",
+            "description": "Success",
             "schema": {
-              "$ref": "#/definitions/CourseObject"
+              "$ref": "#/definitions/Course"
             }
+          },
+          "400": {
+            "$ref": "#/responses/400ErrorResponse"
+          },
+          "404": {
+            "$ref": "#/responses/404ErrorResponse"
+          },
+          "500": {
+            "$ref": "#/responses/500ErrorResponse"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates a course",
+        "operationId": "updateCourse",
+        "description": "Body of the PATCH request must conform to JSON Merge Patch specification outlined in RFC7396",
+        "parameters": [
+          {
+            "$ref": "#/parameters/User-Name"
+          },
+          {
+            "in": "path",
+            "name": "courseId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the course to be updated"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Course"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/responses/400ErrorResponse"
+          },
+          "403": {
+            "$ref": "#/responses/403ErrorResponse"
+          },
+          "500": {
+            "$ref": "#/responses/500ErrorResponse"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete course by Id",
+        "operationId": "deleteCourseById",
+        "parameters": [
+          {
+            "$ref": "#/parameters/User-Name"
+          },
+          {
+            "in": "path",
+            "name": "courseId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the course to be deleted"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/responses/400ErrorResponse"
+          },
+          "404": {
+            "$ref": "#/responses/404ErrorResponse"
+          },
+          "500": {
+            "$ref": "#/responses/500ErrorResponse"
+          }
+        }
+      }
+    },
+    "/classes": {
+      "get": {
+        "summary": "Retrieves classes",
+        "operationId": "getClasses",
+        "parameters": [
+          {
+            "$ref": "#/parameters/User-Name"
+          },
+          {
+            "name": "courseTags",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Course Tags to be used as filter classes - comma seperated list of tags"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ClassesList"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400ErrorResponse"
+          },
+          "500": {
+            "$ref": "#/responses/500ErrorResponse"
+          }
+        }
+      },
+      "post": {
+        "summary": "Adds a new class",
+        "operationId": "addClass",
+        "parameters": [
+          {
+            "$ref": "#/parameters/User-Name"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Class"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Class"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400ErrorResponse"
+          },
+          "403": {
+            "$ref": "#/responses/403ErrorResponse"
+          },
+          "500": {
+            "$ref": "#/responses/500ErrorResponse"
+          }
+        }
+      }
+    },
+    "/classes/{classId}": {
+      "get": {
+        "summary": "Retrieves class by Id",
+        "operationId": "getClassById",
+        "parameters": [
+          {
+            "$ref": "#/parameters/User-Name"
+          },
+          {
+            "in": "path",
+            "name": "classId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the class to be retrieved"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Class"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400ErrorResponse"
+          },
+          "404": {
+            "$ref": "#/responses/404ErrorResponse"
+          },
+          "500": {
+            "$ref": "#/responses/500ErrorResponse"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates a class",
+        "operationId": "updateClass",
+        "description": "Body of the PATCH request must conform to JSON Merge Patch specification outlined in RFC7396",
+        "parameters": [
+          {
+            "$ref": "#/parameters/User-Name"
+          },
+          {
+            "in": "path",
+            "name": "classId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the class to be updated"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Class"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/responses/400ErrorResponse"
+          },
+          "403": {
+            "$ref": "#/responses/403ErrorResponse"
+          },
+          "500": {
+            "$ref": "#/responses/500ErrorResponse"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete class by Id",
+        "operationId": "deleteClassById",
+        "parameters": [
+          {
+            "$ref": "#/parameters/User-Name"
+          },
+          {
+            "in": "path",
+            "name": "classId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the class to be deleted"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
           },
           "400": {
             "$ref": "#/responses/400ErrorResponse"
@@ -147,27 +359,18 @@
     },
     "/teachers": {
       "get": {
-        "tags": [
-          "teachers"
-        ],
         "summary": "Retrieves list of teachers",
         "operationId": "getTeachers",
         "parameters": [
-          {
-            "$ref": "#/parameters/Content-Type"
-          },
-          {
-            "$ref": "#/parameters/Accept"
-          },
           {
             "$ref": "#/parameters/User-Name"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success - List of items returned in the response payload",
+            "description": "Success",
             "schema": {
-              "$ref": "#/definitions/RetrieveTeachersListResponse"
+              "$ref": "#/definitions/TeachersList"
             }
           },
           "400": {
@@ -182,18 +385,9 @@
         }
       },
       "post": {
-        "tags": [
-          "teachers"
-        ],
-        "summary": "Adds a new teacher to the system",
-        "operationId": "registerTeacher",
+        "summary": "Adds a new teacher",
+        "operationId": "onboardTeacher",
         "parameters": [
-          {
-            "$ref": "#/parameters/Content-Type"
-          },
-          {
-            "$ref": "#/parameters/Accept"
-          },
           {
             "$ref": "#/parameters/User-Name"
           },
@@ -202,15 +396,15 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TeacherObject"
+              "$ref": "#/definitions/Teacher"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Success - Item returned in the response payload",
+            "description": "Success",
             "schema": {
-              "$ref": "#/definitions/TeacherObject"
+              "$ref": "#/definitions/Teacher"
             }
           },
           "400": {
@@ -227,18 +421,9 @@
     },
     "/teachers/{teacherId}": {
       "get": {
-        "tags": [
-          "teachers"
-        ],
-        "summary": "Retrieves teacher by teacher Id",
+        "summary": "Retrieves teacher by Id",
         "operationId": "getTeacherById",
         "parameters": [
-          {
-            "$ref": "#/parameters/Content-Type"
-          },
-          {
-            "$ref": "#/parameters/Accept"
-          },
           {
             "$ref": "#/parameters/User-Name"
           },
@@ -252,9 +437,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Success - Item returned in the response payload",
+            "description": "Success",
             "schema": {
-              "$ref": "#/definitions/TeacherObject"
+              "$ref": "#/definitions/Teacher"
             }
           },
           "400": {
@@ -270,54 +455,98 @@
             "$ref": "#/responses/500ErrorResponse"
           }
         }
-      }
-    },
-    "/indemnities": {
-      "get": {
-        "tags": [
-          "indemnities"
-        ],
-        "summary": "Retrieves indemnities from the system. ",
-        "description": "Only indemnities belonging to the requesting user account will be returned. User Account information is available in the header.",
-        "operationId": "getIndemnities",
+      },
+      "patch": {
+        "summary": "Updates a teacher",
+        "operationId": "updateTeacher",
+        "description": "Body of the PATCH request must conform to JSON Merge Patch specification outlined in RFC7396",
         "parameters": [
-          {
-            "$ref": "#/parameters/Content-Type"
-          },
-          {
-            "$ref": "#/parameters/Accept"
-          },
           {
             "$ref": "#/parameters/User-Name"
           },
           {
-            "name": "familyMemberId",
-            "in": "query",
-            "required": false,
+            "in": "path",
+            "name": "teacherId",
+            "required": true,
             "type": "string",
-            "description": "Identifier of the family member"
+            "description": "Id of the teacher to be updated"
           },
           {
-            "name": "indemnityFormId",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Identifier of the Indemnity Form"
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Teacher"
+            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success - List of items returned in the response payload",
-            "schema": {
-              "$ref": "#/definitions/RetrieveIndemnitiesListResponse"
-            }
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/responses/400ErrorResponse"
+          },
+          "403": {
+            "$ref": "#/responses/403ErrorResponse"
+          },
+          "500": {
+            "$ref": "#/responses/500ErrorResponse"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete teacher by Id",
+        "operationId": "deleteTeacherById",
+        "parameters": [
+          {
+            "$ref": "#/parameters/User-Name"
+          },
+          {
+            "in": "path",
+            "name": "teacherId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the teacher to be deleted"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
           },
           "400": {
             "$ref": "#/responses/400ErrorResponse"
           },
           "404": {
-            "description": "If no indemnity is signed for the given indemnityFormId and familyMemberId combination then return 404 - Not Found",
+            "$ref": "#/responses/404ErrorResponse"
+          },
+          "500": {
+            "$ref": "#/responses/500ErrorResponse"
+          }
+        }
+      }
+    },
+    "/indemnityForms": {
+      "get": {
+        "summary": "Retrieves list of indemnity forms",
+        "operationId": "getIndemnityForms",
+        "parameters": [
+          {
+            "$ref": "#/parameters/User-Name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IndemnityFormsList"
+            }
+          },
+          "400": {
             "$ref": "#/responses/400ErrorResponse"
+          },
+          "403": {
+            "$ref": "#/responses/403ErrorResponse"
           },
           "500": {
             "$ref": "#/responses/500ErrorResponse"
@@ -325,18 +554,9 @@
         }
       },
       "post": {
-        "tags": [
-          "indemnities"
-        ],
-        "summary": "Adds a new indemnity for a student in the system",
-        "operationId": "addIndemnity",
+        "summary": "Adds a new indemnity form",
+        "operationId": "addIndemnityForm",
         "parameters": [
-          {
-            "$ref": "#/parameters/Content-Type"
-          },
-          {
-            "$ref": "#/parameters/Accept"
-          },
           {
             "$ref": "#/parameters/User-Name"
           },
@@ -345,19 +565,22 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IndemnityObject"
+              "$ref": "#/definitions/IndemnityForm"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Success - Item returned in the response payload",
+            "description": "Success",
             "schema": {
-              "$ref": "#/definitions/IndemnityObject"
+              "$ref": "#/definitions/IndemnityForm"
             }
           },
           "400": {
             "$ref": "#/responses/400ErrorResponse"
+          },
+          "403": {
+            "$ref": "#/responses/403ErrorResponse"
           },
           "500": {
             "$ref": "#/responses/500ErrorResponse"
@@ -365,29 +588,127 @@
         }
       }
     },
-    "/accounts": {
+    "/indemnityForms/{indemnityFormId}": {
       "get": {
-        "tags": [
-          "accounts"
-        ],
-        "summary": "Retrieves accounts from the system",
-        "operationId": "getAccounts",
+        "summary": "Retrieves indemnity form by Id",
+        "operationId": "getIndemnityFormById",
         "parameters": [
-          {
-            "$ref": "#/parameters/Content-Type"
-          },
-          {
-            "$ref": "#/parameters/Accept"
-          },
           {
             "$ref": "#/parameters/User-Name"
           },
           {
-            "name": "userName",
+            "in": "path",
+            "name": "indemnityFormId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the indemnity from to be retrieved"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IndemnityForm"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400ErrorResponse"
+          },
+          "403": {
+            "$ref": "#/responses/403ErrorResponse"
+          },
+          "404": {
+            "$ref": "#/responses/404ErrorResponse"
+          },
+          "500": {
+            "$ref": "#/responses/500ErrorResponse"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates an indemnity form",
+        "operationId": "updateIndemnityForm",
+        "description": "Body of the PATCH request must conform to JSON Merge Patch specification outlined in RFC7396",
+        "parameters": [
+          {
+            "$ref": "#/parameters/User-Name"
+          },
+          {
+            "in": "path",
+            "name": "indemnityFormId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the indemnity form to be updated"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IndemnityForm"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/responses/400ErrorResponse"
+          },
+          "403": {
+            "$ref": "#/responses/403ErrorResponse"
+          },
+          "500": {
+            "$ref": "#/responses/500ErrorResponse"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete indemnity form by Id",
+        "operationId": "deleteIndemnityFormrById",
+        "parameters": [
+          {
+            "$ref": "#/parameters/User-Name"
+          },
+          {
+            "in": "path",
+            "name": "indemnityFormId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the indemnity form to be deleted"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/responses/400ErrorResponse"
+          },
+          "404": {
+            "$ref": "#/responses/404ErrorResponse"
+          },
+          "500": {
+            "$ref": "#/responses/500ErrorResponse"
+          }
+        }
+      }
+    },
+    "/devotees": {
+      "get": {
+        "summary": "Retrieves Devotees",
+        "operationId": "getDevotees",
+        "parameters": [
+          {
+            "$ref": "#/parameters/User-Name"
+          },
+          {
+            "name": "include",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "If a userName is passed in query string, the results will be filtered by accounts user name"
+            "description": "?include=familyMember will return devotee devotee information with family members details"
           },
           {
             "name": "phoneNumber",
@@ -406,9 +727,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Success - List of items returned in the response payload",
+            "description": "Success",
             "schema": {
-              "$ref": "#/definitions/RetrieveAccountsListResponse"
+              "$ref": "#/definitions/DevoteesList"
             }
           },
           "400": {
@@ -426,37 +747,73 @@
         }
       }
     },
-    "/account/{userName}/enrollments": {
+    "/devotees/{devoteeId}": {
       "get": {
-        "tags": [
-          "enrollments"
+        "summary": "Gets devotee by Id",
+        "operationId": "getDevotee",
+        "parameters": [
+          {
+            "$ref": "#/parameters/User-Name"
+          },
+          {
+            "name": "include",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "?include=familyMember will return devotee devotee information with family members details"
+          },
+          {
+            "in": "path",
+            "name": "devoteeId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the devotee to be retrieved"
+          }
         ],
-        "summary": "Retrieves enrollments from the system.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DevoteeDetails"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400ErrorResponse"
+          },
+          "403": {
+            "$ref": "#/responses/403ErrorResponse"
+          },
+          "404": {
+            "$ref": "#/responses/404ErrorResponse"
+          },
+          "500": {
+            "$ref": "#/responses/500ErrorResponse"
+          }
+        }
+      }
+    },
+    "/devotees/{devoteeId}/enrollments": {
+      "get": {
+        "summary": "Retrieves enrollments.",
         "description": " Only enrollments belonging to the requesting user account will be returned. User Account information is available in the header.",
         "operationId": "getEnrollments",
         "parameters": [
-          {
-            "$ref": "#/parameters/Content-Type"
-          },
-          {
-            "$ref": "#/parameters/Accept"
-          },
           {
             "$ref": "#/parameters/User-Name"
           },
           {
             "in": "path",
-            "name": "userName",
+            "name": "devoteeId",
             "required": true,
             "type": "string",
-            "description": "Id of the account to be retrieved"
+            "description": "Id of the devotee account whose enrollments are to be retrieved"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success - List of items returned in the response payload",
+            "description": "Success",
             "schema": {
-              "$ref": "#/definitions/RetrieveEnrollmentsListResponse"
+              "$ref": "#/definitions/EnrollmentsList"
             }
           },
           "400": {
@@ -468,24 +825,15 @@
         }
       },
       "post": {
-        "tags": [
-          "enrollments"
-        ],
-        "summary": "Adds a new enrollment to the system",
+        "summary": "Adds a new enrollment",
         "operationId": "addEnrollment",
         "parameters": [
-          {
-            "$ref": "#/parameters/Content-Type"
-          },
-          {
-            "$ref": "#/parameters/Accept"
-          },
           {
             "$ref": "#/parameters/User-Name"
           },
           {
             "in": "path",
-            "name": "userName",
+            "name": "devoteeId",
             "required": true,
             "type": "string",
             "description": "Id of the account to be retrieved"
@@ -495,19 +843,349 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EnrollmentObject"
+              "$ref": "#/definitions/Enrollment"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Success - Item returned in the response payload",
+            "description": "Success",
             "schema": {
-              "$ref": "#/definitions/EnrollmentObject"
+              "$ref": "#/definitions/Enrollment"
             }
           },
           "400": {
             "$ref": "#/responses/400ErrorResponse"
+          },
+          "500": {
+            "$ref": "#/responses/500ErrorResponse"
+          }
+        }
+      }
+    },
+    "/devotees/{devoteeId}/enrollments/{enrollmentId}": {
+      "get": {
+        "summary": "get enrollment by id",
+        "operationId": "getEnrollment",
+        "parameters": [
+          {
+            "$ref": "#/parameters/User-Name"
+          },
+          {
+            "in": "path",
+            "name": "devoteeId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the devotee"
+          },
+          {
+            "in": "path",
+            "name": "enrollmentId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the enrollment to be retrieved"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Enrollment"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400ErrorResponse"
+          },
+          "403": {
+            "$ref": "#/responses/403ErrorResponse"
+          },
+          "404": {
+            "$ref": "#/responses/404ErrorResponse"
+          },
+          "500": {
+            "$ref": "#/responses/500ErrorResponse"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates an enrollment",
+        "operationId": "updateEnrollment",
+        "description": "Body of the PATCH request must conform to JSON Merge Patch specification outlined in RFC7396",
+        "parameters": [
+          {
+            "$ref": "#/parameters/User-Name"
+          },
+          {
+            "in": "path",
+            "name": "devoteeId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the devotee"
+          },
+          {
+            "in": "path",
+            "name": "enrollmentId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the enrollment to be retrieved"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Enrollment"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/responses/400ErrorResponse"
+          },
+          "403": {
+            "$ref": "#/responses/403ErrorResponse"
+          },
+          "500": {
+            "$ref": "#/responses/500ErrorResponse"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete enrollment by Id",
+        "operationId": "deleteEnrollmentById",
+        "parameters": [
+          {
+            "$ref": "#/parameters/User-Name"
+          },
+          {
+            "in": "path",
+            "name": "devoteeId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the devotee"
+          },
+          {
+            "in": "path",
+            "name": "enrollmentId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the enrollment to be deleted"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/responses/400ErrorResponse"
+          },
+          "404": {
+            "$ref": "#/responses/404ErrorResponse"
+          },
+          "500": {
+            "$ref": "#/responses/500ErrorResponse"
+          }
+        }
+      }
+    },
+    "/devotees/{devoteeId}/indemnities": {
+      "get": {
+        "summary": "Retrieves indemnities",
+        "description": "Only indemnities belonging to the requesting user account will be returned. User Account information is available in the header.",
+        "operationId": "getIndemnities",
+        "parameters": [
+          {
+            "$ref": "#/parameters/User-Name"
+          },
+          {
+            "in": "path",
+            "name": "devoteeId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the devotee account whose indemnities are to be retrieved"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IndemnitiesList"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400ErrorResponse"
+          },
+          "404": {
+            "$ref": "#/responses/400ErrorResponse"
+          },
+          "500": {
+            "$ref": "#/responses/500ErrorResponse"
+          }
+        }
+      },
+      "post": {
+        "summary": "Adds a new indemnity",
+        "operationId": "addIndemnity",
+        "parameters": [
+          {
+            "$ref": "#/parameters/User-Name"
+          },
+          {
+            "in": "path",
+            "name": "devoteeId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the devotee"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Indemnity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Indemnity"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400ErrorResponse"
+          },
+          "500": {
+            "$ref": "#/responses/500ErrorResponse"
+          }
+        }
+      }
+    },
+    "/devotees/{devoteeId}/indemnities/{indemnityId}": {
+      "get": {
+        "summary": "get indemnity by id",
+        "operationId": "getIndemnity",
+        "parameters": [
+          {
+            "$ref": "#/parameters/User-Name"
+          },
+          {
+            "in": "path",
+            "name": "devoteeId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the devotee"
+          },
+          {
+            "in": "path",
+            "name": "indemnityId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the indemnity to be retrieved"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Indemnity"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/400ErrorResponse"
+          },
+          "403": {
+            "$ref": "#/responses/403ErrorResponse"
+          },
+          "404": {
+            "$ref": "#/responses/404ErrorResponse"
+          },
+          "500": {
+            "$ref": "#/responses/500ErrorResponse"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates an indemnity",
+        "operationId": "updateIndemnity",
+        "description": "Body of the PATCH request must conform to JSON Merge Patch specification outlined in RFC7396",
+        "parameters": [
+          {
+            "$ref": "#/parameters/User-Name"
+          },
+          {
+            "in": "path",
+            "name": "devoteeId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the devotee"
+          },
+          {
+            "in": "path",
+            "name": "indemnityId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the indemnity to be retrieved"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Indemnity"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/responses/400ErrorResponse"
+          },
+          "403": {
+            "$ref": "#/responses/403ErrorResponse"
+          },
+          "500": {
+            "$ref": "#/responses/500ErrorResponse"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete indemnity by Id",
+        "operationId": "deleteIndemnityById",
+        "parameters": [
+          {
+            "$ref": "#/parameters/User-Name"
+          },
+          {
+            "in": "path",
+            "name": "devoteeId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the devotee"
+          },
+          {
+            "in": "path",
+            "name": "indemnityId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the indemnity to be deleted"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/responses/400ErrorResponse"
+          },
+          "404": {
+            "$ref": "#/responses/404ErrorResponse"
           },
           "500": {
             "$ref": "#/responses/500ErrorResponse"
@@ -530,25 +1208,25 @@
         }
       }
     },
-
-    "RetrieveCoursesListResponse": {
+    "CoursesList": {
       "description": "This is the schema of response payload when a list of course information is requested",
       "properties": {
         "courses": {
           "type": "array",
           "description": "List of Courses",
           "items": {
-            "$ref": "#/definitions/CourseObject"
+            "$ref": "#/definitions/Course"
           }
         }
       }
     },
-    "CourseObject": {
+    "Course": {
       "description": "Course Object",
       "properties": {
         "courseId": {
           "type": "string",
-          "description": "Unique course id"
+          "description": "Unique course id",
+          "readOnly": true
         },
         "courseName": {
           "type": "string",
@@ -557,6 +1235,47 @@
         "ageRestrictions": {
           "type": "string",
           "description": "A String describing any age restrictions"
+        },
+        "courseImageURL": {
+          "type": "string",
+          "description": "URL of the course's image"
+        },
+        "courseRemarks": {
+          "type": "string",
+          "description": "Any additional notes or remarks about the course"
+        },
+        "courseTags": {
+          "description": "List of tags associated with the course",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ClassesList": {
+      "description": "This is the schema of response payload when a list of classes is requested",
+      "properties": {
+        "classes": {
+          "type": "array",
+          "description": "List of Courses",
+          "items": {
+            "$ref": "#/definitions/Class"
+          }
+        }
+      }
+    },
+    "Class": {
+      "description": "Course Object",
+      "properties": {
+        "classId": {
+          "type": "string",
+          "description": "Unique class id",
+          "readOnly": true
+        },
+        "courseId": {
+          "type": "string",
+          "description": "Unique course id"
         },
         "courseStartTime": {
           "type": "string",
@@ -586,17 +1305,9 @@
           "type": "string",
           "description": "URL of the course's flyer"
         },
-        "imageURL": {
-          "type": "string",
-          "description": "URL of the course's image"
-        },
         "slots": {
           "type": "integer",
           "description": "Class size or total number of slots in the course"
-        },
-        "courseRemarks": {
-          "type": "string",
-          "description": "Any additional notes or remarks about the course"
         },
         "teachers": {
           "description": "List of teacher (or coordinator) ids of the course",
@@ -604,34 +1315,27 @@
           "items": {
             "type": "string"
           }
-        },
-        "tags": {
-          "description": "List of tags associated with the course",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
-
-    "RetrieveTeachersListResponse": {
+    "TeachersList": {
       "description": "This is the schema of response payload when a list of teacher information is requested",
       "properties": {
         "teachers": {
           "type": "array",
           "description": "List of Teachers",
           "items": {
-            "$ref": "#/definitions/TeacherObject"
+            "$ref": "#/definitions/Teacher"
           }
         }
       }
     },
-    "TeacherObject": {
+    "Teacher": {
       "description": "Teacher Object",
       "properties": {
         "account": {
-          "$ref": "#/definitions/AccountObject"
+          "readOnly": true,
+          "$ref": "#/definitions/Devotee"
         },
         "salutation": {
           "type": "string",
@@ -662,62 +1366,70 @@
         }
       }
     },
-
-    "RetrieveIndemnitiesListResponse": {
+    "IndemnitiesList": {
       "description": "This is the schema of response payload when a list of indemnity information is requested",
       "properties": {
         "indemnities": {
           "type": "array",
           "description": "List of Indemnities",
           "items": {
-            "$ref": "#/definitions/IndemnityObject"
+            "$ref": "#/definitions/Indemnity"
           }
         }
       }
     },
-    "IndemnityObject": {
+    "Indemnity": {
       "description": "Indemnity Object",
       "properties": {
-        "account": {
-          "$ref": "#/definitions/AccountObject"
+        "indemnityId": {
+          "type": "string",
+          "description": "Unique identifier of the Indemnity.",
+          "readOnly": true
+        },
+        "devoteeId": {
+          "type": "string",
+          "description": "Identifier of the Devotee"
         },
         "signedFor": {
-          "$ref": "#/definitions/NameObject"
+          "type": "string",
+          "description": "Identifier of the Family Member or the devotee Id depending on who the indemnity is signed for"
         },
         "signedBy": {
-          "$ref": "#/definitions/NameObject"
+          "type": "string",
+          "description": "Identifier of the Family Member or the devotee Id depending on who the indemnity is signed by"
         },
         "signedOn": {
           "type": "string",
           "description": "Datetime when the indemnity was signed in ISO 8612 format. For e.g. 2018-07-10T07:51:25+00:00"
         },
-        "indemnityForm": {
-          "$ref": "#/definitions/IndemnityFormObject"
+        "indemnityFormId": {
+          "type": "string",
+          "description": "Identifier of the Indemnity Form being signed."
         }
       }
     },
-
-    "RetrieveAccountsListResponse": {
+    "DevoteesList": {
       "description": "This is the schema of response payload when an account's information is requested",
       "properties": {
-        "accounts": {
+        "devotees": {
           "type": "array",
-          "description": "List of Accounts",
+          "description": "List of Devotee Objects",
           "items": {
-            "$ref": "#/definitions/AccountObject"
+            "$ref": "#/definitions/Devotee"
           }
         }
       }
     },
-    "AccountObject": {
+    "Devotee": {
       "description": "Devotee Account Object",
       "properties": {
-        "userName": {
+        "devoteeId": {
           "type": "string",
-          "description": "Unique userName of the devotee"
+          "description": "Unique userName of the devotee",
+          "readOnly": true
         },
         "name": {
-          "$ref": "#/definitions/NameObject"
+          "$ref": "#/definitions/Name"
         },
         "phoneNumber": {
           "type": "string",
@@ -727,9 +1439,33 @@
           "type": "string",
           "description": "Email Id associated with the devotee's account"
         },
-        "dateOfBirth": {
+        "roles": {
+          "type": "array",
+          "description": "List of roles",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DevoteeDetails": {
+      "description": "Devotee Account Object",
+      "properties": {
+        "devoteeId": {
           "type": "string",
-          "description": "Date of birth of the Devotee in the format MM-DD"
+          "description": "Unique userName of the devotee",
+          "readOnly": true
+        },
+        "name": {
+          "$ref": "#/definitions/Name"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number associated with the devotee's account"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email Id associated with the devotee's account"
         },
         "familyMembers": {
           "type": "array",
@@ -747,47 +1483,90 @@
         }
       }
     },
-
-    "RetrieveEnrollmentsListResponse": {
+    "EnrollmentsList": {
       "description": "This is the schema of response payload when a list of indemnity information is requested",
       "properties": {
-        "enrollment": {
+        "enrollments": {
           "type": "array",
           "description": "List of Enrollments",
           "items": {
-            "$ref": "#/definitions/EnrollmentObject"
+            "$ref": "#/definitions/Enrollment"
           }
         }
       }
     },
-    "EnrollmentObject": {
+    "Enrollment": {
       "description": "Enrollment Object",
       "properties": {
         "enrollmentId": {
           "type": "string",
-          "description": "Unique enrollment id"
+          "description": "Unique enrollment id",
+          "readOnly": true
         },
-        "account": {
-          "$ref": "#/definitions/AccountObject"
-        },
-        "participantName": {
-          "$ref": "#/definitions/NameObject"
+        "devoteeId": {
+          "type": "string",
+          "description": "Identifier of the Devotee"
         },
         "familyMemberId": {
           "type": "string",
           "description": "Identifier of the Family Member"
         },
+        "ClassId": {
+          "type": "string",
+          "description": "Identifier of the class being enrolled to"
+        },
         "isParticipantUnder18": {
           "type": "boolean",
-          "description": "true id participant age is under 18 else false"
+          "description": "true if participant age is under 18, else false"
         },
-        "indemnityForm": {
-          "$ref": "#/definitions/IndemnityObject"
+        "indemnityIds": {
+          "type": "array",
+          "description": "List of Indemnity Ids signed in association with this enrollment",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
-
-    "NameObject": {
+    "IndemnityFormsList": {
+      "description": "This is the schema of response payload when a list of indemnity forms is requested",
+      "properties": {
+        "indemnityForms": {
+          "type": "array",
+          "description": "List of Indemnity Forms",
+          "items": {
+            "$ref": "#/definitions/IndemnityForm"
+          }
+        }
+      }
+    },
+    "IndemnityForm": {
+      "description": "Indemnity Form Object",
+      "properties": {
+        "indemnityFormId": {
+          "type": "string",
+          "description": "Unique id of indemnity form",
+          "readOnly": true
+        },
+        "indemnityFormTitle": {
+          "type": "string",
+          "description": "Title of the indemnity Form"
+        },
+        "indemnityFormDescription": {
+          "type": "string",
+          "description": "Description of the indemnity Form that explains the purpose and usage of the form"
+        },
+        "indemnityFormVersion": {
+          "type": "string",
+          "description": "Version of the indemnity Form"
+        },
+        "indemnityFormURL": {
+          "type": "string",
+          "description": "URL of the indemnity template"
+        }
+      }
+    },
+    "Name": {
       "description": "Name Object",
       "properties": {
         "firstName": {
@@ -804,36 +1583,16 @@
         }
       }
     },
-    "IndemnityFormObject": {
-      "description": "Indemnity Form Object",
-      "properties": {
-        "indemnityFormId": {
-          "type": "string",
-          "description": "URL of the indemnity template"
-        },
-        "templateURL": {
-          "type": "string",
-          "description": "URL of the indemnity template"
-        },
-        "indemnityFormTitle": {
-          "type": "string",
-          "description": "Title of the indemnity Form"
-        },
-        "indemnityFormVersion": {
-          "type": "string",
-          "description": "Version of the indemnity Form"
-        }
-      }
-    },
     "FamilyMember": {
       "description": "Devotee Object",
       "properties": {
-        "name": {
-          "$ref": "#/definitions/NameObject"
-        },
-        "dateOfBirth": {
+        "familyMemberId": {
           "type": "string",
-          "description": "Date of birth of the Devotee in the format MM-DD"
+          "description": "Unique Identifier of the family member",
+          "readOnly": true
+        },
+        "familyMemberName": {
+          "$ref": "#/definitions/Name"
         }
       }
     }
