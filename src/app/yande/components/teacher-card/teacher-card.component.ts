@@ -4,7 +4,7 @@ import {Teacher} from '../../models/teacher';
 @Component({
   selector: 'teacher-card',
   templateUrl: './teacher-card.component.html',
-  styleUrls: ['./teacher-card.component.css']
+  styleUrls: ['./teacher-card.component.scss']
 })
 export class TeacherCardComponent implements OnInit {
   @Input() teacher: Teacher;

@@ -21,6 +21,7 @@ import {CourseDetailsResolveService} from './services/course-details-resolve.ser
 import {TeacherListResolveService} from './services/teacher-list-resolve.service';
 import {TeacherDetailsResolveService} from './services/teacher-details-resolve.service';
 import {CourseNameResolveService} from './services/course-name-resolve.service';
+import {TeacherNameResolveService} from './services/teacher-name-resolve.service';
 
 
 const yandeRoutes: Routes = [
@@ -97,7 +98,8 @@ const yandeRoutes: Routes = [
         path: ':id',
         canActivateChild: [YandeChairGuardService],
         resolve: {
-          teacher: TeacherDetailsResolveService
+          teacher: TeacherDetailsResolveService,
+          id: TeacherNameResolveService
         },
         data: {title: ':id'},
         children: [

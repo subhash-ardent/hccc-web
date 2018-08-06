@@ -1,10 +1,18 @@
-<div class="wrapper" >
-    <div class="teacher-icon">
-     	<mat-icon>home</mat-icon>
-     </div>
-	 <div class="teacher-details">
-	     <p>{{teacher.account | fullName}}</p>
-	     <p>{{teacher.account.email}}</p>
-	     <p>{{teacher.account.phoneNumber}}</p>
-	 </div>
-</div>
+<mat-card class="teacher-cards" fxLayout="row" >
+
+    <mat-card-content fxLayout="column">
+        <div *ngIf="!teacher.profilePictureURL" class="teacher-icon">
+            <mat-icon>home</mat-icon>
+        </div>
+        <div *ngIf="teacher.profilePictureURL" class="teacher-img">
+            <img src="{{teacher.profilePictureURL}}">
+        </div>
+        <p>{{teacher.account | fullName}}</p>
+        <p>{{teacher.account.email}}</p>
+        <p>{{teacher.account.phoneNumber}}</p>
+        <mat-card-actions fxLayoutAlign.lt-sm="center center">
+            <a mat-button color="accent" routerLink="/teachers/{{teacher.account.userName}}">DETAILS</a>
+        </mat-card-actions>
+    </mat-card-content>
+
+</mat-card>
