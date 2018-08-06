@@ -1,48 +1,39 @@
 <div class="hccc-teacher-onboard-form container" fxLayout="column" fxLayoutGap="10%" fxLayoutAlign.lt-md="center center" >
 
-  <!--<div fxFlex="100" fxLayoutAlign="center center" *ngIf="appService.isYandeChair">
-    <a mat-fab class="hccc-add-new-fab" routerLink="../create">
-      <mat-icon aria-label="add new icon">add</mat-icon>
-    </a>
-  </div>-->
-
-
-
   <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="10%">
 
       <div fxLayout="column" fxFlex="30" fxFlex.md="40" fxLayoutAlign="center">
-        <mat-form-field >
-          <input fxFlex="60" matInput type="text" placeholder="Enter Devotee Mobile Number">
+        <mat-form-field>
+          <input fxFlex="60" matInput type="text" placeholder="Enter Devotee Mobile Number" #devoteeMobileNumber
+                 (keyup.enter)="getDevotee(devoteeMobileNumber.value)">
           <button fxFlex="10" fxFlex="1 1 auto" mat-icon-button ><mat-icon >search</mat-icon></button>
 
         </mat-form-field>
 
-          <mat-list role="list">
-            <mat-list-item role="listitem"><h3 matSubheader>First Name:</h3>Madhu Ramesh</mat-list-item>
-            <mat-list-item role="listitem"><h3 matSubheader>Email:</h3>abc@example.com</mat-list-item>
-            <mat-list-item role="listitem"><h3 matSubheader>Phone Number:</h3>123-456-7890</mat-list-item><br/>
+          <mat-list role="list" *ngIf="devotee">
+            <mat-list-item role="listitem"><h3 matSubheader>First Name:</h3>{{devotee | fullName}}</mat-list-item>
+            <mat-list-item role="listitem"><h3 matSubheader>Email:</h3>{{devotee.email}}</mat-list-item>
+            <mat-list-item role="listitem"><h3 matSubheader>Phone Number:</h3>{{devotee.phoneNumber}}</mat-list-item><br/>
           </mat-list>
       </div>
 
       <div fxLayout="column" fxFlex="30" fxFlex.md="40" fxLayoutAlign="center">
 
         <mat-form-field>
-          <input matInput placeholder="Title/Salutaion"><br/>
+          <input matInput placeholder="Title/Salutaion" [(ngModel)]="model.salutation"><br/>
         </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Profile Picture URL"><br/>
+            <input matInput placeholder="Profile Picture URL" [(ngModel)]="model.profilePictureURL"><br/>
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Skill sets"><br/>
+            <input matInput placeholder="Skill sets" [(ngModel)]="model.skillSet"><br/>
           </mat-form-field>
-          <mat-checkbox> Indemnity Signed </mat-checkbox><br/>
-          <mat-checkbox> Identification Verified </mat-checkbox><br/>
-          <mat-checkbox> Background check complete </mat-checkbox>
+          <mat-checkbox [(ngModel)]="model.indemnitySigned"> Indemnity Signed </mat-checkbox><br/>
+          <mat-checkbox [(ngModel)]="model.identityVerified"> Identification Verified </mat-checkbox><br/>
+          <mat-checkbox [(ngModel)]="model.backgroundVerified"> Background check complete </mat-checkbox>
       </div>
 
   </div>
-
-
   <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="50px">
       <button mat-flat-button color="accent" >CANCEL</button>
       <button mat-flat-button color="accent">SUBMIT</button>

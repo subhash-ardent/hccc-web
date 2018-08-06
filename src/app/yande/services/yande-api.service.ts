@@ -18,6 +18,7 @@ export class YandeApiService {
 
   private coursesEndpointUrl = 'yande/api/courses';
   private teachersEndpointUrl = 'yande/api/teachers';
+  private devoteeEndpointUrl = 'yande/api/accounts';
   private logger = new LoggerService(this.constructor.name);
   public isCoursesLoaded = false;
   public isTeachersLoaded = false;
@@ -51,7 +52,6 @@ export class YandeApiService {
     } catch (e) {
       this.appService.handleFatalError<CourseCollection>('loadCourses')(e);
     }
-
   }
 
   addCourse(newCourse: Course) {
@@ -69,7 +69,7 @@ export class YandeApiService {
   }
 
   updateCourse(updatedCourse: Course) {
-    return this.http.patch<Course>('/courses', JSON.stringify(updatedCourse)).pipe(
+    return this.http.patch<Course>(this.coursesEndpointUrl, JSON.stringify(updatedCourse)).pipe(
       tap(
         res => {
           const courses = this.courses$.value;
@@ -80,8 +80,6 @@ export class YandeApiService {
         })
     );
   }
-
-
 
   // Teachers
 
@@ -106,7 +104,7 @@ export class YandeApiService {
   }
 
   addTeacher(newTeacher: Teacher) {
-    return this.http.post<Teacher>('/Teachers', JSON.stringify(newTeacher)).pipe(
+    return this.http.post<Teacher>(this.teachersEndpointUrl, JSON.stringify(newTeacher)).pipe(
       tap(
         res => {
           this.teachers$.value.push(res);
@@ -117,7 +115,7 @@ export class YandeApiService {
   }
 
   updateTeacher(updatedTeacher: Teacher) {
-    return this.http.patch<Teacher>('/tVs', JSON.stringify(updatedTeacher)).pipe(
+    return this.http.patch<Teacher>(this.teachersEndpointUrl, JSON.stringify(updatedTeacher)).pipe(
       tap(
         res => {
           const teachers = this.teachers$.value;
@@ -129,6 +127,14 @@ export class YandeApiService {
     );
   }
 
+  // Account
 
+  getDevotee(mobileNumber: string): Observable<[Account]> {
+    return this.http.get<[Account]>(this.devoteeEndpointUrl + '?phoneNumber=' + mobileNumber).pipe(
+      take(1),
+      tap(a => console.log(a)),
+      catchError(this.appService.handleFatalError<[Account]>('getDevotee'))
+    );
+  }
 }
 

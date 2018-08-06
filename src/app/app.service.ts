@@ -7,7 +7,8 @@ import {LoggerService} from './core/services/logger.service';
 import {Router, ActivatedRoute} from '@angular/router';
 import {NotFoundError} from './core/models/not-found-error';
 import {BreadCrumb} from './core/models/bread-crumb';
-import {Course} from './yande/models/course';
+import {MatSnackBar} from '@angular/material';
+import {SnackBarComponent} from './core/components/snack-bar/snack-bar.component';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,8 @@ export class AppService {
 
   constructor(
     private http: HttpClient,
-    private router: Router) {
+    private router: Router,
+    public snackBar: MatSnackBar) {
     this.loadInitialData();
     this.isLoggedIn$.subscribe(
       isLoggedIn => {
@@ -98,33 +100,11 @@ export class AppService {
     }
   }
 
-  // buildBreadCrumb(route: ActivatedRoute, url: string = '',
-  //                 breadcrumbs: Array<BreadCrumb> = []): Array<BreadCrumb> {
-  //   let label = '';
-  //   let path = '';
-  //   // console.log(route);
-  //   route.data.subscribe(data => {
-  //     console.log(data);
-  //   });
-  //   if (route.routeConfig && route.routeConfig.data && route.routeConfig.data['title']) {
-  //     label = route.routeConfig.data[ 'title' ];
-  //     path = route.routeConfig.path;
-  //     const nextUrl = `${url}${path}/`;
-  //     const breadcrumb = {
-  //       label: label,
-  //       url: nextUrl
-  //     };
-  //     const newBreadcrumbs = [ ...breadcrumbs, breadcrumb ];
-  //     if (route.firstChild) {
-  //       return this.buildBreadCrumb(route.firstChild, nextUrl, newBreadcrumbs);
-  //     }
-  //     return newBreadcrumbs;
-  //   }
-  //   if (route.firstChild) {
-  //     return this.buildBreadCrumb(route.firstChild, url, breadcrumbs);
-  //   }
-  //   return breadcrumbs;
-  // }
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 5000,
+    });
+  }
 
   async handlePathParams(route: ActivatedRoute, breadCrumb: BreadCrumb): Promise<string> {
     return await route.data.pipe(

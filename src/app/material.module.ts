@@ -20,7 +20,8 @@ import {
   MatSelectModule,
   MatNativeDateModule,
   MatChipsModule,
-  MatBadgeModule
+  MatBadgeModule,
+  MatSnackBarModule
 } from '@angular/material';
 
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -44,7 +45,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatDatepickerModule,
     MatNativeDateModule,
     MatChipsModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatSnackBarModule
   ],
   exports: [
     BrowserAnimationsModule,
@@ -65,7 +67,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatDatepickerModule,
     MatNativeDateModule,
     MatChipsModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatSnackBarModule
   ]
 })
 export class MaterialModule {

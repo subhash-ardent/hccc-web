@@ -202,6 +202,33 @@ const data = {
       "dateOfBirth" : "1990-06-12"
     } ]
   } ],
+  "1234567890": [ {
+    "userName" : "srinivasan",
+    "phoneNumber" : "5678901234",
+    "roles" : [ "Teacher", "Devotee" ],
+    "email" : "email",
+    "dateOfBirth" : "1990-07-12",
+    "name" : {
+      "firstName" : "Srinivasan",
+      "lastName" : "Venkatesan",
+      "middleName" : ""
+    },
+    "familyMembers" : [ {
+      "name" : {
+        "firstName" : "Lakshmi",
+        "lastName" : "Raman",
+        "middleName" : ""
+      },
+      "dateOfBirth" : "1990-12-12"
+    }, {
+      "name" : {
+        "firstName" : "Padma",
+        "lastName" : "Krishna",
+        "middleName" : ""
+      },
+      "dateOfBirth" : "1990-06-12"
+    } ]
+  } ],
 };
 
 exports.getAccounts = function(contentType,accept,accountId,userName,phoneNumber,role) {
