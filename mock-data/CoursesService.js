@@ -1,41 +1,6 @@
 'use strict';
 
-const courses = [{
-  "courseName": "NARAYANEEYAM CLASSES",
-  "courseEndTime": "3.00 PM",
-  "courseStartTime": "2.00 PM",
-  "courseEndDate": "2019-02-15",
-  "ageRestrictions": "Age above 7",
-  "courseStartDate": "2018-07-15",
-  "tags": ["Slokas", "Adults"],
-  "slots": 20,
-  "courseVenue": "Kanaka Durga Hall",
-  "teachers": [
-    {
-      "profilePictureURL": "http://www.livermoretemple.org/hints/images/Priests/THEJESVI.jpg",
-      "skillSet": ["Krishna yajurvedam", "Pancha Rathra Agamam"],
-      "indemnitySigned": true,
-      "salutation": "Pdt",
-      "identityVerified": true,
-      "account": {
-        "phoneNumber": "1234567890",
-        "roles": ["teacher", "devotee"],
-        "name": {
-          "firstName": "Sampath",
-          "lastName": "Sridharan"
-        },
-        "userName": "ss",
-        "email": "ss@livermoretemple.org"
-      },
-      "backgroundVerified": true
-    }
-  ],
-  "flyerURL": "flyerURL",
-  "courseId": "1",
-  "courseDays": "Saturdays",
-  "courseRemarks": "Please bring your copy of Narayaneeyam to the class",
-  "imageURL": "http://www.livermoretemple.org/hints/images/2012/Jyeshtabhishekam.gif",
-},
+const courses = [
   {
     "courseName": "STEM SUMMER WORKSHOP",
     "courseEndTime": "1.00 PM",
@@ -106,6 +71,42 @@ const courses = [{
     "courseRemarks": "Please bring your copy of Vishnu Sahasaranamam",
     "imageURL": "http://www.livermoretemple.org/hints/images/2010/vishnuclasses.jpg",
 
+  },
+  {
+    "courseName": "NARAYANEEYAM CLASSES",
+    "courseEndTime": "3.00 PM",
+    "courseStartTime": "2.00 PM",
+    "courseEndDate": "2019-02-15",
+    "ageRestrictions": "Age above 7",
+    "courseStartDate": "2018-07-15",
+    "tags": ["Slokas", "Adults"],
+    "slots": 20,
+    "courseVenue": "Kanaka Durga Hall",
+    "teachers": [
+      {
+        "profilePictureURL": "http://www.livermoretemple.org/hints/images/Priests/THEJESVI.jpg",
+        "skillSet": ["Krishna yajurvedam", "Pancha Rathra Agamam"],
+        "indemnitySigned": true,
+        "salutation": "Pdt",
+        "identityVerified": true,
+        "account": {
+          "phoneNumber": "1234567890",
+          "roles": ["teacher", "devotee"],
+          "name": {
+            "firstName": "Sampath",
+            "lastName": "Sridharan"
+          },
+          "userName": "ss",
+          "email": "ss@livermoretemple.org"
+        },
+        "backgroundVerified": true
+      }
+    ],
+    "flyerURL": "flyerURL",
+    "courseId": "1",
+    "courseDays": "Saturdays",
+    "courseRemarks": "Please bring your copy of Narayaneeyam to the class",
+    "imageURL": "http://www.livermoretemple.org/hints/images/2012/Jyeshtabhishekam.gif",
   },
   {
     "courseName": "SANSKRIT CLASSES",

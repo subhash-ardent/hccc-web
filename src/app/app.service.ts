@@ -8,7 +8,6 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {NotFoundError} from './core/models/not-found-error';
 import {BreadCrumb} from './core/models/bread-crumb';
 import {MatSnackBar} from '@angular/material';
-import {SnackBarComponent} from './core/components/snack-bar/snack-bar.component';
 
 @Injectable({
   providedIn: 'root'

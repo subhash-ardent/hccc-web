@@ -20,7 +20,7 @@ import {TeacherDetailsComponent} from './components/teacher-details/teacher-deta
 import {TeacherDetailsUpdateComponent} from './components/teacher-details-update/teacher-details-update.component';
 import {CourseBaseComponent} from './components/course-base/course-base.component';
 import {TeacherBaseComponent} from './components/teacher-base/teacher-base.component';
-import { CourseSortPipe } from './components/course-catalogue/courseSort.pipe';
+import { CourseSortPipe } from './pipes/course-sort.pipe';
 
 
 
