@@ -32,7 +32,7 @@ router.all('/*', (req, res) => {
         console.log(`Api call for ${req.url} failed with status code - ${response.statusCode}`);
         res.status(response.statusCode).end();
       } else {
-        console.log(`Received response for $req.url`, response.statusCode);
+        console.log(`Received response for ${req.url}`, response.statusCode);
         res.status(response.statusCode).send(body);
       }
     })
