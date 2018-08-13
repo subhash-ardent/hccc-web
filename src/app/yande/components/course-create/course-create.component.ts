@@ -8,11 +8,12 @@ import {Teacher} from '../../models/teacher';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material';
 import { NgForm } from '@angular/forms';
+import {SnackBarService} from '../../../core/services/snack-bar.service';
 
 @Component({
   selector: 'app-course-create',
   templateUrl: './course-create.component.html',
-  styleUrls: ['./course-create.component.css']
+  styleUrls: ['./course-create.component.scss']
 })
 export class CourseCreateComponent implements OnInit {
   @ViewChild('courseForm') courseForm: NgForm;
@@ -23,8 +24,10 @@ export class CourseCreateComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   constructor(private appService: AppService,
-              private route: ActivatedRoute,
-              private apiService: YandeApiService) {
+              private snachBarService: SnackBarService,
+              private apiService: YandeApiService,
+              private router: Router,
+              private route: ActivatedRoute) {
     this.model.tags = [];
     this.model.teachers = [];
   }
@@ -59,14 +62,17 @@ export class CourseCreateComponent implements OnInit {
     this.submitted = true;
     console.log('printing model', this.model);
 
-    this.apiService.addCourse(this.model).pipe(
-      catchError(this.appService.handleFatalError<Course[]>(`submit to add course`))
-    ).subscribe();
+    this.apiService.addCourse(this.model).subscribe(
+      data => {
+        this.snachBarService.showSuccessSnackBar('New Course Added Successfully');
+        this.router.navigate(['../'], {relativeTo: this.route});
+      },
+      error => this.snachBarService.showFailureSnackBar('Error while adding new course')
+    );
   }
 
-  //reset functionality and clearing the course-create form.
-
-  onReset(){
+  // reset functionality and clearing the course-create form.
+  onReset() {
     this.model.tags = [];
     this.courseForm.reset();
   }

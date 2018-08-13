@@ -175,76 +175,67 @@ const data = {
       "dateOfBirth" : "1990-06-12"
     } ]
   }],
-  "5678901234": [ {
+  "5555555555": [ {
     "userName" : "Narayanam",
-    "phoneNumber" : "5678901234",
-    "roles" : [ "Teacher", "Devotee" ],
+    "phoneNumber" : "5555555555",
+    "roles" : [ "Priest", "Devotee" ],
     "email" : "email",
-    "dateOfBirth" : "1990-07-12",
     "name" : {
       "firstName" : "Narayanam",
       "lastName" : "Krishna",
       "middleName" : ""
     },
-    "familyMembers" : [ {
-      "name" : {
-        "firstName" : "Lakshmi",
-        "lastName" : "Raman",
-        "middleName" : ""
-      },
-      "dateOfBirth" : "1990-12-12"
-    }, {
-      "name" : {
-        "firstName" : "Padma",
-        "lastName" : "Krishna",
-        "middleName" : ""
-      },
-      "dateOfBirth" : "1990-06-12"
-    } ]
   } ],
-  "1234567890": [ {
+  "6666666666": [ {
     "userName" : "srinivasan",
-    "phoneNumber" : "5678901234",
+    "phoneNumber" : "6666666666",
     "roles" : [ "Teacher", "Devotee" ],
     "email" : "email",
-    "dateOfBirth" : "1990-07-12",
     "name" : {
       "firstName" : "Srinivasan",
       "lastName" : "Venkatesan",
       "middleName" : ""
     },
-    "familyMembers" : [ {
-      "name" : {
-        "firstName" : "Lakshmi",
-        "lastName" : "Raman",
-        "middleName" : ""
-      },
-      "dateOfBirth" : "1990-12-12"
-    }, {
-      "name" : {
-        "firstName" : "Padma",
-        "lastName" : "Krishna",
-        "middleName" : ""
-      },
-      "dateOfBirth" : "1990-06-12"
-    } ]
   } ],
+  "7777777777": [ {
+    "userName" : "vasudevan",
+    "phoneNumber" : "6666666666",
+    "roles" : [ "Devotee" ],
+    "email" : "email",
+    "name" : {
+      "firstName" : "Vasudevan",
+      "lastName" : "Padhmanabhan",
+      "middleName" : ""
+    },
+  } ]
 };
 
 exports.getAccounts = function(contentType,accept,accountId,userName,phoneNumber,role) {
   return new Promise(function(resolve, reject) {
     if (userName === 'devotee') {
       resolve(data['devotee']);
+      // console.log("1");
     } else if (userName === 'yande') {
       resolve(data['yande']);
-    } else if (phoneNumber === '5678901234') {
-      resolve(data['5678901234']);
+      // console.log("2");
+    } else if (phoneNumber === '5555555555') {
+      resolve(data['5555555555']);
+      // console.log("3");
+    } else if (phoneNumber === '6666666666') {
+      resolve(data['6666666666']);
+      // console.log("4");
+    } else if (phoneNumber === '7777777777') {
+      resolve(data['7777777777']);
+      // console.log("5");
     } else if (role === 'teacher') {
       resolve(data['teacher']);
+      // console.log("6");
     } else if (!userName && !phoneNumber && !role) {
       resolve(data['allAccounts']);
+      // console.log("7");
     } else {
       resolve([]);
+      // console.log("8");
     }
   });
 };

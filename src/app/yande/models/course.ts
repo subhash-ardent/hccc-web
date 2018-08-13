@@ -8,8 +8,8 @@ export class Course {
   courseStartDate?: string;
   courseEndDate?: string;
   tags?: string[];
-  slots = 10;
-  courseVenue = 'Shiva - Vishnu Temple, Livermore';
+  slots: number;
+  courseVenue: string;
   teachers: Teacher[];
   flyerURL?: string;
   courseId?: string;

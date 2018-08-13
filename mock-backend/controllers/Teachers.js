@@ -40,6 +40,6 @@ module.exports.registerTeacher = function registerTeacher (req, res, next) {
       utils.writeJson(res, response);
     })
     .catch(function (response) {
-      utils.writeJson(res, response);
+      utils.writeJson(res, response, response.code);
     });
 };

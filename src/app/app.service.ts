@@ -27,7 +27,6 @@ export class AppService {
   public isinitialDataLoaded = false;
   public sideNavMenuClick$: Observable<Event>;
   public breadCrumbs: BreadCrumb[];
-
   authRedirectUrl: string;
   loading = false;
 
@@ -97,12 +96,6 @@ export class AppService {
       })))).subscribe();
       route = route.firstChild;
     }
-  }
-
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 5000,
-    });
   }
 
   async handlePathParams(route: ActivatedRoute, breadCrumb: BreadCrumb): Promise<string> {

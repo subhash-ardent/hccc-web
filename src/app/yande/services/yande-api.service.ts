@@ -9,6 +9,7 @@ import {LoggerService} from '../../core/services/logger.service';
 import {catchError, tap, take, delayWhen} from 'rxjs/operators';
 import {AppService} from '../../app.service';
 import {Account} from '../../core/models/account';
+import {SnackBarService} from '../../core/services/snack-bar.service';
 
 
 @Injectable({
@@ -27,6 +28,7 @@ export class YandeApiService {
 
   constructor(
     private appService: AppService,
+    private snachBarService: SnackBarService,
     private http: HttpClient) {
     this.loadCourses();
     this.loadTeachers();
@@ -63,8 +65,8 @@ export class YandeApiService {
           this.courses$.value.push(res.course);
           this.courses$.next(this.courses$.value);
           this.logger.info(`${newCourse.courseName} added successfully`);
-        }),
-      catchError(this.appService.handleFatalError<Course[]>(`add course`))
+          this.snachBarService.showSuccessSnackBar('New Course Added Successfully');
+        })
     );
   }
 
@@ -104,12 +106,12 @@ export class YandeApiService {
   }
 
   addTeacher(newTeacher: Teacher) {
-    return this.http.post<Teacher>(this.teachersEndpointUrl, JSON.stringify(newTeacher)).pipe(
+    return this.http.post<Teacher>(this.teachersEndpointUrl, {teacher: newTeacher}).pipe(
       tap(
         res => {
           this.teachers$.value.push(res);
           this.teachers$.next(this.teachers$.value);
-          this.logger.info(`${newTeacher.userName} added successfully`);
+          this.logger.info(`Teacher added successfully`);
         })
     );
   }
