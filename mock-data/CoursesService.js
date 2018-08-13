@@ -162,15 +162,19 @@ exports.addCourse = function (contentType, accept, userId, body) {
     if (!body.course) {
       reject();
     }
-    let maxId = courses.reduce(getMaxId, 0);
-    body.course.courseId = maxId + 1;
-    courses.push(body.course);
-    var examples = {};
-    examples['application/json'] = body;
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
+    if(body && body.course && body.course.courseName && ['400', '403', '500'].includes(body.course.courseName)) {
+      reject({code: parseInt(body.course.courseName)});
     } else {
-      resolve();
+      let maxId = courses.reduce(getMaxId, 0);
+      body.course.courseId = maxId + 1;
+      courses.push(body.course);
+      var examples = {};
+      examples['application/json'] = body;
+      if (Object.keys(examples).length > 0) {
+        resolve(examples[Object.keys(examples)[0]]);
+      } else {
+        resolve();
+      }
     }
   });
 }

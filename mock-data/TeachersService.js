@@ -198,47 +198,37 @@ exports.getTeachers = function(contentType,accept,userName) {
  **/
 exports.registerTeacher = function(contentType,accept,userName,body) {
   return new Promise(function(resolve, reject) {
+
     var examples = {};
-    examples['application/json'] = {
-      "profilePictureURL" : "profilePictureURL",
-      "skillSet" : [ "skillSet", "skillSet" ],
-      "indemnitySigned" : true,
-      "salutation" : "salutation",
-      "identityVerified" : true,
-      "account" : {
-        "phoneNumber" : "phoneNumber",
-        "roles" : [ "roles", "roles" ],
-        "name" : {
-          "firstName" : "firstName",
-          "lastName" : "lastName",
-          "middleName" : "middleName"
-        },
-        "dateOfBirth" : "dateOfBirth",
-        "userName" : "userName",
-        "familyMembers" : [ {
-          "name" : {
-            "firstName" : "firstName",
-            "lastName" : "lastName",
-            "middleName" : "middleName"
-          },
-          "dateOfBirth" : "dateOfBirth"
-        }, {
-          "name" : {
-            "firstName" : "firstName",
-            "lastName" : "lastName",
-            "middleName" : "middleName"
-          },
-          "dateOfBirth" : "dateOfBirth"
-        } ],
-        "email" : "email"
-      },
-      "backgroundVerified" : true
-    };
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
+    if(body && body.teacher && body.teacher.salutation && ['400', '403', '500'].includes(body.teacher.salutation)) {
+      reject({code: parseInt(body.teacher.salutation)});
     } else {
-      resolve();
+      examples['application/json'] = {
+        "profilePictureURL": "profilePictureURL",
+        "skillSet": ["skillSet", "skillSet"],
+        "indemnitySigned": true,
+        "salutation": "salutation",
+        "identityVerified": true,
+        "account": {
+          "phoneNumber": "phoneNumber",
+          "roles": ["roles", "roles"],
+          "name": {
+            "firstName": "firstName",
+            "lastName": "lastName",
+            "middleName": "middleName"
+          },
+          "userName": "userName",
+          "email": "email"
+        },
+        "backgroundVerified": true
+      };
+      if (Object.keys(examples).length > 0) {
+        resolve(examples[Object.keys(examples)[0]]);
+      } else {
+        resolve();
+      }
     }
+
   });
 }
 
