@@ -18,6 +18,46 @@ $hccc-theme-warn
 );
 @include angular-material-theme($hccc-theme);
 
+$hccc-theme-success-msg-green: darkgreen;
+$hccc-theme-failure-msg-red: orangered;
+$hccc-theme-warning-msg-yellow: goldenrod;
+$hccc-theme-info-msg-blue: darkcyan;
+
 .mat-badge-content {
   padding: 7px !important;
+}
+
+.hccc-success-snack-bar {
+  background-color: $hccc-theme-success-msg-green;
+  .mat-button {
+    color:mat-contrast($hccc-theme-primary, 900);
+  }
+}
+.hccc-failure-snack-bar {
+  background-color: $hccc-theme-failure-msg-red;
+  .mat-button {
+    color:mat-contrast($hccc-theme-primary, 900);
+  }
+}
+.hccc-warning-snack-bar {
+  background-color: $hccc-theme-warning-msg-yellow;
+  .mat-button {
+    color:mat-contrast($hccc-theme-primary, 900);
+  }
+}
+.hccc-info-snack-bar {
+  background-color: $hccc-theme-info-msg-blue;
+  .mat-button {
+    color:mat-contrast($hccc-theme-primary, 900);
+  }
+}
+
+.hccc-success-caption {
+  background-color: $hccc-theme-success-msg-green;
+  color: mat-contrast($hccc-theme-primary, 900);
+}
+
+.hccc-failure-caption {
+  background-color: $hccc-theme-failure-msg-red;
+  color: mat-contrast($hccc-theme-primary, 900);
 }
