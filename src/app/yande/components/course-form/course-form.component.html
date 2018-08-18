@@ -1,0 +1,129 @@
+
+<form #courseForm="ngForm" (ngSubmit)="onSubmit()" class="hccc-course-creation-form"
+      fxLayout="column" fxLayoutGap="5%" fxLayoutAlign.lt-md="center center"
+      (keydown.enter)="$event.preventDefault()">
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="5%">
+
+        <div fxLayout="column" fxFlex="30" fxFlex.md="40" fxLayoutAlign="center">
+
+            <mat-form-field>
+                <input matInput placeholder="Course Name" value="" [readonly]="action==='details'"
+                       id="courseName" required [(ngModel)]="model.courseName" name="courseName"> <br/>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Age Restrictions Info" value="" [readonly]="action==='details'"
+                       [(ngModel)]="model.ageRestrictions" name="ageRestrictions">
+            </mat-form-field>
+
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
+                    <mat-form-field>
+                        <input matInput type="date" placeholder="Start Date" value="" [readonly]="action==='details'"
+                               [(ngModel)]="model.courseStartDate" name="courseStartDate">
+                        <!--<mat-datepicker-toggle matSuffix [for]="startDatePicker" *ngIf="action=='create'"></mat-datepicker-toggle>-->
+                        <!--<mat-datepicker #startDatePicker="matDatepicker" *ngIf="action=='create'"></mat-datepicker>-->
+                    </mat-form-field>
+                </div>
+                <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
+                    <mat-form-field>
+                        <input matInput type="date" placeholder="End Date" value="" [readonly]="action==='details'"
+                               [(ngModel)]="model.courseEndDate" name="courseEndDate">
+                        <!--<mat-datepicker-toggle matSuffix [for]="endDatePicker" *ngIf="action==='create'"></mat-datepicker-toggle>-->
+                        <!--<mat-datepicker #endDatePicker="matDatepicker" *ngIf="action==='create'"></mat-datepicker>-->
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
+                    <mat-form-field>
+                        <input matInput placeholder="Start Time" type="time" [(ngModel)]="model.courseStartTime" [readonly]="action==='details'"
+                               name="courseStartTime">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
+                    <mat-form-field>
+                        <input matInput placeholder="End Time" type="time" [(ngModel)]="model.courseEndTime" [readonly]="action==='details'"
+                               name="courseEndTime">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <mat-form-field>
+                <input matInput placeholder="Days" value="" [readonly]="action==='details'"
+                       [(ngModel)]="model.courseDays" name="courseDays">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Venue" value="" [readonly]="action==='details'"
+                       [(ngModel)]="model.courseVenue" name="courseVenue">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Flyer URL" value="" [readonly]="action==='details'"
+                       [(ngModel)]="model.flyerURL" name="flyerURL">
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="column" fxFlex="30" fxFlex.md="40" >
+            <mat-form-field  *ngIf="action==='details'">
+                <input matInput placeholder="Teachers and Coordinates" value="" [readonly]="action==='details'"
+                       [(ngModel)]="model.teachersString" name="teachers">
+            </mat-form-field>
+
+            <mat-form-field *ngIf="['create','edit'].includes(action)">
+                <mat-select placeholder="Teachers and Coordinates" [(ngModel)]="model.teachers" name="teachers"  multiple>
+                    <mat-option *ngFor="let teacher of teachers" [value]="teacher">
+                        <!--<mat-option *ngFor="let teacher of teachers" [value]="[teacher.account.userName]"> Uncomment when integrating with Backend-->
+                        {{teacher.account | fullName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="action==='details'">
+                <input matInput placeholder="Tags" value="" [readonly]="action==='details'"
+                       [(ngModel)]="model.tagsString" name="tags">
+            </mat-form-field>
+
+            <mat-form-field *ngIf="['create','edit'].includes(action)">
+                <mat-chip-list #tagList>
+                    <mat-chip *ngFor="let tag of model.tags"
+                              removable (removed)="removeTag(tag)">
+                        {{tag}}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="Tags (comma seperated)"
+                           [matChipInputFor]="tagList"
+                           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                           matChipInputAddOnBlur="true"
+                           (matChipInputTokenEnd)="addTag($event)" >
+                </mat-chip-list>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Image URL" [readonly]="action==='details'"
+                       [(ngModel)]="model.imageURL" name="imageURL">
+            </mat-form-field>
+
+            <mat-form-field>
+                <textarea matInput placeholder="Remarks/Notes" [readonly]="action==='details'"
+                          [(ngModel)]="model.courseRemarks" name="courseRemarks"></textarea>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Number of Slots" [readonly]="action==='details'"
+                       [(ngModel)]="model.slots" name="slots">
+            </mat-form-field>
+        </div>
+
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="50px">
+        <button *ngIf="action!=='details'" mat-flat-button color="accent" routerLink="../">CANCEL</button>
+        <button *ngIf="action==='create'" mat-flat-button color="accent" type="reset" (click)="onReset()">RESET</button>
+        <button *ngIf="action==='create'" mat-flat-button color="accent" type="submit" [disabled]="!courseForm.form.valid">SUBMIT</button>
+        <button *ngIf="action==='edit'" mat-flat-button color="accent" type="button" (click)="onUpdate()">UPDATE</button>
+    </div>
+
+</form>

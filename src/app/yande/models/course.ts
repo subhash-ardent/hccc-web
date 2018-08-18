@@ -16,4 +16,6 @@ export class Course {
   courseDays: string;
   courseRemarks?: string;
   ageRestrictions: string;
+  tagsString: string;
+  teachersString: string;
 }

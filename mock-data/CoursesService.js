@@ -3,8 +3,8 @@
 const courses = [
   {
     "courseName": "STEM SUMMER WORKSHOP",
-    "courseEndTime": "1.00 PM",
-    "courseStartTime": "11.00 AM",
+    "courseEndTime": "13:00",
+    "courseStartTime": "11:00",
     "courseEndDate": "2018-08-15",
     "ageRestrictions": "Age from 8 to 15",
     "courseStartDate": "2018-06-15",
@@ -38,8 +38,8 @@ const courses = [
   },
   {
     "courseName": "VISHNUSAHASRANAMAM CLASS",
-    "courseEndTime": "2.00 PM",
-    "courseStartTime": "1.00 PM",
+    "courseEndTime": "14:00",
+    "courseStartTime": "13:00",
     "courseEndDate": "2018-08-15",
     "ageRestrictions": "Age above 7",
     "courseStartDate": "2018-06-15",
@@ -74,8 +74,8 @@ const courses = [
   },
   {
     "courseName": "NARAYANEEYAM CLASSES",
-    "courseEndTime": "3.00 PM",
-    "courseStartTime": "2.00 PM",
+    "courseEndTime": "15:00",
+    "courseStartTime": "14:00",
     "courseEndDate": "2019-02-15",
     "ageRestrictions": "Age above 7",
     "courseStartDate": "2018-07-15",
@@ -110,8 +110,8 @@ const courses = [
   },
   {
     "courseName": "SANSKRIT CLASSES",
-    "courseEndTime": "varies by course level",
-    "courseStartTime": "varies by course level",
+    "courseEndTime": "15:00",
+    "courseStartTime": "14:00",
     "courseEndDate": "2018-08-15",
     "ageRestrictions": "Age above 6 and Adults",
     "courseStartDate": "2018-06-15",

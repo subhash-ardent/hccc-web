@@ -84,7 +84,6 @@ export class AppService {
             const paramName = label.replace(':','');
             label = data[paramName];
             path = params[paramName];
-            console.log(route.params);
           }
           url = `${url}${path}/`;
           const breadcrumb = {

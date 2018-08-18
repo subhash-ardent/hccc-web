@@ -57,7 +57,6 @@ export class YandeApiService {
   }
 
   addCourse(newCourse: Course) {
-    console.log('prinitng newCourse', JSON.stringify({course: newCourse}));
     return this.http.post<{course: Course}>(this.coursesEndpointUrl, {course: newCourse}).pipe(
       tap(
         res => {

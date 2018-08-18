@@ -8,10 +8,15 @@ import {Course} from '../../models/course';
 })
 export class CourseCardComponent implements OnInit {
   @Input() course: Course;
-  @Input() isEnrollDisabled: boolean;
+  @Input() hideEnroll: boolean;
+  @Input() hideDetails: boolean;
+  @Input() showDelete: boolean;
   constructor() { }
 
   ngOnInit() {
   }
 
+  deleteCourse(courseId) {
+
+  }
 }

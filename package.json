@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "concurrently -k \"node server/index.js\" \"node mock-backend/index.js\" \"ng serve --base-href /yande --deploy-url /yande/ \"",
+    "start": "concurrently -k \"ng serve --base-href /yande --deploy-url /yande/ \"",
     "start-with-node": "ng build --base-href /yande --deploy-url /yande/ && node server/index.js && node mock-backend/index.js",
     "serve": "ng serve",
     "build": "ng build",
