@@ -21,6 +21,7 @@ import {TeacherDetailsUpdateComponent} from './components/teacher-details-update
 import {CourseBaseComponent} from './components/course-base/course-base.component';
 import {TeacherBaseComponent} from './components/teacher-base/teacher-base.component';
 import { CourseSortPipe } from './pipes/course-sort.pipe';
+import { CourseFormComponent } from './components/course-form/course-form.component';
 
 
 
@@ -48,7 +49,8 @@ import { CourseSortPipe } from './pipes/course-sort.pipe';
     TeacherDetailsUpdateComponent,
     CourseBaseComponent,
     TeacherBaseComponent,
-    CourseSortPipe
+    CourseSortPipe,
+    CourseFormComponent
   ]
 })
 export class YandeModule {

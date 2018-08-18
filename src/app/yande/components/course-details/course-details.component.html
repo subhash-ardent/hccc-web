@@ -6,39 +6,7 @@
         </a>
     </div>
 
-    <div fxLayout="column" fxLayoutGap="5%" fxLayoutAlign.lt-md="center center" >
-        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="5%">
-            <div fxLayout="column" fxFlex="30" fxFlex.md="40" fxLayoutAlign="center">
-                <mat-list role="list">
-                  <mat-list-item role="listitem"><h3 matSubheader>Course Name:</h3> {{course.courseName}}</mat-list-item>
-                  <mat-list-item role="listitem"><h3 matSubheader>Age Restrictions:</h3> {{course.ageRestrictions}}</mat-list-item>
-                  <mat-list-item role="listitem"><h3 matSubheader>Start Date:</h3>{{course.courseStartDate}}</mat-list-item>
-                  <mat-list-item role="listitem"><h3 matSubheader>End Date:</h3> {{course.courseEndDate}}</mat-list-item>
-                  <mat-list-item role="listitem"><h3 matSubheader>Time:</h3> {{course.courseStartTime}} - {{course.courseEndTime}}</mat-list-item>
-                  <mat-list-item role="listitem"><h3 matSubheader>Days:</h3> {{course.courseDays}}</mat-list-item>
-                  <mat-list-item role="listitem"><h3 matSubheader>Venue:</h3>{{course.courseVenue}}</mat-list-item>
-                  <mat-list-item role="listitem">
-                      <h3 matSubheader>Flyer URL:</h3>
-                      <a href="https://www.livermoretemple.org">{{course.flyerURL}}</a>
-                  </mat-list-item>
-                </mat-list>
-            </div>
-            <div fxLayout="column" fxFlex="30" fxFlex.md="40" >
-                <mat-list role="list">
-                  <mat-list-item role="listitem"><h3 matSubheader>Teachers and Coordinates:</h3>
-                      <span *ngFor="let teacher of course.teachers">{{teacher}}</span>
-                  </mat-list-item>
-                  <mat-list-item role="listitem"><h3 matSubheader>Tags:</h3>
-                      <span *ngFor="let tag of course.tags">{{tag}}</span>
-                  </mat-list-item>
-                  <mat-list-item role="listitem">
-                      <h3 matSubheader>Image URl:</h3>
-                      <a href="https://google.com">{{course.imageURL}}</a>
-                  </mat-list-item>
-                  <mat-list-item role="listitem"><h3 matSubheader>Remarks:</h3> {{course.courseRemarks}}</mat-list-item>
-                  <mat-list-item role="listitem"><h3 matSubheader>Number of Slots:</h3> {{course.slots}}</mat-list-item>
-                </mat-list>
-            </div>
-        </div>
-    </div>
+    <course-card [course]="course" [hideDetails]="true" fxFlexAlign="center"></course-card>
+
+    <hccc-course-form action='details' [course]="course"></hccc-course-form>
 </div>

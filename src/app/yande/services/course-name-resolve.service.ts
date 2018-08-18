@@ -28,8 +28,12 @@ export class CourseNameResolveService {
         if (!courses || courses.length === 0) {
           throw new Error('Course Catalogue is Empty');
         } else {
-          const course = courses[parseInt(route.params['id']) - 1];
-          console.log(course.courseName);
+          const course = courses.find(c => {
+            return parseInt(c.courseId) === parseInt(route.params['id']);
+          });
+          if (!course) {
+            throw new Error('Course not found');
+          }
           return course.courseName;
         }
       }),

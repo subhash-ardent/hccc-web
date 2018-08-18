@@ -27,9 +27,11 @@
 
         <div>
             <mat-card-actions fxLayoutAlign.lt-sm="center center">
-                <a mat-button color="accent" routerLink="/courses/{{course.courseId}}">DETAILS</a>
+                <a mat-button color="accent" routerLink="/courses/{{course.courseId}}"
+                   *ngIf="!hideDetails">DETAILS</a>
                 <a mat-button color="accent" routerLink="/courses/{{course.courseId}}/enroll"
-                   [disabled]="isEnrollDisabled">ENROLL</a>
+                   *ngIf="!hideEnroll">ENROLL</a>
+                <a mat-button color="accent" (click)="deleteCourse(course.courseId)" *ngIf="showDelete">DELETE</a>
             </mat-card-actions>
         </div>
 

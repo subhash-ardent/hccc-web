@@ -7,7 +7,8 @@
     </a>
   </div>
   <div fxLayout="row wrap" fxLayoutAlign="space-evenly stretch" fxLayoutGap="1%">
-      <course-card *ngFor="let course of courses  | courseSort:'courseName'" [course]="course"></course-card>
+      <course-card *ngFor="let course of courses  | courseSort:'courseName'"
+                   [course]="course" [showDelete]="appService.isYandeChair"></course-card>
 
   </div>
 </div>

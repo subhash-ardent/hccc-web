@@ -70,7 +70,10 @@ const yandeRoutes: Routes = [
             path: 'edit',
             component: CourseDetailsUpdateComponent,
             canActivate: [YandeChairGuardService],
-            data: {title: 'Edit'}
+            data: {title: 'Edit'},
+            resolve: {
+              teachers: TeacherListResolveService
+            },
           },
         ]
       }
