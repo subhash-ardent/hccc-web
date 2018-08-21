@@ -10,6 +10,8 @@ import {Course} from '../../models/course';
 })
 export class CourseCatalogueComponent implements OnInit {
   public courses;
+  public tagMap = new Map();
+  public topThreeTags: [string];
 
   constructor(public appService: AppService,
               private router: Router,
@@ -21,7 +23,26 @@ export class CourseCatalogueComponent implements OnInit {
     this.route.data
       .subscribe((data: { courses: Course[] }) => {
         this.courses = data.courses;
+        this.buildTagMap();
+        this.findTopThreeTags();
       });
+  }
+
+  buildTagMap() {
+    this.courses.forEach(c => {
+      c.tags.forEach(t => {
+        if (this.tagMap.has(t)) {
+          this.tagMap.get(t).push(c);
+        } else {
+          this.tagMap.set(t, [c]);
+        }
+      });
+    });
+  }
+
+  findTopThreeTags() {
+    console.log(this.tagMap);
+    this.topThreeTags = Array.from(this.tagMap.keys()).sort((a, b) => this.tagMap.get(b).length - this.tagMap.get(a).length).slice(0, 3);
   }
 
   // onClickAddNew() {
