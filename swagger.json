@@ -1476,7 +1476,7 @@
         },
         "roles": {
           "type": "array",
-          "description": "List of roles",
+          "description": "List of roles object",
           "items": {
             "type": "string"
           }
