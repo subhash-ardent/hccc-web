@@ -187,176 +187,6 @@
         }
       }
     },
-    "/classes": {
-      "get": {
-        "summary": "Retrieves classes",
-        "operationId": "getClasses",
-        "parameters": [
-          {
-            "$ref": "#/parameters/User-Name"
-          },
-          {
-            "name": "courseTags",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Course Tags to be used as filter classes - comma seperated list of tags"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ClassesList"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/400ErrorResponse"
-          },
-          "500": {
-            "$ref": "#/responses/500ErrorResponse"
-          }
-        }
-      },
-      "post": {
-        "summary": "Adds a new class",
-        "operationId": "addClass",
-        "parameters": [
-          {
-            "$ref": "#/parameters/User-Name"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Class"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Class"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/400ErrorResponse"
-          },
-          "403": {
-            "$ref": "#/responses/403ErrorResponse"
-          },
-          "500": {
-            "$ref": "#/responses/500ErrorResponse"
-          }
-        }
-      }
-    },
-    "/classes/{classId}": {
-      "get": {
-        "summary": "Retrieves class by Id",
-        "operationId": "getClassById",
-        "parameters": [
-          {
-            "$ref": "#/parameters/User-Name"
-          },
-          {
-            "in": "path",
-            "name": "classId",
-            "required": true,
-            "type": "string",
-            "description": "Id of the class to be retrieved"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Class"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/400ErrorResponse"
-          },
-          "404": {
-            "$ref": "#/responses/404ErrorResponse"
-          },
-          "500": {
-            "$ref": "#/responses/500ErrorResponse"
-          }
-        }
-      },
-      "patch": {
-        "summary": "Updates a class",
-        "operationId": "updateClass",
-        "description": "Body of the PATCH request must conform to JSON Merge Patch specification outlined in RFC7396",
-        "parameters": [
-          {
-            "$ref": "#/parameters/User-Name"
-          },
-          {
-            "in": "path",
-            "name": "classId",
-            "required": true,
-            "type": "string",
-            "description": "Id of the class to be updated"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Class"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          },
-          "400": {
-            "$ref": "#/responses/400ErrorResponse"
-          },
-          "403": {
-            "$ref": "#/responses/403ErrorResponse"
-          },
-          "500": {
-            "$ref": "#/responses/500ErrorResponse"
-          }
-        }
-      },
-      "delete": {
-        "summary": "Delete class by Id",
-        "operationId": "deleteClassById",
-        "parameters": [
-          {
-            "$ref": "#/parameters/User-Name"
-          },
-          {
-            "in": "path",
-            "name": "classId",
-            "required": true,
-            "type": "string",
-            "description": "Id of the class to be deleted"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          },
-          "400": {
-            "$ref": "#/responses/400ErrorResponse"
-          },
-          "404": {
-            "$ref": "#/responses/404ErrorResponse"
-          },
-          "500": {
-            "$ref": "#/responses/500ErrorResponse"
-          }
-        }
-      }
-    },
     "/teachers": {
       "get": {
         "summary": "Retrieves list of teachers",
@@ -718,11 +548,11 @@
             "description": "If a phone number is passed in query string, the results will be filtered by accounts mobile number"
           },
           {
-            "name": "role",
+            "name": "roleName",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "If a role is passed in query string, the results will be filtered by roles"
+            "description": "If a role name is passed in query string, the results will be filtered by roles"
           }
         ],
         "responses": {
@@ -795,7 +625,7 @@
     "/devotees/{devoteeId}/enrollments": {
       "get": {
         "summary": "Retrieves enrollments.",
-        "description": " Only enrollments belonging to the requesting user account will be returned. User Account information is available in the header.",
+        "description": " Only enrollments belonging to the requesting devotee account will be returned. User Account information is available in the header.",
         "operationId": "getEnrollments",
         "parameters": [
           {
@@ -1250,32 +1080,14 @@
           "items": {
             "type": "string"
           }
-        }
-      }
-    },
-    "ClassesList": {
-      "description": "This is the schema of response payload when a list of classes is requested",
-      "properties": {
-        "classes": {
-          "type": "array",
-          "description": "List of Courses",
-          "items": {
-            "$ref": "#/definitions/Class"
-          }
-        }
-      }
-    },
-    "Class": {
-      "description": "Course Object",
-      "properties": {
-        "classId": {
-          "type": "string",
-          "description": "Unique class id",
-          "readOnly": true
         },
-        "courseId": {
-          "type": "string",
-          "description": "Unique course id"
+        "isArchived": {
+          "type": "boolean",
+          "description": "Boolean field indicates if course is archived"
+        },
+        "isRegistrationOpen": {
+          "type": "boolean",
+          "description": "Boolean field indicates if registration is open"
         },
         "courseStartTime": {
           "type": "string",
@@ -1333,7 +1145,7 @@
     "Teacher": {
       "description": "Teacher Object",
       "properties": {
-        "account": {
+        "devotee": {
           "readOnly": true,
           "$ref": "#/definitions/Devotee"
         },
@@ -1390,11 +1202,11 @@
           "type": "string",
           "description": "Identifier of the Devotee"
         },
-        "signedFor": {
+        "signedForFamilyMemberId": {
           "type": "string",
           "description": "Identifier of the Family Member or the devotee Id depending on who the indemnity is signed for"
         },
-        "signedBy": {
+        "signedByFamilyMemberId": {
           "type": "string",
           "description": "Identifier of the Family Member or the devotee Id depending on who the indemnity is signed by"
         },
@@ -1440,11 +1252,7 @@
           "description": "Email Id associated with the devotee's account"
         },
         "roles": {
-          "type": "array",
-          "description": "List of roles",
-          "items": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/Role"
         }
       }
     },
@@ -1475,11 +1283,7 @@
           }
         },
         "roles": {
-          "type": "array",
-          "description": "List of roles object",
-          "items": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/Name"
         }
       }
     },
@@ -1507,17 +1311,25 @@
           "type": "string",
           "description": "Identifier of the Devotee"
         },
-        "familyMemberId": {
+        "participantFamilyMemberId": {
           "type": "string",
-          "description": "Identifier of the Family Member"
+          "description": "Identifier of the Participating Family Member"
         },
-        "ClassId": {
+        "courseId": {
           "type": "string",
           "description": "Identifier of the class being enrolled to"
         },
         "isParticipantUnder18": {
           "type": "boolean",
           "description": "true if participant age is under 18, else false"
+        },
+        "guardianFamilyMemberId": {
+          "type": "string",
+          "description": "Identifier of the Guardian Family Member"
+        },
+        "emergencyContactNumber": {
+          "type": "string",
+          "description": "Emergency contact phone number"
         },
         "indemnityIds": {
           "type": "array",
@@ -1593,6 +1405,23 @@
         },
         "familyMemberName": {
           "$ref": "#/definitions/Name"
+        }
+      }
+    },
+    "Role": {
+      "description": "Role Object",
+      "properties": {
+        "roleId": {
+          "type": "number",
+          "description": "Id of the role"
+        },
+        "roleName": {
+          "type": "string",
+          "description": "Name of the role"
+        },
+        "roleDescription": {
+          "type": "string",
+          "description": "Description of the role"
         }
       }
     }
