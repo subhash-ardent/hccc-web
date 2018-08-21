@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Course} from '../../models/course';
 
 @Component({
   selector: 'hccc-course-search-navbar',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./course-search-navbar.component.css']
 })
 export class CourseSearchNavbarComponent implements OnInit {
-
+  @Input() topThreeTags: [string];
   constructor() { }
 
   ngOnInit() {
