@@ -11,7 +11,7 @@ import {Course} from '../../models/course';
 export class CourseCatalogueComponent implements OnInit {
   public courses;
   public tagMap = new Map();
-  public topThreeTags: [string];
+  public topThreeTags: any[];
 
   constructor(public appService: AppService,
               private router: Router,
