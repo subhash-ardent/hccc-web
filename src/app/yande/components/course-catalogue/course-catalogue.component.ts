@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {AppService} from '../../../app.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Course} from '../../models/course';
@@ -12,7 +12,8 @@ export class CourseCatalogueComponent implements OnInit {
   public courses;
   public tagMap = new Map();
   public topThreeTags: any[];
-
+   filterTag: string = '';
+   filterString: string = '';
   constructor(public appService: AppService,
               private router: Router,
               private route: ActivatedRoute) {
@@ -23,6 +24,7 @@ export class CourseCatalogueComponent implements OnInit {
     this.route.data
       .subscribe((data: { courses: Course[] }) => {
         this.courses = data.courses;
+        console.log(this.courses);
         this.buildTagMap();
         this.findTopThreeTags();
       });
@@ -31,10 +33,10 @@ export class CourseCatalogueComponent implements OnInit {
   buildTagMap() {
     this.courses.forEach(c => {
       c.tags.forEach(t => {
-        if (this.tagMap.has(t)) {
-          this.tagMap.get(t).push(c);
+        if (this.tagMap.has(t.toUpperCase())) {
+          this.tagMap.get(t.toUpperCase()).push(c);
         } else {
-          this.tagMap.set(t, [c]);
+          this.tagMap.set(t.toUpperCase(), [c]);
         }
       });
     });
@@ -43,8 +45,8 @@ export class CourseCatalogueComponent implements OnInit {
   findTopThreeTags() {
     console.log(this.tagMap);
     this.topThreeTags = Array.from(this.tagMap.keys()).sort((a, b) => this.tagMap.get(b).length - this.tagMap.get(a).length).slice(0, 3);
+    this.topThreeTags[3] = 'ALL'; 
   }
-
   // onClickAddNew() {
   //     this.router.navigate(['../create'], {relativeTo: this.route});
   // }

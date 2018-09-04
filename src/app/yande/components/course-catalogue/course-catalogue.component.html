@@ -1,14 +1,14 @@
 <!--Course catalogue works!-->
 <div class="wrapper" fxLayout="column">
-  <hccc-course-search-navbar [topThreeTags]="topThreeTags"></hccc-course-search-navbar>
+  <hccc-course-search-navbar [topThreeTags]="topThreeTags" (filteredTag) = "filterTag = $event" (searchKey) = "filterString = $event"></hccc-course-search-navbar>
   <div fxFlex="100" fxLayoutAlign="center center" *ngIf="appService.isYandeChair">
     <a mat-fab ngClass.gt-sm="hccc-add-new-fab" routerLink="./create">
       <mat-icon aria-label="add new icon">add</mat-icon>
     </a>
   </div>
   <div fxLayout="row wrap" fxLayoutAlign="space-evenly stretch" fxLayoutGap="1%">
-      <course-card *ngFor="let course of courses  | courseSort:'courseName'"
-                   [course]="course" [showDelete]="appService.isYandeChair"></course-card>
+      <course-card *ngFor="let course of courses  | courseSort:'courseName' | CourseFilter:filterTag:filterString "
+                   [course]="course" [showDelete]="appService.isYandeChair"><p *ngIf="courses.length===0">no matches found</p></course-card>
 
   </div>
 </div>
