@@ -11,7 +11,7 @@
         <p>{{teacher.account.email}}</p>
         <p>{{teacher.account.phoneNumber}}</p>
         <mat-card-actions fxLayoutAlign.lt-sm="center center">
-            <a mat-button color="accent" routerLink="/teachers/{{teacher.account.userName}}">DETAILS</a>
+            <a mat-button color="accent" routerLink="/teachers/{{teacher.account.userName}}" *ngIf="!hideTDetails">DETAILS</a>
         </mat-card-actions>
     </mat-card-content>
 

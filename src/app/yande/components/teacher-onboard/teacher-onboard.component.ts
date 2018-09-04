@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {catchError} from 'rxjs/operators';
 import {Teacher} from '../../models/teacher';
 import {YandeApiService} from '../../services/yande-api.service';

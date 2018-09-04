@@ -18,6 +18,7 @@ export class TeacherDetailsComponent implements OnInit {
     this.route.data
       .subscribe((data: { teacher: Teacher }) => {
         this.teacher = data.teacher;
+        console.log(this.teacher);
       });
   }
 
