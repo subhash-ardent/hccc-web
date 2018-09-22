@@ -8,6 +8,7 @@ import {Teacher} from '../../models/teacher';
 })
 export class TeacherCardComponent implements OnInit {
   @Input() teacher: Teacher;
+  @Input() hideTDetails: boolean;
   constructor() { }
 
   ngOnInit() {
