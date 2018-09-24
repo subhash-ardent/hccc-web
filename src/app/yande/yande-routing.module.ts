@@ -13,6 +13,7 @@ import {TeacherDetailsComponent} from './components/teacher-details/teacher-deta
 import {TeacherDetailsUpdateComponent} from './components/teacher-details-update/teacher-details-update.component';
 import {CourseBaseComponent} from './components/course-base/course-base.component';
 import {TeacherBaseComponent} from './components/teacher-base/teacher-base.component';
+import {MyCoursesComponent} from './components/my-courses/my-courses.component';
 
 import {AuthGuardService} from '../core/services/auth-guard.service';
 import {YandeChairGuardService} from './services/yande-chair-guard.service';
@@ -118,6 +119,10 @@ const yandeRoutes: Routes = [
         ],
       }
     ]
+  },
+  {
+    path:'myCourses',
+    component: MyCoursesComponent
   }
 ];
 

@@ -1,0 +1,16 @@
+.wrapper{
+    margin-top: 3%;
+}
+.mat-card-title, .mat-card-subtitle, p{
+    text-align: center
+}
+input{
+    border-bottom: 1px solid #000000;
+    border-left: 0px;
+    border-right: 0px;
+    border-top: 0px;
+}
+mat-card-content{
+    overflow: auto;
+    max-height: 300px;
+}

@@ -1,0 +1,6 @@
+<div class="wrapper" fxLayout="column">
+  <div fxLayout="row wrap" fxLayoutAlign="space-around center" fxLayoutGap="1%">
+    <course-card *ngFor="let course of myCourses  | courseSort:'courseName'" [course]="course" [hideEnroll]="true" ></course-card>
+    <!-- <p *ngIf="myCourses.length()===0">no courses to show</p> -->
+</div>
+</div>

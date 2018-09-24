@@ -1,6 +1,7 @@
-div.wrapper {
-  height: 200px;
+
+button{
+  background-color: #8AAF52;
 }
-.toolbar {
-    background-color: white;
+.enroll{
+  margin: 3% auto;
 }
