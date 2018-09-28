@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {catchError, map, mergeMap} from 'rxjs/operators';
 import {Account} from './core/models/account';
 import {LoggerService} from './core/services/logger.service';
@@ -18,6 +18,8 @@ export class AppService {
   private hcccGuestUserName = 'hccc-guest-user';
   private currentUserUrl = 'yande/user/current';  // URL to web api
   private logger = new LoggerService(this.constructor.name);
+  
+
 
   public currentUser: Account;
   public isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject(false);

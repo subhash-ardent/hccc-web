@@ -1,1 +1,32 @@
-<course-card [course]="course" [hideEnroll]="true"></course-card>
+
+<div  class="enroll">
+    <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+        <div fxFlexAlign="center">
+            <course-card [course]="course" [hideEnroll]="true"></course-card>
+        </div>
+        <div fxFlex="0 0 33%" fxFlex.lt-lg="47%" fxFlexAlign="center">
+            <form #courseEnrollForm="ngForm" (ngSubmit)="toEnroll()" fxLayoutGap="5%">
+                <mat-form-field fxFill>
+                    <mat-select placeholder="Select Participant">
+                      <mat-option *ngFor="let member of family" [value]="member">
+                        {{member}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                <mat-checkbox [(ngModel)]="isUnderAge" name="underAge" fxFill>Is Participant Under Age 18</mat-checkbox>
+                <mat-form-field fxFill>
+                        <mat-select placeholder="Select Parent/Guardian" [disabled]="!isUnderAge">
+                          <mat-option *ngFor="let member of family" [value]="member">
+                            {{member}}
+                          </mat-option>
+                        </mat-select>
+                </mat-form-field>
+                <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5%">
+                      <button mat-flat-button color="#8AAF52" type="button">CANCEL</button>
+                      <button mat-flat-button color="#8AAF52" type="submit" routerLink="../indemnity">ENROLL</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

@@ -3,6 +3,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule }    from '@angular/common/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 
 // Components
@@ -19,11 +21,13 @@ import {AppService} from './app.service';
 
 
 
+
 @NgModule({
   imports: [
     BrowserModule,
     HttpClientModule,
     MaterialModule,
+    FlexLayoutModule,
     YandeModule,
     CoreModule,
     AppRoutingModule,

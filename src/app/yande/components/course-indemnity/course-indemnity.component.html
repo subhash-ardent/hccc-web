@@ -1,5 +1,65 @@
-<div class="wrapper" fxLayoutAlign="center center" fxFlex="100" fxLayout="column">
-  <div class="mat-title">Course Indemnity Page </div>
-  <div class="mat-title">Under Construction</div>
-  <a mat-button routerLink="../../catalogue"> BACK TO CATALOGUE</a>
+<div class="wrapper" fxLayout="row wrap" fxLayoutAlign="center center">
+    <div fxLayout="column" >
+      <form #courseIndemnityForm="ngForm" (ngSubmit)="onAccepting()">
+        <div fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="space-around center">
+          <mat-card>
+            <mat-card-title fxFlexAlign="center">
+              HINDU COMMUNITY AND CULTURAL CENTER, INC (HCCC)
+            </mat-card-title>
+            <br>
+            <mat-card-title fxFlexAlign="center">
+              UNCONDITIONAL RELEASE OF LIABILITY & AGREEMENT TO INDEMNITY
+            </mat-card-title>
+            <mat-card-subtitle>
+              (the "Agreement")
+            </mat-card-subtitle>
+            <br>
+            <mat-card-title >
+              ***THIS IS A LEGALLY BINDING AGREEMENT, PLEASE READ CAREFULLY***
+            </mat-card-title>
+            <mat-card-content>
+              <div fxLayout="row" fxLayoutAlign="center center">
+                <p>Youth Participant:<input type="text"></p>
+                <p>Date of birth:<input type="text"></p>
+              </div>
+              <span>
+                <p>Parent or Guardian:<input type="text"></p>
+              </span>
+              <p>Program: Location:HCCC-Property</p>
+              <p>
+                &#8544;. PARTIES BOUND BY THIS AGREEMENT
+              </p>
+                <P>
+                  A. HCCC: As used in this agreement, the term HCCC includes Hindu Community and Cultural
+                </P>
+                <p>Center, Inc 
+                  and its Directors and Officers together with all volunteers and coordinators, employees and</p>
+                <p>agents.</p>
+                <p>
+                  B. CHILD/Participant: As used in this agreement, the term Child/youth or Participant includes
+                </p>
+                <p>
+                  the individual paticipants in the program stated above, the participant's parents, guardians, and heirs.
+                </p>
+                <p>
+                  &#8545;. UNCONTITIONAL RELEASE OF LIABILITY
+                </p>
+                <P>
+                  In consideration for child/youth<input type="text">, being permittedd to participate
+                </P>
+
+            </mat-card-content>    
+          </mat-card>
+        </div>
+          <br>
+          <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5%">
+              <button mat-flat-button color="#8AAF52" type="button">DECLINE</button>
+              <button mat-flat-button color="#8AAF52" type="submit">ACCEPT</button>
+          </div>
+      </form>
+    </div>
 </div>
+
+<!-- </div>
+  <a mat-button routerLink="../../"> BACK TO CATALOGUE</a>
+</div> -->

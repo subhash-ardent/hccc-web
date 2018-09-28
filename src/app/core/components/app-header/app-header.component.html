@@ -12,9 +12,18 @@
 
     <span *ngIf="!appService.isLoggedIn">Login</span>
     <div fxLayout="row"  *ngIf="appService.isLoggedIn" fxLayoutGap=".5em" fxShow.lt-md="false">
-        <button mat-icon-button>
+            <button mat-icon-button>
+                    <mat-icon>person</mat-icon>
+                </button>
+        <!-- <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>person</mat-icon>
-        </button>
+        </button> -->
+        <!-- <mat-menu #menu="matMenu">
+                <button mat-menu-item routerLink="/myCourses">
+                        <mat-icon>book</mat-icon>
+                        <span>My Courses</span>
+                </button>
+        </mat-menu> -->
         <span class="username mat-subheading-1">{{appService.currentUser.name.firstName}}</span>
         <span class="username mat-subheading-1">{{appService.currentUser.name.lastName}}</span>
     </div>
