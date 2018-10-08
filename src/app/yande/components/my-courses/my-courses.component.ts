@@ -82,9 +82,8 @@ myCourses:Course[] = [{
   tagsString: "",
   teachersString: ""
 }];
-  constructor(private appService: AppService) {
-    this.appService.courseEnrollment.subscribe((course:Course)=>this.myCourses.push(course));
-    console.log(this.myCourses);
+  constructor() {
+
    }
 
   ngOnInit() {}
