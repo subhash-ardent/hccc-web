@@ -82,9 +82,7 @@ myCourses:Course[] = [{
   tagsString: "",
   teachersString: ""
 }];
-  constructor() {
-
-   }
+  constructor() {}
 
   ngOnInit() {}
 
