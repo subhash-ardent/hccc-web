@@ -1,14 +1,17 @@
 
-<form #courseForm="ngForm" (ngSubmit)="onSubmit()" class="hccc-course-creation-form"
+<form #courseForm="ngForm" (ngSubmit)="courseForm.valid && onSubmit()" class="hccc-course-creation-form"
       fxLayout="column" fxLayoutGap="5%" fxLayoutAlign.lt-md="center center"
       (keydown.enter)="$event.preventDefault()">
     <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="5%">
 
-        <div fxLayout="column" fxFlex="30" fxFlex.md="40" fxLayoutAlign="center">
+        <div fxLayout="column" fxFlex="30" fxFlex.md="40" fxLayoutAlign="center" class="form-group">
 
             <mat-form-field>
-                <input matInput placeholder="Course Name" value="" [readonly]="action==='details'"
-                       id="courseName" required [(ngModel)]="model.courseName" name="courseName"> <br/>
+                <input matInput placeholder="Course Name" value="" [readonly]="action==='details'" id="courseName"  minlength="4" required [(ngModel)]="model.courseName" name="courseName"> <br/>
+                       <div *ngIf="courseForm.form.controls.courseName.invalid" >
+                            <div *ngIf="courseForm.controls.courseName.errors.required && (courseForm.controls.courseName.dirty || courseForm.controls.courseName.touched)" class="validation">*Course name is required</div>
+                            <div *ngIf="courseForm.controls.courseName.errors.minlength" class="validation"> *Name must be at least 4 characters long </div>     
+                        </div>
             </mat-form-field>
 
             <mat-form-field>
@@ -20,7 +23,10 @@
                 <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
                     <mat-form-field>
                         <input matInput type="date" placeholder="Start Date" value="" [readonly]="action==='details'"
-                               [(ngModel)]="model.courseStartDate" name="courseStartDate">
+                               [(ngModel)]="model.courseStartDate" name="courseStartDate" required>
+                               <div *ngIf="courseForm.controls.courseStartDate.invalid" >
+                                    <div *ngIf="courseForm.controls.courseStartDate.errors.required && (courseForm.controls.courseStartDate.dirty || courseForm.controls.courseStartDate.touched)" class="validation">*Start date is required</div>
+                               </div>
                         <!--<mat-datepicker-toggle matSuffix [for]="startDatePicker" *ngIf="action=='create'"></mat-datepicker-toggle>-->
                         <!--<mat-datepicker #startDatePicker="matDatepicker" *ngIf="action=='create'"></mat-datepicker>-->
                     </mat-form-field>
@@ -28,7 +34,10 @@
                 <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
                     <mat-form-field>
                         <input matInput type="date" placeholder="End Date" value="" [readonly]="action==='details'"
-                               [(ngModel)]="model.courseEndDate" name="courseEndDate">
+                               [(ngModel)]="model.courseEndDate" name="courseEndDate" required>
+                               <div *ngIf="courseForm.controls.courseEndDate.invalid" >
+                                    <div *ngIf="courseForm.controls.courseEndDate.errors.required && (courseForm.controls.courseEndDate.dirty || courseForm.controls.courseEndDate.touched)" class="validation">*End date is required</div>
+                               </div>
                         <!--<mat-datepicker-toggle matSuffix [for]="endDatePicker" *ngIf="action==='create'"></mat-datepicker-toggle>-->
                         <!--<mat-datepicker #endDatePicker="matDatepicker" *ngIf="action==='create'"></mat-datepicker>-->
                     </mat-form-field>
@@ -57,7 +66,10 @@
 
             <mat-form-field>
                 <input matInput placeholder="Venue" value="" [readonly]="action==='details'"
-                       [(ngModel)]="model.courseVenue" name="courseVenue">
+                       [(ngModel)]="model.courseVenue" name="courseVenue" required>
+                       <div *ngIf="courseForm.controls.courseVenue.invalid" >
+                            <div *ngIf="courseForm.controls.courseVenue.errors.required && (courseForm.controls.courseVenue.dirty || courseForm.controls.courseVenue.touched)" class="validation">*Course venue is required</div>
+                       </div>
             </mat-form-field>
 
             <mat-form-field>
@@ -73,12 +85,15 @@
             </mat-form-field>
 
             <mat-form-field *ngIf="['create','edit'].includes(action)">
-                <mat-select placeholder="Teachers and Coordinates" [(ngModel)]="model.teachers" name="teachers"  multiple>
+                <mat-select placeholder="Teachers and Coordinates" [(ngModel)]="model.teachers" name="teachers"  multiple required>
                     <mat-option *ngFor="let teacher of teachers" [value]="teacher">
                         <!--<mat-option *ngFor="let teacher of teachers" [value]="[teacher.account.userName]"> Uncomment when integrating with Backend-->
                         {{teacher.account | fullName}}
                     </mat-option>
                 </mat-select>
+                <div *ngIf="courseForm.controls.teachers.invalid" >
+                        <div *ngIf="courseForm.controls.teachers.errors.required && (courseForm.controls.teachers.dirty || courseForm.controls.teachers.touched)" class="validation">Select Teacher</div>
+                   </div>
             </mat-form-field>
 
             <mat-form-field *ngIf="action==='details'">

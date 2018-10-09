@@ -5,3 +5,13 @@
 mat-chip-list{
   padding-bottom: .7em;
 }
+
+cdk-overlay-pane {
+  margin-top: 60px;
+}
+.validation{
+  color: red;
+  position: absolute;
+  padding-top: 10px;
+  font-size: 12px;
+}
