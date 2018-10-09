@@ -36,7 +36,8 @@ import { MyCoursesComponent } from './components/my-courses/my-courses.component
     YandeRoutingModule,
     FormsModule,
     MaterialModule,
-    CoreModule
+    CoreModule,
+    
   ],
   declarations: [
     CourseCardComponent,

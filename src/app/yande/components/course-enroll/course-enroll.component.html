@@ -13,7 +13,7 @@
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
-                <mat-checkbox [(ngModel)]="isUnderAge" name="underAge" fxFill>Is Participant Under Age 18</mat-checkbox>
+                <mat-checkbox [(ngModel)]="appService.isUnderAge" name="underAge" fxFill>Is Participant Under Age 18</mat-checkbox>
                 <mat-form-field fxFill>
                         <mat-select placeholder="Select Parent/Guardian" [disabled]="!isUnderAge">
                           <mat-option *ngFor="let member of family" [value]="member">

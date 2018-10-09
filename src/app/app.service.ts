@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import {catchError, map, mergeMap} from 'rxjs/operators';
 import {Account} from './core/models/account';
 import {LoggerService} from './core/services/logger.service';
@@ -31,6 +31,7 @@ export class AppService {
   public breadCrumbs: BreadCrumb[];
   authRedirectUrl: string;
   loading = false;
+  isUnderAge:boolean = false;
 
   constructor(
     private http: HttpClient,
