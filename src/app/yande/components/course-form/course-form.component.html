@@ -14,9 +14,15 @@
                         </div>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field *ngIf="action==='details'">
                 <input matInput placeholder="Age Restrictions Info" value="" [readonly]="action==='details'"
                        [(ngModel)]="model.ageRestrictions" name="ageRestrictions">
+            </mat-form-field>
+
+            <mat-form-field *ngIf="['create','edit'].includes(action)">
+                <input matInput placeholder="Age Restrictions Info" value="" [readonly]="action==='details'"
+                       [(ngModel)]="model.ageRestrictions" name="ageRestrictions"
+                       matTooltip="Participant's age limit">
             </mat-form-field>
 
             <div fxLayout="row" fxLayoutAlign="space-between center">
@@ -59,9 +65,15 @@
                 </div>
             </div>
 
-            <mat-form-field>
+            <mat-form-field *ngIf="action==='details'">
                 <input matInput placeholder="Days" value="" [readonly]="action==='details'"
                        [(ngModel)]="model.courseDays" name="courseDays">
+            </mat-form-field>
+
+            <mat-form-field *ngIf="['create','edit'].includes(action)">
+                <input matInput placeholder="Days" value="" [readonly]="action==='details'"
+                       [(ngModel)]="model.courseDays" name="courseDays"
+                       matTooltip="Course Duration">
             </mat-form-field>
 
             <mat-form-field>
@@ -109,10 +121,17 @@
                         <mat-icon matChipRemove>cancel</mat-icon>
                     </mat-chip>
                     <input placeholder="Tags (comma seperated)"
-                           [matChipInputFor]="tagList"
-                           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                           matChipInputAddOnBlur="true"
-                           (matChipInputTokenEnd)="addTag($event)" >
+                    [matChipInputFor]="tagList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    matChipInputAddOnBlur="true"
+                    (matChipInputTokenEnd)="addTag($event)" 
+                           matTooltip="Categories that course might fall into"
+                           matInput [formControl]="myControl" [matAutocomplete]="auto">
+                   <mat-autocomplete  #auto="matAutocomplete" [displayWith]="null" (optionSelected)="addTagByAutoCompletion($event)">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                      {{option}}
+                    </mat-option>
+                  </mat-autocomplete>
                 </mat-chip-list>
             </mat-form-field>
 
@@ -121,9 +140,15 @@
                        [(ngModel)]="model.imageURL" name="imageURL">
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field *ngIf="action==='details'">
                 <textarea matInput placeholder="Remarks/Notes" [readonly]="action==='details'"
                           [(ngModel)]="model.courseRemarks" name="courseRemarks"></textarea>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="['create','edit'].includes(action)">
+                <textarea matInput placeholder="Remarks/Notes" [readonly]="action==='details'"
+                          [(ngModel)]="model.courseRemarks" name="courseRemarks" 
+                          matTooltip="Tell participants's how they could benifit the most out of this course!"></textarea>
             </mat-form-field>
 
             <mat-form-field>
@@ -136,7 +161,7 @@
 
     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="50px">
         <button *ngIf="action!=='details'" mat-flat-button color="accent" routerLink="../">CANCEL</button>
-        <button *ngIf="action==='create'" mat-flat-button color="accent" type="reset" (click)="onReset()">RESET</button>
+        <button *ngIf="action==='create'" mat-flat-button matTooltip="Info about the action" color="accent" type="reset" (click)="onReset()">RESET</button>
         <button *ngIf="action==='create'" mat-flat-button color="accent" type="submit" [disabled]="!courseForm.form.valid">SUBMIT</button>
         <button *ngIf="action==='edit'" mat-flat-button color="accent" type="button" (click)="onUpdate()">UPDATE</button>
     </div>

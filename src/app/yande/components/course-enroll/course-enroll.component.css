@@ -5,3 +5,9 @@ button{
 .enroll{
   margin: 3% auto;
 }
+.validation{
+  color: red;
+  position: absolute;
+  padding-top: 10px;
+  font-size: 12px;
+}

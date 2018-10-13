@@ -5,13 +5,15 @@
 
         <div fxLayout="column" fxFlex="30" fxFlex.md="40" fxLayoutAlign="center">
                 <mat-list-item *ngIf="['details','update'].includes(tAction)"><teacher-card [teacher]="model" flexAlign="center" [hideTDetails]="hideTDetails"></teacher-card></mat-list-item>
-            <mat-form-field *ngIf="!['details','update'].includes(tAction)">
+            <mat-form-field *ngIf="tAction==='add'">
                 <input fxFlex="60" matInput type="text" placeholder="Enter Devotee Mobile Number" #devoteeMobileNumber
-                       required (keyup.enter)="getDevotee(devoteeMobileNumber.value)">
+                       required (keyup.enter)="getDevotee(devoteeMobileNumber.value)"
+                       matTooltip="Get Teacher-details by typing his/her number">
                 <button fxFlex="10" fxFlex="1 1 auto" mat-icon-button (click)="getDevotee(devoteeMobileNumber.value)">
                     <mat-icon>search</mat-icon>
                 </button>
             </mat-form-field>
+
             <mat-list-item *ngIf="invalidPhoneNumber">
                 <span class="mat-caption hccc-failure-caption">Enter a valid phone number</span>
             </mat-list-item>
@@ -26,27 +28,37 @@
             </mat-list>
         </div>
 
-        <div fxLayout="column" fxFlex="30" fxFlex.md="40" fxLayoutAlign="center">
+        <form fxLayout="column" fxFlex="30" fxFlex.md="40" fxLayoutAlign="center" #teacherForm="ngForm" (ngSubmit)="onSubmit()">
 
             <mat-form-field>
-                <input matInput placeholder="Title/Salutaion" [(ngModel)]="model.salutation" [readonly]="tAction==='details'"><br/>
+                <input matInput placeholder="Title/Salutaion" name="title" required [(ngModel)]="model.salutation" [readonly]="tAction==='details'"><br/>
+                    <div *ngIf="teacherForm.form.controls.title.invalid" >
+                        <div *ngIf="teacherForm.controls.title.errors.required && (teacherForm.controls.title.dirty || teacherForm.controls.title.touched)" class="validation">*Title/Salutation is required</div>
+                    </div>    
             </mat-form-field>
+
             <mat-form-field>
-                <input matInput placeholder="Profile Picture URL" [(ngModel)]="model.profilePictureURL" [readonly]="tAction==='details'"><br/>
+                <input matInput placeholder="Profile Picture URL" name="picUrl" [(ngModel)]="model.profilePictureURL" [readonly]="tAction==='details'"><br/>
             </mat-form-field>
+
             <mat-form-field>
-                <input matInput placeholder="Skill sets" [(ngModel)]="model.skillSet" [readonly]="tAction==='details'"><br/>
+                <input matInput placeholder="Skill sets" name="skills" required [(ngModel)]="model.skillSet" [readonly]="tAction==='details'"><br/>
+                <div *ngIf="teacherForm.form.controls.skills.invalid" >
+                    <div *ngIf="teacherForm.controls.skills.errors.required && (teacherForm.controls.skills.dirty || teacherForm.controls.skills.touched)" class="validation">*Skill Sets are required</div>
+                </div>
             </mat-form-field>
-            <mat-checkbox [(ngModel)]="model.indemnitySigned" [disabled]="tAction==='details'"> Indemnity Signed</mat-checkbox>
+
+            <mat-checkbox name="indemnitySigned" required #indemnity="ngModel" [(ngModel)]="model.indemnitySigned" [disabled]="tAction==='details'"> Indemnity Signed</mat-checkbox>
             <br/>
-            <mat-checkbox [(ngModel)]="model.identityVerified" [disabled]="tAction==='details'"> Identification Verified</mat-checkbox>
+            <mat-checkbox name="identityVerified" required [(ngModel)]="model.identityVerified" [disabled]="tAction==='details'"> Identification Verified</mat-checkbox>
             <br/>
-            <mat-checkbox [(ngModel)]="model.backgroundVerified" [disabled]="tAction==='details'"> Background check complete</mat-checkbox>
-        </div>
+            <mat-checkbox name="backgroundVerified" required [(ngModel)]="model.backgroundVerified" [disabled]="tAction==='details'"> Background check complete</mat-checkbox>
+        </form>
 
     </div>
     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="50px">
-        <button mat-flat-button color="accent" *ngIf="tAction!='details'">CANCEL</button>
-        <button mat-flat-button color="accent" [disabled]="isTeacher" (click)="onSubmit()" *ngIf="tAction!='details'">SUBMIT</button>
+        <button mat-flat-button color="accent" *ngIf="tAction ==='add'" (click)="onCancelling()">CANCEL</button>
+        <button mat-flat-button color="accent" *ngIf="tAction ==='update'" routerLink="/teachers">CANCEL</button>
+        <button mat-flat-button color="accent" [disabled]="isTeacher || !teacherForm.valid" type="submit" *ngIf="tAction!='details'">SUBMIT</button>
     </div>
 </div>

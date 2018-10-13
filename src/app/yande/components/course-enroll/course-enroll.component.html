@@ -7,13 +7,16 @@
         <div fxFlex="0 0 33%" fxFlex.lt-lg="47%" fxFlexAlign="center">
             <form #courseEnrollForm="ngForm" (ngSubmit)="toEnroll()" fxLayoutGap="5%">
                 <mat-form-field fxFill>
-                    <mat-select placeholder="Select Participant">
+                    <mat-select placeholder="Select Participant" ngModel required name="participantName">
                       <mat-option *ngFor="let member of family" [value]="member">
                         {{member}}
                       </mat-option>
                     </mat-select>
+                    <div *ngIf="courseEnrollForm.controls.participantName.invalid" >
+                        <div *ngIf="courseEnrollForm.controls.participantName.errors.required && (courseEnrollForm.controls.participantName.dirty || courseEnrollForm.controls.participantName.touched)" class="validation">Select Teacher</div>
+                   </div>
                   </mat-form-field>
-                <mat-checkbox [(ngModel)]="appService.isUnderAge" name="underAge" fxFill>Is Participant Under Age 18</mat-checkbox>
+                <mat-checkbox [(ngModel)]="appService.isUnderAge" name="underAge" fxFill matTooltip="Check Only If the participnt is underage!">Is Participant Under Age 18</mat-checkbox>
                 <mat-form-field fxFill>
                         <mat-select placeholder="Select Parent/Guardian" [disabled]="!isUnderAge">
                           <mat-option *ngFor="let member of family" [value]="member">
@@ -23,7 +26,7 @@
                 </mat-form-field>
                 <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="5%">
                       <button mat-flat-button color="#8AAF52" type="button">CANCEL</button>
-                      <button mat-flat-button color="#8AAF52" type="submit" routerLink="../indemnity">ENROLL</button>
+                      <button mat-flat-button color="#8AAF52" type="submit" [disabled]="courseEnrollForm.invalid">ENROLL</button>
                 </div>
             </form>
         </div>

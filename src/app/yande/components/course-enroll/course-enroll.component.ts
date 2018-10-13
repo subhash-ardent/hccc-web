@@ -27,6 +27,7 @@ export class CourseEnrollComponent implements OnInit{
   }
  
   toEnroll(){
+    this.router.navigate(['/indemnity']);
   }
 
 }

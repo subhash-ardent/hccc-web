@@ -1,7 +1,8 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from '../material.module';
+import { MatButtonModule,MatTooltipModule,MatInputModule,MatAutocompleteModule } from '@angular/material';
 import {CoreModule} from '../core/core.module';
 import {YandeRoutingModule} from './yande-routing.module';
 
@@ -35,7 +36,12 @@ import { MyCoursesComponent } from './components/my-courses/my-courses.component
     CommonModule,
     YandeRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     MaterialModule,
+    MatTooltipModule,
+    MatInputModule,
+    MatButtonModule,
+    MatAutocompleteModule,
     CoreModule,
     
   ],

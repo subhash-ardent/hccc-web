@@ -62,12 +62,6 @@ const yandeRoutes: Routes = [
             data: {title: 'Enroll'}
           },
           {
-            path: 'indemnity',
-            component: CourseIndemnityComponent,
-            canActivate: [AuthGuardService],
-            data: {title: 'Indemnity'}
-          },
-          {
             path: 'edit',
             component: CourseDetailsUpdateComponent,
             canActivate: [YandeChairGuardService],
@@ -123,7 +117,13 @@ const yandeRoutes: Routes = [
   {
     path:'myCourses',
     component: MyCoursesComponent
-  }
+  },
+  {
+    path: 'indemnity',
+    component: CourseIndemnityComponent,
+    canActivate: [AuthGuardService],
+    data: {title: 'Indemnity'}
+  },
 ];
 
 
