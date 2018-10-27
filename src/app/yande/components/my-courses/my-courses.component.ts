@@ -11,7 +11,7 @@ import { AppService } from '../../../app.service';
 export class MyCoursesComponent implements OnInit {
 myCourses:Course[] = [{
   courseName: "testCourse",
-  imageURL: "http://www.nasrinsafai.com/wp-content/images/goddess-saraswati.jpg",
+  courseImageURL: "http://www.nasrinsafai.com/wp-content/images/goddess-saraswati.jpg",
   courseEndTime: "then",
   courseStartTime: "now",
   courseStartDate: "today",
@@ -29,7 +29,7 @@ myCourses:Course[] = [{
   teachersString: ""
 }, {
   courseName: "testCourse",
-  imageURL: "http://www.nasrinsafai.com/wp-content/images/goddess-saraswati.jpg",
+  courseImageURL: "http://www.nasrinsafai.com/wp-content/images/goddess-saraswati.jpg",
   courseEndTime: "then",
   courseStartTime: "now",
   courseStartDate: "today",
@@ -47,7 +47,7 @@ myCourses:Course[] = [{
   teachersString: ""
 }, {
   courseName: "testCourse",
-  imageURL: "http://www.nasrinsafai.com/wp-content/images/goddess-saraswati.jpg",
+  courseImageURL: "http://www.nasrinsafai.com/wp-content/images/goddess-saraswati.jpg",
   courseEndTime: "then",
   courseStartTime: "now",
   courseStartDate: "today",
@@ -65,7 +65,7 @@ myCourses:Course[] = [{
   teachersString: ""
 }, {
   courseName: "testCourse",
-  imageURL: "http://www.nasrinsafai.com/wp-content/images/goddess-saraswati.jpg",
+  courseImageURL: "http://www.nasrinsafai.com/wp-content/images/goddess-saraswati.jpg",
   courseEndTime: "then",
   courseStartTime: "now",
   courseStartDate: "today",
