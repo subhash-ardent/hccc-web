@@ -2,7 +2,7 @@ import {Teacher} from './teacher';
 
 export class Course {
   courseName: string;
-  imageURL?: string;
+  imagecourseImageURLURL?: string;
   courseEndTime: string;
   courseStartTime: string;
   courseStartDate?: string;

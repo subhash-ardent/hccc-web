@@ -39,20 +39,20 @@ export class YandeApiService {
   async loadCourses() {
     try {
       const intentionalDelay = () => timer(1000);
-      const res = await this.http.get<CourseCollection>(this.coursesEndpointUrl).pipe(
+      const res = await this.http.get<Course[]>(this.coursesEndpointUrl).pipe(
         take(1),
         delayWhen(intentionalDelay),
-        catchError(this.appService.handleFatalError<CourseCollection>('loadCourses'))
+        catchError(this.appService.handleFatalError<Course[]>('loadCourses'))
       ).toPromise();
       this.logger.info('Fetched courses');
-      if (res && res.courses) {
-        this.courses$.next(res.courses);
+      if (res) {
+        this.courses$.next(res);
         this.isCoursesLoaded = true;
       } else {
         throw new Error('Invalid payload');
       }
     } catch (e) {
-      this.appService.handleFatalError<CourseCollection>('loadCourses')(e);
+      this.appService.handleFatalError<Course[]>('loadCourses')(e);
     }
   }
 
@@ -87,20 +87,20 @@ export class YandeApiService {
   async loadTeachers() {
     try {
       const intentionalDelay = () => timer(1000);
-      const res = await this.http.get<TeacherCollection>(this.teachersEndpointUrl).pipe(
+      const res = await this.http.get<Teacher[]>(this.teachersEndpointUrl).pipe(
         take(1),
         delayWhen(intentionalDelay),
-        catchError(this.appService.handleFatalError<TeacherCollection>('loadTeachers'))
+        catchError(this.appService.handleFatalError<Teacher[]>('loadTeachers'))
       ).toPromise();
       this.logger.info('Fetched teachers');
-      if (res && res.teachers) {
-        this.teachers$.next(res.teachers);
+      if (res) {
+        this.teachers$.next(res);
         this.isTeachersLoaded = true;
       } else {
         throw new Error('Invalid payload');
       }
     } catch (e) {
-      this.appService.handleFatalError<TeacherCollection>('loadTeachers')(e);
+      this.appService.handleFatalError<Teacher[]>('loadTeachers')(e);
     }
   }
 
