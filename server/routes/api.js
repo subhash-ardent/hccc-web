@@ -10,8 +10,8 @@ router.all('/*', (req, res) => {
   try{
     console.log(req.method, req.url);
     let options = {
-      baseUrl: config.baseUrl,
-      url: "/yande/api" + req.url,
+      baseUrl: config.courseUrl,
+      url: req.url,
       method: req.method,
       headers: {
         "Accept": "application/json",
@@ -20,10 +20,11 @@ router.all('/*', (req, res) => {
       }
     };
 
+
     if (req.method === 'POST' && req.body) {
       options.body = JSON.stringify(req.body);
     }
-    // console.log(options);
+    console.log(options);
     request(options, function(err, response, body) {
       if(err) {
         console.log(`Api call for ${req.url} failed with an error`, err);

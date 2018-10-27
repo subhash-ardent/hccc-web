@@ -32,13 +32,15 @@ export class CourseCatalogueComponent implements OnInit {
 
   buildTagMap() {
     this.courses.forEach(c => {
-      c.tags.forEach(t => {
-        if (this.tagMap.has(t.toUpperCase())) {
-          this.tagMap.get(t.toUpperCase()).push(c);
-        } else {
-          this.tagMap.set(t.toUpperCase(), [c]);
-        }
-      });
+      if (c.tags) {
+        c.tags.forEach(t => {
+          if (this.tagMap.has(t.toUpperCase())) {
+            this.tagMap.get(t.toUpperCase()).push(c);
+          } else {
+            this.tagMap.set(t.toUpperCase(), [c]);
+          }
+        });
+      }
     });
   }
 
