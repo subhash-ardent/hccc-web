@@ -14,13 +14,16 @@ import { FooterComponent } from './components/footer/footer.component';
 import { FullNamePipe } from './pipes/full-name.pipe';
 import { BreadCrumbComponent } from './components/bread-crumb/bread-crumb.component';
 import { HomeComponent } from './components/home/home.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
   imports: [
     CommonModule,
     CoreRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ],
   declarations: [
     AppBannerComponent,
@@ -33,7 +36,8 @@ import { HomeComponent } from './components/home/home.component';
     FooterComponent,
     FullNamePipe,
     BreadCrumbComponent,
-    HomeComponent
+    HomeComponent,
+    LoginFormComponent
   ],
   exports: [
     AppBannerComponent,
