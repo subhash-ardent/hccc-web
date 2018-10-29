@@ -1,18 +1,30 @@
 "use strict";
 
 let express = require('express');
+const fs = require('fs');
+const path = require('path');
+const certFile = path.resolve(__dirname, '../cert/cid_crt.crt');
+const keyFile = path.resolve(__dirname, '../cert/cid_key.key');
+
 let router = express.Router();
 const request = require('request');
 const env = process.env.ENVIRONMENT ? process.env.ENVIRONMENT : 'dev';
 const config = require(`${__dirname}/../config/${env}.json`);
 
 router.all('/*', (req, res) => {
+  process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
   try{
     console.log(req.method, req.url);
     let options = {
       baseUrl: config.baseUrl,
       url: req.url,
       method: req.method,
+      agentOptions: {
+        cert: fs.readFileSync(certFile),
+        key: fs.readFileSync(keyFile),
+        passphrase: 'changeit',
+        securityOptions: 'SSL_OP_NO_SSLv3'
+      },
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json",

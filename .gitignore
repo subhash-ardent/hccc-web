@@ -38,3 +38,8 @@ testem.log
 .DS_Store
 Thumbs.db
 /mock-backend/node_modules
+
+server/cert/*.crt
+server/cert/*.key
+server/cert/*.pem
+
