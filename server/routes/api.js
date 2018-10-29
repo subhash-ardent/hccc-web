@@ -10,7 +10,7 @@ router.all('/*', (req, res) => {
   try{
     console.log(req.method, req.url);
     let options = {
-      baseUrl: config.courseUrl,
+      baseUrl: config.baseUrl,
       url: req.url,
       method: req.method,
       headers: {

@@ -51,8 +51,8 @@ let getUserFromCookie = function(req) {
   return currUserName;
 };
 
-let customStrategyVerify = function(req, cb) {
-  console.log("customStrategyVerify");
+let localStrategyVerify = function(usr, cb) {
+  console.log("localStrategyVerify", usr, pass);
   if(req && req.user && req.user.userName && req.user.userName !== guestUser.userName) {
     cb(null, req.user);
   } else {
@@ -91,7 +91,7 @@ let deserializeUser = function(userName, cb) {
 };
 
 module.exports = {
-  customStrategyVerify,
+  localStrategyVerify,
   serializeUser,
   deserializeUser
 };
