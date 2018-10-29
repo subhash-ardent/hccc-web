@@ -24,7 +24,6 @@ export class CourseCatalogueComponent implements OnInit {
     this.route.data
       .subscribe((data: { courses: Course[] }) => {
         this.courses = data.courses;
-        console.log(this.courses);
         this.buildTagMap();
         this.findTopThreeTags();
       });
@@ -45,7 +44,6 @@ export class CourseCatalogueComponent implements OnInit {
   }
 
   findTopThreeTags() {
-    console.log(this.tagMap);
     this.topThreeTags = Array.from(this.tagMap.keys()).sort((a, b) => this.tagMap.get(b).length - this.tagMap.get(a).length).slice(0, 3);
     this.topThreeTags[3] = 'ALL'; 
   }

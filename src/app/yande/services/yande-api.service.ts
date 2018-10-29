@@ -19,7 +19,7 @@ export class YandeApiService {
 
   private coursesEndpointUrl = 'yande/api/courses';
   private teachersEndpointUrl = 'yande/api/teachers';
-  private devoteeEndpointUrl = 'yande/api/accounts';
+  private devoteeEndpointUrl = 'yande/api/devotee';
   private logger = new LoggerService(this.constructor.name);
   public isCoursesLoaded = false;
   public isTeachersLoaded = false;
@@ -133,7 +133,6 @@ export class YandeApiService {
   getDevotee(mobileNumber: string): Observable<[Account]> {
     return this.http.get<[Account]>(this.devoteeEndpointUrl + '?phoneNumber=' + mobileNumber).pipe(
       take(1),
-      tap(a => console.log(a)),
       catchError(this.appService.handleFatalError<[Account]>('getDevotee'))
     );
   }

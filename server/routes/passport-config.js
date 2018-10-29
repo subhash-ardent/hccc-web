@@ -4,6 +4,29 @@ const request = require('request');
 
 const guestUser = {userName:"hccc-guest-user"};
 
+// Temporarily hardcoding yande profile. remove when devotee api is available
+
+const yneUser = {
+  "userName" : "yande",
+  "phoneNumber" : "9876543210",
+  "roles" : [ "Chairman - Youth and Cultural", "Devotee" ],
+  "email" : "email",
+  "dateOfBirth" : "1990-07-12",
+  "name" : {
+    "firstName" : "Vandhana",
+    "lastName" : "Bhanoori",
+    "middleName" : ""
+  },
+  "familyMembers" : [ {
+    "name" : {
+      "firstName" : "Prabhakar",
+      "lastName" : "Bhanoori",
+      "middleName" : ""
+    },
+    "dateOfBirth" : "1990-12-12"
+  } ]
+};
+
 let getUserByUserName = function(usrNm) {
   // fetching current users info from backend
   // make GET call to /accounts endpoint passing userName as query parameter
@@ -74,7 +97,7 @@ let serializeUser = function(user, cb) {
 };
 let deserializeUser = function(userName, cb) {
     if(userName === guestUser.userName) {
-      cb(null, guestUser);
+      cb(null, yneUser);
     } else {
       getUserByUserName(userName)
         .then(function (userDetails) {
