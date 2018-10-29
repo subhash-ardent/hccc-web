@@ -63,7 +63,7 @@ app.use('/yande/*', passport.authenticate('custom', failureRedirect), express.st
 const port = process.env.PORT || '3000';
 app.set('port', port);
 const server = http.createServer(app);
-server.listen(port, () => console.log(`API running on localhost: ${port}`));
+server.listen(port, '0.0.0.0', () => console.log(`API running on localhost: ${port}`));
 
 
 
