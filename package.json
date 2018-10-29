@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "concurrently -k \"node server/index.js\" \"node mock-backend/index.js\" \"ng serve --base-href /yande --deploy-url /yande/ \"",
-    "start-with-node": "ng build --base-href /yande --deploy-url /yande/ && node server/index.js && node mock-backend/index.js",
+    "start": "concurrently -k \"node server/index.js\" \"ng serve --base-href /yande --deploy-url /yande/ \"",
+    "start-with-node": "ng build --prod --base-href /yande --deploy-url /yande/ && node server/index.js",
+    "start-only-node": "node server/index.js",
     "serve": "ng serve",
     "build": "ng build",
     "test": "ng test",
@@ -13,7 +14,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^6.0.5",
+    "@angular/animations": "^6.0.3",
     "@angular/cdk": "^6.2.1",
     "@angular/common": "^6.0.3",
     "@angular/compiler": "^6.0.3",

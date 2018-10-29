@@ -10,7 +10,9 @@
     <span fxFlex="1 1 auto"></span>
 
 
-    <span *ngIf="!appService.isLoggedIn">Login</span>
+    <a *ngIf="!appService.isLoggedIn" routerLink="login-redirect">
+        Login
+    </a>
     <div fxLayout="row"  *ngIf="appService.isLoggedIn" fxLayoutGap=".5em" fxShow.lt-md="false">
             <button mat-icon-button>
                     <mat-icon>person</mat-icon>
