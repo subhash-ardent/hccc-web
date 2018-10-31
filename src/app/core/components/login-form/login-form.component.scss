@@ -1,0 +1,22 @@
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    
+    width: 100%;
+}
+.loginForm {
+    margin-top: 3%;  
+}
+mat-card{
+    min-width: 150px;
+}
+
+.validation{
+    color: red;
+    position: absolute;
+    padding-top: 10px;
+    font-size: 12px;
+  }
