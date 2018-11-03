@@ -11,6 +11,16 @@
 7. Start Application: `npm start`
 8. Navigate to `localhost:4200` on a browser to view the webapp
 
+### New Setup instructions with Java backend
+
+1. Clone the repository: `git clone https://github.com/hcccecit/hccc-web.git`
+2. Change into the directory: `cd hccc-web`
+3. Install dependencies: `npm install`
+4. take the certs from `https://github.com/hcccecit/hccc-api/tree/master/config/security/certs`
+5. Copy at `/server/certs`
+7. Start Application: `npm start`
+8. Navigate to `localhost:4200` on a browser to view the webapp
+
 Always run `npm install` after pulling latest code from GitHub.
 
 ### To generate mock backend after making changes to the API Specification
