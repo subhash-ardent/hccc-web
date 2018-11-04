@@ -604,7 +604,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/DevoteeDetails"
+              "$ref": "#/definitions/Devotee"
             }
           },
           "400": {
@@ -821,7 +821,7 @@
         }
       }
     },
-    "/devotees/{devoteeId}/indemnities": {
+    "/devotees/{devoteeId}/enrollments/{enrollmentId}/indemnities": {
       "get": {
         "summary": "Retrieves indemnities",
         "description": "Only indemnities belonging to the requesting user account will be returned. User Account information is available in the header.",
@@ -836,6 +836,13 @@
             "required": true,
             "type": "string",
             "description": "Id of the devotee account whose indemnities are to be retrieved"
+          },
+          {
+            "in": "path",
+            "name": "enrollmentId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the enrollment to be retrieved"
           }
         ],
         "responses": {
@@ -877,6 +884,13 @@
             "schema": {
               "$ref": "#/definitions/Indemnity"
             }
+          },
+          {
+            "in": "path",
+            "name": "enrollmentId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the enrollment to be retrieved"
           }
         ],
         "responses": {
@@ -895,7 +909,7 @@
         }
       }
     },
-    "/devotees/{devoteeId}/indemnities/{indemnityId}": {
+    "/devotees/{devoteeId}/enrollments/{enrollmentId}/indemnities/{indemnityId}": {
       "get": {
         "summary": "get indemnity by id",
         "operationId": "getIndemnity",
@@ -916,6 +930,13 @@
             "required": true,
             "type": "string",
             "description": "Id of the indemnity to be retrieved"
+          },
+          {
+            "in": "path",
+            "name": "enrollmentId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the enrollment to be retrieved"
           }
         ],
         "responses": {
@@ -968,6 +989,13 @@
             "schema": {
               "$ref": "#/definitions/Indemnity"
             }
+          },
+          {
+            "in": "path",
+            "name": "enrollmentId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the enrollment to be retrieved"
           }
         ],
         "responses": {
@@ -1005,6 +1033,13 @@
             "required": true,
             "type": "string",
             "description": "Id of the indemnity to be deleted"
+          },
+          {
+            "in": "path",
+            "name": "enrollmentId",
+            "required": true,
+            "type": "string",
+            "description": "Id of the enrollment to be retrieved"
           }
         ],
         "responses": {
@@ -1050,6 +1085,66 @@
         }
       }
     },
+    "TeachersList": {
+      "description": "This is the schema of response payload when a list of teacher information is requested",
+      "properties": {
+        "teachers": {
+          "type": "array",
+          "description": "List of Teachers",
+          "items": {
+            "$ref": "#/definitions/Teacher"
+          }
+        }
+      }
+    },
+    "IndemnitiesList": {
+      "description": "This is the schema of response payload when a list of indemnity information is requested",
+      "properties": {
+        "indemnities": {
+          "type": "array",
+          "description": "List of Indemnities",
+          "items": {
+            "$ref": "#/definitions/Indemnity"
+          }
+        }
+      }
+    },
+    "DevoteesList": {
+      "description": "This is the schema of response payload when an account's information is requested",
+      "properties": {
+        "devotees": {
+          "type": "array",
+          "description": "List of Devotee Objects",
+          "items": {
+            "$ref": "#/definitions/Devotee"
+          }
+        }
+      }
+    },
+    "EnrollmentsList": {
+      "description": "This is the schema of response payload when a list of indemnity information is requested",
+      "properties": {
+        "enrollments": {
+          "type": "array",
+          "description": "List of Enrollments",
+          "items": {
+            "$ref": "#/definitions/Enrollment"
+          }
+        }
+      }
+    },
+    "IndemnityFormsList": {
+      "description": "This is the schema of response payload when a list of indemnity forms is requested",
+      "properties": {
+        "indemnityForms": {
+          "type": "array",
+          "description": "List of Indemnity Forms",
+          "items": {
+            "$ref": "#/definitions/IndemnityForm"
+          }
+        }
+      }
+    },
     "Course": {
       "description": "Course Object",
       "properties": {
@@ -1075,11 +1170,8 @@
           "description": "Any additional notes or remarks about the course"
         },
         "courseTags": {
-          "description": "List of tags associated with the course",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string",
+          "description": "List of tags associated with the course. comma seperated"
         },
         "isArchived": {
           "type": "boolean",
@@ -1122,22 +1214,35 @@
           "description": "Class size or total number of slots in the course"
         },
         "teachers": {
-          "description": "List of teacher (or coordinator) ids of the course",
+          "description": "List of teachers of the course",
           "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "TeachersList": {
-      "description": "This is the schema of response payload when a list of teacher information is requested",
-      "properties": {
-        "teachers": {
-          "type": "array",
-          "description": "List of Teachers",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/Teacher"
+          }
+        },
+        "indemnityForms": {
+          "description": "List of indemnityForms",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/IndemnityForm"
+          }
+        },
+        "transientTeacherIds": {
+          "description": "List of teacher (or coordinator) ids of the course",
+          "type": "array",
+          "writeOnly": true,
+          "items": {
+            "type": "integer"
+          }
+        },
+        "transientIndemnityFormIds": {
+          "description": "List of indemnityForm ids",
+          "type": "array",
+          "writeOnly": true,
+          "items": {
+            "type": "integer"
           }
         }
       }
@@ -1149,6 +1254,11 @@
           "readOnly": true,
           "$ref": "#/definitions/Devotee"
         },
+        "teacherId": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Teacher Id"
+        },
         "salutation": {
           "type": "string",
           "description": "Salutation or title. For e.g. Mrs, Dr, Shri, Pandit, etc."
@@ -1158,11 +1268,8 @@
           "description": "URL of the teachers profile picture"
         },
         "skillSet": {
-          "description": "Teacher's skill set",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "description": "Teacher's skill set. comma seperated",
+          "type": "string"
         },
         "indemnitySigned": {
           "type": "boolean",
@@ -1178,18 +1285,6 @@
         }
       }
     },
-    "IndemnitiesList": {
-      "description": "This is the schema of response payload when a list of indemnity information is requested",
-      "properties": {
-        "indemnities": {
-          "type": "array",
-          "description": "List of Indemnities",
-          "items": {
-            "$ref": "#/definitions/Indemnity"
-          }
-        }
-      }
-    },
     "Indemnity": {
       "description": "Indemnity Object",
       "properties": {
@@ -1198,103 +1293,69 @@
           "description": "Unique identifier of the Indemnity.",
           "readOnly": true
         },
-        "devoteeId": {
-          "type": "string",
-          "description": "Identifier of the Devotee"
+        "createdUser": {
+          "$ref": "#/definitions/Devotee",
+          "description": "Devotee who created the enrollment",
+          "readOnly": true
         },
-        "signedForFamilyMemberId": {
-          "type": "string",
-          "description": "Identifier of the Family Member or the devotee Id depending on who the indemnity is signed for"
+        "enrollment": {
+          "$ref": "#/definitions/Enrollment",
+          "description": "Enrollment to which this indemnity is associated to",
+          "readOnly": true
         },
-        "signedByFamilyMemberId": {
-          "type": "string",
-          "description": "Identifier of the Family Member or the devotee Id depending on who the indemnity is signed by"
-        },
-        "signedOn": {
+        "signedDate": {
           "type": "string",
           "description": "Datetime when the indemnity was signed in ISO 8612 format. For e.g. 2018-07-10T07:51:25+00:00"
         },
         "indemnityFormId": {
           "type": "string",
-          "description": "Identifier of the Indemnity Form being signed."
-        }
-      }
-    },
-    "DevoteesList": {
-      "description": "This is the schema of response payload when an account's information is requested",
-      "properties": {
-        "devotees": {
-          "type": "array",
-          "description": "List of Devotee Objects",
-          "items": {
-            "$ref": "#/definitions/Devotee"
-          }
+          "description": "Identifier of the Indemnity Form being signed.",
+          "writeOnly": true
+        },
+        "indemnityForm": {
+          "$ref": "#/definitions/IndemnityForm",
+          "description": "Identifier of the Indemnity Form being signed.",
+          "readOnly": true
         }
       }
     },
     "Devotee": {
       "description": "Devotee Account Object",
       "properties": {
-        "devoteeId": {
+        "userName": {
           "type": "string",
-          "description": "Unique userName of the devotee",
-          "readOnly": true
+          "description": "Unique userName of the devotee"
         },
-        "name": {
-          "$ref": "#/definitions/Name"
-        },
-        "phoneNumber": {
+        "phoneResidence": {
           "type": "string",
-          "description": "Phone number associated with the devotee's account"
+          "description": "Devotee's primary phone number"
+        },
+        "firstName": {
+          "type": "string",
+          "description": "Unique userName of the devotee"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Unique userName of the devotee"
         },
         "email": {
           "type": "string",
           "description": "Email Id associated with the devotee's account"
         },
         "roles": {
-          "$ref": "#/definitions/Role"
-        }
-      }
-    },
-    "DevoteeDetails": {
-      "description": "Devotee Account Object",
-      "properties": {
-        "devoteeId": {
-          "type": "string",
-          "description": "Unique userName of the devotee",
-          "readOnly": true
-        },
-        "name": {
-          "$ref": "#/definitions/Name"
-        },
-        "phoneNumber": {
-          "type": "string",
-          "description": "Phone number associated with the devotee's account"
-        },
-        "email": {
-          "type": "string",
-          "description": "Email Id associated with the devotee's account"
-        },
-        "familyMembers": {
+          "description": "Roles associated to the devotee profile",
           "type": "array",
-          "description": "List of family Members",
+          "readOnly": true,
           "items": {
-            "$ref": "#/definitions/FamilyMember"
+            "$ref": "#/definitions/Role"
           }
         },
-        "roles": {
-          "$ref": "#/definitions/Name"
-        }
-      }
-    },
-    "EnrollmentsList": {
-      "description": "This is the schema of response payload when a list of indemnity information is requested",
-      "properties": {
-        "enrollments": {
+        "familyMembers": {
+          "description": "Family members of the devotee",
           "type": "array",
-          "description": "List of Enrollments",
+          "readOnly": true,
           "items": {
-            "$ref": "#/definitions/Enrollment"
+            "$ref": "#/definitions/FamilyMember"
           }
         }
       }
@@ -1307,47 +1368,83 @@
           "description": "Unique enrollment id",
           "readOnly": true
         },
-        "devoteeId": {
+        "createdUser": {
+          "$ref": "#/definitions/Devotee",
+          "description": "Devotee who created the enrollment",
+          "readOnly": true
+        },
+        "transientCourseId": {
           "type": "string",
-          "description": "Identifier of the Devotee"
+          "writeOnly" : true,
+          "description": "Identifier of the class being enrolled to"
+        },
+        "course": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Course Enrolled"
+        },
+        "transientParticipantUsername": {
+          "type": "string",
+          "writeOnly" : true,
+          "description": "Identifier of the Participant, (if the devotee is the Participant)"
+        },
+        "transientGuardianUsername": {
+          "type": "string",
+          "writeOnly" : true,
+          "description": "Identifier of the Guardian, (if the Devotee is the guardian)"
+        },
+        "transientParticipantFamilyMemberId": {
+          "type": "string",
+          "writeOnly" : true,
+          "description": "Identifier of the Participant, (if a family member is the participant) "
+        },
+        "transientGuardianFamilyMemberId": {
+          "type": "string",
+          "writeOnly" : true,
+          "description": "Identifier of the Guardian (if a family member is the guardian)"
+        },
+        "participantUsername": {
+          "$ref": "#/definitions/Devotee",
+          "readOnly" : true,
+          "description": "Identifier of the Participant, (if the devotee is the Participant)"
+        },
+        "guardianUsername": {
+          "$ref": "#/definitions/Devotee",
+          "readOnly" : true,
+          "description": "Identifier of the Guardian, (if the Devotee is the guardian)"
         },
         "participantFamilyMemberId": {
-          "type": "string",
-          "description": "Identifier of the Participating Family Member"
+          "$ref": "#/definitions/FamilyMember",
+          "readOnly" : true,
+          "description": "Identifier of the Participant, (if a family member is the participant) "
         },
-        "courseId": {
-          "type": "string",
-          "description": "Identifier of the class being enrolled to"
+        "guardianFamilyMemberId": {
+          "$ref": "#/definitions/FamilyMember",
+          "readOnly" : true,
+          "description": "Identifier of the Guardian (if a family member is the guardian)"
         },
         "isParticipantUnder18": {
           "type": "boolean",
           "description": "true if participant age is under 18, else false"
         },
-        "guardianFamilyMemberId": {
-          "type": "string",
-          "description": "Identifier of the Guardian Family Member"
-        },
         "emergencyContactNumber": {
           "type": "string",
           "description": "Emergency contact phone number"
         },
-        "indemnityIds": {
+        "transientIndemnityIds": {
           "type": "array",
+          "writeOnly" : true,
           "description": "List of Indemnity Ids signed in association with this enrollment",
           "items": {
-            "type": "string"
+            "type": "integer"
           }
-        }
-      }
-    },
-    "IndemnityFormsList": {
-      "description": "This is the schema of response payload when a list of indemnity forms is requested",
-      "properties": {
-        "indemnityForms": {
+        },
+        "indemnities": {
           "type": "array",
-          "description": "List of Indemnity Forms",
+          "readOnly": true,
+          "description": "List of Indemnities signed in association with this enrollment",
           "items": {
-            "$ref": "#/definitions/IndemnityForm"
+            "$ref": "#/definitions/Indemnity"
           }
         }
       }
@@ -1378,23 +1475,6 @@
         }
       }
     },
-    "Name": {
-      "description": "Name Object",
-      "properties": {
-        "firstName": {
-          "type": "string",
-          "description": "First name of teacher"
-        },
-        "middleName": {
-          "type": "string",
-          "description": "Middle name of teacher"
-        },
-        "lastName": {
-          "type": "string",
-          "description": "Last name of teacher"
-        }
-      }
-    },
     "FamilyMember": {
       "description": "Devotee Object",
       "properties": {
@@ -1403,8 +1483,21 @@
           "description": "Unique Identifier of the family member",
           "readOnly": true
         },
-        "familyMemberName": {
-          "$ref": "#/definitions/Name"
+        "firstName": {
+          "description": "First Name of Family Member",
+          "type": "string"
+        },
+        "lastName": {
+          "description": "First Name of Family Member",
+          "type": "string"
+        },
+        "phoneResidence": {
+          "description": "First Name of Family Member",
+          "type": "string"
+        },
+        "email": {
+          "description": "First Name of Family Member",
+          "type": "string"
         }
       }
     },
@@ -1478,3 +1571,4 @@
     }
   }
 }
+
