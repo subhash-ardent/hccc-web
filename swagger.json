@@ -1430,22 +1430,6 @@
         "emergencyContactNumber": {
           "type": "string",
           "description": "Emergency contact phone number"
-        },
-        "transientIndemnityIds": {
-          "type": "array",
-          "writeOnly" : true,
-          "description": "List of Indemnity Ids signed in association with this enrollment",
-          "items": {
-            "type": "integer"
-          }
-        },
-        "indemnities": {
-          "type": "array",
-          "readOnly": true,
-          "description": "List of Indemnities signed in association with this enrollment",
-          "items": {
-            "$ref": "#/definitions/Indemnity"
-          }
         }
       }
     },
