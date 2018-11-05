@@ -1,16 +1,17 @@
-import {Component, Input, OnInit, ViewChild } from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Teacher} from '../../models/teacher';
 import {Course} from '../../models/course';
 import {YandeApiService} from '../../services/yande-api.service';
-import {NgForm, FormControl} from '@angular/forms';
+import {FormGroup, FormControl} from '@angular/forms';
 import {AppService} from '../../../app.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {MatChipInputEvent,MatAutocompleteSelectedEvent} from '@angular/material';
+import {MatChipInputEvent, MatAutocompleteSelectedEvent} from '@angular/material';
 import {COMMA} from '@angular/cdk/keycodes';
 import {SnackBarService} from '../../../core/services/snack-bar.service';
 import {FullNamePipe} from '../../../core/pipes/full-name.pipe';
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+
 @Component({
   selector: 'hccc-course-form',
   templateUrl: './course-form.component.html',
@@ -19,56 +20,60 @@ import {map, startWith} from 'rxjs/operators';
 export class CourseFormComponent implements OnInit {
   @Input() course: Course;
   @Input() action: string;
-  @ViewChild('courseForm') courseForm: NgForm;
+
+  public courseForm = new FormGroup({
+    courseName: new FormControl(''),
+    lastName: new FormControl(''),
+  });
+
+
   model: Course;
   teachers: Teacher[];
   submitted = false;
   tags: string;
   readonly separatorKeysCodes: number[] = [COMMA];
 
-  //tags auto-completion properties
+  // tags auto-completion properties
   myControl = new FormControl();
-  options: string[] = ['kids', 'adults', 'slokas','language','sanskrit','stem'];
+  options: string[] = ['kids', 'adults', 'slokas', 'language', 'sanskrit', 'stem'];
   filteredOptions: Observable<string[]>;
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
-  }
-  public displayNull()
-{
-    return null
-}
 
   constructor(private appService: AppService,
               private snachBarService: SnackBarService,
               private apiService: YandeApiService,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute) { }
 
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
 
+  public displayNull() {
+    return null;
   }
 
   addTag(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
     if ((value || '').trim()) {
-      this.model.tags.push(value.toLowerCase());
+      this.model.tagsArray.push(value.toLowerCase());
     }
     if (input) {
       input.value = '';
     }
   }
-  addTagByAutoCompletion(event:MatAutocompleteSelectedEvent): void {
+
+  addTagByAutoCompletion(event: MatAutocompleteSelectedEvent): void {
     const value = event.option.value.trim();
-    this.model.tags.push(value.toLowerCase());
+    this.model.tagsArray.push(value.toLowerCase());
   }
 
   removeTag(tag: string): void {
     const index = this.model.tags.indexOf(tag);
 
     if (index >= 0) {
-      this.model.tags.splice(index, 1);
+      this.model.tagsArray.splice(index, 1);
     }
   }
 
@@ -79,17 +84,17 @@ export class CourseFormComponent implements OnInit {
       });
     if (this.action === 'details') {
       this.model = this.course;
-      this.model.tagsString = this.model.tags.join(', ');
-      this.model.teachersString = this.model.teachers.map(t => new FullNamePipe().transform(t.account)).join(', ');
+      this.model.tagsString = this.model.tags;
+      this.model.teachersString = this.model.teachers.map(t => new FullNamePipe().transform(t.devotee)).join(', ');
     } else if (this.action === 'edit') {
       this.model = Object.assign({}, this.course);
     } else {
       this.model = new Course();
-      this.model.tags = [];
+      this.model.tagsArray = [];
       this.model.teachers = [];
     }
 
-    //for tags-autoCompletion
+    // for tags-autoCompletion
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
@@ -112,7 +117,7 @@ export class CourseFormComponent implements OnInit {
 
   // reset functionality and clearing the course-create form.
   onReset() {
-    this.model.tags = [];
+    this.model.tagsArray = [];
     this.courseForm.reset();
   }
 

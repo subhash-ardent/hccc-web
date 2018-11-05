@@ -2,12 +2,13 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {catchError, map, mergeMap} from 'rxjs/operators';
-import {Account} from './core/models/account';
+import {Devotee} from './core/models/devotee';
 import {LoggerService} from './core/services/logger.service';
 import {Router, ActivatedRoute} from '@angular/router';
 import {NotFoundError} from './core/models/not-found-error';
 import {BreadCrumb} from './core/models/bread-crumb';
 import {MatSnackBar} from '@angular/material';
+import {Role} from './core/models/role';
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +19,7 @@ export class AppService {
   private hcccGuestUserName = 'hccc-guest-user';
   private currentUserUrl = 'yande/user/current';  // URL to web api
   private logger = new LoggerService(this.constructor.name);
-  
-
-
-  public currentUser: Account;
+  public currentUser: Devotee;
   public isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public isLoggedIn = false;
   public isYandeChair$: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -29,9 +27,9 @@ export class AppService {
   public isinitialDataLoaded = false;
   public sideNavMenuClick$: Observable<Event>;
   public breadCrumbs: BreadCrumb[];
-  authRedirectUrl: string;
-  loading = false;
-  isUnderAge:boolean = false;
+  public authRedirectUrl: string;
+  public loading = false;
+  isUnderAge = false;
 
   constructor(
     private http: HttpClient,
@@ -58,9 +56,9 @@ export class AppService {
   }
 
   async loadInitialData() {
-    const user = await this.http.get<Account>(this.currentUserUrl)
+    const user = await this.http.get<Devotee>(this.currentUserUrl)
       .pipe(
-        catchError(this.handleFatalError<Account>('loadInitialData'))
+        catchError(this.handleFatalError<Devotee>('loadInitialData'))
       )
       .toPromise();
     this.logger.info('Fetched current user');
@@ -68,8 +66,10 @@ export class AppService {
 
     if (this.currentUser && this.currentUser.userName && this.currentUser.userName !== this.hcccGuestUserName) {
       this.isLoggedIn$.next(true);
-      if (this.currentUser.roles.length > 0 && this.currentUser.roles.includes(this.yandeChairRoleLabel)) {
-        this.isYandeChair$.next(true);
+      if (this.currentUser.roles.length > 0) {
+        if (this.currentUser.roles.map(role => role.roleName).includes(this.yandeChairRoleLabel)) {
+          this.isYandeChair$.next(true);
+        }
       }
     }
     this.isinitialDataLoaded = true;
@@ -84,7 +84,7 @@ export class AppService {
           let label = data.title;
           let path = route.routeConfig.path;
           if (label.startsWith(':')) {
-            const paramName = label.replace(':','');
+            const paramName = label.replace(':', '');
             label = data[paramName];
             path = params[paramName];
           }
@@ -103,7 +103,7 @@ export class AppService {
   async handlePathParams(route: ActivatedRoute, breadCrumb: BreadCrumb): Promise<string> {
     return await route.data.pipe(
       map((data: any) => {
-        breadCrumb.url.replace(breadCrumb.label, route.params[breadCrumb.label.replace(':','')]);
+        breadCrumb.url.replace(breadCrumb.label, route.params[breadCrumb.label.replace(':', '')]);
         breadCrumb.label = data.title;
         return data.title;
       }))

@@ -7,7 +7,8 @@ export class Course {
   courseStartTime: string;
   courseStartDate?: string;
   courseEndDate?: string;
-  tags?: string[];
+  tags?: string;
+  tagsArray?: string[];
   slots: number;
   courseVenue: string;
   teachers: Teacher[];

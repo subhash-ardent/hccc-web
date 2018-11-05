@@ -1,8 +1,8 @@
-import {Account} from '../../core/models/account';
+import {Devotee} from '../../core/models/devotee';
 
 export class Teacher {
   userName: string;
-  account: Account;
+  devotee: Devotee;
   skillSet: string[];
   salutation: string;
   profilePictureURL: string;

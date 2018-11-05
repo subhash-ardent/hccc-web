@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Teacher } from '../../models/teacher';
-import { NgForm } from '@angular/forms';
-import { YandeApiService } from '../../services/yande-api.service';
-import { SnackBarService } from '../../../core/services/snack-bar.service';
-import { Account } from '../../../core/models/account';
-import { Router } from '@angular/router';
+import {Component, OnInit, Input, ViewChild} from '@angular/core';
+import {Teacher} from '../../models/teacher';
+import {NgForm} from '@angular/forms';
+import {YandeApiService} from '../../services/yande-api.service';
+import {SnackBarService} from '../../../core/services/snack-bar.service';
+import {Devotee} from '../../../core/models/devotee';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'hccc-teacher-form',
@@ -13,11 +13,11 @@ import { Router } from '@angular/router';
 })
 export class TeacherFormComponent implements OnInit {
   @Input() model = new Teacher();
-  @Input() tAction: string = '';
-  @Input() hideTDetails:boolean;
+  @Input() tAction = '';
+  @Input() hideTDetails: boolean;
   @ViewChild('teacherForm') teacherForm: NgForm;
 
-  devotee: Account;
+  devotee: Devotee;
   isTeacher = false;
   invalidPhoneNumber = false;
 
@@ -25,7 +25,8 @@ export class TeacherFormComponent implements OnInit {
     private apiService: YandeApiService,
     private snachBarService: SnackBarService,
     private router: Router
-    ) { }
+  ) {
+  }
 
   ngOnInit() {
   }
@@ -37,7 +38,7 @@ export class TeacherFormComponent implements OnInit {
       this.apiService.getDevotee(value).subscribe(a => {
         if (a.length && a.length > 0) {
           this.devotee = a[0];
-          if (this.devotee && this.devotee.roles && this.devotee.roles.includes('Teacher')) {
+          if (this.devotee && this.devotee.roles && this.devotee.roles.map(role => role.roleName).includes('Teacher')) {
             this.isTeacher = true;
           }
         } else {
@@ -53,11 +54,11 @@ export class TeacherFormComponent implements OnInit {
   }
 
 
-
-  onSubmit(){
-    console.log("submitted");
+  onSubmit() {
+    console.log('submitted');
   }
-  onCancelling(){
+
+  onCancelling() {
     this.teacherForm.reset();
     this.router.navigate(['/teachers']);
   }

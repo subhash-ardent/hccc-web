@@ -5,7 +5,7 @@ import {YandeApiService} from '../../services/yande-api.service';
 import {AppService} from '../../../app.service';
 import {SnackBarService} from '../../../core/services/snack-bar.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Account} from '../../../core/models/account';
+import {Devotee} from '../../../core/models/devotee';
 
 @Component({
   selector: 'app-teacher-onboard',
@@ -16,7 +16,7 @@ export class TeacherOnboardComponent implements OnInit {
   model = new Teacher();
   teachers: Teacher[];
   submitted = false;
-  devotee: Account;
+  devotee: Devotee;
   isTeacher = false;
   invalidPhoneNumber = false;
   constructor(private appService: AppService,
@@ -35,7 +35,7 @@ export class TeacherOnboardComponent implements OnInit {
       this.apiService.getDevotee(value).subscribe(a => {
         if (a.length && a.length > 0) {
           this.devotee = a[0];
-          if (this.devotee && this.devotee.roles && this.devotee.roles.includes('Teacher')) {
+          if (this.devotee && this.devotee.roles && this.devotee.roles.map(role => role.roleName).includes('Teacher')) {
             this.isTeacher = true;
           }
         } else {

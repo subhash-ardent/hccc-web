@@ -8,7 +8,7 @@ import {BehaviorSubject, Observable, of, timer} from 'rxjs';
 import {LoggerService} from '../../core/services/logger.service';
 import {catchError, tap, take, delayWhen} from 'rxjs/operators';
 import {AppService} from '../../app.service';
-import {Account} from '../../core/models/account';
+import {Devotee} from '../../core/models/devotee';
 import {SnackBarService} from '../../core/services/snack-bar.service';
 
 
@@ -128,12 +128,12 @@ export class YandeApiService {
     );
   }
 
-  // Account
+  // Devotee
 
-  getDevotee(mobileNumber: string): Observable<[Account]> {
-    return this.http.get<[Account]>(this.devoteeEndpointUrl + '?phoneNumber=' + mobileNumber).pipe(
+  getDevotee(mobileNumber: string): Observable<[Devotee]> {
+    return this.http.get<[Devotee]>(this.devoteeEndpointUrl + '/phoneNumber/' + mobileNumber).pipe(
       take(1),
-      catchError(this.appService.handleFatalError<[Account]>('getDevotee'))
+      catchError(this.appService.handleFatalError<[Devotee]>('getDevotee'))
     );
   }
 }

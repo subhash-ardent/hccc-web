@@ -31,6 +31,7 @@ export class CourseDetailsResolveService {
     return this.apiService.courses$.pipe(
       take(1),
       map(courses => {
+
         if (!courses || courses.length === 0) {
           throw new Error('Course Catalogue is Empty');
         } else {

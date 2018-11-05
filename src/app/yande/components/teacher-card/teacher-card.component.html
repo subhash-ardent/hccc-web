@@ -7,11 +7,11 @@
         <div *ngIf="teacher.profilePictureURL" class="teacher-img">
             <img src="{{teacher.profilePictureURL}}">
         </div>
-        <p>{{teacher.account | fullName}}</p>
-        <p>{{teacher.account.email}}</p>
-        <p>{{teacher.account.phoneNumber}}</p>
+        <p>fullname</p>
+        <p>email</p>
+        <p>pn</p>
         <mat-card-actions fxLayoutAlign.lt-sm="center center">
-            <a mat-button color="accent" routerLink="/teachers/{{teacher.account.userName}}" *ngIf="!hideTDetails">DETAILS</a>
+            <a mat-button color="accent" routerLink="/teachers/abc" *ngIf="!hideTDetails">DETAILS</a>
         </mat-card-actions>
     </mat-card-content>
 

@@ -28,7 +28,7 @@ export class TeacherDetailsResolveService {
         if (!teachers || teachers.length === 0) {
           throw new Error('Teacher List is Empty');
         } else {
-          const teacher = teachers.find(t => t.account && t.account.userName && t.account.userName === route.params['id']);
+          const teacher = teachers.find(t => t.devotee && t.devotee.userName && t.devotee.userName === route.params['id']);
           return teacher;
         }
       }),
