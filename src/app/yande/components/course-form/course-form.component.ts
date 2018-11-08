@@ -85,7 +85,12 @@ export class CourseFormComponent implements OnInit {
     if (this.action === 'details') {
       this.model = this.course;
       this.model.tagsString = this.model.tags;
-      this.model.teachersString = this.model.teachers.map(t => new FullNamePipe().transform(t.devotee)).join(', ');
+      if (this.model.teachers && this.model.teachers.length > 0) {
+        this.model.teachersString = this.model.teachers.map(t => new FullNamePipe().transform(t.devotee)).join(', ');
+      } else {
+        this.model.teachersString = '';
+      }
+
     } else if (this.action === 'edit') {
       this.model = Object.assign({}, this.course);
     } else {

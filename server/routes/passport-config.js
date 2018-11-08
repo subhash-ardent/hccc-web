@@ -10,38 +10,39 @@ const guestUser = {userName: "hccc-guest-user"};
 
 // Temporarily hardcoding yande profile. remove when devotee api is available
 
-const yneUser = {
-  "userName": "yande",
-  "phoneNumber": "9876543210",
-  "roles": [{
-    "roleId": "52",
-    "roleName": "Chairman - Youth and Cultural",
-    "roleDescription": "Chairman - Youth and Cultural",
-  }, {
-    "roleId": "28",
-    "roleName": "Devotee",
-    "roleDescription": "Devotee",
-  }],
-  "email": "email",
-  "dateOfBirth": "1990-07-12",
-  "firstName": "Vandhana",
-  "lastName": "Bhanoori",
-  "middleName": "",
-  "familyMembers": [{
-    "firstName": "Prabhakar",
-    "lastName": "Bhanoori",
-    "middleName": ""
-  }]
-};
+// const yneUser = {
+//   "userName": "yande",
+//   "phoneNumber": "9876543210",
+//   "roles": [{
+//     "roleId": "52",
+//     "roleName": "Chairman - Youth and Cultural",
+//     "roleDescription": "Chairman - Youth and Cultural",
+//   }, {
+//     "roleId": "28",
+//     "roleName": "Devotee",
+//     "roleDescription": "Devotee",
+//   }],
+//   "email": "email",
+//   "dateOfBirth": "1990-07-12",
+//   "firstName": "Vandhana",
+//   "lastName": "Bhanoori",
+//   "middleName": "",
+//   "familyMembers": [{
+//     "firstName": "Prabhakar",
+//     "lastName": "Bhanoori",
+//     "middleName": ""
+//   }]
+// };
 
 let getUserByUserName = function (usrNm) {
   // fetching current users info from backend
   // make GET call to /accounts endpoint passing userName as query parameter
 
   return new Promise(function (resolve, reject) {
+    process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
     let options = {
       baseUrl: config.baseUrl,
-      url: "/devotee/" + usrNm,
+      url: "/devotees/" + usrNm,
       method: 'GET',
       agentOptions: {
         cert: fs.readFileSync(certFile),
@@ -55,6 +56,7 @@ let getUserByUserName = function (usrNm) {
         "User-Name": usrNm
       }
     };
+
     request(options, function (err, response, body) {
       if (err) {
         console.log(`Api call for ${options.url} failed with an error`, err);
@@ -65,8 +67,8 @@ let getUserByUserName = function (usrNm) {
       } else {
         //console.log(`Received response for ${options.url}`);
         let users = JSON.parse(body);
-        if (users && users.length > 0)
-          resolve(JSON.parse(body)[0]);
+        if (users)
+          resolve(JSON.parse(body));
         else
           reject(new Error('No matching user profile found'));
       }
@@ -76,7 +78,6 @@ let getUserByUserName = function (usrNm) {
 
 let getUserFromCookie = function (req) {
   let currUserName;
-  // console.log("cookie: ", req.cookies.sessionInfo);
   if (req.cookies && req.cookies.sessionInfo) {
     let sessionInfo = req.cookies.sessionInfo;
     if (sessionInfo.startsWith("username=")) {
@@ -90,7 +91,13 @@ let customStrategyVerify = function (req, cb) {
   if (req && req.user && req.user.userName && req.user.userName !== guestUser.userName) {
     cb(null, req.user);
   } else {
-    let currUserName = getUserFromCookie(req);
+
+    /* Currently hardcoding Y&E username ("ABCD")
+    * below line can be uncommented to get username from cookie
+    * */
+    // let currUserName = getUserFromCookie(req);
+    let currUserName = "ABCD";
+
     if (!currUserName) {
       cb(null, guestUser);
     } else {

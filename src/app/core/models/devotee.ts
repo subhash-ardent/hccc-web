@@ -3,8 +3,8 @@ import {Role} from './role';
 
 export class Devotee {
   userName: string;
-  phoneNumber: string;
-  roles: Role[];
+  phoneResidence: string;
+  categories: Role[];
   email: string;
   firstName: string;
   lastName: string;

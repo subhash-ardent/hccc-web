@@ -66,8 +66,10 @@ export class AppService {
 
     if (this.currentUser && this.currentUser.userName && this.currentUser.userName !== this.hcccGuestUserName) {
       this.isLoggedIn$.next(true);
-      if (this.currentUser.roles.length > 0) {
-        if (this.currentUser.roles.map(role => role.roleName).includes(this.yandeChairRoleLabel)) {
+      const cUser = this.currentUser;
+      console.log(cUser);
+      if (cUser.categories && cUser.categories.length > 0) {
+        if (this.currentUser.categories.map(role => role.name).includes(this.yandeChairRoleLabel)) {
           this.isYandeChair$.next(true);
         }
       }

@@ -14,7 +14,7 @@ export class CourseCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.course);
+    // console.log(this.course);
   }
 
   deleteCourse(courseId) {

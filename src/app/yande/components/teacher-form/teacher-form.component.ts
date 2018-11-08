@@ -38,7 +38,7 @@ export class TeacherFormComponent implements OnInit {
       this.apiService.getDevotee(value).subscribe(a => {
         if (a.length && a.length > 0) {
           this.devotee = a[0];
-          if (this.devotee && this.devotee.roles && this.devotee.roles.map(role => role.roleName).includes('Teacher')) {
+          if (this.devotee && this.devotee.categories && this.devotee.categories.map(role => role.name).includes('Teacher')) {
             this.isTeacher = true;
           }
         } else {

@@ -20,7 +20,7 @@
             <mat-list role="list" *ngIf="devotee">
                 <mat-list-item role="listitem"><h3 matSubheader>First Name:</h3>{{devotee | fullName}}</mat-list-item>
                 <mat-list-item role="listitem"><h3 matSubheader>Email:</h3>{{devotee.email}}</mat-list-item>
-                <mat-list-item role="listitem"><h3 matSubheader>Phone Number:</h3>{{devotee.phoneNumber}}</mat-list-item>
+                <mat-list-item role="listitem"><h3 matSubheader>Phone Number:</h3>{{devotee.phoneResidence}}</mat-list-item>
                 <br/>
                 <mat-list-item *ngIf="isTeacher">
                     <span class="mat-caption hccc-success-caption" >{{devotee | fullName}} is already onboarded as a Teacher</span>
@@ -32,9 +32,6 @@
 
             <mat-form-field>
                 <input matInput placeholder="Title/Salutaion" name="title" required [(ngModel)]="model.salutation" [readonly]="tAction==='details'"><br/>
-                    <div *ngIf="teacherForm.form.controls.title.invalid" >
-                        <div *ngIf="teacherForm.controls.title.errors.required && (teacherForm.controls.title.dirty || teacherForm.controls.title.touched)" class="validation">*Title/Salutation is required</div>
-                    </div>    
             </mat-form-field>
 
             <mat-form-field>
@@ -43,9 +40,6 @@
 
             <mat-form-field>
                 <input matInput placeholder="Skill sets" name="skills" required [(ngModel)]="model.skillSet" [readonly]="tAction==='details'"><br/>
-                <div *ngIf="teacherForm.form.controls.skills.invalid" >
-                    <div *ngIf="teacherForm.controls.skills.errors.required && (teacherForm.controls.skills.dirty || teacherForm.controls.skills.touched)" class="validation">*Skill Sets are required</div>
-                </div>
             </mat-form-field>
 
             <mat-checkbox name="indemnitySigned" required #indemnity="ngModel" [(ngModel)]="model.indemnitySigned" [disabled]="tAction==='details'"> Indemnity Signed</mat-checkbox>
