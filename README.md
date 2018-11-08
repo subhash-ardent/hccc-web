@@ -47,4 +47,3 @@ Always run `npm install` after pulling latest code from GitHub.
 8. Navigate to `localhost:4200` on a browser to view the latest app
 
 
-

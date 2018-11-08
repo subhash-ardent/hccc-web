@@ -12,11 +12,11 @@
         <mat-card-content fxLayout="column" fxLayoutAlign="center center">
             <div>On {{course.courseDays}}</div>
             <div>By <span class="teacher-name"
-                    *ngFor="let teacher of course.teachers">{{teacher.account | fullName:teacher.salutation}}</span>
+                    *ngFor="let teacher of course.teachers">{{teacher.devotee | fullName:teacher.salutation}}</span>
             </div>
 
                 <mat-chip-list #tagList  selectable="false">
-                    <mat-chip *ngFor="let tag of course.tags" disableRipple="true" selectable="false">
+                    <mat-chip *ngFor="let tag of course.tagsArray" disableRipple="true" selectable="false">
                         {{tag}}
                     </mat-chip>
                 </mat-chip-list>

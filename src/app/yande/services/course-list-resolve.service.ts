@@ -34,6 +34,12 @@ export class CourseListResolveService implements Resolve<Course[]> {
         if (!courses || courses.length === 0) {
           throw new Error('Course Catalogue is Empty');
         } else {
+          courses = courses.map(course => {
+            if (course.tags) {
+              course.tagsArray = course.tags.split(',');
+            }
+            return course;
+          });
           return courses;
         }
       }),

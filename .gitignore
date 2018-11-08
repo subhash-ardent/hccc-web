@@ -43,3 +43,6 @@ server/cert/*.crt
 server/cert/*.key
 server/cert/*.pem
 
+/mock-backend
+/mock-data
+

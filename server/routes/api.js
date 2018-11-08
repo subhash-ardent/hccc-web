@@ -36,7 +36,7 @@ router.all('/*', (req, res) => {
     if (req.method === 'POST' && req.body) {
       options.body = JSON.stringify(req.body);
     }
-    console.log(options);
+    // console.log(options);
     request(options, function(err, response, body) {
       if(err) {
         console.log(`Api call for ${req.url} failed with an error`, err);

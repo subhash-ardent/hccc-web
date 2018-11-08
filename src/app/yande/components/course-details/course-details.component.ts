@@ -17,6 +17,7 @@ export class CourseDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.data
       .subscribe((data: { course: Course }) => {
+        console.log(data.course);
         this.course = data.course;
       });
   }

@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from '../material.module';
-import { MatButtonModule,MatTooltipModule,MatInputModule,MatAutocompleteModule } from '@angular/material';
+import {MatButtonModule, MatTooltipModule, MatInputModule, MatAutocompleteModule} from '@angular/material';
 import {CoreModule} from '../core/core.module';
 import {YandeRoutingModule} from './yande-routing.module';
 
@@ -21,14 +21,12 @@ import {TeacherDetailsComponent} from './components/teacher-details/teacher-deta
 import {TeacherDetailsUpdateComponent} from './components/teacher-details-update/teacher-details-update.component';
 import {CourseBaseComponent} from './components/course-base/course-base.component';
 import {TeacherBaseComponent} from './components/teacher-base/teacher-base.component';
-import { CourseSortPipe } from './pipes/course-sort.pipe';
-import { CourseFormComponent } from './components/course-form/course-form.component';
-import { CourseFilterPipe } from './pipes/course-filter.pipe';
-import { TeacherFormComponent } from './components/teacher-form/teacher-form.component';
-import { MyCoursesComponent } from './components/my-courses/my-courses.component';
+import {CourseSortPipe} from './pipes/course-sort.pipe';
+import {CourseFormComponent} from './components/course-form/course-form.component';
+import {CourseFilterPipe} from './pipes/course-filter.pipe';
+import {TeacherFormComponent} from './components/teacher-form/teacher-form.component';
 
-
-
+// import { MyCoursesComponent } from './components/my-courses/my-courses.component';
 
 
 @NgModule({
@@ -43,7 +41,6 @@ import { MyCoursesComponent } from './components/my-courses/my-courses.component
     MatButtonModule,
     MatAutocompleteModule,
     CoreModule,
-    
   ],
   declarations: [
     CourseCardComponent,
@@ -65,7 +62,7 @@ import { MyCoursesComponent } from './components/my-courses/my-courses.component
     CourseFormComponent,
     CourseFilterPipe,
     TeacherFormComponent,
-    MyCoursesComponent
+    // MyCoursesComponent
   ]
 })
 export class YandeModule {
