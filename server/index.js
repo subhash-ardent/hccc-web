@@ -43,7 +43,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 let failureRedirect = {
-  failureRedirect: 'https://livermoretemple.org'
+  failureRedirect: '/yande/error-page'
 };
 
 // Configure API and Webapp routes

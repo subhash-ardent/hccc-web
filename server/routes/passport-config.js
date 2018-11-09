@@ -89,6 +89,7 @@ let getUserFromCookie = function (req) {
 
 let customStrategyVerify = function (req, cb) {
   if (req && req.user && req.user.userName && req.user.userName !== guestUser.userName) {
+    console.log(req.user);
     cb(null, req.user);
   } else {
 
@@ -105,8 +106,9 @@ let customStrategyVerify = function (req, cb) {
         .then(function (userDetails) {
           cb(null, userDetails);
         })
-        .catch(function () {
-          cb(null, false);
+        .catch(function (e) {
+          console.log("Cannot establish a session for ", currUserName, ". Continue as Guest User.");
+          cb(null, guestUser);
         });
     }
   }
@@ -117,7 +119,7 @@ let serializeUser = function (user, cb) {
 };
 let deserializeUser = function (userName, cb) {
   if (userName === guestUser.userName) {
-    cb(null, yneUser);
+    cb(null, guestUser);
   } else {
     getUserByUserName(userName)
       .then(function (userDetails) {
