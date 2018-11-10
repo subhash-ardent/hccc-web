@@ -88,25 +88,43 @@ let getUserFromCookie = function (req) {
 };
 
 let customStrategyVerify = function (req, cb) {
+
+  // This method is called to verify a valid session before every protected route.
+  console.log("verifying session");
+
+  // Check if the request has a (valid) logged-in user and not a guest user.
   if (req && req.user && req.user.userName && req.user.userName !== guestUser.userName) {
-    console.log(req.user);
+
+    // If the request has a valid user, return the user.
     cb(null, req.user);
+
   } else {
 
-    /* Currently hardcoding Y&E username ("ABCD")
-    * below line can be uncommented to get username from cookie
-    * */
+    // Look into the cookies to see if a valid user session is set by the legacy application.
+
+    /***********************/
+    // Currently hard-coding Y&E username ("ABCD"). Below lines to be toggled to get username from cookie
     // let currUserName = getUserFromCookie(req);
     let currUserName = "ABCD";
+    /************************/
+
 
     if (!currUserName) {
+
+      // If there is no user session found in the cookies, return guest user
       cb(null, guestUser);
+
     } else {
+
+      // If a valid user session is found in the cookies (set by legacy application),
+      // get the user details from backend and return the same
       getUserByUserName(currUserName)
         .then(function (userDetails) {
           cb(null, userDetails);
         })
         .catch(function (e) {
+
+          // If not able to get user details for the user, return guest user.
           console.log("Cannot establish a session for ", currUserName, ". Continue as Guest User.");
           cb(null, guestUser);
         });
@@ -115,8 +133,13 @@ let customStrategyVerify = function (req, cb) {
 
 };
 let serializeUser = function (user, cb) {
+
+  // Sets the current user in session
+  //
   cb(null, user.userName);
 };
+
+
 let deserializeUser = function (userName, cb) {
   if (userName === guestUser.userName) {
     cb(null, guestUser);

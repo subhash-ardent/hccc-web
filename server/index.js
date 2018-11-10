@@ -23,17 +23,24 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());
 
 // Enabling user session
-app.use(session(config.sessionOptions));
+const sessionOptions = config.sessionOptions;
+const m15 = 1000 * 60 * 15;
+sessionOptions.cookie = {
+  expires: new Date(Date.now() + m15),
+  maxAge: m15
+};
+
+app.use(session(sessionOptions));
 
 // Verify session
-// app.use((req,res,next) => {
-//   if(!req.session) {
-//     return next(new Error('Session Unavailable'));
-//   } else {
-//     console.log("Session Verified");
-//     next();
-//   }
-// });
+app.use((req,res,next) => {
+  if(!req.session) {
+    return next(new Error('Session Unavailable'));
+  } else {
+    console.log("Session Verified");
+    next();
+  }
+});
 
 // Configure passport
 passport.use('custom', new Strategy(passportConfig.customStrategyVerify));
