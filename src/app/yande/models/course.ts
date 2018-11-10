@@ -1,22 +1,23 @@
 import {Teacher} from './teacher';
+import {IndemnityForm} from './indemnity-forms';
 
 export class Course {
-  courseName: string;
-  courseImageURL?: string;
-  courseEndTime: string;
-  courseStartTime: string;
-  courseStartDate?: string;
-  courseEndDate?: string;
-  tags?: string;
-  tagsArray?: string[];
-  slots: number;
-  courseVenue: string;
-  teachers: Teacher[];
-  flyerURL?: string;
-  courseId?: string;
-  courseDays: string;
-  courseRemarks?: string;
-  ageRestrictions: string;
-  tagsString: string;
-  teachersString: string;
+  courseId: number;
+  courseName = '';
+  courseImageURL = '';
+  courseEndTime = '';
+  courseStartTime = '';
+  courseStartDate = new Date();
+  courseEndDate = new Date();
+  totalSlots = 0;
+  courseVenue = '';
+  flyerURL = '';
+  isArchived = false;
+  isRegistrationOpen = true;
+  courseDays = '';
+  courseRemarks = '';
+  ageRestrictions = '';
+  tags = '';
+  teachers: Teacher[] = [];
+  indemnityForms: IndemnityForm[] = [];
 }

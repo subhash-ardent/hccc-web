@@ -31,7 +31,8 @@
                    *ngIf="!hideDetails">DETAILS</a>
                 <a mat-button color="accent" routerLink="/courses/{{course.courseId}}/enroll"
                    *ngIf="!hideEnroll">ENROLL</a>
-                <a mat-button color="accent" (click)="deleteCourse(course.courseId)" *ngIf="showDelete">DELETE</a>
+                <a mat-button color="accent" (click)="deleteCourse(course.courseId)"
+                   *ngIf="showDelete">DELETE</a>
             </mat-card-actions>
         </div>
 

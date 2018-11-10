@@ -1,5 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, ChangeDetectorRef} from '@angular/core';
 import {Course} from '../../models/course';
+import {AppService} from '../../../app.service';
+import {YandeApiService} from '../../services/yande-api.service';
+import {SnackBarService} from '../../../core/services/snack-bar.service';
 
 @Component({
   selector: 'course-card',
@@ -11,13 +14,20 @@ export class CourseCardComponent implements OnInit {
   @Input() hideEnroll: boolean;
   @Input() hideDetails: boolean;
   @Input() showDelete: boolean;
-  constructor() { }
+  constructor(private apiService: YandeApiService,
+              private snackBarService: SnackBarService) { }
 
   ngOnInit() {
     // console.log(this.course);
   }
 
   deleteCourse(courseId) {
+    this.apiService.deleteCourse(this.course).subscribe(
+      data => {
+        this.snackBarService.showSuccessSnackBar('Course Deleted Successfully');
 
+      },
+      error => this.snackBarService.showFailureSnackBar('Error while deleting course')
+    );
   }
 }

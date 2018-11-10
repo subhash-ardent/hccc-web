@@ -1,7 +1,9 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, ChangeDetectorRef} from '@angular/core';
 import {AppService} from '../../../app.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Course} from '../../models/course';
+import {YandeApiService} from '../../services/yande-api.service';
+import {LoggerService} from '../../../core/services/logger.service';
 
 @Component({
   selector: 'app-course-catalogue',
@@ -14,21 +16,36 @@ export class CourseCatalogueComponent implements OnInit {
   public topThreeTags: any[];
   filterTag: string = '';
   filterString: string = '';
+  private logger = new LoggerService(this.constructor.name);
 
   constructor(public appService: AppService,
+              private apiService: YandeApiService,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private ref: ChangeDetectorRef) {
     this.appService = appService;
   }
 
   ngOnInit() {
-    this.route.data
-      .subscribe((data: { courses: Course[] }) => {
-        this.courses = data.courses;
-        this.buildTagMap();
-        this.findTopThreeTags();
-      });
+    // this.route.data
+    //   .subscribe((data: { courses: Course[] }) => {
+    //     this.courses = data.courses;
+    //     this.buildTagMap();
+    //     this.findTopThreeTags();
+    //   });
+
+    this.apiService.courses$.subscribe(
+      courses => {
+        this.courses = courses;
+        this.ref.detectChanges();
+      },
+      err => {
+        this.logger.error('Error while fetching courses');
+      }
+    );
   }
+
+
 
   buildTagMap() {
     this.courses.forEach(c => {

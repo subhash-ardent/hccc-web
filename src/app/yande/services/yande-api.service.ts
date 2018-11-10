@@ -10,6 +10,7 @@ import {catchError, tap, take, delayWhen} from 'rxjs/operators';
 import {AppService} from '../../app.service';
 import {Devotee} from '../../core/models/devotee';
 import {SnackBarService} from '../../core/services/snack-bar.service';
+import {IndemnityForm} from '../models/indemnity-forms';
 
 
 @Injectable({
@@ -20,11 +21,14 @@ export class YandeApiService {
   private coursesEndpointUrl = 'yande/api/courses';
   private teachersEndpointUrl = 'yande/api/teachers';
   private devoteeEndpointUrl = 'yande/api/devotee';
+  private indemnityFormsEndpointUrl = 'yande/api/indemnityForms';
   private logger = new LoggerService(this.constructor.name);
   public isCoursesLoaded = false;
   public isTeachersLoaded = false;
+  public isIndemnityFormsLoaded = false;
   public courses$: BehaviorSubject<Course[]> = new BehaviorSubject(null);
   public teachers$: BehaviorSubject<Teacher[]> = new BehaviorSubject(null);
+  public indemnityForms$: BehaviorSubject<IndemnityForm[]> = new BehaviorSubject(null);
 
   constructor(
     private appService: AppService,
@@ -32,6 +36,7 @@ export class YandeApiService {
     private http: HttpClient) {
     this.loadCourses();
     this.loadTeachers();
+    this.loadIndemnityForms();
   }
 
   // Courses
@@ -45,6 +50,7 @@ export class YandeApiService {
         catchError(this.appService.handleFatalError<Course[]>('loadCourses'))
       ).toPromise();
       this.logger.info('Fetched courses');
+      // const res = [];
       if (res) {
         this.courses$.next(res);
         this.isCoursesLoaded = true;
@@ -57,14 +63,30 @@ export class YandeApiService {
   }
 
   addCourse(newCourse: Course) {
-    return this.http.post<{course: Course}>(this.coursesEndpointUrl, {course: newCourse}).pipe(
+    return this.http.post<{ course: Course }>(this.coursesEndpointUrl, {course: newCourse}).pipe(
       tap(
         res => {
-          if (!res.course) { throw new Error('Invalid Response'); }
+          if (!res.course) {
+            throw new Error('Invalid Response');
+          }
           this.courses$.value.push(res.course);
           this.courses$.next(this.courses$.value);
           this.logger.info(`${newCourse.courseName} added successfully`);
           this.snachBarService.showSuccessSnackBar('New Course Added Successfully');
+        })
+    );
+  }
+
+  deleteCourse(deletedCourse: Course) {
+    return this.http.delete(this.coursesEndpointUrl + '/' + deletedCourse.courseId).pipe(
+      tap(
+        res => {
+          const courses = this.courses$.value;
+          const index = courses.findIndex((course: Course) => course.courseId === deletedCourse.courseId);
+          courses.splice(index, 1);
+          console.log(index, courses);
+          this.courses$.next(courses);
+          this.logger.info(`${deletedCourse.courseName} deleted successfully`);
         })
     );
   }
@@ -93,6 +115,7 @@ export class YandeApiService {
         catchError(this.appService.handleFatalError<Teacher[]>('loadTeachers'))
       ).toPromise();
       this.logger.info('Fetched teachers');
+      // const res = [];
       if (res) {
         this.teachers$.next(res);
         this.isTeachersLoaded = true;
@@ -135,6 +158,29 @@ export class YandeApiService {
       take(1),
       catchError(this.appService.handleFatalError<[Devotee]>('getDevotee'))
     );
+  }
+
+  // Indemnity Forms
+
+  async loadIndemnityForms() {
+    try {
+      const intentionalDelay = () => timer(1000);
+      const res = await this.http.get<IndemnityForm[]>(this.indemnityFormsEndpointUrl).pipe(
+        take(1),
+        delayWhen(intentionalDelay),
+        catchError(this.appService.handleFatalError<IndemnityForm[]>('loadIndemnityForms'))
+      ).toPromise();
+      this.logger.info('Fetched teachers');
+      // const res = [];
+      if (res) {
+        this.indemnityForms$.next(res);
+        this.isIndemnityFormsLoaded = true;
+      } else {
+        throw new Error('Invalid payload');
+      }
+    } catch (e) {
+      this.appService.handleFatalError<IndemnityForm[]>('loadIndemnityForms')(e);
+    }
   }
 }
 

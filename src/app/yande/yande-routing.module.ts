@@ -23,6 +23,7 @@ import {TeacherListResolveService} from './services/teacher-list-resolve.service
 import {TeacherDetailsResolveService} from './services/teacher-details-resolve.service';
 import {CourseNameResolveService} from './services/course-name-resolve.service';
 import {TeacherNameResolveService} from './services/teacher-name-resolve.service';
+import {IndemnityFormListResolveService} from './services/indemnity-form-list-resolve.service';
 
 
 const yandeRoutes: Routes = [
@@ -41,7 +42,8 @@ const yandeRoutes: Routes = [
         path: 'create', component: CourseCreateComponent,
         canActivate: [YandeChairGuardService],
         resolve: {
-          teachers: TeacherListResolveService
+          teachers: TeacherListResolveService,
+          indemnityForms: IndemnityFormListResolveService
         },
         data: {title: 'Create'}
       },

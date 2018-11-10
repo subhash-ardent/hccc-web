@@ -15,7 +15,7 @@ import {SnackBarService} from '../../../core/services/snack-bar.service';
   templateUrl: './course-create.component.html',
   styleUrls: ['./course-create.component.scss']
 })
-export class CourseCreateComponent{
+export class CourseCreateComponent {
   constructor() {
   }
 }

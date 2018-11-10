@@ -36,7 +36,7 @@ export class CourseDetailsResolveService {
           throw new Error('Course Catalogue is Empty');
         } else {
           const course = courses.find(c => {
-            return parseInt(c.courseId) === parseInt(route.params['id']);
+            return c.courseId === parseInt(route.params['id'], 10);
           });
           if (!course) {
             throw new Error('Course not found');

@@ -2,7 +2,7 @@ import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Teacher} from '../../models/teacher';
 import {Course} from '../../models/course';
 import {YandeApiService} from '../../services/yande-api.service';
-import {FormGroup, FormControl} from '@angular/forms';
+import {FormGroup, FormControl, FormBuilder} from '@angular/forms';
 import {AppService} from '../../../app.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatChipInputEvent, MatAutocompleteSelectedEvent} from '@angular/material';
@@ -11,6 +11,7 @@ import {SnackBarService} from '../../../core/services/snack-bar.service';
 import {FullNamePipe} from '../../../core/pipes/full-name.pipe';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import {IndemnityForm} from '../../models/indemnity-forms';
 
 @Component({
   selector: 'hccc-course-form',
@@ -20,125 +21,103 @@ import {map, startWith} from 'rxjs/operators';
 export class CourseFormComponent implements OnInit {
   @Input() course: Course;
   @Input() action: string;
-
-  public courseForm = new FormGroup({
-    courseName: new FormControl(''),
-    lastName: new FormControl(''),
-  });
-
-
-  model: Course;
   teachers: Teacher[];
-  submitted = false;
-  tags: string;
-  readonly separatorKeysCodes: number[] = [COMMA];
+  indemnityForms: IndemnityForm[];
+  courseForm: FormGroup;
 
-  // tags auto-completion properties
-  myControl = new FormControl();
-  options: string[] = ['kids', 'adults', 'slokas', 'language', 'sanskrit', 'stem'];
-  filteredOptions: Observable<string[]>;
+  // readonly separatorKeysCodes: number[] = [COMMA];
 
   constructor(private appService: AppService,
-              private snachBarService: SnackBarService,
+              private snackBarService: SnackBarService,
               private apiService: YandeApiService,
               private router: Router,
-              private route: ActivatedRoute) { }
-
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+              private route: ActivatedRoute,
+              private formBuilder: FormBuilder) {
+    this.courseForm = formBuilder.group(new Course());
+    console.log(this.courseForm);
   }
 
-  public displayNull() {
-    return null;
-  }
-
-  addTag(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-    if ((value || '').trim()) {
-      this.model.tagsArray.push(value.toLowerCase());
-    }
-    if (input) {
-      input.value = '';
-    }
-  }
-
-  addTagByAutoCompletion(event: MatAutocompleteSelectedEvent): void {
-    const value = event.option.value.trim();
-    this.model.tagsArray.push(value.toLowerCase());
-  }
-
-  removeTag(tag: string): void {
-    const index = this.model.tags.indexOf(tag);
-
-    if (index >= 0) {
-      this.model.tagsArray.splice(index, 1);
-    }
-  }
+  // addTag(event: MatChipInputEvent): void {
+  //   const input = event.input;
+  //   const value = event.value;
+  //   if ((value || '').trim()) {
+  //     this.model.tagsArray.push(value.toLowerCase());
+  //   }
+  //   if (input) {
+  //     input.value = '';
+  //   }
+  // }
+  //
+  // removeTag(tag: string): void {
+  //   const index = this.model.tags.indexOf(tag);
+  //
+  //   if (index >= 0) {
+  //     this.model.tagsArray.splice(index, 1);
+  //   }
+  // }
 
   ngOnInit() {
+    // Getting the list of teachers from backend to render dropdown options
     this.route.data
-      .subscribe((data: { teachers: Teacher[] }) => {
+      .subscribe(data => {
         this.teachers = data.teachers;
+        this.indemnityForms = data.indemnityForms;
       });
-    if (this.action === 'details') {
-      this.model = this.course;
-      this.model.tagsString = this.model.tags;
-      if (this.model.teachers && this.model.teachers.length > 0) {
-        this.model.teachersString = this.model.teachers.map(t => new FullNamePipe().transform(t.devotee)).join(', ');
-      } else {
-        this.model.teachersString = '';
-      }
 
-    } else if (this.action === 'edit') {
-      this.model = Object.assign({}, this.course);
-    } else {
-      this.model = new Course();
-      this.model.tagsArray = [];
-      this.model.teachers = [];
+    // Prepare for 3 different actions
+    switch (this.action) {
+      case 'details':
+        // this.model = this.course;
+        // this.model.tagsString = this.model.tags;
+        // if (this.model.teachers && this.model.teachers.length > 0) {
+        //   this.model.teachersString = this.model.teachers.map(t => new FullNamePipe().transform(t.devotee)).join(', ');
+        // } else {
+        //   this.model.teachersString = '';
+        // }
+        break;
+
+      case 'edit':
+        // this.model = Object.assign({}, this.course);
+        break;
+
+      case 'create':
+        break;
     }
 
-    // for tags-autoCompletion
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value))
-    );
 
   }
 
   onSubmit() {
-    this.submitted = true;
-    console.log('printing model', this.model);
-
-    this.apiService.addCourse(this.model).subscribe(
-      data => {
-        this.snachBarService.showSuccessSnackBar('New Course Added Successfully');
-        this.router.navigate(['../'], {relativeTo: this.route});
-      },
-      error => this.snachBarService.showFailureSnackBar('Error while adding new course')
-    );
+    console.log('printing model', this.course);
+    //
+    // this.apiService.addCourse(this.model).subscribe(
+    //   data => {
+    //     this.snackBarService.showSuccessSnackBar('New Course Added Successfully');
+    //     this.router.navigate(['../'], {relativeTo: this.route});
+    //   },
+    //   error => this.snackBarService.showFailureSnackBar('Error while adding new course')
+    // );
   }
 
   // reset functionality and clearing the course-create form.
-  onReset() {
-    this.model.tagsArray = [];
-    this.courseForm.reset();
-  }
+  // onReset() {
+  //   this.model.tagsArray = [];
+  //   this.courseForm.reset();
+  // }
 
-  onUpdate() {
-    const updatedCourse = new Course();
-    for (const key in Object.keys(this.model)) {
-      if (this.model[key] === this.course[key]) {
-        updatedCourse[key] = this.model[key];
-      }
-    }
-    this.apiService.updateCourse(updatedCourse).subscribe(
-      data => {
-        this.snachBarService.showSuccessSnackBar('Course Updated Successfully');
-        this.router.navigate(['../'], {relativeTo: this.route});
-      },
-      error => this.snachBarService.showFailureSnackBar('Error while updating course')
-    );
-  }
+  // onUpdate() {
+  //   const updatedCourse = new Course();
+  //   for (const key in Object.keys(this.model)) {
+  //     if (this.model[key] === this.course[key]) {
+  //       updatedCourse[key] = this.model[key];
+  //     }
+  //   }
+  //   this.apiService.updateCourse(updatedCourse).subscribe(
+  //     data => {
+  //       this.snackBarService.showSuccessSnackBar('Course Updated Successfully');
+  //       this.router.navigate(['../'], {relativeTo: this.route});
+  //     },
+  //     error => this.snackBarService.showFailureSnackBar('Error while updating course')
+  //   );
+  // }
 }

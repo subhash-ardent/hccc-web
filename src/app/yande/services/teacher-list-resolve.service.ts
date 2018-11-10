@@ -30,11 +30,11 @@ export class TeacherListResolveService implements Resolve<Teacher[]> {
     return this.apiService.teachers$.pipe(
       take(1),
       map(teachers => {
-        if (!teachers || teachers.length === 0) {
-          throw new Error('Teachers List is Empty');
-        } else {
+        // if (!teachers || teachers.length === 0) {
+        //   throw new Error('Teachers List is Empty');
+        // } else {
           return teachers;
-        }
+        // }
       }),
       catchError(this.appService.handleFatalError<Teacher[]>(`get teachers`))
     ).toPromise();
