@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from '../material.module';
-import {MatButtonModule, MatTooltipModule, MatInputModule, MatAutocompleteModule} from '@angular/material';
+import {MatButtonModule, MatTooltipModule, MatInputModule, MatAutocompleteModule, MatIconModule} from '@angular/material';
 import {CoreModule} from '../core/core.module';
 import {YandeRoutingModule} from './yande-routing.module';
 
@@ -40,6 +40,7 @@ import {TeacherFormComponent} from './components/teacher-form/teacher-form.compo
     MatInputModule,
     MatButtonModule,
     MatAutocompleteModule,
+    MatIconModule,
     CoreModule,
   ],
   declarations: [
