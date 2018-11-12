@@ -1,27 +1,28 @@
-<form class="hccc-course-creation-form" fxLayout="column" fxLayoutGap="5%" fxLayoutAlign.lt-md="center center"
-      [formGroup]="courseForm" (submit)="onSubmit()">
+<mat-card>
+<div class="hccc-course-creation-form" fxLayout="column" fxLayoutGap="5%" fxLayoutAlign.lt-md="center center"
+      [formGroup]="courseForm">
 
     <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="5%">
 
         <div fxLayout="column" fxFlex="30" fxFlex.md="40" fxLayoutAlign="center" class="form-group">
 
             <mat-form-field>
-                <input matInput placeholder="Course Name" formControlName="courseName"/>
+                <input matInput placeholder="Course Name" formControlName="courseName" [readonly]="readOnly"/>
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput placeholder="Age Restrictions Info" formControlName="ageRestrictions"/>
+                <input matInput placeholder="Age Restrictions Info" formControlName="ageRestrictions" [readonly]="readOnly"/>
             </mat-form-field>
 
             <div fxLayout="row" fxLayoutAlign="space-between center">
                 <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
                     <mat-form-field>
-                        <input matInput type="date" placeholder="Start Date" formControlName="courseStartDate">
+                        <input matInput type="date" placeholder="Start Date" formControlName="courseStartDate" [readonly]="readOnly">
                     </mat-form-field>
                 </div>
                 <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
                     <mat-form-field>
-                        <input matInput type="date" placeholder="End Date" formControlName="courseEndDate">
+                        <input matInput type="date" placeholder="End Date" formControlName="courseEndDate" [readonly]="readOnly">
                     </mat-form-field>
                 </div>
             </div>
@@ -29,31 +30,32 @@
             <div fxLayout="row" fxLayoutAlign="space-between center">
                 <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
                     <mat-form-field>
-                        <input matInput placeholder="Start Time" type="time" formControlName="courseStartTime">
+                        <input matInput placeholder="Start Time" type="time" formControlName="courseStartTime" [readonly]="readOnly">
                     </mat-form-field>
                 </div>
                 <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
                     <mat-form-field>
-                        <input matInput placeholder="End Time" type="time" formControlName="courseEndTime">
+                        <input matInput placeholder="End Time" type="time" formControlName="courseEndTime" [readonly]="readOnly">
                     </mat-form-field>
                 </div>
             </div>
 
             <mat-form-field>
-                <input matInput placeholder="Days" formControlName="courseDays">
+                <input matInput placeholder="Days" formControlName="courseDays" [readonly]="readOnly">
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput placeholder="Venue" formControlName="courseVenue">
+                <input matInput placeholder="Venue" formControlName="courseVenue" [readonly]="readOnly">
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput placeholder="Flier URL" formControlName="flyerURL">
+                <input matInput placeholder="Flier URL" formControlName="flyerURL" [readonly]="readOnly">
             </mat-form-field>
 
             <mat-form-field>
-                <mat-select placeholder="Indemnity Forms" formControlName="indemnityForms" multiple>
-                    <mat-option *ngFor="let form of indemnityForms" [value]="[form.indemnityFormTitle]">
+                <input matInput placeholder="Indemnity Forms" formControlName="indemnityFormsString" [readonly]="readOnly" *ngIf="readOnly">
+                <mat-select placeholder="Indemnity Forms" formControlName="indemnityForms" multiple  *ngIf="!readOnly">
+                    <mat-option *ngFor="let form of indemnityForms" [value]="form.indemnityFormId">
                         {{form.indemnityFormTitle}}
                     </mat-option>
                 </mat-select>
@@ -64,27 +66,28 @@
         <div fxLayout="column" fxFlex="30" fxFlex.md="40">
 
             <mat-form-field>
-                <mat-select placeholder="Teachers and Coordinates" formControlName="teachers" multiple>
-                    <mat-option *ngFor="let teacher of teachers" [value]="[teacher.devotee | fullName]">
+                <input matInput placeholder="Teachers and Coordinates" formControlName="teachersString" [readonly]="readOnly" *ngIf="readOnly">
+                <mat-select placeholder="Teachers and Coordinates" formControlName="teachers" multiple  *ngIf="!readOnly">
+                    <mat-option *ngFor="let teacher of teachers" [value]="teacher.teacherId">
                         {{teacher.devotee | fullName}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput placeholder="Tags" formControlName="tags">
+                <input matInput placeholder="Tags" formControlName="tags" [readonly]="readOnly">
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field *ngIf="!readOnly">
                 <input matInput placeholder="Image URL" formControlName="courseImageURL">
             </mat-form-field>
 
             <mat-form-field>
-                <textarea matInput placeholder="Remarks/Notes" formControlName="courseRemarks"></textarea>
+                <textarea matInput placeholder="Remarks/Notes" formControlName="courseRemarks" [readonly]="readOnly"></textarea>
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput placeholder="Number of Slots" formControlName="totalSlots">
+                <input matInput placeholder="Number of Slots" formControlName="slots" [readonly]="readOnly">
             </mat-form-field>
 
             <mat-checkbox formControlName="isArchived">Is Archived</mat-checkbox>
@@ -96,10 +99,12 @@
     </div>
 
     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="50px">
-        <button *ngIf="action!=='details'" mat-flat-button color="accent" routerLink="../">CANCEL</button>
-        <!--<button *ngIf="action==='create'" mat-flat-button color="accent" type="reset" (click)="onReset()">RESET</button>-->
-        <button *ngIf="action==='create'" mat-flat-button color="accent" type="submit">SUBMIT</button>
+        <button mat-flat-button color="accent" routerLink="../" *ngIf="!readOnly">BACK</button>
+        <button mat-flat-button color="accent" routerLink="/courses" *ngIf="readOnly">BACK</button>
+        <button *ngIf="action==='create'" mat-flat-button color="accent" type="reset" (click)="onReset()">RESET</button>
+        <button *ngIf="action==='create'" mat-flat-button color="accent" type="submit" (click)="onSubmit()">SUBMIT</button>
         <!--<button *ngIf="action==='edit'" mat-flat-button color="accent" type="button" (click)="onUpdate()">UPDATE</button>-->
     </div>
 
-</form>
+</div>
+</mat-card>

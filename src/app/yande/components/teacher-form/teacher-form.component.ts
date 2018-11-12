@@ -1,6 +1,6 @@
 import {Component, OnInit, Input, ViewChild} from '@angular/core';
 import {Teacher} from '../../models/teacher';
-import {NgForm} from '@angular/forms';
+import {FormGroup, NgForm} from '@angular/forms';
 import {YandeApiService} from '../../services/yande-api.service';
 import {SnackBarService} from '../../../core/services/snack-bar.service';
 import {Devotee} from '../../../core/models/devotee';
@@ -16,6 +16,8 @@ export class TeacherFormComponent implements OnInit {
   @Input() tAction = '';
   @Input() hideTDetails: boolean;
   @ViewChild('teacherForm') teacherForm: NgForm;
+
+  devoteePhNo: FormGroup;
 
   devotee: Devotee;
   isTeacher = false;

@@ -5,10 +5,6 @@
 mat-chip-list{
   padding-bottom: .7em;
 }
-
-cdk-overlay-pane {
-  margin-top: 60px;
-}
 .validation{
   color: red;
   position: absolute;
@@ -19,3 +15,8 @@ cdk-overlay-pane {
 mat-checkbox {
   padding: 1.5em 0 1.5em 0;
 }
+
+mat-card {
+  margin: 5em;
+}
+

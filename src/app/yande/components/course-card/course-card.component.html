@@ -16,8 +16,9 @@
             </div>
 
                 <mat-chip-list #tagList  selectable="false">
-                    <mat-chip *ngFor="let tag of course.tagsArray" disableRipple="true" selectable="false">
-                        {{tag}}
+                    <!--<mat-chip *ngFor="let tag of course.tags" disableRipple="true" selectable="false">-->
+                        <mat-chip disableRipple="true" selectable="false">
+                        {{course.tags}}
                     </mat-chip>
                 </mat-chip-list>
 

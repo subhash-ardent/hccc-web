@@ -105,7 +105,7 @@ let customStrategyVerify = function (req, cb) {
     /***********************/
     // Currently hard-coding Y&E username ("ABCD"). Below lines to be toggled to get username from cookie
     // let currUserName = getUserFromCookie(req);
-    let currUserName = "ABCD";
+    let currUserName = "DEVOTEE1";
     /************************/
 
 

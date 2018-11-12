@@ -40,6 +40,7 @@ export class CourseListResolveService implements Resolve<Course[]> {
         //     }
         //     return course;
         //   });
+
           return courses;
         // }
       }),

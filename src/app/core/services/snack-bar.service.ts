@@ -22,7 +22,7 @@ export class SnackBarService {
   openSnackBar(message: string, tone = 'info') {
     this.snackBar.open(message, 'CLOSE', {
       duration: 15000,
-      verticalPosition: 'top',
+      verticalPosition: 'bottom',
       panelClass: 'hccc-' + tone + '-snack-bar'
     });
   }

@@ -14,35 +14,24 @@ export class CourseCatalogueComponent implements OnInit {
   public courses;
   public tagMap = new Map();
   public topThreeTags: any[];
-  filterTag: string = '';
-  filterString: string = '';
+  filterTag = '';
+  filterString = '';
   private logger = new LoggerService(this.constructor.name);
 
   constructor(public appService: AppService,
               private apiService: YandeApiService,
               private router: Router,
-              private route: ActivatedRoute,
-              private ref: ChangeDetectorRef) {
+              private route: ActivatedRoute) {
     this.appService = appService;
   }
 
   ngOnInit() {
-    // this.route.data
-    //   .subscribe((data: { courses: Course[] }) => {
-    //     this.courses = data.courses;
-    //     this.buildTagMap();
-    //     this.findTopThreeTags();
-    //   });
-
-    this.apiService.courses$.subscribe(
-      courses => {
-        this.courses = courses;
-        this.ref.detectChanges();
-      },
-      err => {
-        this.logger.error('Error while fetching courses');
-      }
-    );
+    this.route.data
+      .subscribe((data: { courses: Course[] }) => {
+        this.courses = data.courses;
+        // this.buildTagMap();
+        // this.findTopThreeTags();
+      });
   }
 
 

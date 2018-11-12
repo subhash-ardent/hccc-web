@@ -1,9 +1,10 @@
 import {Devotee} from '../../core/models/devotee';
 
 export class Teacher {
+  teacherId: number;
   userName: string;
   devotee: Devotee;
-  skillSet: string[];
+  skillSets: string;
   salutation: string;
   profilePictureURL: string;
   indemnitySigned: boolean;
