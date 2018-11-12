@@ -35,9 +35,20 @@ export class YandeApiService {
     private appService: AppService,
     private snackBarService: SnackBarService,
     private http: HttpClient) {
-    // this.loadCourses();
-    // this.loadTeachers();
-    // this.loadIndemnityForms();
+
+    this.loadCourses();
+    appService.isYandeChair$.subscribe(
+      isYandeChair => {
+        if (isYandeChair) {
+          this.loadTeachers();
+          this.loadIndemnityForms();
+        }
+      },
+      err => {
+        this.logger.error('Error while checking for Y&E role of user');
+      }
+    );
+
   }
 
   // Courses
@@ -59,7 +70,7 @@ export class YandeApiService {
     c.courseStartTime = res.courseStartTime || '';
     c.courseEndTime = res.courseEndTime || '';
     c.courseStartDate = res.courseStartDate || '';
-    c.courseEndTime = res.courseEndTime || '';
+    c.courseEndDate = res.courseEndDate || '';
     c.courseDays = res.courseDays || '';
     c.courseVenue = res.courseVenue || '';
     c.flyerURL = res.flyerURL || '';
@@ -175,16 +186,15 @@ export class YandeApiService {
   }
 
   addCourse(newCourse) {
-    return this.http.post<Course>(this.coursesEndpointUrl, newCourse).pipe(
+    return this.http.post<any>(this.coursesEndpointUrl, newCourse).pipe(
       tap(
         res => {
           if (!res) {
             throw new Error('Invalid Response');
           }
-          this.courses$.value.push(res);
+          this.courses$.value.push(this.createCourse(res));
           this.courses$.next(this.courses$.value);
           this.logger.info(`${newCourse.courseName} added successfully`);
-          this.snackBarService.showSuccessSnackBar('New Course Added Successfully');
         })
     );
   }
@@ -239,26 +249,43 @@ export class YandeApiService {
     }
   }
 
-  addTeacher(newTeacher: Teacher) {
-    return this.http.post<Teacher>(this.teachersEndpointUrl, {teacher: newTeacher}).pipe(
+  addTeacher(newTeacher, userName) {
+    return this.http.post<any>(this.teachersEndpointUrl + '/devotees/' + userName, newTeacher).pipe(
       tap(
         res => {
-          this.teachers$.value.push(res);
+          if (!res) {
+            throw new Error('Invalid Response');
+          }
+          this.teachers$.value.push(this.createTeacher(res));
           this.teachers$.next(this.teachers$.value);
-          this.logger.info(`Teacher added successfully`);
+          this.logger.info(`${newTeacher.teacherId} added successfully`);
         })
     );
   }
 
-  updateTeacher(updatedTeacher: Teacher) {
-    return this.http.patch<Teacher>(this.teachersEndpointUrl, JSON.stringify(updatedTeacher)).pipe(
+  deleteTeacher(deletedTeacher: Teacher) {
+    return this.http.delete(this.teachersEndpointUrl + '/' + deletedTeacher.teacherId).pipe(
       tap(
         res => {
           const teachers = this.teachers$.value;
-          const index = teachers.findIndex((teacher: Teacher) => teacher.userName === updatedTeacher.userName);
-          teachers.splice(index, 1, updatedTeacher);
+          const index = teachers.findIndex((t: Teacher) => t.teacherId === deletedTeacher.teacherId);
+          teachers.splice(index, 1);
+          console.log(index, teachers);
           this.teachers$.next(teachers);
-          this.logger.info(`${updatedTeacher.userName} updated successfully`);
+          this.logger.info(`${deletedTeacher.teacherId} deleted successfully`);
+        })
+    );
+  }
+
+  updateTeacher(updates, teacherId) {
+    return this.http.patch(this.teachersEndpointUrl + '/' + teacherId, updates).pipe(
+      tap(
+        res => {
+          const teachers = this.teachers$.value;
+          const index = teachers.findIndex((t: Teacher) => t.teacherId === teacherId);
+          teachers[index] = Object.assign(teachers[index], updates);
+          this.teachers$.next(teachers);
+          this.logger.info(`${teachers[index].teacherId} updated successfully`);
         })
     );
   }

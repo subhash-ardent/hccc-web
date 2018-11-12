@@ -1,3 +1,5 @@
+@import '../../../../../src/hccc-theme.scss';
+
 .validation{
     color: red;
     position: absolute;
@@ -11,3 +13,49 @@
     padding-bottom: 5px;
     font-size: 12px;
   }
+
+  div.mat-caption {
+    margin: 1em 0 1em 0;
+  }
+
+  mat-card.search {
+    margin: 3em 0 3em 0;
+    mat-form-field{
+      margin: 1em;
+    }
+    button {
+      margin: 1em 1em 1em 2em;
+    }
+  }
+
+  mat-card.hccc-teacher-onboard-form {
+    margin: 3em 0 0 0;
+  }
+
+.devotees-list {
+  margin: 2em 0 2em 0;
+  height: 300px;
+  overflow: scroll;
+  mat-card.selected {
+    background-color: mat-color($hccc-theme-accent, 50, .8);
+  }
+  mat-card {
+    margin: 2px 2px 2em 2px;
+    mat-radio-button {
+      mat-card-content {
+        margin-left: 1em;
+      }
+    }
+  }
+}
+
+mat-card.form {
+  margin: 3em 0 3em 0;
+  padding: 3em 3em 3em 3em;
+  mat-checkbox {
+    margin: 1em 0 0 0;
+  }
+  .form-buttons {
+    margin: 5em 0 0 0;
+  }
+}

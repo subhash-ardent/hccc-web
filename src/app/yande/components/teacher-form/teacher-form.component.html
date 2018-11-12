@@ -1,72 +1,74 @@
-<div class="hccc-teacher-onboard-form container" fxLayout="column" fxLayoutGap="10%"
-     fxLayoutAlign.lt-md="center center">
+<mat-card class="hccc-teacher-onboard-form container" fxLayout="column" fxLayoutGap="10%"
+          fxLayoutAlign.lt-md="center center">
 
     <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="10%">
 
-        <div fxLayout="column" fxFlex="50" fxFlex.md="40" fxLayoutAlign="center start">
+        <div fxLayout="column" fxFlex="50" fxFlex.md="40" fxLayoutAlign="space-around start">
 
-            <mat-list-item *ngIf="['details','update'].includes(tAction)">
-                <teacher-card [teacher]="model" flexAlign="center" [hideTDetails]="hideTDetails"></teacher-card>
-            </mat-list-item>
+            <teacher-card *ngIf="['details','edit'].includes(action)"
+                          [hideDetails]=true [teacher]="teacher" flexAlign="center">
+            </teacher-card>
 
-            <mat-form-field *ngIf="tAction==='add'" fxLayout="row">
-                <input fxFlex="100 2" matInput type="text" placeholder="Enter Phone Number" #devoteeMobileNumber
-                       required matTooltip="Get a Devotee's details by entering their phone number">
-            </mat-form-field>
-            <button mat-flat-button color="accent" (click)="getDevotee(devoteeMobileNumber.value)">SEARCH</button>
+            <mat-card class="search" *ngIf="action==='create'" fxLayout="row" fxLayoutGap="5%"
+                      fxLayoutAlign="space-around center">
+                <mat-form-field>
+                    <input matInput type="text" placeholder="Enter Phone Number" [formControl]="devoteePhNo"
+                           matTooltip="Get a Devotee's details by entering their phone number">
+                </mat-form-field>
+                <button mat-flat-button color="accent" (click)="getDevotee(devoteePhNo.value)">SEARCH</button>
+                <div class="mat-caption hccc-failure-caption" *ngIf="invalidPhoneNumber">
+                    Enter a valid phone number
+                </div>
+            </mat-card>
 
-            <mat-list-item *ngIf="invalidPhoneNumber">
-                <span class="mat-caption hccc-failure-caption">Enter a valid phone number</span>
-            </mat-list-item>
-            <mat-list role="list" *ngIf="devotee">
-                <mat-list-item role="listitem"><h3 matSubheader>First Name:</h3>{{devotee | fullName}}</mat-list-item>
-                <mat-list-item role="listitem"><h3 matSubheader>Email:</h3>{{devotee.email}}</mat-list-item>
-                <mat-list-item role="listitem"><h3 matSubheader>Phone Number:</h3>{{devotee.phoneResidence}}
-                </mat-list-item>
-                <br/>
-                <mat-list-item *ngIf="isTeacher">
-                    <span class="mat-caption hccc-success-caption">{{devotee | fullName}} is already onboarded as a Teacher</span>
-                </mat-list-item>
-            </mat-list>
+            <div *ngIf="devotees"> Select a devotee:</div>
+            <div class="devotees-list" *ngIf="devotees">
+                <mat-card *ngFor="let devotee of devotees" [class.selected]="devotee.userName===userName"
+                          (click)="userName=devotee.userName">
+                        <mat-card-content>UserName: {{devotee.userName}}</mat-card-content>
+                        <mat-card-content>First Name: {{devotee | fullName}}</mat-card-content>
+                        <mat-card-content>Email: {{devotee.email}}</mat-card-content>
+                        <mat-card-content>Phone Number: {{devotee.phoneResidence}}</mat-card-content>
+                    <div *ngIf="devotee.isTeacher">
+                        <span class="mat-caption hccc-success-caption">{{devotee | fullName}} is already onboarded as a Teacher</span>
+                    </div>
+                </mat-card>
+            </div>
         </div>
 
-        <form fxLayout="column" fxFlex="30" fxFlex.md="40" fxLayoutAlign="center" #teacherForm="ngForm"
-              (ngSubmit)="onSubmit()">
+        <mat-card class="form" fxLayout="column" fxFlex="30" fxFlex.md="40" fxLayoutAlign="center" *ngIf="devoteeSelected || readOnly" [formGroup]="teacherForm">
 
             <mat-form-field>
-                <input matInput placeholder="Title/Salutaion" name="title" required [(ngModel)]="model.salutation"
-                       [readonly]="tAction==='details'"><br/>
+                <input matInput placeholder="Title/Salutaion" formControlName="salutation" [readonly]="readOnly">
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput placeholder="Profile Picture URL" name="picUrl" [(ngModel)]="model.profilePictureURL"
-                       [readonly]="tAction==='details'"><br/>
+                <input matInput placeholder="Profile Picture URL" formControlName="profilePictureURL" [readonly]="readOnly">
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput placeholder="Skill sets" name="skills" required [(ngModel)]="model.skillSet"
-                       [readonly]="tAction==='details'"><br/>
+                <input matInput placeholder="Skill sets" formControlName="skillSets" [readonly]="readOnly">
             </mat-form-field>
 
-            <mat-checkbox name="indemnitySigned" required #indemnity="ngModel" [(ngModel)]="model.indemnitySigned"
-                          [disabled]="tAction==='details'"> Indemnity Signed
+            <mat-checkbox name="indemnitySigned" formControlName="indemnitySigned" [disabled]="readOnly">
+                Indemnity Signed
             </mat-checkbox>
-            <br/>
-            <mat-checkbox name="identityVerified" required [(ngModel)]="model.identityVerified"
-                          [disabled]="tAction==='details'"> Identification Verified
+
+            <mat-checkbox name="identityVerified" formControlName="identityVerified" [disabled]="readOnly">
+                Identification Verified
             </mat-checkbox>
-            <br/>
-            <mat-checkbox name="backgroundVerified" required [(ngModel)]="model.backgroundVerified"
-                          [disabled]="tAction==='details'"> Background check complete
+
+            <mat-checkbox name="backgroundVerified" formControlName="backgroundVerified" [disabled]="readOnly">
+                Background check complete
             </mat-checkbox>
-        </form>
+
+            <div class="form-buttons" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="50px">
+                <button mat-flat-button color="accent" routerLink="../" *ngIf="!readOnly">BACK</button>
+                <button mat-flat-button color="accent" routerLink="/teachers" *ngIf="readOnly">BACK</button>
+                <button *ngIf="action==='create'" mat-flat-button color="accent" type="submit" (click)="onSubmit()">SUBMIT</button>
+            </div>
+        </mat-card>
 
     </div>
-    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="50px">
-        <button mat-flat-button color="accent" *ngIf="tAction ==='add'" (click)="onCancelling()">CANCEL</button>
-        <button mat-flat-button color="accent" *ngIf="tAction ==='update'" routerLink="/teachers">CANCEL</button>
-        <button mat-flat-button color="accent" [disabled]="isTeacher || !teacherForm.valid" type="submit"
-                *ngIf="tAction!='details'">SUBMIT
-        </button>
-    </div>
-</div>
+
+</mat-card>

@@ -9,5 +9,6 @@ export class Devotee {
   firstName: string;
   lastName: string;
   middleName: string;
+  isTeacher = false;
   familyMembers: FamilyMember[];
 }

@@ -8,12 +8,16 @@
             <img src="{{teacher.profilePictureURL}}">
         </div>
         <div *ngIf="teacher.devotee">
+            <p>{{teacher.devotee.userName}}</p>
             <p>{{teacher.devotee.firstName}} {{teacher.devotee.lastName}}</p>
             <p>{{teacher.devotee.email}}</p>
             <p>{{teacher.devotee.phoneResidence}}</p>
         </div>
         <mat-card-actions fxLayoutAlign.lt-sm="center center">
-            <a mat-button color="accent" routerLink="/teachers/{{teacher.devotee.userName}}" *ngIf="!hideTDetails">DETAILS</a>
+            <a mat-button color="accent" routerLink="/teachers/{{teacher.devotee.userName}}"
+               *ngIf="!hideDetails">DETAILS</a>
+            <a mat-button color="accent" (click)="deleteTeacher(teacher.teacherId)"
+               *ngIf="showDelete">DELETE</a>
         </mat-card-actions>
     </mat-card-content>
 

@@ -82,7 +82,6 @@ export class CourseFormComponent implements OnInit {
         this.readOnly = false;
         this.courseForm = this.createForm(this.course);
         this.configureChangeListeners(this.courseForm);
-        // this.courseForm.valueChanges.subscribe(c => console.log(c));
         break;
 
       case 'create':
