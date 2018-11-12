@@ -57,8 +57,8 @@ let failureRedirect = {
 app.use('/yande/user/current', passport.authenticate('custom', failureRedirect), currentUser);
 
 //TODO: implement RBAC for APIs and put passport authentication back in place for protected APIs
-app.use('/yande/api', api);
-// app.use('/yande/api', passport.authenticate('custom', failureRedirect), api);
+// app.use('/yande/api', api);
+app.use('/yande/api', passport.authenticate('custom', failureRedirect), api);
 app.use('/yande/health', health);
 // app.get('/yande/home', passport.authenticate('custom', failureRedirect), (req, res) => {
 //   res.sendFile(path.join(__dirname, '../dist/youth-and-education/index.html'));

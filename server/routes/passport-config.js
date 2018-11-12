@@ -6,33 +6,14 @@ const path = require('path');
 const certFile = path.resolve(__dirname, '../cert/cid_crt.crt');
 const keyFile = path.resolve(__dirname, '../cert/cid_key.key');
 
-const guestUser = {userName: "hccc-guest-user"};
-
-// Temporarily hardcoding yande profile. remove when devotee api is available
-
-// const yneUser = {
-//   "userName": "yande",
-//   "phoneNumber": "9876543210",
-//   "roles": [{
-//     "roleId": "52",
-//     "roleName": "Chairman - Youth and Cultural",
-//     "roleDescription": "Chairman - Youth and Cultural",
-//   }, {
-//     "roleId": "28",
-//     "roleName": "Devotee",
-//     "roleDescription": "Devotee",
-//   }],
-//   "email": "email",
-//   "dateOfBirth": "1990-07-12",
-//   "firstName": "Vandhana",
-//   "lastName": "Bhanoori",
-//   "middleName": "",
-//   "familyMembers": [{
-//     "firstName": "Prabhakar",
-//     "lastName": "Bhanoori",
-//     "middleName": ""
-//   }]
-// };
+const guestUser = {
+  userName: "hccc-guest-user",
+  categories: [
+    {
+      "name": "Guest",
+    }
+  ]
+};
 
 let getUserByUserName = function (usrNm) {
   // fetching current users info from backend
@@ -53,7 +34,8 @@ let getUserByUserName = function (usrNm) {
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json",
-        "User-Name": usrNm
+        "X-hccc-logged-in-user": usrNm,
+        "X-hccc-authz-role": "Devotee"
       }
     };
 
@@ -90,7 +72,6 @@ let getUserFromCookie = function (req) {
 let customStrategyVerify = function (req, cb) {
 
   // This method is called to verify a valid session before every protected route.
-  console.log("verifying session");
 
   // Check if the request has a (valid) logged-in user and not a guest user.
   if (req && req.user && req.user.userName && req.user.userName !== guestUser.userName) {
@@ -103,7 +84,7 @@ let customStrategyVerify = function (req, cb) {
     // Look into the cookies to see if a valid user session is set by the legacy application.
 
     /***********************/
-    // Currently hard-coding Y&E username ("ABCD"). Below lines to be toggled to get username from cookie
+    // Currently hard-coding Y&E username. Below lines needs to be toggled to get username from cookie
     // let currUserName = getUserFromCookie(req);
     let currUserName = "DEVOTEE1";
     /************************/
