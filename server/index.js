@@ -50,22 +50,22 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 let failureRedirect = {
-  failureRedirect: '/yande/error-page'
+  failureRedirect: '/hccc/error-page'
 };
 
 // Configure API and Webapp routes
-app.use('/yande/user/current', passport.authenticate('custom', failureRedirect), currentUser);
+app.use('/hccc/user/current', passport.authenticate('custom', failureRedirect), currentUser);
 
 //TODO: implement RBAC for APIs and put passport authentication back in place for protected APIs
 // app.use('/yande/api', api);
-app.use('/yande/api', passport.authenticate('custom', failureRedirect), api);
-app.use('/yande/health', health);
+app.use('/hccc/api', passport.authenticate('custom', failureRedirect), api);
+app.use('/hccc/health', health);
 // app.get('/yande/home', passport.authenticate('custom', failureRedirect), (req, res) => {
 //   res.sendFile(path.join(__dirname, '../dist/youth-and-education/index.html'));
 // });
-app.use('/yande', passport.authenticate('custom', failureRedirect), express.static(path.join(__dirname, '../dist/youth-and-education')));
-app.use('/yande/', passport.authenticate('custom', failureRedirect), express.static(path.join(__dirname, '../dist/youth-and-education')));
-app.use('/yande/*', passport.authenticate('custom', failureRedirect), express.static(path.join(__dirname, '../dist/youth-and-education')));
+app.use('/hccc', passport.authenticate('custom', failureRedirect), express.static(path.join(__dirname, '../dist/youth-and-education')));
+app.use('/hccc/', passport.authenticate('custom', failureRedirect), express.static(path.join(__dirname, '../dist/youth-and-education')));
+app.use('/hccc/*', passport.authenticate('custom', failureRedirect), express.static(path.join(__dirname, '../dist/youth-and-education')));
 
 const port = process.env.PORT || '3000';
 app.set('port', port);

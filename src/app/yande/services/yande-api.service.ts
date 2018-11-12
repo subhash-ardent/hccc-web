@@ -19,10 +19,10 @@ import {FamilyMember} from '../../core/models/family-member';
 })
 export class YandeApiService {
 
-  private coursesEndpointUrl = 'yande/api/courses';
-  private teachersEndpointUrl = 'yande/api/teachers';
-  private devoteeEndpointUrl = 'yande/api/devotees';
-  private indemnityFormsEndpointUrl = 'yande/api/indemnityForms';
+  private coursesEndpointUrl = 'hccc/api/courses';
+  private teachersEndpointUrl = 'hccc/api/teachers';
+  private devoteeEndpointUrl = 'hccc/api/devotees';
+  private indemnityFormsEndpointUrl = 'hccc/api/indemnityForms';
   private logger = new LoggerService(this.constructor.name);
   public isCoursesLoaded = false;
   public isTeachersLoaded = false;

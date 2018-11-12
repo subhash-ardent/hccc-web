@@ -17,7 +17,7 @@ export class AppService {
 
   private yandeChairRoleLabel = 'Chairman - Youth and Cultural';
   private hcccGuestUserName = 'hccc-guest-user';
-  private currentUserUrl = 'yande/user/current';  // URL to web api
+  private currentUserUrl = 'hccc/user/current';  // URL to web api
   private logger = new LoggerService(this.constructor.name);
   public currentUser: Devotee;
   public isLoggedIn$: BehaviorSubject<boolean> = new BehaviorSubject(false);
