@@ -1,8 +1,8 @@
 const PROXY_CONFIG = [
   {
     context: [
-      "/yande/user",
-      "/yande/api",
+      "/hccc/user",
+      "/hccc/api",
       "/user",
       "/api"
     ],

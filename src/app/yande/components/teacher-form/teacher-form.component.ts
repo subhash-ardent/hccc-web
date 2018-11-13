@@ -170,6 +170,12 @@ export class TeacherFormComponent implements OnInit {
     );
   }
 
+  onDevoteeSelect(userName, isTeacher) {
+    if (!isTeacher) {
+      this.userName = userName;
+    }
+  }
+
   onCancelling() {
     this.teacherForm.reset();
     this.router.navigate(['/teachers']);
