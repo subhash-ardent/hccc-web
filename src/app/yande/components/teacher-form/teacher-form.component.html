@@ -24,7 +24,7 @@
             <div *ngIf="devotees"> Select a devotee:</div>
             <div class="devotees-list" *ngIf="devotees">
                 <mat-card *ngFor="let devotee of devotees" [class.selected]="devotee.userName===userName"
-                          (click)="userName=devotee.userName">
+                          (click)="onDevoteeSelect(devotee.userName, devotee.isTeacher)">
                         <mat-card-content>UserName: {{devotee.userName}}</mat-card-content>
                         <mat-card-content>First Name: {{devotee | fullName}}</mat-card-content>
                         <mat-card-content>Email: {{devotee.email}}</mat-card-content>
