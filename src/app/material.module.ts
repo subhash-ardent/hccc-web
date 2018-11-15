@@ -22,7 +22,9 @@ import {
   MatChipsModule,
   MatBadgeModule,
   MatSnackBarModule,
-  MatRadioModule
+  MatRadioModule,
+  MatTooltipModule,
+  MatAutocompleteModule
 } from '@angular/material';
 
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -48,7 +50,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatChipsModule,
     MatBadgeModule,
     MatSnackBarModule,
-    MatRadioModule
+    MatRadioModule,
+    MatTooltipModule,
+    MatAutocompleteModule
   ],
   exports: [
     BrowserAnimationsModule,
@@ -71,7 +75,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatChipsModule,
     MatBadgeModule,
     MatSnackBarModule,
-    MatRadioModule
+    MatRadioModule,
+    MatTooltipModule,
+    MatAutocompleteModule
   ]
 })
 export class MaterialModule {
