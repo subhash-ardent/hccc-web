@@ -1,10 +1,10 @@
-const env = process.env.ENVIRONMENT ? process.env.ENVIRONMENT : 'dev';
+const env = process.env.NODE_ENV ? process.env.NODE_ENV : 'dev';
 const config = require(`${__dirname}/../config/${env}.json`);
 const request = require('request');
 const fs = require('fs');
 const path = require('path');
-const certFile = path.resolve(__dirname, '../cert/cid_crt.crt');
-const keyFile = path.resolve(__dirname, '../cert/cid_key.key');
+const certFile = path.resolve(__dirname, '../cert/' + config.certs.crt);
+const keyFile = path.resolve(__dirname, '../cert/' + config.certs.key);
 
 const guestUser = {
   userName: "hccc-guest-user",
@@ -28,7 +28,7 @@ let getUserByUserName = function (usrNm) {
       agentOptions: {
         cert: fs.readFileSync(certFile),
         key: fs.readFileSync(keyFile),
-        passphrase: 'changeit',
+        passphrase: config.certs.pwd,
         securityOptions: 'SSL_OP_NO_SSLv3'
       },
       headers: {
@@ -77,6 +77,7 @@ let customStrategyVerify = function (req, cb) {
   if (req && req.user && req.user.userName && req.user.userName !== guestUser.userName) {
 
     // If the request has a valid user, return the user.
+    console.log("Request has a valid user, ", req.user);
     cb(null, req.user);
 
   } else {
@@ -86,7 +87,7 @@ let customStrategyVerify = function (req, cb) {
     /***********************/
     // Currently hard-coding Y&E username. Below lines needs to be toggled to get username from cookie
     // let currUserName = getUserFromCookie(req);
-    let currUserName = "DEVOTEE1";
+    let currUserName = "YOUTH";
     /************************/
 
 
@@ -101,6 +102,7 @@ let customStrategyVerify = function (req, cb) {
       // get the user details from backend and return the same
       getUserByUserName(currUserName)
         .then(function (userDetails) {
+          console.log(userDetails);
           cb(null, userDetails);
         })
         .catch(function (e) {

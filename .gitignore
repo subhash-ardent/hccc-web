@@ -46,3 +46,5 @@ server/cert/*.pem
 /mock-backend
 /mock-data
 
+server/config/prod.json
+server/config/qa.json
