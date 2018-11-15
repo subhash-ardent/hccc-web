@@ -39,7 +39,7 @@
         <mat-card class="form" fxLayout="column" fxFlex="30" fxFlex.md="40" fxLayoutAlign="center" *ngIf="devoteeSelected || readOnly" [formGroup]="teacherForm">
 
             <mat-form-field>
-                <input matInput placeholder="Title/Salutaion" formControlName="salutation" [readonly]="readOnly">
+                <input matInput placeholder="Title/Salutaion" formControlName="salutation" [readonly]="readOnly" required>
             </mat-form-field>
 
             <mat-form-field>
@@ -47,7 +47,7 @@
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput placeholder="Skill sets" formControlName="skillSets" [readonly]="readOnly">
+                <input matInput placeholder="Skill sets" formControlName="skillSets" [readonly]="readOnly" required>
             </mat-form-field>
 
             <mat-checkbox name="indemnitySigned" formControlName="indemnitySigned" [disabled]="readOnly">
@@ -65,7 +65,7 @@
             <div class="form-buttons" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="50px">
                 <button mat-flat-button color="accent" routerLink="../" *ngIf="!readOnly">BACK</button>
                 <button mat-flat-button color="accent" routerLink="/teachers" *ngIf="readOnly">BACK</button>
-                <button *ngIf="action==='create'" mat-flat-button color="accent" type="submit" (click)="onSubmit()">SUBMIT</button>
+                <button *ngIf="action==='create'" mat-flat-button color="accent" type="submit"  [disabled]="!teacherForm.valid" (click)="onSubmit()">SUBMIT</button>
             </div>
         </mat-card>
 

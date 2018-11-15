@@ -7,22 +7,22 @@
         <div fxLayout="column" fxFlex="30" fxFlex.md="40" fxLayoutAlign="center" class="form-group">
 
             <mat-form-field>
-                <input matInput placeholder="Course Name" formControlName="courseName" [readonly]="readOnly"/>
+                <input matInput placeholder="Course Name" formControlName="courseName" [readonly]="readOnly" required/>
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput placeholder="Age Restrictions Info" formControlName="ageRestrictions" [readonly]="readOnly"/>
+                <input matInput placeholder="Age Restrictions Info" formControlName="ageRestrictions" [readonly]="readOnly" required/>
             </mat-form-field>
 
             <div fxLayout="row" fxLayoutAlign="space-between center">
                 <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
                     <mat-form-field>
-                        <input matInput type="date" placeholder="Start Date" formControlName="courseStartDate" [readonly]="readOnly">
+                        <input matInput type="date" placeholder="Start Date" formControlName="courseStartDate" [readonly]="readOnly" required>
                     </mat-form-field>
                 </div>
                 <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
                     <mat-form-field>
-                        <input matInput type="date" placeholder="End Date" formControlName="courseEndDate" [readonly]="readOnly">
+                        <input matInput type="date" placeholder="End Date" formControlName="courseEndDate" [readonly]="readOnly" required>
                     </mat-form-field>
                 </div>
             </div>
@@ -30,22 +30,22 @@
             <div fxLayout="row" fxLayoutAlign="space-between center">
                 <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
                     <mat-form-field>
-                        <input matInput placeholder="Start Time" type="time" formControlName="courseStartTime" [readonly]="readOnly">
+                        <input matInput placeholder="Start Time" type="time" formControlName="courseStartTime" [readonly]="readOnly" required>
                     </mat-form-field>
                 </div>
                 <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
                     <mat-form-field>
-                        <input matInput placeholder="End Time" type="time" formControlName="courseEndTime" [readonly]="readOnly">
+                        <input matInput placeholder="End Time" type="time" formControlName="courseEndTime" [readonly]="readOnly" required>
                     </mat-form-field>
                 </div>
             </div>
 
             <mat-form-field>
-                <input matInput placeholder="Days" formControlName="courseDays" [readonly]="readOnly">
+                <input matInput placeholder="Days" formControlName="courseDays" [readonly]="readOnly" required>
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput placeholder="Venue" formControlName="courseVenue" [readonly]="readOnly">
+                <input matInput placeholder="Venue" formControlName="courseVenue" [readonly]="readOnly" required>
             </mat-form-field>
 
             <mat-form-field>
@@ -87,7 +87,7 @@
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput placeholder="Number of Slots" formControlName="slots" [readonly]="readOnly">
+                <input matInput placeholder="Number of Slots" formControlName="slots" [readonly]="readOnly" required>
             </mat-form-field>
 
             <mat-checkbox formControlName="isArchived">Is Archived</mat-checkbox>
@@ -102,7 +102,7 @@
         <button mat-flat-button color="accent" routerLink="../" *ngIf="!readOnly">BACK</button>
         <button mat-flat-button color="accent" routerLink="/courses" *ngIf="readOnly">BACK</button>
         <button *ngIf="action==='create'" mat-flat-button color="accent" type="reset" (click)="onReset()">RESET</button>
-        <button *ngIf="action==='create'" mat-flat-button color="accent" type="submit" (click)="onSubmit()">SUBMIT</button>
+        <button *ngIf="action==='create'" mat-flat-button color="accent" type="submit" [disabled]="!courseForm.valid" (click)="onSubmit()">SUBMIT</button>
         <!--<button *ngIf="action==='edit'" mat-flat-button color="accent" type="button" (click)="onUpdate()">UPDATE</button>-->
     </div>
 
