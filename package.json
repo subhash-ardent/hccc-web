@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "concurrently -k \"NODE_ENV=prod node server/index.js\" \"ng serve --base-href /hccc --deploy-url /hccc/ \"",
-    "start-with-node": "ng build --prod --base-href /hccc --deploy-url /hccc/ && NODE_ENV=prod node server/index.js",
+    "start": "concurrently -k \"node server/index.js\" \"ng serve --base-href /hccc --deploy-url /hccc/ \"",
+    "start-with-node": "ng build --prod --base-href /hccc --deploy-url /hccc/ && node server/index.js",
     "start-only-node": "node server/index.js",
     "serve": "ng serve",
     "build": "ng build",
