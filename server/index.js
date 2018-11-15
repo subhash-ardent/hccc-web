@@ -14,7 +14,7 @@ const api = require(__dirname + '/routes/api');
 const currentUser = require(__dirname + '/routes/currentUser');
 const passportConfig = require(__dirname + '/routes/passport-config');
 
-const env = process.env.ENVIRONMENT ? process.env.ENVIRONMENT : 'dev';
+const env = process.env.NODE_ENV ? process.env.NODE_ENV : 'dev';
 const config = require(`${__dirname}/config/${env}.json`);
 
 const app = express();
