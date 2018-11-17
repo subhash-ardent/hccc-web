@@ -10,5 +10,9 @@
     "crt": "cid_crt.crt",
     "key": "cid_key.key",
     "pwd": "changeit"
+  },
+  "serverCerts": {
+    "crt": "server.crt",
+    "key": "server.key"
   }
 }

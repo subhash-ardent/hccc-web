@@ -74,12 +74,12 @@ export class TeacherFormComponent implements OnInit {
 
     // this.userName = new FormControl('', [Validators.required]);
     const fg = this.formBuilder.group({
-      salutation: [c.salutation, {updateOn: 'blur'}],
+      salutation: [c.salutation, {updateOn: 'blur', validators: Validators.required}],
       profilePictureURL: [c.profilePictureURL, {updateOn: 'blur'}],
       indemnitySigned: [{value: c.indemnitySigned, disabled: this.readOnly}, {updateOn: 'blur'}],
       backgroundVerified: [{value: c.backgroundVerified, disabled: this.readOnly}, {updateOn: 'blur'}],
       identityVerified: [{value: c.identityVerified, disabled: this.readOnly}, {updateOn: 'blur'}],
-      skillSets: [c.skillSets, {updateOn: 'blur'}],
+      skillSets: [c.skillSets, {updateOn: 'blur', validators: Validators.required}],
     });
 
     return fg;
@@ -155,7 +155,7 @@ export class TeacherFormComponent implements OnInit {
     this.apiService.addTeacher(TeacherFormComponent.constructPostPayload(this.teacherForm.value), this.userName).subscribe(
       data => {
         this.router.navigate(['../'], {relativeTo: this.route});
-        this.snackBarService.showSuccessSnackBar('New Course Added Successfully');
+        this.snackBarService.showSuccessSnackBar('New Teacher Onboarded Successfully');
         this.appService.loading = false;
       },
       error => {

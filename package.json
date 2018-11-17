@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "concurrently -k \"node server/index.js\" \"ng serve --base-href /hccc --deploy-url /hccc/ \"",
-    "start-with-node": "ng build --prod --base-href /hccc --deploy-url /hccc/ && node server/index.js",
+    "start-node-on-win": "ng build --prod --base-href /hccc --deploy-url /hccc/ && node server/index.js",
+    "start-node-on-mac": "ng build --prod --base-href /hccc --deploy-url /hccc/ && sudo NODE_ENV=prod node server/index.js",
     "start-only-node": "node server/index.js",
     "serve": "ng serve",
     "build": "ng build",
@@ -32,6 +33,7 @@
     "express-session": "^1.15.6",
     "fs": "0.0.1-security",
     "http": "0.0.0",
+    "https": "^1.0.0",
     "passport": "^0.4.0",
     "passport-custom": "^1.0.5",
     "passport-local": "^1.0.0",

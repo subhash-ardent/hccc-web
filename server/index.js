@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
+const https = require('https');
 const http = require('http');
+const fs = require('fs');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const request = require('request');
@@ -75,10 +77,31 @@ app.use('/hccc', passport.authenticate('custom', failureRedirect), express.stati
 app.use('/hccc/', passport.authenticate('custom', failureRedirect), express.static(path.join(__dirname, '../dist/youth-and-education')));
 app.use('/hccc/*', passport.authenticate('custom', failureRedirect), express.static(path.join(__dirname, '../dist/youth-and-education')));
 
-const port = process.env.PORT || '3000';
-app.set('port', port);
-const server = http.createServer(app);
-server.listen(port, '0.0.0.0', () => console.log(`API running on localhost: ${port}`));
+
+if (env && env === 'prod') {
+
+  // Code to run on SSL
+  const port = process.env.PORT || '443';
+  const certFile = path.resolve(__dirname, './cert/' + config.serverCerts.crt);
+  const keyFile = path.resolve(__dirname, './cert/' + config.serverCerts.key);
+  const options = {
+    key: fs.readFileSync(keyFile),
+    cert: fs.readFileSync(certFile)
+  };
+  app.set('port', port);
+  const server = https.createServer(options, app);
+  server.listen(port, '0.0.0.0', () => console.log(`API running on localhost: ${port}`));
+
+} else {
+
+  // Code to run on port 80
+  const port = process.env.PORT || '80';
+  app.set('port', port);
+  const server = http.createServer(app);
+  server.listen(port, '0.0.0.0', () => console.log(`API running on localhost: ${port}`));
+
+}
+
 
 
 

@@ -102,8 +102,8 @@
         <button mat-flat-button color="accent" routerLink="../" *ngIf="!readOnly">BACK</button>
         <button mat-flat-button color="accent" routerLink="/courses" *ngIf="readOnly">BACK</button>
         <button *ngIf="action==='create'" mat-flat-button color="accent" type="reset" (click)="onReset()">RESET</button>
-        <button *ngIf="action==='create'" mat-flat-button color="accent" type="submit" (click)="onSubmit()">SUBMIT</button>
-        <!--<button *ngIf="action==='edit'" mat-flat-button color="accent" type="button" (click)="onUpdate()">UPDATE</button>-->
+        <button *ngIf="action==='create'" mat-flat-button color="accent" type="submit"
+                (click)="onSubmit()" [disabled]="!courseForm.valid">SUBMIT</button>
     </div>
 
 </div>
