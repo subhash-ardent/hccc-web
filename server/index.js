@@ -6,7 +6,6 @@ const cookieParser = require('cookie-parser');
 const request = require('request');
 const session = require ('express-session');
 const passport = require('passport');
-// const Strategy = require('passport-local').Strategy;
 const Strategy = require('passport-custom').Strategy;
 
 const health = require(__dirname + '/routes/health');
@@ -22,6 +21,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());
 
+
+/*
+Express session is currently not utilized for this application.
+Session management is performed by the legacy application.
+Node server will query the legacy application for every request.
+This is not performant, but works for the interim as we iron-out long term SSO Strategies.
+*/
+
 // Enabling user session
 const sessionOptions = config.sessionOptions;
 const m15 = 1000 * 60 * 15;
@@ -29,7 +36,6 @@ sessionOptions.cookie = {
   expires: new Date(Date.now() + m15),
   maxAge: m15
 };
-
 app.use(session(sessionOptions));
 
 // Verify session
@@ -41,6 +47,8 @@ app.use((req,res,next) => {
     next();
   }
 });
+
+
 
 // Configure passport
 passport.use('custom', new Strategy(passportConfig.customStrategyVerify));

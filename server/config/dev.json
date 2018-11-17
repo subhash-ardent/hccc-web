@@ -1,5 +1,5 @@
 {
-  "baseUrl": "https://10.10.1.205:18443/hccc-api",
+  "baseUrl": "https://10.10.1.207:18443/hccc-api",
   "loginUrl": "https://livermoretemple.org",
   "sessionOptions": {
     "secret": "some-secret",
