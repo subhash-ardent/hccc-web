@@ -10,7 +10,7 @@
     <span fxFlex="1 1 auto"></span>
 
 
-    <a *ngIf="!appService.isLoggedIn" routerLink="login-redirect">
+    <a *ngIf="!appService.isLoggedIn" [href]="loginUrl + redirectUrl">
         Login
     </a>
     <div fxLayout="row"  *ngIf="appService.isLoggedIn" fxLayoutGap=".5em" fxShow.lt-md="false">
