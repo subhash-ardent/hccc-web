@@ -7,7 +7,7 @@
         <div fxLayout="column" fxFlex="30" fxFlex.md="40" fxLayoutAlign="center" class="form-group">
 
             <mat-form-field>
-                <input matInput placeholder="Course Name" formControlName="courseName" [readonly]="readOnly"/>
+                <input matInput placeholder="*Course Name" formControlName="courseName" [readonly]="readOnly"/>
             </mat-form-field>
 
             <mat-form-field>
@@ -17,12 +17,12 @@
             <div fxLayout="row" fxLayoutAlign="space-between center">
                 <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
                     <mat-form-field>
-                        <input matInput type="date" placeholder="Start Date" formControlName="courseStartDate" [readonly]="readOnly">
+                        <input matInput type="date" placeholder="*Start Date" formControlName="courseStartDate" [readonly]="readOnly">
                     </mat-form-field>
                 </div>
                 <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
                     <mat-form-field>
-                        <input matInput type="date" placeholder="End Date" formControlName="courseEndDate" [readonly]="readOnly">
+                        <input matInput type="date" placeholder="*End Date" formControlName="courseEndDate" [readonly]="readOnly">
                     </mat-form-field>
                 </div>
             </div>
@@ -30,22 +30,22 @@
             <div fxLayout="row" fxLayoutAlign="space-between center">
                 <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
                     <mat-form-field>
-                        <input matInput placeholder="Start Time" type="time" formControlName="courseStartTime" [readonly]="readOnly">
+                        <input matInput placeholder="*Start Time" type="time" formControlName="courseStartTime" [readonly]="readOnly">
                     </mat-form-field>
                 </div>
                 <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
                     <mat-form-field>
-                        <input matInput placeholder="End Time" type="time" formControlName="courseEndTime" [readonly]="readOnly">
+                        <input matInput placeholder="*End Time" type="time" formControlName="courseEndTime" [readonly]="readOnly">
                     </mat-form-field>
                 </div>
             </div>
 
             <mat-form-field>
-                <input matInput placeholder="Days" formControlName="courseDays" [readonly]="readOnly">
+                <input matInput placeholder="*Days of the Week" formControlName="courseDays" [readonly]="readOnly">
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput placeholder="Venue" formControlName="courseVenue" [readonly]="readOnly">
+                <input matInput placeholder="*Venue" formControlName="courseVenue" [readonly]="readOnly">
             </mat-form-field>
 
             <mat-form-field>
@@ -79,7 +79,7 @@
             </mat-form-field>
 
             <mat-form-field *ngIf="!readOnly">
-                <input matInput placeholder="Image URL" formControlName="courseImageURL">
+                <input matInput placeholder="*Image URL" formControlName="courseImageURL">
             </mat-form-field>
 
             <mat-form-field>
@@ -87,7 +87,7 @@
             </mat-form-field>
 
             <mat-form-field>
-                <input matInput placeholder="Number of Slots" formControlName="slots" [readonly]="readOnly">
+                <input matInput placeholder="*Number of Slots" formControlName="slots" [readonly]="readOnly">
             </mat-form-field>
 
             <mat-checkbox formControlName="isArchived">Is Archived</mat-checkbox>

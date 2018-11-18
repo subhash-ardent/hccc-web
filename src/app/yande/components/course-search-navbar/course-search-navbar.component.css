@@ -3,7 +3,7 @@
 .hccc-search-toolbar input {
   height:40px;
   padding-left: 40px;
-  font-size: .85em;
+  font-size: .5em;
   background: url(../../../../assets/img/baseline-search-24px.svg) no-repeat scroll 7px 7px;
 }
 .hccc-course-tags {

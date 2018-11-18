@@ -7,7 +7,7 @@
 // define 3 theme color
 // mat-palette accepts $palette-name, main, lighter and darker variants
 $hccc-theme-primary: mat-palette($mat-grey);
-$hccc-theme-accent: mat-palette($mat-orange);
+$hccc-theme-accent: mat-palette($mat-light-blue, 900, 700, 1000);
 $hccc-theme-warn: mat-palette($mat-red, A200);
 
 // create theme (use mat-dark-theme for themes with dark backgrounds)
@@ -22,6 +22,15 @@ $hccc-theme-success-msg-green: darkgreen;
 $hccc-theme-failure-msg-red: orangered;
 $hccc-theme-warning-msg-yellow: goldenrod;
 $hccc-theme-info-msg-blue: darkcyan;
+
+$custom-typography: mat-typography-config(
+        $font-family: 'Roboto, monospace',
+        $headline: mat-typography-level(20px, 32px, 100),
+        $title: mat-typography-level(28px, 32px, 100),
+        $body-1: mat-typography-level(12px, 24px, 200)
+);
+
+@include angular-material-typography($custom-typography);
 
 .mat-badge-content {
   padding: 7px !important;

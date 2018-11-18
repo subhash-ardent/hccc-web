@@ -14,9 +14,7 @@
     font-size: 12px;
   }
 
-  div.mat-caption {
-    margin: 1em 0 1em 0;
-  }
+
 
   mat-card.search {
     margin: 3em 0 3em 0;
@@ -58,4 +56,9 @@ mat-card.form {
   .form-buttons {
     margin: 5em 0 0 0;
   }
+}
+
+.mat-caption {
+  margin: 1em 0 1em 0;
+  padding: 0 5px 0 5px;
 }

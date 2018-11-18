@@ -64,15 +64,15 @@ let failureRedirect = {
 };
 
 // Configure API and Webapp routes
-app.use('/hccc/user/current', passport.authenticate('custom', failureRedirect), currentUser);
 
-//TODO: implement RBAC for APIs and put passport authentication back in place for protected APIs
-// app.use('/yande/api', api);
+// API routes
+app.use('/hccc/user/current', passport.authenticate('custom', failureRedirect), currentUser);
 app.use('/hccc/api', passport.authenticate('custom', failureRedirect), api);
+
+// Health endpoint
 app.use('/hccc/health', health);
-// app.get('/yande/home', passport.authenticate('custom', failureRedirect), (req, res) => {
-//   res.sendFile(path.join(__dirname, '../dist/youth-and-education/index.html'));
-// });
+
+// Webapp routes
 app.use('/hccc', passport.authenticate('custom', failureRedirect), express.static(path.join(__dirname, '../dist/youth-and-education')));
 app.use('/hccc/', passport.authenticate('custom', failureRedirect), express.static(path.join(__dirname, '../dist/youth-and-education')));
 app.use('/hccc/*', passport.authenticate('custom', failureRedirect), express.static(path.join(__dirname, '../dist/youth-and-education')));
@@ -80,22 +80,24 @@ app.use('/hccc/*', passport.authenticate('custom', failureRedirect), express.sta
 
 if (env && env === 'prod') {
 
-  // Code to run on SSL
-  const port = process.env.PORT || '443';
-  const certFile = path.resolve(__dirname, './cert/' + config.serverCerts.crt);
-  const keyFile = path.resolve(__dirname, './cert/' + config.serverCerts.key);
-  const options = {
-    key: fs.readFileSync(keyFile),
-    cert: fs.readFileSync(certFile)
-  };
-  app.set('port', port);
-  const server = https.createServer(options, app);
-  server.listen(port, '0.0.0.0', () => console.log(`API running on localhost: ${port}`));
-
+  // Code to run on SSL 443
+  if(config && config.serverCerts) {
+    const port = '443';
+    const p12File = path.resolve(__dirname, './cert/' + config.serverCerts.p12);
+    const options = {
+      pfx: fs.readFileSync(p12File),
+      passphrase: config.serverCerts.pwd
+    };
+    app.set('port', port);
+    const server = https.createServer(options, app);
+    server.listen(port, '0.0.0.0', () => console.log(`API running on localhost: ${port}`));
+  } else {
+    throw new Error("Server certs not configured");
+  }
 } else {
 
-  // Code to run on port 80
-  const port = process.env.PORT || '80';
+  // Code to run on port 3000
+  const port = '3000';
   app.set('port', port);
   const server = http.createServer(app);
   server.listen(port, '0.0.0.0', () => console.log(`API running on localhost: ${port}`));

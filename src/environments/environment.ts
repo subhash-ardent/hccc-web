@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  loginRedirect: {
+    loginUrl: 'https://testlivermoretemple.org/hints/content/asp/login.asp?page=',
+    redirectUrl: 'https://apps.testlivermoretemple.org/hccc/courses'
+  }
 };
 
 /*

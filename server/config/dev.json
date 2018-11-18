@@ -1,5 +1,5 @@
 {
-  "baseUrl": "https://10.10.1.207:18443/hccc-api",
+  "baseUrl": "https://10.10.1.205:18443/hccc-api",
   "loginUrl": "https://livermoretemple.org",
   "sessionOptions": {
     "secret": "some-secret",
@@ -14,5 +14,21 @@
   "serverCerts": {
     "crt": "server.crt",
     "key": "server.key"
+  },
+  "testUserEnabled": true,
+  "testUser": {
+    "userName": "devotee1",
+    "firstName": "DEVOTEEONE",
+    "lastName": "DEVOTEEONE",
+    "phoneResidence": "6506506500",
+    "email": "B_R_KRISHNA@YAHOO.COM",
+    "familyInfoDetails": [],
+    "categories": [
+      {
+        "categoryId": 52,
+        "name": "Chairman - Youth and Cultural",
+        "description": ""
+      }
+    ]
   }
 }

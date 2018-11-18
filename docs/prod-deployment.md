@@ -18,11 +18,9 @@
 #### All deployments
 
 1. Install dependencies `npm install`
-2. set NODE-ENV 
-    - powershell `$env:NODE_ENV="production"`
-    - cmd `set NODE_ENV=production`
-3. Copy certs
-4. Copy config file
-5. Open cmd using `Run as Administrator`
-5. Start the application `npm run start-with-node`
+2. Copy all cert files from `c:/HCCC/yne/frontend/cert` to `c:/HCCC/yne/frontend/hccc-web/server/cert`
+3. Copy `prod.json` config file from `c:/HCCC/yne/frontend/config` to `c:/HCCC/yne/frontend/hccc-web/server/config`
+4. Open `cmd` using `Run as Administrator`
+5. Set NODE-ENV `set NODE_ENV=prod`
+6. Start the application `npm run start-node-on-win`
 

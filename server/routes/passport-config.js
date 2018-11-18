@@ -6,6 +6,7 @@ const path = require('path');
 const certFile = path.resolve(__dirname, '../cert/' + config.certs.crt);
 const keyFile = path.resolve(__dirname, '../cert/' + config.certs.key);
 
+
 const guestUser = {
   userName: "hccc-guest-user",
   categories: [
@@ -120,44 +121,46 @@ let customStrategyVerify = function (req, cb) {
   //
   // } else {
 
-  // Look into the cookies to see if a valid user session is set by the legacy application.
-  let sid = getSidFromCookie(req);
-  let currUserName = null;
-  getUserNameBySid(sid)
+  if(env === 'prod' || !config.testUserEnabled) {
+    // Look into the cookies to see if a valid user session is set by the legacy application.
+    let sid = getSidFromCookie(req);
+    let currUserName = null;
+    getUserNameBySid(sid)
 
-    .then(function (currUserName) {
-      console.log("currUserName: ", currUserName);
+      .then(function (currUserName) {
+        console.log("currUserName: ", currUserName);
 
-      if (!currUserName) {
+        if (!currUserName) {
 
-        // If there is no user session found in the cookies, return guest user
+          // If there is no user session found in the cookies, return guest user
+          cb(null, guestUser);
+
+        } else {
+
+          // If a valid user session is found in the cookies (set by legacy application),
+          // get the user details from backend and return the same
+          return getUserByUserName(currUserName);
+
+        }
+      })
+      .then(function (userDetails) {
+
+        if (userDetails) {
+          cb(null, userDetails);
+        }
+      })
+      .catch(function (e) {
+
+        // If not able to get user details for the user, return guest user.
+        console.log("Cannot establish a session for ", currUserName, ". Continue as Guest User.");
         cb(null, guestUser);
+      });
 
-      } else {
+  } else {
 
-        // If a valid user session is found in the cookies (set by legacy application),
-        // get the user details from backend and return the same
-        return getUserByUserName(currUserName);
-
-      }
-    })
-    .then(function (userDetails) {
-
-      if (userDetails) {
-        console.log(userDetails);
-        cb(null, userDetails);
-      }
-    })
-    .catch(function (e) {
-
-      // If not able to get user details for the user, return guest user.
-      console.log("Cannot establish a session for ", currUserName, ". Continue as Guest User.");
-      cb(null, guestUser);
-    });
-
-
-  // }
-
+    // For development, enable different user profiles from config file
+    cb(null, config.testUser);
+  }
 };
 
 
