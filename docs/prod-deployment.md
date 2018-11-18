@@ -5,6 +5,7 @@
 1. Navigate to the applications parent directory `c:/HCCC/yne/frontend/`
 2. Clone the repo `https://github.com/hcccecit/hccc-web.git`
 3. Navigate to the root folder `cd hccc-web`
+4. Install PM2 `npm install pm2 -g`
 
 
 #### Subsequesnt deployments
