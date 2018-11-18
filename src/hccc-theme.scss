@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Serif');
 @import '~@angular/material/theming';
 // always include only once per project
 @include mat-core();
@@ -23,11 +23,29 @@ $hccc-theme-failure-msg-red: orangered;
 $hccc-theme-warning-msg-yellow: goldenrod;
 $hccc-theme-info-msg-blue: darkcyan;
 
+//$custom-typography: mat-typography-config(
+//        $font-family: 'Barlow Condensed, sans-serif',
+//        $headline: mat-typography-level(20px, 32px, 100),
+//        $title: mat-typography-level(28px, 32px, 100),
+//        $body-1: mat-typography-level(16px, 18px, 100)
+//);
+
 $custom-typography: mat-typography-config(
-        $font-family: 'Roboto, monospace',
-        $headline: mat-typography-level(20px, 32px, 100),
-        $title: mat-typography-level(28px, 32px, 100),
-        $body-1: mat-typography-level(14px, 18px, 100)
+  $font-family: 'IBM Plex Serif, serif',
+  $display-4:     mat-typography-level(112px, 112px, 300),
+  $display-3:     mat-typography-level(56px, 56px, 400),
+  $display-2:     mat-typography-level(45px, 48px, 400),
+  $display-1:     mat-typography-level(34px, 40px, 400),
+  $headline:      mat-typography-level(24px, 32px, 400),
+  $title:         mat-typography-level(20px, 32px, 500),
+  $subheading-2:  mat-typography-level(16px, 28px, 400),
+  $subheading-1:  mat-typography-level(15px, 24px, 400),
+  $body-2:        mat-typography-level(14px, 24px, 500),
+  $body-1:        mat-typography-level(14px, 20px, 400),
+  $caption:       mat-typography-level(12px, 20px, 400),
+  $button:        mat-typography-level(14px, 14px, 500),
+  // Line-height must be unit-less fraction of the font-size.
+  $input:         mat-typography-level(16px, 1.125, 400)
 );
 
 @include angular-material-typography($custom-typography);
@@ -70,3 +88,22 @@ $custom-typography: mat-typography-config(
   background-color: $hccc-theme-failure-msg-red;
   color: mat-contrast($hccc-theme-primary, 900);
 }
+
+
+//@function mat-typography-config(
+//  $font-family:   'Roboto, "Helvetica Neue", sans-serif',
+//  $display-4:     mat-typography-level(112px, 112px, 300),
+//  $display-3:     mat-typography-level(56px, 56px, 400),
+//  $display-2:     mat-typography-level(45px, 48px, 400),
+//  $display-1:     mat-typography-level(34px, 40px, 400),
+//  $headline:      mat-typography-level(24px, 32px, 400),
+//  $title:         mat-typography-level(20px, 32px, 500),
+//  $subheading-2:  mat-typography-level(16px, 28px, 400),
+//  $subheading-1:  mat-typography-level(15px, 24px, 400),
+//  $body-2:        mat-typography-level(14px, 24px, 500),
+//  $body-1:        mat-typography-level(14px, 20px, 400),
+//  $caption:       mat-typography-level(12px, 20px, 400),
+//  $button:        mat-typography-level(14px, 14px, 500),
+//  // Line-height must be unit-less fraction of the font-size.
+//  $input:         mat-typography-level(16px, 1.125, 400)
+//)
