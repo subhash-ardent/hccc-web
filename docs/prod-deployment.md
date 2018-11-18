@@ -25,3 +25,8 @@
 5. Set NODE-ENV `set NODE_ENV=prod`
 6. Start the application `npm run start-node-on-win`
 
+
+#### PM2 commands
+
+- To list `pm2 list`
+- To stop a process `pm2 stop <id>`
