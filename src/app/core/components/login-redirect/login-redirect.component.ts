@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-login-redirect',
@@ -7,7 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginRedirectComponent implements OnInit {
 
-  constructor() { }
+  loginUrl: string;
+  redirectUrl: string;
+
+  constructor() {
+    if (environment && environment.loginRedirect) {
+      this.loginUrl = environment.loginRedirect.loginUrl;
+      this.redirectUrl = environment.loginRedirect.redirectUrl;
+    }
+  }
 
   ngOnInit() {
   }

@@ -75,6 +75,7 @@ export class YandeApiService {
     c.courseVenue = res.courseVenue || '';
     c.flyerURL = res.flyerURL || '';
     c.slots = res.slots || '';
+    c.courseImageURL = res.courseImageURL || '';
 
     c.tags = res.tags || '';
     c.tagsArray = c.tags.split(',');

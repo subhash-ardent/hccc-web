@@ -5,9 +5,9 @@ export class Teacher {
   userName: string;
   devotee: Devotee;
   skillSets: string;
-  salutation: string;
+  salutation = 'Shri';
   profilePictureURL: string;
-  indemnitySigned: boolean;
-  backgroundVerified: boolean;
-  identityVerified: boolean;
+  indemnitySigned = false;
+  backgroundVerified = false;
+  identityVerified = false;
 }

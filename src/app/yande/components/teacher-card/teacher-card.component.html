@@ -2,16 +2,16 @@
 
     <mat-card-content fxLayout="column">
         <div *ngIf="!teacher.profilePictureURL" class="teacher-icon">
-            <mat-icon>home</mat-icon>
+            <mat-icon>avatar</mat-icon>
         </div>
         <div *ngIf="teacher.profilePictureURL" class="teacher-img">
             <img src="{{teacher.profilePictureURL}}">
         </div>
-        <div *ngIf="teacher.devotee">
-            <p>{{teacher.devotee.userName}}</p>
-            <p>{{teacher.devotee.firstName}} {{teacher.devotee.lastName}}</p>
-            <p>{{teacher.devotee.email}}</p>
-            <p>{{teacher.devotee.phoneResidence}}</p>
+        <div *ngIf="teacher.devotee" class="teacher-info">
+            <div class="mat-body-1">{{teacher.devotee.userName}}</div>
+            <div class="mat-body-1">{{teacher.devotee.firstName}} {{teacher.devotee.lastName}}</div>
+            <div class="mat-body-1">{{teacher.devotee.email}}</div>
+            <div class="mat-body-1">{{teacher.devotee.phoneResidence}}</div>
         </div>
         <mat-card-actions fxLayoutAlign.lt-sm="center center">
             <a mat-button color="accent" routerLink="/teachers/{{teacher.devotee.userName}}"

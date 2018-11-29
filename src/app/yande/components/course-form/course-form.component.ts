@@ -105,24 +105,92 @@ export class CourseFormComponent implements OnInit {
 
     return this.formBuilder.group({
       courseId: [c.courseId],
-      courseName: [c.courseName, {updateOn: 'blur'}],
-      courseImageURL: [c.courseImageURL, {updateOn: 'blur'}],
-      courseEndTime: [c.courseEndTime, {updateOn: 'blur'}],
-      courseStartTime: [c.courseStartTime, {updateOn: 'blur'}],
-      courseStartDate: [c.courseStartDate, {updateOn: 'blur'}],
-      courseEndDate: [c.courseEndDate, {updateOn: 'blur'}],
-      slots: [c.slots, {updateOn: 'blur'}],
-      courseVenue: [c.courseVenue, {updateOn: 'blur'}],
-      flyerURL: [c.flyerURL, {updateOn: 'blur'}],
-      isArchived: [{value: c.isArchived, disabled: this.readOnly}, {updateOn: 'blur'}],
-      isRegistrationOpen: [{value: c.isRegistrationOpen, disabled: this.readOnly}, {updateOn: 'blur'}],
-      courseDays: [c.courseDays, {updateOn: 'blur'}],
-      courseRemarks: [c.courseRemarks, {updateOn: 'blur'}],
-      ageRestrictions: [c.ageRestrictions, {updateOn: 'blur'}],
-      tags: [c.tags, {updateOn: 'blur'}],
-      teachers: [c.teachers, {updateOn: 'blur'}],
+
+      courseName: [c.courseName, {
+        updateOn: 'blur',
+        validators: Validators.required
+      }],
+
+      courseImageURL: [c.courseImageURL, {
+        updateOn: 'blur',
+        validators: Validators.required
+      }],
+
+      courseEndTime: [c.courseEndTime, {
+        updateOn: 'blur',
+        validators: Validators.required
+      }],
+
+      courseStartTime: [c.courseStartTime, {
+        updateOn: 'blur',
+        validators: Validators.required
+      }],
+
+      courseStartDate: [c.courseStartDate, {
+        updateOn: 'blur',
+        validators: Validators.required
+      }],
+
+      courseEndDate: [c.courseEndDate, {
+        updateOn: 'blur',
+        validators: Validators.required
+      }],
+
+      slots: [c.slots, {
+        updateOn: 'blur',
+        validators: Validators.required
+      }],
+
+      courseVenue: [c.courseVenue, {
+        updateOn: 'blur',
+        validators: Validators.required
+      }],
+
+      flyerURL: [c.flyerURL, {
+        updateOn: 'blur'
+      }],
+
+      isArchived: [{
+        value: c.isArchived,
+        disabled: this.readOnly
+      }, {
+        updateOn: 'blur'
+      }],
+
+      isRegistrationOpen: [{
+        value: c.isRegistrationOpen,
+        disabled: this.readOnly
+      }, {
+        updateOn: 'blur'
+      }],
+
+      courseDays: [c.courseDays, {
+        updateOn: 'blur',
+        validators: Validators.required
+      }],
+
+      courseRemarks: [c.courseRemarks, {
+        updateOn: 'blur'
+      }],
+
+      ageRestrictions: [c.ageRestrictions, {
+        updateOn: 'blur'
+      }],
+
+      tags: [c.tags, {
+        updateOn: 'blur'
+      }],
+
+      teachers: [c.teachers, {
+        updateOn: 'blur'
+      }],
+
       teachersString: [teachersString],
-      indemnityForms: [c.indemnityForms, {updateOn: 'blur'}],
+
+      indemnityForms: [c.indemnityForms, {
+        updateOn: 'blur'
+      }],
+
       indemnityFormsString: [indemnityFormsString]
     });
   }

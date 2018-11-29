@@ -10,5 +10,25 @@
     "crt": "cid_crt.crt",
     "key": "cid_key.key",
     "pwd": "changeit"
+  },
+  "serverCerts": {
+    "crt": "server.crt",
+    "key": "server.key"
+  },
+  "testUserEnabled": true,
+  "testUser": {
+    "userName": "devotee1",
+    "firstName": "DEVOTEEONE",
+    "lastName": "DEVOTEEONE",
+    "phoneResidence": "6506506500",
+    "email": "B_R_KRISHNA@YAHOO.COM",
+    "familyInfoDetails": [],
+    "categories": [
+      {
+        "categoryId": 52,
+        "name": "Chairman - Youth and Cultural",
+        "description": ""
+      }
+    ]
   }
 }

@@ -1,34 +1,36 @@
 <mat-card class="hccc-teacher-onboard-form container" fxLayout="column" fxLayoutGap="10%"
           fxLayoutAlign.lt-md="center center">
 
-    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="10%">
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center" fxLayoutGap="2%">
 
-        <div fxLayout="column" fxFlex="50" fxFlex.md="40" fxLayoutAlign="space-around start">
+        <div fxLayout="column" fxLayoutAlign="space-around start">
 
             <teacher-card *ngIf="['details','edit'].includes(action)"
                           [hideDetails]=true [teacher]="teacher" flexAlign="center">
             </teacher-card>
 
-            <mat-card class="search" *ngIf="action==='create'" fxLayout="row" fxLayoutGap="5%"
-                      fxLayoutAlign="space-around center">
+            <mat-card class="search" *ngIf="action==='create'" fxLayout="column" fxLayoutGap="5%"
+                      fxLayoutAlign="startr">
+                <div fxLayout="row" fxLayoutGap="5%" fxLayoutAlign="space-around center">
                 <mat-form-field>
-                    <input matInput type="text" placeholder="Enter Phone Number" [formControl]="devoteePhNo"
+                    <input matInput type="text" placeholder="*Enter Phone Number" [formControl]="devoteePhNo"
                            matTooltip="Get a Devotee's details by entering their phone number">
                 </mat-form-field>
                 <button mat-flat-button color="accent" (click)="getDevotee(devoteePhNo.value)">SEARCH</button>
+                </div>
                 <div class="mat-caption hccc-failure-caption" *ngIf="invalidPhoneNumber">
                     Enter a valid phone number
                 </div>
             </mat-card>
 
-            <div *ngIf="devotees"> Select a devotee:</div>
+            <div *ngIf="devotees" class="mat-subheading-1"> Select a devotee:</div>
             <div class="devotees-list" *ngIf="devotees">
                 <mat-card *ngFor="let devotee of devotees" [class.selected]="devotee.userName===userName"
                           (click)="onDevoteeSelect(devotee.userName, devotee.isTeacher)">
-                        <mat-card-content>UserName: {{devotee.userName}}</mat-card-content>
-                        <mat-card-content>First Name: {{devotee | fullName}}</mat-card-content>
-                        <mat-card-content>Email: {{devotee.email}}</mat-card-content>
-                        <mat-card-content>Phone Number: {{devotee.phoneResidence}}</mat-card-content>
+                        <div class="mat-body-1">UserName: {{devotee.userName}}</div>
+                        <div class="mat-body-1">First Name: {{devotee | fullName}}</div>
+                        <div class="mat-body-1">Email: {{devotee.email}}</div>
+                        <div class="mat-body-1">Phone Number: {{devotee.phoneResidence}}</div>
                     <div *ngIf="devotee.isTeacher">
                         <span class="mat-caption hccc-success-caption">{{devotee | fullName}} is already onboarded as a Teacher</span>
                     </div>

@@ -4,13 +4,13 @@
             <mat-icon>menu</mat-icon>
         </button>
 
-        <span class="text">Shiva - Vishnu Temple, Livermore</span>
+        <span class="text mat-headline">Shiva - Vishnu Temple, Livermore</span>
     </div>
     <!-- This fills the remaining space of the current row -->
     <span fxFlex="1 1 auto"></span>
 
 
-    <a *ngIf="!appService.isLoggedIn" routerLink="login-redirect">
+    <a *ngIf="!appService.isLoggedIn" [href]="loginUrl + redirectUrl">
         Login
     </a>
     <div fxLayout="row"  *ngIf="appService.isLoggedIn" fxLayoutGap=".5em" fxShow.lt-md="false">
@@ -26,8 +26,8 @@
                         <span>My Courses</span>
                 </button>
         </mat-menu> -->
-        <span class="username mat-subheading-1">{{appService.currentUser.firstName}}</span>
-        <span class="username mat-subheading-1">{{appService.currentUser.lastName}}</span>
+        <span class="username mat-body-1">{{appService.currentUser.firstName}}</span>
+        <span class="username mat-body-1">{{appService.currentUser.lastName}}</span>
     </div>
 
 </mat-toolbar>
