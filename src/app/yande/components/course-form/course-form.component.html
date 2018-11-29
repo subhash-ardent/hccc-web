@@ -14,7 +14,7 @@
                 <input matInput placeholder="Age Restrictions Info" formControlName="ageRestrictions" [readonly]="readOnly" required/>
             </mat-form-field>
 
-            <div fxLayout="row" fxLayoutAlign="space-between center">
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
                 <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
                     <mat-form-field>
                         <input matInput type="date" placeholder="Start Date" formControlName="courseStartDate" [readonly]="readOnly" required>
@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-            <div fxLayout="row" fxLayoutAlign="space-between center">
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
                 <div fxLayout="column" fxFlex="48" fxLayoutAlign="stretch">
                     <mat-form-field>
                         <input matInput placeholder="Start Time" type="time" formControlName="courseStartTime" [readonly]="readOnly" required>
